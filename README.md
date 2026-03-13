@@ -15,11 +15,9 @@ Core objectives include mapping spatial and temporal partitioning, and modeling 
 2. Submitting Slurm (interactive & batch) jobs  
 3. Linking GitHub with RStudio (creating a PAT, cloning, committing, pushing)  
 
-- **`input/`** (e.g., sample metadata, lookup tables)      
+- **`data/`** (see `data/README.md` for list of larger external files ignored by GitHub)      
 – Small reference files (e.g., sample metadata, lookup tables).      
-– *NOTE*: Does not include large raw genomic and geospatial inputs, these are stored externally (see below).
-
-- **`data/`** (ignored by GitHub; see `data/README.md` for external locations)
+– *NOTE*: Does not include large raw genomic and geospatial inputs, these are stored externally (see below).    
 
 - **`results/`** (ignored by GitHub; see `results/README.md` for external locations)
 

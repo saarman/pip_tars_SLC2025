@@ -1,0 +1,1775 @@
+site_code,site_name,longitude,latitude,trap_type,collection_date,disease_week,species,count,season,urban_cat
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-07-10,28,Culex tarsalis,NA,mid,urban
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-07-17,29,Culex tarsalis,1,mid,urban
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-09-05,36,Culex tarsalis,NA,late,urban
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-09-18,38,Culex tarsalis,2,late,urban
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-09-25,39,Culex tarsalis,NA,late,urban
+229,300 E Church,-111.883171,40.729612,GRVD,2025-06-03,23,Culex tarsalis,NA,mid,urban
+229,300 E Church,-111.883171,40.729612,GRVD,2025-08-12,33,Culex tarsalis,8,late,urban
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-03,36,Culex tarsalis,1,late,urban
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-23,39,Culex tarsalis,2,late,urban
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-30,40,Culex tarsalis,2,late,urban
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-06-24,26,Culex tarsalis,1,mid,urban
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-09-30,40,Culex tarsalis,4,late,urban
+27,Ambassador,-112.029156,40.846014,CO2,2025-04-11,15,Culex tarsalis,7,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-04-23,17,Culex tarsalis,1,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-02,18,Culex tarsalis,6,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-08,19,Culex tarsalis,28,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-15,20,Culex tarsalis,1,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-21,21,Culex tarsalis,19,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-23,21,Culex tarsalis,248,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-28,22,Culex tarsalis,660,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-30,22,Culex tarsalis,776,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-03,23,Culex tarsalis,63,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-05,23,Culex tarsalis,162,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-10,24,Culex tarsalis,670,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-12,24,Culex tarsalis,135,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-18,25,Culex tarsalis,983,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-24,26,Culex tarsalis,3090,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-26,26,Culex tarsalis,208,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-01,27,Culex tarsalis,2896,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-03,27,Culex tarsalis,2343,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-08,28,Culex tarsalis,4013,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-10,28,Culex tarsalis,1748,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-15,29,Culex tarsalis,4280,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-17,29,Culex tarsalis,2419,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-22,30,Culex tarsalis,28,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-24,30,Culex tarsalis,2197,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-29,31,Culex tarsalis,1346,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-29,31,Culex tarsalis,1346,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-31,31,Culex tarsalis,1191,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-05,32,Culex tarsalis,1188,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-07,32,Culex tarsalis,1721,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-12,33,Culex tarsalis,3219,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-14,33,Culex tarsalis,1132,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-19,34,Culex tarsalis,2178,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-21,34,Culex tarsalis,1320,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-26,35,Culex tarsalis,2280,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-09-03,36,Culex tarsalis,2224,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-09-05,36,Culex tarsalis,13,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-09-09,37,Culex tarsalis,158,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-09-11,37,Culex tarsalis,625,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-09-18,38,Culex tarsalis,62,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-09-23,39,Culex tarsalis,5,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-09-25,39,Culex tarsalis,40,late,rural
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-04-16,16,Culex tarsalis,9,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-04-23,17,Culex tarsalis,7,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-02,18,Culex tarsalis,2,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-08,19,Culex tarsalis,1,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-15,20,Culex tarsalis,2,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-23,21,Culex tarsalis,42,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-28,22,Culex tarsalis,133,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-30,22,Culex tarsalis,152,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-03,23,Culex tarsalis,117,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-05,23,Culex tarsalis,47,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-10,24,Culex tarsalis,670,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-12,24,Culex tarsalis,117,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-18,25,Culex tarsalis,424,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-24,26,Culex tarsalis,231,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-26,26,Culex tarsalis,371,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-01,27,Culex tarsalis,49,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-03,27,Culex tarsalis,102,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-08,28,Culex tarsalis,1140,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-10,28,Culex tarsalis,287,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-15,29,Culex tarsalis,1979,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-17,29,Culex tarsalis,675,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-22,30,Culex tarsalis,11,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-24,30,Culex tarsalis,820,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-29,31,Culex tarsalis,656,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-29,31,Culex tarsalis,656,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-31,31,Culex tarsalis,227,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-05,32,Culex tarsalis,3,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-07,32,Culex tarsalis,383,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-12,33,Culex tarsalis,587,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-14,33,Culex tarsalis,454,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-19,34,Culex tarsalis,581,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-21,34,Culex tarsalis,1,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-26,35,Culex tarsalis,429,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-03,36,Culex tarsalis,1282,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-05,36,Culex tarsalis,136,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-11,37,Culex tarsalis,274,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-16,38,Culex tarsalis,122,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-18,38,Culex tarsalis,73,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-23,39,Culex tarsalis,8,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-25,39,Culex tarsalis,45,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-04-11,15,Culex tarsalis,14,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-04-16,16,Culex tarsalis,25,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-04-23,17,Culex tarsalis,4,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-02,18,Culex tarsalis,2,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-08,19,Culex tarsalis,15,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-13,20,Culex tarsalis,6,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-15,20,Culex tarsalis,3,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-21,21,Culex tarsalis,12,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-23,21,Culex tarsalis,11,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-28,22,Culex tarsalis,53,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-30,22,Culex tarsalis,45,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-03,23,Culex tarsalis,22,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-05,23,Culex tarsalis,21,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-10,24,Culex tarsalis,208,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-12,24,Culex tarsalis,545,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-18,25,Culex tarsalis,228,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-24,26,Culex tarsalis,93,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-26,26,Culex tarsalis,291,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-01,27,Culex tarsalis,509,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-03,27,Culex tarsalis,315,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-08,28,Culex tarsalis,585,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-10,28,Culex tarsalis,783,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-15,29,Culex tarsalis,2005,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-17,29,Culex tarsalis,996,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-22,30,Culex tarsalis,3,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-24,30,Culex tarsalis,317,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-29,31,Culex tarsalis,116,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-29,31,Culex tarsalis,116,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-31,31,Culex tarsalis,399,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-05,32,Culex tarsalis,736,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-07,32,Culex tarsalis,287,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-12,33,Culex tarsalis,513,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-14,33,Culex tarsalis,458,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-19,34,Culex tarsalis,88,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-21,34,Culex tarsalis,938,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-26,35,Culex tarsalis,888,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-03,36,Culex tarsalis,567,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-05,36,Culex tarsalis,391,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-09,37,Culex tarsalis,227,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-11,37,Culex tarsalis,66,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-16,38,Culex tarsalis,104,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-18,38,Culex tarsalis,114,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-23,39,Culex tarsalis,15,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-25,39,Culex tarsalis,12,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-30,40,Culex tarsalis,57,late,peri
+52,Audubon,-112.114005,40.826291,CO2,2025-04-16,16,Culex tarsalis,3,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-04-23,17,Culex tarsalis,11,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-05-08,19,Culex tarsalis,61,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-05-21,21,Culex tarsalis,4,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-05-23,21,Culex tarsalis,39,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-05-28,22,Culex tarsalis,77,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-05-30,22,Culex tarsalis,151,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-03,23,Culex tarsalis,8,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-05,23,Culex tarsalis,96,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-10,24,Culex tarsalis,144,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-12,24,Culex tarsalis,16,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-18,25,Culex tarsalis,363,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-24,26,Culex tarsalis,100,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-26,26,Culex tarsalis,78,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-01,27,Culex tarsalis,317,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-03,27,Culex tarsalis,320,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-08,28,Culex tarsalis,1637,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-15,29,Culex tarsalis,2780,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-17,29,Culex tarsalis,1319,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-22,30,Culex tarsalis,1,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-24,30,Culex tarsalis,1566,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-29,31,Culex tarsalis,381,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-29,31,Culex tarsalis,381,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-31,31,Culex tarsalis,138,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-05,32,Culex tarsalis,233,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-07,32,Culex tarsalis,403,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-12,33,Culex tarsalis,1981,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-14,33,Culex tarsalis,322,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-19,34,Culex tarsalis,498,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-21,34,Culex tarsalis,557,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-26,35,Culex tarsalis,500,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-03,36,Culex tarsalis,1079,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-09,37,Culex tarsalis,957,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-11,37,Culex tarsalis,418,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-16,38,Culex tarsalis,22,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-18,38,Culex tarsalis,38,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-23,39,Culex tarsalis,21,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-30,40,Culex tarsalis,43,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-04-11,15,Culex tarsalis,2,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-04-16,16,Culex tarsalis,1,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-04-23,17,Culex tarsalis,2,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-05-08,19,Culex tarsalis,1,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-05-23,21,Culex tarsalis,8,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-05-28,22,Culex tarsalis,50,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-05-30,22,Culex tarsalis,35,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-06-03,23,Culex tarsalis,2,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-06-05,23,Culex tarsalis,99,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-06-12,24,Culex tarsalis,118,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-06-18,25,Culex tarsalis,243,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-06-24,26,Culex tarsalis,579,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-06-26,26,Culex tarsalis,243,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-01,27,Culex tarsalis,1487,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-03,27,Culex tarsalis,644,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-08,28,Culex tarsalis,669,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-10,28,Culex tarsalis,186,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-15,29,Culex tarsalis,6520,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-17,29,Culex tarsalis,2130,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-24,30,Culex tarsalis,1629,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-29,31,Culex tarsalis,2041,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-29,31,Culex tarsalis,2041,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-31,31,Culex tarsalis,286,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-05,32,Culex tarsalis,3328,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-07,32,Culex tarsalis,1802,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-12,33,Culex tarsalis,4028,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-14,33,Culex tarsalis,1344,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-19,34,Culex tarsalis,232,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-21,34,Culex tarsalis,612,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-26,35,Culex tarsalis,2412,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-03,36,Culex tarsalis,3293,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-05,36,Culex tarsalis,2015,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-09,37,Culex tarsalis,1713,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-11,37,Culex tarsalis,729,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-16,38,Culex tarsalis,39,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-18,38,Culex tarsalis,82,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-23,39,Culex tarsalis,10,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-30,40,Culex tarsalis,20,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-04-11,15,Culex tarsalis,19,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-04-16,16,Culex tarsalis,7,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-04-23,17,Culex tarsalis,1,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-08,19,Culex tarsalis,8,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-13,20,Culex tarsalis,2,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-15,20,Culex tarsalis,14,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-21,21,Culex tarsalis,25,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-23,21,Culex tarsalis,103,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-28,22,Culex tarsalis,539,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-30,22,Culex tarsalis,554,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-03,23,Culex tarsalis,109,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-05,23,Culex tarsalis,278,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-10,24,Culex tarsalis,710,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-12,24,Culex tarsalis,372,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-18,25,Culex tarsalis,567,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-24,26,Culex tarsalis,807,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-26,26,Culex tarsalis,29,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-01,27,Culex tarsalis,2261,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-03,27,Culex tarsalis,2435,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-08,28,Culex tarsalis,1819,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-10,28,Culex tarsalis,1164,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-15,29,Culex tarsalis,3854,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-17,29,Culex tarsalis,2303,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-22,30,Culex tarsalis,1,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-24,30,Culex tarsalis,1627,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-29,31,Culex tarsalis,2204,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-29,31,Culex tarsalis,2204,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-31,31,Culex tarsalis,827,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-05,32,Culex tarsalis,2900,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-07,32,Culex tarsalis,829,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-12,33,Culex tarsalis,2117,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-14,33,Culex tarsalis,2518,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-19,34,Culex tarsalis,2503,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-21,34,Culex tarsalis,3988,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-26,35,Culex tarsalis,3101,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-03,36,Culex tarsalis,1278,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-05,36,Culex tarsalis,1056,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-09,37,Culex tarsalis,1731,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-11,37,Culex tarsalis,2105,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-16,38,Culex tarsalis,231,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-18,38,Culex tarsalis,187,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-23,39,Culex tarsalis,31,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-25,39,Culex tarsalis,9,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-30,40,Culex tarsalis,3,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-11,15,Culex tarsalis,13,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-16,16,Culex tarsalis,4,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-23,17,Culex tarsalis,1,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-05-13,20,Culex tarsalis,1,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-05-21,21,Culex tarsalis,9,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-05-23,21,Culex tarsalis,51,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-05-28,22,Culex tarsalis,64,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-05-30,22,Culex tarsalis,394,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-03,23,Culex tarsalis,77,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-05,23,Culex tarsalis,318,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-12,24,Culex tarsalis,824,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-18,25,Culex tarsalis,278,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-24,26,Culex tarsalis,1312,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-26,26,Culex tarsalis,452,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-01,27,Culex tarsalis,1254,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-03,27,Culex tarsalis,986,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-08,28,Culex tarsalis,1068,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-10,28,Culex tarsalis,305,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-15,29,Culex tarsalis,3213,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-17,29,Culex tarsalis,2585,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-22,30,Culex tarsalis,30,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-24,30,Culex tarsalis,1513,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-29,31,Culex tarsalis,2152,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-29,31,Culex tarsalis,2152,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-31,31,Culex tarsalis,1119,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-05,32,Culex tarsalis,2280,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-07,32,Culex tarsalis,1209,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-12,33,Culex tarsalis,815,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-14,33,Culex tarsalis,2224,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-19,34,Culex tarsalis,47,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-21,34,Culex tarsalis,2313,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-26,35,Culex tarsalis,2751,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-03,36,Culex tarsalis,2509,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-05,36,Culex tarsalis,4006,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-09,37,Culex tarsalis,1498,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-11,37,Culex tarsalis,3926,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-16,38,Culex tarsalis,86,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-18,38,Culex tarsalis,479,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-23,39,Culex tarsalis,20,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-25,39,Culex tarsalis,39,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-30,40,Culex tarsalis,11,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-04-11,15,Culex tarsalis,7,early,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-05-08,19,Culex tarsalis,5,early,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-05-21,21,Culex tarsalis,15,early,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-05-23,21,Culex tarsalis,58,early,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-05-28,22,Culex tarsalis,125,early,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-05-30,22,Culex tarsalis,249,early,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-03,23,Culex tarsalis,4,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-05,23,Culex tarsalis,67,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-10,24,Culex tarsalis,489,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-12,24,Culex tarsalis,474,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-18,25,Culex tarsalis,287,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-24,26,Culex tarsalis,430,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-26,26,Culex tarsalis,505,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-01,27,Culex tarsalis,1979,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-03,27,Culex tarsalis,298,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-08,28,Culex tarsalis,976,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-10,28,Culex tarsalis,34,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-15,29,Culex tarsalis,1893,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-17,29,Culex tarsalis,5,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-24,30,Culex tarsalis,1098,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-29,31,Culex tarsalis,254,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-29,31,Culex tarsalis,254,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-31,31,Culex tarsalis,740,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-05,32,Culex tarsalis,1847,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-07,32,Culex tarsalis,509,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-12,33,Culex tarsalis,1325,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-14,33,Culex tarsalis,1289,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-19,34,Culex tarsalis,491,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-21,34,Culex tarsalis,20,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-26,35,Culex tarsalis,2849,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-03,36,Culex tarsalis,519,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-05,36,Culex tarsalis,701,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-09,37,Culex tarsalis,382,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-11,37,Culex tarsalis,301,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-16,38,Culex tarsalis,454,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-18,38,Culex tarsalis,64,late,rural
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-08-14,33,Culex tarsalis,NA,late,urban
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-09-18,38,Culex tarsalis,NA,late,urban
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-04-11,15,Culex tarsalis,18,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-04-16,16,Culex tarsalis,9,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-04-23,17,Culex tarsalis,8,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-02,18,Culex tarsalis,3,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-08,19,Culex tarsalis,4,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-15,20,Culex tarsalis,8,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-21,21,Culex tarsalis,29,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-23,21,Culex tarsalis,23,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-28,22,Culex tarsalis,625,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-30,22,Culex tarsalis,134,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-03,23,Culex tarsalis,252,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-05,23,Culex tarsalis,293,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-10,24,Culex tarsalis,35,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-12,24,Culex tarsalis,502,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-18,25,Culex tarsalis,1364,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-24,26,Culex tarsalis,1186,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-26,26,Culex tarsalis,1489,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-01,27,Culex tarsalis,783,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-03,27,Culex tarsalis,614,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-08,28,Culex tarsalis,1161,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-10,28,Culex tarsalis,122,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-15,29,Culex tarsalis,4340,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-17,29,Culex tarsalis,808,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-22,30,Culex tarsalis,2,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-24,30,Culex tarsalis,69,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-29,31,Culex tarsalis,142,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-29,31,Culex tarsalis,142,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-31,31,Culex tarsalis,754,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-05,32,Culex tarsalis,44,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-07,32,Culex tarsalis,186,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-12,33,Culex tarsalis,1875,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-14,33,Culex tarsalis,814,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-19,34,Culex tarsalis,1069,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-21,34,Culex tarsalis,2366,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-26,35,Culex tarsalis,105,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-03,36,Culex tarsalis,4518,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-09,37,Culex tarsalis,1027,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-11,37,Culex tarsalis,163,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-16,38,Culex tarsalis,257,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-18,38,Culex tarsalis,327,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-23,39,Culex tarsalis,48,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-25,39,Culex tarsalis,39,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-30,40,Culex tarsalis,8,late,peri
+211,Downington Ave,-111.857223,40.730895,CO2,2025-05-13,20,Culex tarsalis,3,early,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-05-21,21,Culex tarsalis,12,early,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-05-28,22,Culex tarsalis,3,early,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-06-03,23,Culex tarsalis,35,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-06-10,24,Culex tarsalis,8,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-06-24,26,Culex tarsalis,145,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-01,27,Culex tarsalis,6,mid,urban
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-01,27,Culex tarsalis,1,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-08,28,Culex tarsalis,142,mid,urban
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-08,28,Culex tarsalis,2,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-15,29,Culex tarsalis,224,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-24,30,Culex tarsalis,30,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-29,31,Culex tarsalis,6,mid,urban
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-29,31,Culex tarsalis,NA,mid,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-05,32,Culex tarsalis,105,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-12,33,Culex tarsalis,322,late,urban
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-08-12,33,Culex tarsalis,NA,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-19,34,Culex tarsalis,8,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-26,35,Culex tarsalis,83,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-03,36,Culex tarsalis,93,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-09,37,Culex tarsalis,26,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-16,38,Culex tarsalis,20,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-23,39,Culex tarsalis,2,late,urban
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-30,40,Culex tarsalis,1,late,urban
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-09-30,40,Culex tarsalis,3,late,urban
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-11,15,Culex tarsalis,6,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-16,16,Culex tarsalis,5,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-23,17,Culex tarsalis,7,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-02,18,Culex tarsalis,2,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-08,19,Culex tarsalis,104,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-13,20,Culex tarsalis,9,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-15,20,Culex tarsalis,21,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-21,21,Culex tarsalis,130,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-23,21,Culex tarsalis,58,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-28,22,Culex tarsalis,270,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-30,22,Culex tarsalis,595,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-03,23,Culex tarsalis,129,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-05,23,Culex tarsalis,7,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-10,24,Culex tarsalis,660,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-12,24,Culex tarsalis,1894,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-18,25,Culex tarsalis,987,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-24,26,Culex tarsalis,3870,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-26,26,Culex tarsalis,1077,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-01,27,Culex tarsalis,1145,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-03,27,Culex tarsalis,2018,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-08,28,Culex tarsalis,773,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-10,28,Culex tarsalis,2379,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-15,29,Culex tarsalis,5363,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-17,29,Culex tarsalis,2824,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-22,30,Culex tarsalis,122,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-24,30,Culex tarsalis,285,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-29,31,Culex tarsalis,714,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-29,31,Culex tarsalis,714,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-31,31,Culex tarsalis,1949,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-05,32,Culex tarsalis,3317,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-07,32,Culex tarsalis,2422,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-12,33,Culex tarsalis,2668,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-14,33,Culex tarsalis,2750,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-19,34,Culex tarsalis,927,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-21,34,Culex tarsalis,5305,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-26,35,Culex tarsalis,5128,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-03,36,Culex tarsalis,84,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-05,36,Culex tarsalis,1647,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-09,37,Culex tarsalis,579,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-11,37,Culex tarsalis,34,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-16,38,Culex tarsalis,614,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-18,38,Culex tarsalis,381,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-23,39,Culex tarsalis,13,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-25,39,Culex tarsalis,165,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-30,40,Culex tarsalis,37,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-04-16,16,Culex tarsalis,3,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-02,18,Culex tarsalis,5,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-08,19,Culex tarsalis,15,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-21,21,Culex tarsalis,2,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-23,21,Culex tarsalis,60,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-28,22,Culex tarsalis,627,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-30,22,Culex tarsalis,770,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-03,23,Culex tarsalis,41,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-05,23,Culex tarsalis,251,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-12,24,Culex tarsalis,229,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-18,25,Culex tarsalis,3700,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-24,26,Culex tarsalis,1504,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-26,26,Culex tarsalis,676,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-01,27,Culex tarsalis,3376,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-03,27,Culex tarsalis,2139,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-08,28,Culex tarsalis,3973,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-10,28,Culex tarsalis,3712,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-15,29,Culex tarsalis,3575,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-17,29,Culex tarsalis,2660,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-24,30,Culex tarsalis,3778,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-29,31,Culex tarsalis,438,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-29,31,Culex tarsalis,438,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-31,31,Culex tarsalis,1229,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-05,32,Culex tarsalis,1903,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-07,32,Culex tarsalis,888,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-12,33,Culex tarsalis,1811,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-14,33,Culex tarsalis,1470,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-19,34,Culex tarsalis,933,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-21,34,Culex tarsalis,2735,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-26,35,Culex tarsalis,3611,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-09-09,37,Culex tarsalis,28,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-09-11,37,Culex tarsalis,601,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-09-16,38,Culex tarsalis,4,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-09-18,38,Culex tarsalis,64,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-09-23,39,Culex tarsalis,12,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-09-25,39,Culex tarsalis,91,late,rural
+32,Fair Park,-111.920029,40.772369,CO2,2025-04-11,15,Culex tarsalis,50,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-04-16,16,Culex tarsalis,14,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-04-23,17,Culex tarsalis,8,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-02,18,Culex tarsalis,5,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-08,19,Culex tarsalis,5,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-21,21,Culex tarsalis,8,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-23,21,Culex tarsalis,9,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-28,22,Culex tarsalis,28,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-30,22,Culex tarsalis,14,early,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-03,23,Culex tarsalis,3,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-05,23,Culex tarsalis,3,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-10,24,Culex tarsalis,14,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-12,24,Culex tarsalis,24,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-18,25,Culex tarsalis,24,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-24,26,Culex tarsalis,33,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-26,26,Culex tarsalis,15,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-01,27,Culex tarsalis,4,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-03,27,Culex tarsalis,2,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-08,28,Culex tarsalis,15,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-10,28,Culex tarsalis,16,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-15,29,Culex tarsalis,66,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-17,29,Culex tarsalis,23,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-22,30,Culex tarsalis,1,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-24,30,Culex tarsalis,4,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-29,31,Culex tarsalis,9,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-29,31,Culex tarsalis,9,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-31,31,Culex tarsalis,8,mid,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-05,32,Culex tarsalis,29,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-07,32,Culex tarsalis,13,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-12,33,Culex tarsalis,65,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-14,33,Culex tarsalis,32,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-19,34,Culex tarsalis,1,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-21,34,Culex tarsalis,3,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-26,35,Culex tarsalis,86,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-03,36,Culex tarsalis,27,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-09,37,Culex tarsalis,23,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-11,37,Culex tarsalis,2,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-16,38,Culex tarsalis,20,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-18,38,Culex tarsalis,6,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-25,39,Culex tarsalis,2,late,urban
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-30,40,Culex tarsalis,2,late,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-06-12,24,Culex tarsalis,1,mid,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-06-20,25,Culex tarsalis,1,mid,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-06-26,26,Culex tarsalis,2,mid,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-03,27,Culex tarsalis,2,mid,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-17,29,Culex tarsalis,3,mid,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-22,30,Culex tarsalis,1,mid,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-07,32,Culex tarsalis,1,late,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-28,35,Culex tarsalis,1,late,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-09-11,37,Culex tarsalis,NA,late,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-09-18,38,Culex tarsalis,2,late,urban
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-09-25,39,Culex tarsalis,NA,late,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-05-30,22,Culex tarsalis,2,early,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-06-05,23,Culex tarsalis,4,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-06-12,24,Culex tarsalis,14,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-06-20,25,Culex tarsalis,2,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-06-26,26,Culex tarsalis,13,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-07-03,27,Culex tarsalis,3,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-07-10,28,Culex tarsalis,2,mid,urban
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-07-10,28,Culex tarsalis,NA,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-07-17,29,Culex tarsalis,5,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-07-31,31,Culex tarsalis,1,mid,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-08-07,32,Culex tarsalis,3,late,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-08-28,35,Culex tarsalis,3,late,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-09-18,38,Culex tarsalis,6,late,urban
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-09-25,39,Culex tarsalis,5,late,urban
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-09-25,39,Culex tarsalis,1,late,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-05-23,21,Culex tarsalis,6,early,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-05-30,22,Culex tarsalis,2,early,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-06-05,23,Culex tarsalis,6,mid,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-06-12,24,Culex tarsalis,2,mid,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-06-20,25,Culex tarsalis,5,mid,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-06-26,26,Culex tarsalis,5,mid,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-03,27,Culex tarsalis,NA,mid,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-10,28,Culex tarsalis,1,mid,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-10,28,Culex tarsalis,NA,mid,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-17,29,Culex tarsalis,19,mid,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-17,29,Culex tarsalis,NA,mid,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-22,30,Culex tarsalis,3,mid,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-31,31,Culex tarsalis,14,mid,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-08-07,32,Culex tarsalis,14,late,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-08-14,33,Culex tarsalis,4,late,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-08-28,35,Culex tarsalis,25,late,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-09-11,37,Culex tarsalis,22,late,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-09-11,37,Culex tarsalis,2,late,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-09-18,38,Culex tarsalis,50,late,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-09-18,38,Culex tarsalis,NA,late,urban
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-09-25,39,Culex tarsalis,8,late,urban
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-09-25,39,Culex tarsalis,NA,late,urban
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-08-19,34,Culex tarsalis,1,late,urban
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-09-30,40,Culex tarsalis,NA,late,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-05-23,21,Culex tarsalis,17,early,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-05-30,22,Culex tarsalis,14,early,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-06-05,23,Culex tarsalis,19,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-06-12,24,Culex tarsalis,4,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-06-20,25,Culex tarsalis,48,mid,urban
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-06-20,25,Culex tarsalis,1,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-06-26,26,Culex tarsalis,127,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-03,27,Culex tarsalis,9,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-10,28,Culex tarsalis,48,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-17,29,Culex tarsalis,156,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-22,30,Culex tarsalis,18,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-31,31,Culex tarsalis,6,mid,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-08-07,32,Culex tarsalis,3,late,urban
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-07,32,Culex tarsalis,1,late,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-08-14,33,Culex tarsalis,116,late,urban
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-21,34,Culex tarsalis,NA,late,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-08-28,35,Culex tarsalis,105,late,urban
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-09-05,36,Culex tarsalis,NA,late,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-09-11,37,Culex tarsalis,26,late,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-09-18,38,Culex tarsalis,11,late,urban
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-09-18,38,Culex tarsalis,NA,late,urban
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-09-25,39,Culex tarsalis,16,late,urban
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-09-25,39,Culex tarsalis,1,late,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-05-21,21,Culex tarsalis,3,early,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-05-28,22,Culex tarsalis,12,early,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-03,23,Culex tarsalis,8,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-10,24,Culex tarsalis,6,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-18,25,Culex tarsalis,23,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-24,26,Culex tarsalis,33,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-01,27,Culex tarsalis,6,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-08,28,Culex tarsalis,22,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-15,29,Culex tarsalis,47,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-24,30,Culex tarsalis,14,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-29,31,Culex tarsalis,2,mid,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-08-05,32,Culex tarsalis,2,late,urban
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-08-05,32,Culex tarsalis,1,late,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-08-12,33,Culex tarsalis,22,late,urban
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-08-12,33,Culex tarsalis,1,late,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-08-26,35,Culex tarsalis,13,late,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-03,36,Culex tarsalis,34,late,urban
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-09-03,36,Culex tarsalis,NA,late,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-09,37,Culex tarsalis,11,late,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-16,38,Culex tarsalis,17,late,urban
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-23,39,Culex tarsalis,4,late,urban
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-09-23,39,Culex tarsalis,NA,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-05-21,21,Culex tarsalis,5,early,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-05-28,22,Culex tarsalis,9,early,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-06-03,23,Culex tarsalis,7,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-06-10,24,Culex tarsalis,64,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-06-24,26,Culex tarsalis,61,mid,urban
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-06-24,26,Culex tarsalis,1,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-01,27,Culex tarsalis,89,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-08,28,Culex tarsalis,4,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-15,29,Culex tarsalis,168,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-24,30,Culex tarsalis,25,mid,urban
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-07-24,30,Culex tarsalis,2,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-29,31,Culex tarsalis,32,mid,urban
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-07-29,31,Culex tarsalis,NA,mid,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-05,32,Culex tarsalis,96,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-12,33,Culex tarsalis,199,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-19,34,Culex tarsalis,8,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-26,35,Culex tarsalis,212,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-03,36,Culex tarsalis,27,late,urban
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-09-03,36,Culex tarsalis,NA,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-09,37,Culex tarsalis,15,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-16,38,Culex tarsalis,28,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-23,39,Culex tarsalis,3,late,urban
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-09-23,39,Culex tarsalis,2,late,urban
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-30,40,Culex tarsalis,5,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-05-13,20,Culex tarsalis,1,early,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-05-13,20,Culex tarsalis,NA,early,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-05-28,22,Culex tarsalis,4,early,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-05-28,22,Culex tarsalis,1,early,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-03,23,Culex tarsalis,2,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-10,24,Culex tarsalis,43,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-18,25,Culex tarsalis,45,mid,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-06-18,25,Culex tarsalis,1,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-24,26,Culex tarsalis,97,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-01,27,Culex tarsalis,40,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-08,28,Culex tarsalis,75,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-15,29,Culex tarsalis,81,mid,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-07-15,29,Culex tarsalis,3,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-24,30,Culex tarsalis,8,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-29,31,Culex tarsalis,6,mid,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-05,32,Culex tarsalis,27,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-12,33,Culex tarsalis,57,late,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-08-12,33,Culex tarsalis,2,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-19,34,Culex tarsalis,1,late,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-08-19,34,Culex tarsalis,1,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-26,35,Culex tarsalis,25,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-03,36,Culex tarsalis,19,late,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-09-03,36,Culex tarsalis,1,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-09,37,Culex tarsalis,7,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-16,38,Culex tarsalis,12,late,urban
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-23,39,Culex tarsalis,3,late,urban
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-09-23,39,Culex tarsalis,1,late,urban
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-04-16,16,Culex tarsalis,1,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-04-23,17,Culex tarsalis,1,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-05-08,19,Culex tarsalis,2,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-05-21,21,Culex tarsalis,1,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-05-23,21,Culex tarsalis,3,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-05-28,22,Culex tarsalis,49,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-05-30,22,Culex tarsalis,19,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-03,23,Culex tarsalis,108,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-05,23,Culex tarsalis,31,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-10,24,Culex tarsalis,22,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-12,24,Culex tarsalis,78,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-18,25,Culex tarsalis,48,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-24,26,Culex tarsalis,239,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-26,26,Culex tarsalis,208,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-01,27,Culex tarsalis,186,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-03,27,Culex tarsalis,297,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-08,28,Culex tarsalis,128,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-10,28,Culex tarsalis,26,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-15,29,Culex tarsalis,1902,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-17,29,Culex tarsalis,560,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-22,30,Culex tarsalis,3,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-24,30,Culex tarsalis,1313,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-29,31,Culex tarsalis,647,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-29,31,Culex tarsalis,647,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-31,31,Culex tarsalis,52,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-05,32,Culex tarsalis,271,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-07,32,Culex tarsalis,156,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-12,33,Culex tarsalis,865,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-14,33,Culex tarsalis,305,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-19,34,Culex tarsalis,254,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-21,34,Culex tarsalis,9,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-26,35,Culex tarsalis,472,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-03,36,Culex tarsalis,1148,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-09,37,Culex tarsalis,1253,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-11,37,Culex tarsalis,373,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-16,38,Culex tarsalis,95,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-18,38,Culex tarsalis,36,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-23,39,Culex tarsalis,7,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-25,39,Culex tarsalis,33,late,peri
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-04-16,16,Culex tarsalis,2,early,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-02,18,Culex tarsalis,1,early,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-21,21,Culex tarsalis,3,early,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-23,21,Culex tarsalis,13,early,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-28,22,Culex tarsalis,14,early,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-30,22,Culex tarsalis,4,early,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-03,23,Culex tarsalis,9,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-05,23,Culex tarsalis,8,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-10,24,Culex tarsalis,63,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-12,24,Culex tarsalis,67,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-18,25,Culex tarsalis,107,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-24,26,Culex tarsalis,87,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-26,26,Culex tarsalis,62,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-01,27,Culex tarsalis,79,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-03,27,Culex tarsalis,12,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-08,28,Culex tarsalis,79,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-10,28,Culex tarsalis,3,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-15,29,Culex tarsalis,233,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-17,29,Culex tarsalis,178,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-29,31,Culex tarsalis,87,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-29,31,Culex tarsalis,87,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-31,31,Culex tarsalis,52,mid,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-05,32,Culex tarsalis,100,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-07,32,Culex tarsalis,61,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-12,33,Culex tarsalis,242,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-14,33,Culex tarsalis,209,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-19,34,Culex tarsalis,116,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-21,34,Culex tarsalis,328,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-26,35,Culex tarsalis,194,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-03,36,Culex tarsalis,61,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-09,37,Culex tarsalis,19,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-11,37,Culex tarsalis,2,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-16,38,Culex tarsalis,35,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-18,38,Culex tarsalis,16,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-23,39,Culex tarsalis,3,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-25,39,Culex tarsalis,4,late,urban
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-30,40,Culex tarsalis,4,late,urban
+54,Goat Farm,-112.063284,40.787677,CO2,2025-04-16,16,Culex tarsalis,11,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-04-23,17,Culex tarsalis,15,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-02,18,Culex tarsalis,1,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-08,19,Culex tarsalis,25,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-21,21,Culex tarsalis,17,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-23,21,Culex tarsalis,130,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-28,22,Culex tarsalis,306,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-30,22,Culex tarsalis,228,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-03,23,Culex tarsalis,308,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-05,23,Culex tarsalis,129,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-10,24,Culex tarsalis,212,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-12,24,Culex tarsalis,260,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-18,25,Culex tarsalis,413,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-24,26,Culex tarsalis,836,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-26,26,Culex tarsalis,519,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-01,27,Culex tarsalis,2770,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-03,27,Culex tarsalis,3419,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-08,28,Culex tarsalis,2113,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-10,28,Culex tarsalis,605,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-15,29,Culex tarsalis,5665,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-17,29,Culex tarsalis,5972,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-22,30,Culex tarsalis,205,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-24,30,Culex tarsalis,3902,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-29,31,Culex tarsalis,3053,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-29,31,Culex tarsalis,3053,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-31,31,Culex tarsalis,668,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-05,32,Culex tarsalis,4933,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-07,32,Culex tarsalis,1264,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-12,33,Culex tarsalis,4781,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-14,33,Culex tarsalis,3108,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-19,34,Culex tarsalis,4023,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-21,34,Culex tarsalis,86,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-26,35,Culex tarsalis,5842,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-03,36,Culex tarsalis,4549,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-05,36,Culex tarsalis,3124,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-09,37,Culex tarsalis,4768,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-11,37,Culex tarsalis,3601,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-16,38,Culex tarsalis,722,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-18,38,Culex tarsalis,207,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-23,39,Culex tarsalis,10,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-25,39,Culex tarsalis,38,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-30,40,Culex tarsalis,87,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-04-16,16,Culex tarsalis,15,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-04-23,17,Culex tarsalis,8,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-02,18,Culex tarsalis,39,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-08,19,Culex tarsalis,180,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-13,20,Culex tarsalis,7,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-15,20,Culex tarsalis,1,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-21,21,Culex tarsalis,22,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-23,21,Culex tarsalis,414,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-28,22,Culex tarsalis,1070,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-30,22,Culex tarsalis,627,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-03,23,Culex tarsalis,326,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-05,23,Culex tarsalis,694,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-10,24,Culex tarsalis,1071,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-12,24,Culex tarsalis,1577,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-18,25,Culex tarsalis,2248,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-24,26,Culex tarsalis,1252,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-26,26,Culex tarsalis,1308,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-01,27,Culex tarsalis,336,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-03,27,Culex tarsalis,108,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-08,28,Culex tarsalis,3070,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-10,28,Culex tarsalis,3422,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-15,29,Culex tarsalis,10271,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-17,29,Culex tarsalis,7526,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-22,30,Culex tarsalis,29,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-24,30,Culex tarsalis,5213,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-29,31,Culex tarsalis,7448,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-29,31,Culex tarsalis,7448,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-31,31,Culex tarsalis,1693,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-05,32,Culex tarsalis,1833,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-07,32,Culex tarsalis,2517,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-12,33,Culex tarsalis,4541,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-14,33,Culex tarsalis,2303,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-19,34,Culex tarsalis,3217,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-21,34,Culex tarsalis,5969,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-26,35,Culex tarsalis,4631,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-03,36,Culex tarsalis,4072,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-05,36,Culex tarsalis,1846,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-09,37,Culex tarsalis,3990,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-11,37,Culex tarsalis,3798,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-16,38,Culex tarsalis,1274,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-18,38,Culex tarsalis,7,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-23,39,Culex tarsalis,9,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-25,39,Culex tarsalis,188,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-30,40,Culex tarsalis,24,late,rural
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-09-03,36,Culex tarsalis,NA,late,urban
+26,Harrison,-112.031522,40.830952,CO2,2025-04-11,15,Culex tarsalis,3,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-04-23,17,Culex tarsalis,2,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-02,18,Culex tarsalis,9,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-08,19,Culex tarsalis,4,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-13,20,Culex tarsalis,1,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-15,20,Culex tarsalis,4,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-21,21,Culex tarsalis,8,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-23,21,Culex tarsalis,146,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-28,22,Culex tarsalis,213,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-05-30,22,Culex tarsalis,368,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-03,23,Culex tarsalis,53,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-05,23,Culex tarsalis,132,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-10,24,Culex tarsalis,584,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-12,24,Culex tarsalis,74,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-18,25,Culex tarsalis,653,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-24,26,Culex tarsalis,1170,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-26,26,Culex tarsalis,28,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-01,27,Culex tarsalis,1067,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-03,27,Culex tarsalis,803,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-08,28,Culex tarsalis,938,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-10,28,Culex tarsalis,1410,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-15,29,Culex tarsalis,2618,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-17,29,Culex tarsalis,3723,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-22,30,Culex tarsalis,2,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-24,30,Culex tarsalis,2960,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-29,31,Culex tarsalis,1494,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-29,31,Culex tarsalis,1494,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-31,31,Culex tarsalis,2467,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-05,32,Culex tarsalis,1887,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-07,32,Culex tarsalis,3051,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-12,33,Culex tarsalis,3914,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-14,33,Culex tarsalis,4591,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-19,34,Culex tarsalis,3747,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-21,34,Culex tarsalis,1499,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-26,35,Culex tarsalis,1080,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-03,36,Culex tarsalis,2802,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-05,36,Culex tarsalis,3324,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-09,37,Culex tarsalis,765,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-11,37,Culex tarsalis,595,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-16,38,Culex tarsalis,141,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-18,38,Culex tarsalis,311,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-25,39,Culex tarsalis,6,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-30,40,Culex tarsalis,1,late,rural
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-11,15,Culex tarsalis,32,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-16,16,Culex tarsalis,24,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-23,17,Culex tarsalis,7,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-02,18,Culex tarsalis,12,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-13,20,Culex tarsalis,43,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-15,20,Culex tarsalis,6,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-21,21,Culex tarsalis,346,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-23,21,Culex tarsalis,102,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-28,22,Culex tarsalis,98,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-30,22,Culex tarsalis,447,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-03,23,Culex tarsalis,183,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-05,23,Culex tarsalis,206,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-10,24,Culex tarsalis,732,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-12,24,Culex tarsalis,1038,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-18,25,Culex tarsalis,872,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-24,26,Culex tarsalis,432,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-26,26,Culex tarsalis,927,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-01,27,Culex tarsalis,849,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-03,27,Culex tarsalis,1814,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-08,28,Culex tarsalis,323,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-10,28,Culex tarsalis,3570,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-15,29,Culex tarsalis,2334,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-17,29,Culex tarsalis,2922,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-22,30,Culex tarsalis,199,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-24,30,Culex tarsalis,11,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-29,31,Culex tarsalis,266,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-29,31,Culex tarsalis,266,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-31,31,Culex tarsalis,550,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-05,32,Culex tarsalis,2929,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-07,32,Culex tarsalis,1977,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-12,33,Culex tarsalis,97,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-14,33,Culex tarsalis,2016,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-19,34,Culex tarsalis,954,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-21,34,Culex tarsalis,203,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-26,35,Culex tarsalis,881,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-03,36,Culex tarsalis,2244,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-05,36,Culex tarsalis,3466,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-09,37,Culex tarsalis,741,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-11,37,Culex tarsalis,505,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-16,38,Culex tarsalis,209,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-18,38,Culex tarsalis,120,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-23,39,Culex tarsalis,97,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-25,39,Culex tarsalis,17,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-30,40,Culex tarsalis,484,late,peri
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-05-30,22,Culex tarsalis,8,early,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-06-12,24,Culex tarsalis,51,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-06-20,25,Culex tarsalis,8,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-06-20,25,Culex tarsalis,1,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-06-26,26,Culex tarsalis,11,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-03,27,Culex tarsalis,5,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-10,28,Culex tarsalis,38,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-17,29,Culex tarsalis,24,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-22,30,Culex tarsalis,6,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-31,31,Culex tarsalis,2,mid,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-08-07,32,Culex tarsalis,34,late,urban
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-08-07,32,Culex tarsalis,1,late,urban
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-08-21,34,Culex tarsalis,1,late,urban
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-08-21,34,Culex tarsalis,1,late,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-08-28,35,Culex tarsalis,14,late,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-09-11,37,Culex tarsalis,5,late,urban
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-09-18,38,Culex tarsalis,8,late,urban
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-09-25,39,Culex tarsalis,1,late,urban
+35,Inland Sea,-112.101481,40.816002,CO2,2025-04-11,15,Culex tarsalis,3,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-04-16,16,Culex tarsalis,10,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-04-23,17,Culex tarsalis,17,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-02,18,Culex tarsalis,6,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-08,19,Culex tarsalis,98,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-15,20,Culex tarsalis,3,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-21,21,Culex tarsalis,10,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-23,21,Culex tarsalis,54,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-28,22,Culex tarsalis,252,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-03,23,Culex tarsalis,41,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-05,23,Culex tarsalis,765,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-10,24,Culex tarsalis,196,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-12,24,Culex tarsalis,277,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-18,25,Culex tarsalis,1380,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-24,26,Culex tarsalis,167,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-26,26,Culex tarsalis,411,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-01,27,Culex tarsalis,1335,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-03,27,Culex tarsalis,1073,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-08,28,Culex tarsalis,2425,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-10,28,Culex tarsalis,225,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-15,29,Culex tarsalis,2729,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-17,29,Culex tarsalis,3222,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-22,30,Culex tarsalis,1,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-24,30,Culex tarsalis,1783,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-29,31,Culex tarsalis,1165,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-29,31,Culex tarsalis,1165,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-31,31,Culex tarsalis,227,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-05,32,Culex tarsalis,674,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-07,32,Culex tarsalis,180,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-12,33,Culex tarsalis,762,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-14,33,Culex tarsalis,16,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-19,34,Culex tarsalis,1477,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-21,34,Culex tarsalis,886,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-26,35,Culex tarsalis,3994,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-03,36,Culex tarsalis,3566,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-05,36,Culex tarsalis,1025,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-09,37,Culex tarsalis,1509,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-11,37,Culex tarsalis,849,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-16,38,Culex tarsalis,160,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-18,38,Culex tarsalis,228,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-23,39,Culex tarsalis,15,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-30,40,Culex tarsalis,45,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-04-11,15,Culex tarsalis,1,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-04-23,17,Culex tarsalis,2,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-05-02,18,Culex tarsalis,34,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-05-08,19,Culex tarsalis,9,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-05-23,21,Culex tarsalis,11,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-05-28,22,Culex tarsalis,132,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-05-30,22,Culex tarsalis,62,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-03,23,Culex tarsalis,13,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-05,23,Culex tarsalis,44,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-10,24,Culex tarsalis,89,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-12,24,Culex tarsalis,42,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-18,25,Culex tarsalis,256,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-24,26,Culex tarsalis,111,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-26,26,Culex tarsalis,27,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-01,27,Culex tarsalis,506,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-03,27,Culex tarsalis,403,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-08,28,Culex tarsalis,253,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-10,28,Culex tarsalis,304,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-15,29,Culex tarsalis,1135,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-17,29,Culex tarsalis,1823,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-22,30,Culex tarsalis,3,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-24,30,Culex tarsalis,1118,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-29,31,Culex tarsalis,933,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-29,31,Culex tarsalis,933,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-31,31,Culex tarsalis,245,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-05,32,Culex tarsalis,1952,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-07,32,Culex tarsalis,17,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-12,33,Culex tarsalis,171,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-14,33,Culex tarsalis,562,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-19,34,Culex tarsalis,385,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-21,34,Culex tarsalis,147,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-26,35,Culex tarsalis,856,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-03,36,Culex tarsalis,619,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-05,36,Culex tarsalis,293,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-09,37,Culex tarsalis,601,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-11,37,Culex tarsalis,273,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-16,38,Culex tarsalis,199,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-18,38,Culex tarsalis,84,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-23,39,Culex tarsalis,25,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-25,39,Culex tarsalis,24,late,rural
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-11,15,Culex tarsalis,19,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-16,16,Culex tarsalis,22,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-23,17,Culex tarsalis,4,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-05-02,18,Culex tarsalis,2,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-05-08,19,Culex tarsalis,4,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-05-23,21,Culex tarsalis,78,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-05-28,22,Culex tarsalis,32,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-03,23,Culex tarsalis,115,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-05,23,Culex tarsalis,43,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-10,24,Culex tarsalis,94,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-12,24,Culex tarsalis,334,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-18,25,Culex tarsalis,98,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-24,26,Culex tarsalis,368,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-26,26,Culex tarsalis,245,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-01,27,Culex tarsalis,99,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-03,27,Culex tarsalis,19,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-08,28,Culex tarsalis,109,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-10,28,Culex tarsalis,51,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-15,29,Culex tarsalis,229,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-17,29,Culex tarsalis,230,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-24,30,Culex tarsalis,7,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-29,31,Culex tarsalis,8,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-29,31,Culex tarsalis,8,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-31,31,Culex tarsalis,38,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-05,32,Culex tarsalis,6,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-07,32,Culex tarsalis,56,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-12,33,Culex tarsalis,353,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-14,33,Culex tarsalis,184,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-19,34,Culex tarsalis,6,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-21,34,Culex tarsalis,93,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-26,35,Culex tarsalis,649,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-03,36,Culex tarsalis,195,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-09,37,Culex tarsalis,131,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-11,37,Culex tarsalis,10,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-16,38,Culex tarsalis,51,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-18,38,Culex tarsalis,26,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-23,39,Culex tarsalis,15,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-25,39,Culex tarsalis,2,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-30,40,Culex tarsalis,2,late,peri
+57,Lakefront,-112.023355,40.86989,CO2,2025-04-11,15,Culex tarsalis,6,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-04-16,16,Culex tarsalis,7,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-02,18,Culex tarsalis,13,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-08,19,Culex tarsalis,26,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-13,20,Culex tarsalis,1,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-21,21,Culex tarsalis,4,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-23,21,Culex tarsalis,96,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-28,22,Culex tarsalis,317,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-30,22,Culex tarsalis,896,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-03,23,Culex tarsalis,16,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-05,23,Culex tarsalis,441,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-10,24,Culex tarsalis,1072,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-12,24,Culex tarsalis,217,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-18,25,Culex tarsalis,2294,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-24,26,Culex tarsalis,1270,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-26,26,Culex tarsalis,823,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-01,27,Culex tarsalis,93,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-03,27,Culex tarsalis,4186,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-08,28,Culex tarsalis,4405,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-10,28,Culex tarsalis,1926,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-15,29,Culex tarsalis,3904,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-17,29,Culex tarsalis,3161,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-22,30,Culex tarsalis,6,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-24,30,Culex tarsalis,3160,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-29,31,Culex tarsalis,3850,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-29,31,Culex tarsalis,3850,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-31,31,Culex tarsalis,1009,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-05,32,Culex tarsalis,780,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-07,32,Culex tarsalis,328,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-12,33,Culex tarsalis,1621,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-14,33,Culex tarsalis,2486,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-19,34,Culex tarsalis,2345,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-21,34,Culex tarsalis,3752,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-26,35,Culex tarsalis,447,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-03,36,Culex tarsalis,17,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-09,37,Culex tarsalis,2332,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-11,37,Culex tarsalis,303,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-16,38,Culex tarsalis,14,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-18,38,Culex tarsalis,214,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-23,39,Culex tarsalis,13,late,rural
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-04-11,15,Culex tarsalis,3,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-04-23,17,Culex tarsalis,3,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-02,18,Culex tarsalis,1,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-08,19,Culex tarsalis,16,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-21,21,Culex tarsalis,4,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-23,21,Culex tarsalis,28,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-28,22,Culex tarsalis,53,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-30,22,Culex tarsalis,99,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-03,23,Culex tarsalis,52,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-05,23,Culex tarsalis,31,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-10,24,Culex tarsalis,178,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-12,24,Culex tarsalis,295,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-18,25,Culex tarsalis,143,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-24,26,Culex tarsalis,541,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-26,26,Culex tarsalis,14,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-01,27,Culex tarsalis,341,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-08,28,Culex tarsalis,304,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-10,28,Culex tarsalis,173,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-15,29,Culex tarsalis,3642,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-17,29,Culex tarsalis,838,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-24,30,Culex tarsalis,924,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-29,31,Culex tarsalis,1294,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-29,31,Culex tarsalis,1294,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-05,32,Culex tarsalis,1909,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-07,32,Culex tarsalis,258,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-12,33,Culex tarsalis,387,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-14,33,Culex tarsalis,623,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-19,34,Culex tarsalis,868,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-21,34,Culex tarsalis,1492,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-26,35,Culex tarsalis,2313,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-03,36,Culex tarsalis,924,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-05,36,Culex tarsalis,23,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-09,37,Culex tarsalis,1552,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-11,37,Culex tarsalis,137,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-16,38,Culex tarsalis,430,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-18,38,Culex tarsalis,86,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-23,39,Culex tarsalis,8,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-25,39,Culex tarsalis,6,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-30,40,Culex tarsalis,4,late,peri
+63,New State,-111.981345,40.871167,CO2,2025-04-11,15,Culex tarsalis,2,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-05-02,18,Culex tarsalis,1,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-05-08,19,Culex tarsalis,35,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-05-21,21,Culex tarsalis,6,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-05-23,21,Culex tarsalis,73,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-05-28,22,Culex tarsalis,72,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-05-30,22,Culex tarsalis,243,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-03,23,Culex tarsalis,57,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-05,23,Culex tarsalis,307,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-10,24,Culex tarsalis,1089,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-12,24,Culex tarsalis,1279,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-18,25,Culex tarsalis,2871,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-24,26,Culex tarsalis,998,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-26,26,Culex tarsalis,937,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-01,27,Culex tarsalis,392,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-03,27,Culex tarsalis,1829,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-08,28,Culex tarsalis,531,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-10,28,Culex tarsalis,2227,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-15,29,Culex tarsalis,3482,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-17,29,Culex tarsalis,1295,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-22,30,Culex tarsalis,2,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-24,30,Culex tarsalis,1510,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-29,31,Culex tarsalis,3509,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-29,31,Culex tarsalis,3509,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-31,31,Culex tarsalis,2176,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-08-05,32,Culex tarsalis,1692,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-08-07,32,Culex tarsalis,2026,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-08-12,33,Culex tarsalis,2847,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-08-14,33,Culex tarsalis,1360,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-08-19,34,Culex tarsalis,814,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-08-21,34,Culex tarsalis,4106,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-08-26,35,Culex tarsalis,5442,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-03,36,Culex tarsalis,289,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-09,37,Culex tarsalis,659,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-11,37,Culex tarsalis,947,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-16,38,Culex tarsalis,3,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-18,38,Culex tarsalis,111,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-23,39,Culex tarsalis,14,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-25,39,Culex tarsalis,33,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-30,40,Culex tarsalis,11,late,rural
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-05-21,21,Culex tarsalis,3,early,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-05-28,22,Culex tarsalis,9,early,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-06-03,23,Culex tarsalis,12,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-06-10,24,Culex tarsalis,13,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-06-18,25,Culex tarsalis,67,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-06-24,26,Culex tarsalis,2,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-06-24,26,Culex tarsalis,1,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-01,27,Culex tarsalis,45,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-08,28,Culex tarsalis,28,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-15,29,Culex tarsalis,121,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-24,30,Culex tarsalis,27,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-29,31,Culex tarsalis,10,mid,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-05,32,Culex tarsalis,188,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-12,33,Culex tarsalis,147,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-19,34,Culex tarsalis,8,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-08-19,34,Culex tarsalis,1,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-26,35,Culex tarsalis,140,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-03,36,Culex tarsalis,34,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-09,37,Culex tarsalis,5,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-16,38,Culex tarsalis,44,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-09-16,38,Culex tarsalis,6,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-23,39,Culex tarsalis,8,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-09-23,39,Culex tarsalis,2,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-30,40,Culex tarsalis,5,late,urban
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-09-30,40,Culex tarsalis,2,late,urban
+65,Noggin,-112.059,40.81327,CO2,2025-04-16,16,Culex tarsalis,12,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-04-23,17,Culex tarsalis,10,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-02,18,Culex tarsalis,3,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-15,20,Culex tarsalis,1,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-21,21,Culex tarsalis,10,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-23,21,Culex tarsalis,1,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-28,22,Culex tarsalis,163,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-30,22,Culex tarsalis,470,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-03,23,Culex tarsalis,57,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-05,23,Culex tarsalis,41,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-10,24,Culex tarsalis,197,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-12,24,Culex tarsalis,86,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-18,25,Culex tarsalis,763,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-24,26,Culex tarsalis,365,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-01,27,Culex tarsalis,1031,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-03,27,Culex tarsalis,2173,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-08,28,Culex tarsalis,1215,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-10,28,Culex tarsalis,676,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-17,29,Culex tarsalis,3212,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-22,30,Culex tarsalis,15,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-24,30,Culex tarsalis,1497,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-29,31,Culex tarsalis,1123,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-29,31,Culex tarsalis,1123,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-31,31,Culex tarsalis,29,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-05,32,Culex tarsalis,2916,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-07,32,Culex tarsalis,720,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-12,33,Culex tarsalis,386,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-14,33,Culex tarsalis,1688,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-19,34,Culex tarsalis,19,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-21,34,Culex tarsalis,18,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-26,35,Culex tarsalis,128,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-03,36,Culex tarsalis,3182,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-05,36,Culex tarsalis,656,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-09,37,Culex tarsalis,1352,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-11,37,Culex tarsalis,708,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-16,38,Culex tarsalis,489,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-18,38,Culex tarsalis,411,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-23,39,Culex tarsalis,12,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-25,39,Culex tarsalis,99,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-30,40,Culex tarsalis,28,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-04-11,15,Culex tarsalis,1,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-04-16,16,Culex tarsalis,1,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-02,18,Culex tarsalis,4,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-08,19,Culex tarsalis,13,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-21,21,Culex tarsalis,3,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-23,21,Culex tarsalis,34,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-28,22,Culex tarsalis,37,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-30,22,Culex tarsalis,171,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-03,23,Culex tarsalis,4,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-05,23,Culex tarsalis,148,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-10,24,Culex tarsalis,488,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-12,24,Culex tarsalis,281,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-18,25,Culex tarsalis,573,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-24,26,Culex tarsalis,428,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-26,26,Culex tarsalis,338,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-01,27,Culex tarsalis,807,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-03,27,Culex tarsalis,1510,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-08,28,Culex tarsalis,722,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-10,28,Culex tarsalis,1136,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-15,29,Culex tarsalis,3177,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-17,29,Culex tarsalis,774,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-22,30,Culex tarsalis,11,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-24,30,Culex tarsalis,332,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-29,31,Culex tarsalis,633,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-29,31,Culex tarsalis,633,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-31,31,Culex tarsalis,1116,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-05,32,Culex tarsalis,1044,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-07,32,Culex tarsalis,499,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-12,33,Culex tarsalis,2617,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-14,33,Culex tarsalis,1027,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-19,34,Culex tarsalis,734,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-21,34,Culex tarsalis,2353,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-26,35,Culex tarsalis,2316,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-03,36,Culex tarsalis,1010,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-05,36,Culex tarsalis,657,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-09,37,Culex tarsalis,205,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-11,37,Culex tarsalis,331,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-16,38,Culex tarsalis,62,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-18,38,Culex tarsalis,120,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-25,39,Culex tarsalis,33,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-30,40,Culex tarsalis,7,late,rural
+59,O'Reillys,-112.038803,40.754836,CO2,2025-04-11,15,Culex tarsalis,19,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-04-16,16,Culex tarsalis,7,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-04-23,17,Culex tarsalis,3,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-02,18,Culex tarsalis,1,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-08,19,Culex tarsalis,11,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-21,21,Culex tarsalis,8,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-23,21,Culex tarsalis,27,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-28,22,Culex tarsalis,62,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-30,22,Culex tarsalis,23,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-03,23,Culex tarsalis,17,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-05,23,Culex tarsalis,27,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-10,24,Culex tarsalis,60,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-12,24,Culex tarsalis,40,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-18,25,Culex tarsalis,467,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-24,26,Culex tarsalis,770,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-26,26,Culex tarsalis,2,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-03,27,Culex tarsalis,5,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-08,28,Culex tarsalis,18,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-10,28,Culex tarsalis,112,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-15,29,Culex tarsalis,615,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-17,29,Culex tarsalis,1114,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-24,30,Culex tarsalis,644,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-31,31,Culex tarsalis,124,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-05,32,Culex tarsalis,936,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-07,32,Culex tarsalis,290,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-12,33,Culex tarsalis,1151,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-14,33,Culex tarsalis,823,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-19,34,Culex tarsalis,378,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-21,34,Culex tarsalis,1992,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-26,35,Culex tarsalis,2301,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-03,36,Culex tarsalis,1661,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-09,37,Culex tarsalis,170,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-11,37,Culex tarsalis,47,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-16,38,Culex tarsalis,15,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-18,38,Culex tarsalis,13,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-23,39,Culex tarsalis,14,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-30,40,Culex tarsalis,4,late,peri
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-11,15,Culex tarsalis,1,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-23,17,Culex tarsalis,3,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-05-08,19,Culex tarsalis,12,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-05-21,21,Culex tarsalis,3,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-05-23,21,Culex tarsalis,28,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-05-30,22,Culex tarsalis,136,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-03,23,Culex tarsalis,16,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-05,23,Culex tarsalis,91,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-10,24,Culex tarsalis,175,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-18,25,Culex tarsalis,1,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-24,26,Culex tarsalis,262,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-26,26,Culex tarsalis,242,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-01,27,Culex tarsalis,241,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-03,27,Culex tarsalis,642,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-08,28,Culex tarsalis,909,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-10,28,Culex tarsalis,706,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-15,29,Culex tarsalis,4,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-17,29,Culex tarsalis,1442,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-22,30,Culex tarsalis,3,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-24,30,Culex tarsalis,745,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-29,31,Culex tarsalis,220,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-29,31,Culex tarsalis,220,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-31,31,Culex tarsalis,909,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-05,32,Culex tarsalis,373,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-07,32,Culex tarsalis,704,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-12,33,Culex tarsalis,618,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-14,33,Culex tarsalis,695,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-19,34,Culex tarsalis,291,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-21,34,Culex tarsalis,287,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-26,35,Culex tarsalis,1501,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-03,36,Culex tarsalis,1581,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-05,36,Culex tarsalis,432,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-09,37,Culex tarsalis,190,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-11,37,Culex tarsalis,617,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-16,38,Culex tarsalis,21,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-18,38,Culex tarsalis,101,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-23,39,Culex tarsalis,8,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-30,40,Culex tarsalis,11,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-04-11,15,Culex tarsalis,1,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-04-16,16,Culex tarsalis,5,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-04-23,17,Culex tarsalis,4,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-02,18,Culex tarsalis,1,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-08,19,Culex tarsalis,54,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-13,20,Culex tarsalis,1,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-15,20,Culex tarsalis,1,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-21,21,Culex tarsalis,6,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-23,21,Culex tarsalis,51,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-28,22,Culex tarsalis,436,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-30,22,Culex tarsalis,387,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-03,23,Culex tarsalis,9,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-05,23,Culex tarsalis,333,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-10,24,Culex tarsalis,878,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-12,24,Culex tarsalis,89,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-18,25,Culex tarsalis,390,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-24,26,Culex tarsalis,89,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-26,26,Culex tarsalis,201,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-01,27,Culex tarsalis,1623,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-03,27,Culex tarsalis,411,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-08,28,Culex tarsalis,1219,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-10,28,Culex tarsalis,436,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-15,29,Culex tarsalis,3600,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-17,29,Culex tarsalis,1751,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-22,30,Culex tarsalis,4,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-24,30,Culex tarsalis,1686,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-29,31,Culex tarsalis,1437,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-29,31,Culex tarsalis,1437,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-31,31,Culex tarsalis,198,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-05,32,Culex tarsalis,3357,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-07,32,Culex tarsalis,45,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-12,33,Culex tarsalis,5329,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-14,33,Culex tarsalis,14,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-19,34,Culex tarsalis,499,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-21,34,Culex tarsalis,4607,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-26,35,Culex tarsalis,2958,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-03,36,Culex tarsalis,1659,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-05,36,Culex tarsalis,1705,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-09,37,Culex tarsalis,384,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-11,37,Culex tarsalis,1153,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-16,38,Culex tarsalis,108,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-18,38,Culex tarsalis,95,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-25,39,Culex tarsalis,27,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-30,40,Culex tarsalis,24,late,rural
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-11,15,Culex tarsalis,49,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-16,16,Culex tarsalis,27,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-23,17,Culex tarsalis,18,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-02,18,Culex tarsalis,6,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-08,19,Culex tarsalis,43,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-13,20,Culex tarsalis,42,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-15,20,Culex tarsalis,20,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-21,21,Culex tarsalis,68,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-23,21,Culex tarsalis,110,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-28,22,Culex tarsalis,204,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-30,22,Culex tarsalis,157,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-03,23,Culex tarsalis,187,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-05,23,Culex tarsalis,110,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-10,24,Culex tarsalis,359,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-12,24,Culex tarsalis,2,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-18,25,Culex tarsalis,629,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-24,26,Culex tarsalis,1594,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-26,26,Culex tarsalis,1293,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-01,27,Culex tarsalis,867,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-03,27,Culex tarsalis,276,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-08,28,Culex tarsalis,1866,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-10,28,Culex tarsalis,3171,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-15,29,Culex tarsalis,3637,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-17,29,Culex tarsalis,1379,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-22,30,Culex tarsalis,63,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-24,30,Culex tarsalis,2225,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-29,31,Culex tarsalis,72,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-29,31,Culex tarsalis,72,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-31,31,Culex tarsalis,1123,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-05,32,Culex tarsalis,1365,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-07,32,Culex tarsalis,519,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-12,33,Culex tarsalis,2387,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-14,33,Culex tarsalis,1387,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-19,34,Culex tarsalis,904,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-21,34,Culex tarsalis,1355,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-26,35,Culex tarsalis,1958,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-03,36,Culex tarsalis,2442,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-05,36,Culex tarsalis,203,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-09,37,Culex tarsalis,800,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-11,37,Culex tarsalis,52,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-16,38,Culex tarsalis,349,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-18,38,Culex tarsalis,133,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-25,39,Culex tarsalis,7,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-30,40,Culex tarsalis,94,late,peri
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-05-23,21,Culex tarsalis,1,early,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-06-12,24,Culex tarsalis,1,mid,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-06-26,26,Culex tarsalis,2,mid,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-07-10,28,Culex tarsalis,NA,mid,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-07-17,29,Culex tarsalis,1,mid,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-07,32,Culex tarsalis,1,late,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-14,33,Culex tarsalis,NA,late,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-28,35,Culex tarsalis,1,late,urban
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-09-18,38,Culex tarsalis,4,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-04-11,15,Culex tarsalis,4,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-04-16,16,Culex tarsalis,11,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-02,18,Culex tarsalis,1,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-08,19,Culex tarsalis,5,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-13,20,Culex tarsalis,2,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-21,21,Culex tarsalis,3,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-23,21,Culex tarsalis,10,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-28,22,Culex tarsalis,28,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-30,22,Culex tarsalis,37,early,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-05,23,Culex tarsalis,20,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-10,24,Culex tarsalis,238,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-12,24,Culex tarsalis,251,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-18,25,Culex tarsalis,419,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-24,26,Culex tarsalis,268,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-26,26,Culex tarsalis,399,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-01,27,Culex tarsalis,295,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-03,27,Culex tarsalis,22,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-08,28,Culex tarsalis,258,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-10,28,Culex tarsalis,238,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-15,29,Culex tarsalis,631,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-17,29,Culex tarsalis,404,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-22,30,Culex tarsalis,2,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-24,30,Culex tarsalis,392,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-29,31,Culex tarsalis,181,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-29,31,Culex tarsalis,181,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-31,31,Culex tarsalis,76,mid,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-05,32,Culex tarsalis,268,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-07,32,Culex tarsalis,70,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-12,33,Culex tarsalis,219,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-14,33,Culex tarsalis,119,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-19,34,Culex tarsalis,48,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-21,34,Culex tarsalis,240,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-26,35,Culex tarsalis,797,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-03,36,Culex tarsalis,353,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-05,36,Culex tarsalis,268,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-09,37,Culex tarsalis,152,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-11,37,Culex tarsalis,36,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-16,38,Culex tarsalis,114,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-18,38,Culex tarsalis,61,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-23,39,Culex tarsalis,6,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-25,39,Culex tarsalis,10,late,urban
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-30,40,Culex tarsalis,17,late,urban
+4,Rudy,-112.003105,40.844458,CO2,2025-04-11,15,Culex tarsalis,33,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-04-16,16,Culex tarsalis,9,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-04-23,17,Culex tarsalis,1,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-02,18,Culex tarsalis,2,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-08,19,Culex tarsalis,87,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-13,20,Culex tarsalis,6,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-15,20,Culex tarsalis,2,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-21,21,Culex tarsalis,36,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-23,21,Culex tarsalis,12,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-28,22,Culex tarsalis,233,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-30,22,Culex tarsalis,246,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-03,23,Culex tarsalis,110,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-05,23,Culex tarsalis,118,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-10,24,Culex tarsalis,760,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-12,24,Culex tarsalis,646,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-18,25,Culex tarsalis,787,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-24,26,Culex tarsalis,1459,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-26,26,Culex tarsalis,223,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-01,27,Culex tarsalis,744,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-03,27,Culex tarsalis,1117,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-08,28,Culex tarsalis,364,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-10,28,Culex tarsalis,1888,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-15,29,Culex tarsalis,1372,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-17,29,Culex tarsalis,902,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-22,30,Culex tarsalis,63,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-24,30,Culex tarsalis,618,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-29,31,Culex tarsalis,1147,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-29,31,Culex tarsalis,1147,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-31,31,Culex tarsalis,28,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-05,32,Culex tarsalis,2533,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-07,32,Culex tarsalis,1796,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-12,33,Culex tarsalis,2052,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-14,33,Culex tarsalis,1520,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-19,34,Culex tarsalis,572,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-21,34,Culex tarsalis,3074,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-26,35,Culex tarsalis,664,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-03,36,Culex tarsalis,1906,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-05,36,Culex tarsalis,754,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-09,37,Culex tarsalis,645,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-11,37,Culex tarsalis,461,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-16,38,Culex tarsalis,28,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-18,38,Culex tarsalis,6,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-23,39,Culex tarsalis,26,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-25,39,Culex tarsalis,79,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-30,40,Culex tarsalis,37,late,rural
+66,Runway,-112.074051,40.841498,CO2,2025-06-10,24,Culex tarsalis,641,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-06-12,24,Culex tarsalis,45,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-06-18,25,Culex tarsalis,1029,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-06-24,26,Culex tarsalis,676,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-06-26,26,Culex tarsalis,89,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-01,27,Culex tarsalis,884,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-08,28,Culex tarsalis,2776,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-10,28,Culex tarsalis,362,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-15,29,Culex tarsalis,1729,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-17,29,Culex tarsalis,1192,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-22,30,Culex tarsalis,1,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-24,30,Culex tarsalis,2596,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-29,31,Culex tarsalis,262,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-29,31,Culex tarsalis,262,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-31,31,Culex tarsalis,1110,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-05,32,Culex tarsalis,533,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-07,32,Culex tarsalis,406,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-12,33,Culex tarsalis,2,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-14,33,Culex tarsalis,780,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-19,34,Culex tarsalis,203,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-21,34,Culex tarsalis,1701,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-26,35,Culex tarsalis,873,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-03,36,Culex tarsalis,710,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-09,37,Culex tarsalis,45,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-11,37,Culex tarsalis,150,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-16,38,Culex tarsalis,25,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-18,38,Culex tarsalis,48,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-23,39,Culex tarsalis,25,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-25,39,Culex tarsalis,38,late,peri
+228,Senior Center,-111.861971,40.764297,GRVD,2025-06-05,23,Culex tarsalis,NA,mid,urban
+228,Senior Center,-111.861971,40.764297,GRVD,2025-07-10,28,Culex tarsalis,NA,mid,urban
+228,Senior Center,-111.861971,40.764297,GRVD,2025-07-17,29,Culex tarsalis,2,mid,urban
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-07,32,Culex tarsalis,NA,late,urban
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-21,34,Culex tarsalis,2,late,urban
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-21,34,Culex tarsalis,2,late,urban
+228,Senior Center,-111.861971,40.764297,GRVD,2025-09-18,38,Culex tarsalis,NA,late,urban
+228,Senior Center,-111.861971,40.764297,GRVD,2025-09-25,39,Culex tarsalis,3,late,urban
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-04-11,15,Culex tarsalis,3,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-04-16,16,Culex tarsalis,4,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-04-23,17,Culex tarsalis,1,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-08,19,Culex tarsalis,11,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-21,21,Culex tarsalis,17,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-23,21,Culex tarsalis,29,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-28,22,Culex tarsalis,88,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-30,22,Culex tarsalis,27,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-03,23,Culex tarsalis,60,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-05,23,Culex tarsalis,18,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-10,24,Culex tarsalis,298,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-12,24,Culex tarsalis,122,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-18,25,Culex tarsalis,57,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-24,26,Culex tarsalis,372,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-26,26,Culex tarsalis,158,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-01,27,Culex tarsalis,86,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-03,27,Culex tarsalis,89,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-08,28,Culex tarsalis,293,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-10,28,Culex tarsalis,387,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-15,29,Culex tarsalis,902,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-17,29,Culex tarsalis,2027,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-22,30,Culex tarsalis,1,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-24,30,Culex tarsalis,34,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-29,31,Culex tarsalis,218,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-29,31,Culex tarsalis,218,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-31,31,Culex tarsalis,166,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-05,32,Culex tarsalis,343,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-07,32,Culex tarsalis,223,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-12,33,Culex tarsalis,578,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-14,33,Culex tarsalis,247,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-19,34,Culex tarsalis,179,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-21,34,Culex tarsalis,493,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-26,35,Culex tarsalis,568,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-03,36,Culex tarsalis,928,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-05,36,Culex tarsalis,183,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-09,37,Culex tarsalis,116,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-11,37,Culex tarsalis,31,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-16,38,Culex tarsalis,93,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-18,38,Culex tarsalis,103,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-23,39,Culex tarsalis,24,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-25,39,Culex tarsalis,45,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-30,40,Culex tarsalis,7,late,peri
+50,South Saratoga,-112.109041,40.784374,CO2,2025-04-11,15,Culex tarsalis,3,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-04-16,16,Culex tarsalis,5,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-04-23,17,Culex tarsalis,3,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-05-08,19,Culex tarsalis,1,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-05-15,20,Culex tarsalis,1,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-05-21,21,Culex tarsalis,7,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-05-23,21,Culex tarsalis,18,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-05-28,22,Culex tarsalis,19,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-05-30,22,Culex tarsalis,49,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-06-05,23,Culex tarsalis,9,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-06-10,24,Culex tarsalis,106,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-06-12,24,Culex tarsalis,98,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-06-18,25,Culex tarsalis,8,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-06-24,26,Culex tarsalis,83,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-06-26,26,Culex tarsalis,167,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-01,27,Culex tarsalis,427,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-03,27,Culex tarsalis,246,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-08,28,Culex tarsalis,405,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-10,28,Culex tarsalis,68,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-15,29,Culex tarsalis,59,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-24,30,Culex tarsalis,1539,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-29,31,Culex tarsalis,769,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-29,31,Culex tarsalis,769,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-31,31,Culex tarsalis,83,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-05,32,Culex tarsalis,559,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-07,32,Culex tarsalis,209,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-12,33,Culex tarsalis,2397,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-14,33,Culex tarsalis,483,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-19,34,Culex tarsalis,295,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-21,34,Culex tarsalis,717,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-26,35,Culex tarsalis,541,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-03,36,Culex tarsalis,1339,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-05,36,Culex tarsalis,419,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-09,37,Culex tarsalis,526,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-11,37,Culex tarsalis,234,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-16,38,Culex tarsalis,38,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-18,38,Culex tarsalis,37,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-23,39,Culex tarsalis,1,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-25,39,Culex tarsalis,8,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-30,40,Culex tarsalis,11,late,rural
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-06-10,24,Culex tarsalis,2,mid,urban
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-08-12,33,Culex tarsalis,1,late,urban
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-08-19,34,Culex tarsalis,1,late,urban
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-09-30,40,Culex tarsalis,NA,late,urban
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-06-24,26,Culex tarsalis,1,mid,urban
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-08-12,33,Culex tarsalis,1,late,urban
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-09-30,40,Culex tarsalis,2,late,urban
+58,Train Tracks,-112.003557,40.754243,CO2,2025-04-11,15,Culex tarsalis,19,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-04-16,16,Culex tarsalis,13,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-04-23,17,Culex tarsalis,17,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-02,18,Culex tarsalis,9,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-08,19,Culex tarsalis,26,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-13,20,Culex tarsalis,3,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-21,21,Culex tarsalis,55,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-23,21,Culex tarsalis,57,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-28,22,Culex tarsalis,147,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-30,22,Culex tarsalis,152,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-03,23,Culex tarsalis,89,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-05,23,Culex tarsalis,183,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-10,24,Culex tarsalis,977,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-12,24,Culex tarsalis,234,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-18,25,Culex tarsalis,438,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-24,26,Culex tarsalis,945,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-26,26,Culex tarsalis,792,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-01,27,Culex tarsalis,566,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-03,27,Culex tarsalis,436,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-08,28,Culex tarsalis,3293,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-10,28,Culex tarsalis,376,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-15,29,Culex tarsalis,242,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-17,29,Culex tarsalis,2124,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-22,30,Culex tarsalis,2,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-24,30,Culex tarsalis,1033,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-29,31,Culex tarsalis,1850,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-29,31,Culex tarsalis,1850,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-31,31,Culex tarsalis,500,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-05,32,Culex tarsalis,831,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-07,32,Culex tarsalis,168,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-12,33,Culex tarsalis,1214,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-14,33,Culex tarsalis,121,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-19,34,Culex tarsalis,199,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-21,34,Culex tarsalis,2728,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-26,35,Culex tarsalis,4366,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-03,36,Culex tarsalis,2027,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-05,36,Culex tarsalis,850,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-09,37,Culex tarsalis,776,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-11,37,Culex tarsalis,500,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-16,38,Culex tarsalis,627,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-18,38,Culex tarsalis,189,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-23,39,Culex tarsalis,2,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-25,39,Culex tarsalis,23,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-30,40,Culex tarsalis,17,late,peri
+225,White Church,-111.837254,40.738721,GRVD,2025-07-17,29,Culex tarsalis,1,mid,urban
+225,White Church,-111.837254,40.738721,GRVD,2025-07-22,30,Culex tarsalis,NA,mid,urban
+225,White Church,-111.837254,40.738721,GRVD,2025-09-25,39,Culex tarsalis,1,late,urban
+34,Wingpointe,-111.97708,40.771529,CO2,2025-04-11,15,Culex tarsalis,27,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-04-16,16,Culex tarsalis,7,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-04-23,17,Culex tarsalis,10,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-02,18,Culex tarsalis,15,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-08,19,Culex tarsalis,111,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-13,20,Culex tarsalis,2,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-15,20,Culex tarsalis,6,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-21,21,Culex tarsalis,117,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-23,21,Culex tarsalis,351,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-28,22,Culex tarsalis,270,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-30,22,Culex tarsalis,77,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-03,23,Culex tarsalis,112,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-05,23,Culex tarsalis,37,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-10,24,Culex tarsalis,1049,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-12,24,Culex tarsalis,323,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-18,25,Culex tarsalis,585,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-24,26,Culex tarsalis,723,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-26,26,Culex tarsalis,648,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-01,27,Culex tarsalis,613,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-03,27,Culex tarsalis,664,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-08,28,Culex tarsalis,604,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-10,28,Culex tarsalis,7,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-15,29,Culex tarsalis,29,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-17,29,Culex tarsalis,1812,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-22,30,Culex tarsalis,3,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-24,30,Culex tarsalis,1391,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-29,31,Culex tarsalis,394,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-29,31,Culex tarsalis,394,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-31,31,Culex tarsalis,233,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-05,32,Culex tarsalis,1304,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-07,32,Culex tarsalis,4,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-12,33,Culex tarsalis,1925,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-14,33,Culex tarsalis,2448,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-19,34,Culex tarsalis,335,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-21,34,Culex tarsalis,2640,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-26,35,Culex tarsalis,3837,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-03,36,Culex tarsalis,810,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-09,37,Culex tarsalis,536,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-11,37,Culex tarsalis,59,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-16,38,Culex tarsalis,272,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-18,38,Culex tarsalis,206,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-23,39,Culex tarsalis,11,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-25,39,Culex tarsalis,16,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-30,40,Culex tarsalis,7,late,peri

@@ -1,0 +1,145 @@
+name,site_code,longitude,latitude,trap_type,disease_week,species,date,males,females
+Fire Station 8,213,-111.891203,40.740865,CO2,22,Culex pipiens,05/28/25 2:45 PM,,33
+Fire Station 8,213,-111.891203,40.740865,CO2,22,Culex tarsalis,05/28/25 2:45 PM,,4
+Downington Ave,211,-111.857223,40.730895,CO2,22,Culex pipiens,05/28/25 2:45 PM,,1
+Downington Ave,211,-111.857223,40.730895,CO2,22,Culex tarsalis,05/28/25 2:45 PM,,3
+Fire Station 5,215,-111.861323,40.750031,CO2,22,Culex pipiens,05/28/25 2:45 PM,,2
+Fire Station 5,215,-111.861323,40.750031,CO2,22,Culex tarsalis,05/28/25 2:45 PM,,12
+Nibley Golf Course,221,-111.872716,40.710398,CO2,22,Culex pipiens,05/28/25 2:45 PM,,3
+Nibley Golf Course,221,-111.872716,40.710398,CO2,22,Culex tarsalis,05/28/25 2:45 PM,,9
+Fire Station 6,231,-111.918378,40.752326,CO2,22,Culex tarsalis,05/28/25 2:45 PM,,9
+Nibley Golf Course,221,-111.872716,40.710398,GRVD,22,Culex pipiens,05/28/25 2:45 PM,,1
+Graystone Church,222,-111.859296,40.710842,GRVD,22,Culex pipiens,05/28/25 2:45 PM,,3
+Stratford Ward,223,-111.847231,40.715254,GRVD,22,Culex pipiens,05/28/25 2:45 PM,,2
+Fire Station 5,215,-111.861323,40.750031,GRVD,22,Culex pipiens,05/28/25 2:45 PM,,2
+Tracy Aviary,207,-111.875491,40.742217,GRVD,22,Culex pipiens,05/28/25 2:45 PM,1,5
+300 E Church,229,-111.883171,40.729612,GRVD,22,Culex pipiens,05/28/25 2:45 PM,,1
+Fire Station 8,213,-111.891203,40.740865,GRVD,22,Culex pipiens,05/28/25 2:45 PM,,21
+Fire Station 8,213,-111.891203,40.740865,GRVD,22,Culex tarsalis,05/28/25 2:45 PM,,1
+700 S 200 W,230,-111.898097,40.752834,GRVD,22,Culex pipiens,05/28/25 2:45 PM,1,9
+Fire Station 6,231,-111.918378,40.752326,GRVD,22,Culex pipiens,05/28/25 2:45 PM,,2
+Audubon,52,-112.114005,40.826291,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,77
+Avocet,51,-112.122441,40.794842,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,50
+South Saratoga,50,-112.109041,40.784374,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,19
+Inland Sea,35,-112.101481,40.816002,CO2,22,Culex pipiens,05/28/25 3:03 PM,,30
+Inland Sea,35,-112.101481,40.816002,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,252
+Jade,53,-112.069104,40.824112,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,132
+Prison,61,-112.084522,40.800948,CO2,22,Culex pipiens,05/28/25 3:03 PM,,13
+Prison,61,-112.084522,40.800948,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,436
+Goat Farm,54,-112.063284,40.787677,CO2,22,Culex pipiens,05/28/25 3:03 PM,,25
+Goat Farm,54,-112.063284,40.787677,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,306
+Noggin,65,-112.059,40.81327,CO2,22,Culex pipiens,05/28/25 3:03 PM,,173
+Noggin,65,-112.059,40.81327,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,163
+Elephant Island,62,-112.049517,40.852033,CO2,22,Culex pipiens,05/28/25 3:03 PM,,145
+Elephant Island,62,-112.049517,40.852033,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,627
+Bird Reclamation,28,-112.050242,40.802139,CO2,22,Culex pipiens,05/28/25 3:03 PM,,4
+Bird Reclamation,28,-112.050242,40.802139,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,539
+Amelia Earhart (F.S. #9),5,-112.02854,40.778689,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,133
+Harrison,26,-112.031522,40.830952,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,213
+Ambassador,27,-112.029156,40.846014,CO2,22,Culex pipiens,05/28/25 3:03 PM,,76
+Ambassador,27,-112.029156,40.846014,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,660
+Lakefront,57,-112.023355,40.86989,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,317
+Power Pole Road,23,-112.015109,40.822043,CO2,22,Culex pipiens,05/28/25 3:03 PM,,32
+Blackhawk,24,-112.016928,40.806671,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,64
+Goggin,25,-112.012101,40.793303,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,1070
+Rudy,4,-112.003105,40.844458,CO2,22,Culex pipiens,05/28/25 3:03 PM,,18
+Rudy,4,-112.003105,40.844458,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,233
+Train Tracks,58,-112.003557,40.754243,CO2,22,Culex pipiens,05/28/25 3:03 PM,,11
+Train Tracks,58,-112.003557,40.754243,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,147
+Blue Lake,22,-111.986131,40.829946,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,125
+Northpoint,56,-111.982075,40.845859,CO2,22,Culex pipiens,05/28/25 3:03 PM,,5
+Northpoint,56,-111.982075,40.845859,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,37
+New State,63,-111.981345,40.871167,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,72
+Wingpointe,34,-111.97708,40.771529,CO2,22,Culex pipiens,05/28/25 3:03 PM,,10
+Wingpointe,34,-111.97708,40.771529,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,270
+Drechsel,9,-111.970167,40.841775,CO2,22,Culex pipiens,05/28/25 3:03 PM,,3
+Drechsel,9,-111.970167,40.841775,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,270
+KETO Pumps,60,-111.967566,40.747503,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,32
+SLCMAD Facility,64,-111.955752,40.816544,CO2,22,Culex pipiens,05/28/25 3:03 PM,,3
+SLCMAD Facility,64,-111.955752,40.816544,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,88
+Hinckley,3,-111.953357,40.84209,CO2,22,Culex pipiens,05/28/25 3:03 PM,,10
+Hinckley,3,-111.953357,40.84209,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,98
+ATV,29,-111.944005,40.826462,CO2,22,Culex pipiens,05/28/25 3:03 PM,,2
+ATV,29,-111.944005,40.826462,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,53
+RAC Soccer,1,-111.942333,40.815674,CO2,22,Culex pipiens,05/28/25 3:03 PM,,5
+RAC Soccer,1,-111.942333,40.815674,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,204
+Rose Park Golf Course,31,-111.937342,40.80014,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,28
+Glendale Golf Course,33,-111.931808,40.727647,CO2,22,Culex pipiens,05/28/25 3:03 PM,,10
+Glendale Golf Course,33,-111.931808,40.727647,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,14
+Fair Park,32,-111.920029,40.772369,CO2,22,Culex pipiens,05/28/25 3:03 PM,,4
+Fair Park,32,-111.920029,40.772369,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,28
+Deseret Nursery,37,-112.029477,40.740352,CO2,22,Culex pipiens,05/28/25 3:03 PM,,33
+Deseret Nursery,37,-112.029477,40.740352,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,625
+Lee Kay Dog Training Grounds,30,-112.045785,40.727823,CO2,22,Culex pipiens,05/28/25 3:03 PM,,8
+Lee Kay Dog Training Grounds,30,-112.045785,40.727823,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,53
+Frontage Corral,49,-112.083321,40.768911,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,49
+O'Reillys,59,-112.038803,40.754836,CO2,22,Culex tarsalis,05/28/25 3:03 PM,,62
+Fire Station 2,214,-111.89899,40.776333,CO2,22,Culex pipiens,05/30/25 3:22 PM,,1
+Fire Station 2,214,-111.89899,40.776333,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,2
+Hogle Zoo,209,-111.813278,40.749919,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,8
+Fire Station 13,218,-111.822666,40.723648,CO2,22,Culex pipiens,05/30/25 3:22 PM,,1
+Fire Station 13,218,-111.822666,40.723648,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,2
+Fire Station 4,219,-111.864795,40.781594,CO2,22,Culex pipiens,05/30/25 3:22 PM,,2
+Fire Station 4,219,-111.864795,40.781594,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,14
+Audubon,52,-112.114005,40.826291,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,151
+Avocet,51,-112.122441,40.794842,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,35
+South Saratoga,50,-112.109041,40.784374,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,49
+Jade,53,-112.069104,40.824112,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,62
+Prison,61,-112.084522,40.800948,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,387
+Goat Farm,54,-112.063284,40.787677,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,228
+Noggin,65,-112.059,40.81327,CO2,22,Culex pipiens,05/30/25 3:22 PM,,12
+Noggin,65,-112.059,40.81327,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,470
+Elephant Island,62,-112.049517,40.852033,CO2,22,Culex pipiens,05/30/25 3:22 PM,,151
+Elephant Island,62,-112.049517,40.852033,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,770
+Bird Reclamation,28,-112.050242,40.802139,CO2,22,Culex pipiens,05/30/25 3:22 PM,,43
+Bird Reclamation,28,-112.050242,40.802139,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,554
+Amelia Earhart (F.S. #9),5,-112.02854,40.778689,CO2,22,Culex pipiens,05/30/25 3:22 PM,,17
+Amelia Earhart (F.S. #9),5,-112.02854,40.778689,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,152
+Harrison,26,-112.031522,40.830952,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,368
+Ambassador,27,-112.029156,40.846014,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,776
+Lakefront,57,-112.023355,40.86989,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,896
+Power Pole Road,23,-112.015109,40.822043,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,136
+Blackhawk,24,-112.016928,40.806671,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,394
+Goggin,25,-112.012101,40.793303,CO2,22,Culex pipiens,05/30/25 3:22 PM,,128
+Goggin,25,-112.012101,40.793303,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,627
+Rudy,4,-112.003105,40.844458,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,246
+Train Tracks,58,-112.003557,40.754243,CO2,22,Culex pipiens,05/30/25 3:22 PM,,31
+Train Tracks,58,-112.003557,40.754243,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,152
+Blue Lake,22,-111.986131,40.829946,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,249
+Northpoint,56,-111.982075,40.845859,CO2,22,Culex pipiens,05/30/25 3:22 PM,,21
+Northpoint,56,-111.982075,40.845859,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,171
+New State,63,-111.981345,40.871167,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,243
+Wingpointe,34,-111.97708,40.771529,CO2,22,Culex pipiens,05/30/25 3:22 PM,,32
+Wingpointe,34,-111.97708,40.771529,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,77
+Drechsel,9,-111.970167,40.841775,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,595
+KETO Pumps,60,-111.967566,40.747503,CO2,22,Culex pipiens,05/30/25 3:22 PM,,16
+SLCMAD Facility,64,-111.955752,40.816544,CO2,22,Culex pipiens,05/30/25 3:22 PM,,13
+SLCMAD Facility,64,-111.955752,40.816544,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,27
+Hinckley,3,-111.953357,40.84209,CO2,22,Culex pipiens,05/30/25 3:22 PM,,17
+Hinckley,3,-111.953357,40.84209,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,447
+ATV,29,-111.944005,40.826462,CO2,22,Culex pipiens,05/30/25 3:22 PM,,9
+ATV,29,-111.944005,40.826462,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,45
+RAC Soccer,1,-111.942333,40.815674,CO2,22,Culex pipiens,05/30/25 3:22 PM,,13
+RAC Soccer,1,-111.942333,40.815674,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,157
+Rose Park Golf Course,31,-111.937342,40.80014,CO2,22,Culex pipiens,05/30/25 3:22 PM,,1
+Rose Park Golf Course,31,-111.937342,40.80014,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,37
+Glendale Golf Course,33,-111.931808,40.727647,CO2,22,Culex pipiens,05/30/25 3:22 PM,,1
+Glendale Golf Course,33,-111.931808,40.727647,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,4
+Fair Park,32,-111.920029,40.772369,CO2,22,Culex pipiens,05/30/25 3:22 PM,,3
+Fair Park,32,-111.920029,40.772369,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,14
+Deseret Nursery,37,-112.029477,40.740352,CO2,22,Culex pipiens,05/30/25 3:22 PM,,3
+Deseret Nursery,37,-112.029477,40.740352,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,134
+Lee Kay Dog Training Grounds,30,-112.045785,40.727823,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,99
+Frontage Corral,49,-112.083321,40.768911,CO2,22,Culex pipiens,05/30/25 3:22 PM,,1
+Frontage Corral,49,-112.083321,40.768911,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,19
+O'Reillys,59,-112.038803,40.754836,CO2,22,Culex pipiens,05/30/25 3:22 PM,,16
+O'Reillys,59,-112.038803,40.754836,CO2,22,Culex tarsalis,05/30/25 3:22 PM,,23
+1700 E Church,224,-111.841969,40.729523,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,3
+White Church,225,-111.837254,40.738721,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,1
+Indian Hills Elementary School,208,-111.816866,40.74037,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,7
+Fire Station 13,218,-111.822666,40.723648,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,3
+Canyon Rim Church,226,-111.806695,40.705864,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,1
+Rose Park Church,227,-111.9258517,40.7930466,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,4
+Fire Station 2,214,-111.89899,40.776333,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,1
+Fire Station 1,212,-111.876123,40.764295,GRVD,22,Culex pipiens,05/30/25 3:22 PM,1,4
+Senior Center,228,-111.861971,40.764297,GRVD,22,Culex pipiens,05/30/25 3:22 PM,,5

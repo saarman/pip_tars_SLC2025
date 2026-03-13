@@ -1,0 +1,43 @@
+name,site_code,longitude,latitude,trap_type,disease_week,species,date,males,females
+South Saratoga,50,-112.109041,40.784374,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,1
+Inland Sea,35,-112.101481,40.816002,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,3
+Prison,61,-112.084522,40.800948,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,1
+Noggin,65,-112.059,40.81327,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,1
+Bird Reclamation,28,-112.050242,40.802139,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,14
+Amelia Earhart (F.S. #9),5,-112.02854,40.778689,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,2
+Harrison,26,-112.031522,40.830952,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,4
+Ambassador,27,-112.029156,40.846014,CO2,20,Culex pipiens,05/15/25 3:03 PM,,1
+Ambassador,27,-112.029156,40.846014,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,1
+Goggin,25,-112.012101,40.793303,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,1
+Rudy,4,-112.003105,40.844458,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,2
+Wingpointe,34,-111.97708,40.771529,CO2,20,Culex pipiens,05/15/25 3:03 PM,,1
+Wingpointe,34,-111.97708,40.771529,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,6
+Drechsel,9,-111.970167,40.841775,CO2,20,Culex pipiens,05/15/25 3:03 PM,,1
+Drechsel,9,-111.970167,40.841775,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,21
+Hinckley,3,-111.953357,40.84209,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,6
+ATV,29,-111.944005,40.826462,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,3
+RAC Soccer,1,-111.942333,40.815674,CO2,20,Culex pipiens,05/15/25 3:03 PM,,1
+RAC Soccer,1,-111.942333,40.815674,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,20
+Deseret Nursery,37,-112.029477,40.740352,CO2,20,Culex tarsalis,05/15/25 3:03 PM,,8
+O'Reillys,59,-112.038803,40.754836,CO2,20,Culex pipiens,05/15/25 3:03 PM,,6
+Fire Station 8,213,-111.891203,40.740865,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,1
+Downington Ave,211,-111.857223,40.730895,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,3
+Tracy Aviary,207,-111.875491,40.742217,GRVD,20,Culex pipiens,05/15/25 3:05 PM,,3
+Fire Station 8,213,-111.891203,40.740865,GRVD,20,Culex tarsalis,05/15/25 3:05 PM,1,
+Prison,61,-112.084522,40.800948,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,1
+Bird Reclamation,28,-112.050242,40.802139,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,2
+Harrison,26,-112.031522,40.830952,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,1
+Lakefront,57,-112.023355,40.86989,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,1
+Blackhawk,24,-112.016928,40.806671,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,1
+Goggin,25,-112.012101,40.793303,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,7
+Rudy,4,-112.003105,40.844458,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,6
+Train Tracks,58,-112.003557,40.754243,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,3
+Wingpointe,34,-111.97708,40.771529,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,2
+Drechsel,9,-111.970167,40.841775,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,9
+Hinckley,3,-111.953357,40.84209,CO2,20,Culex pipiens,05/15/25 3:05 PM,,15
+Hinckley,3,-111.953357,40.84209,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,43
+ATV,29,-111.944005,40.826462,CO2,20,Culex pipiens,05/15/25 3:05 PM,,1
+ATV,29,-111.944005,40.826462,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,6
+RAC Soccer,1,-111.942333,40.815674,CO2,20,Culex pipiens,05/15/25 3:05 PM,,2
+RAC Soccer,1,-111.942333,40.815674,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,42
+Rose Park Golf Course,31,-111.937342,40.80014,CO2,20,Culex tarsalis,05/15/25 3:05 PM,,2

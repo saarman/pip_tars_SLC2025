@@ -1,0 +1,1395 @@
+site_code,site_name,longitude,latitude,trap_type,collection_date,disease_week,species,count,season,urban_cat
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-05-30,22,Culex pipiens,3,early,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-06-05,23,Culex pipiens,9,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-06-12,24,Culex pipiens,10,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-06-20,25,Culex pipiens,5,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-06-26,26,Culex pipiens,30,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-07-03,27,Culex pipiens,79,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-07-10,28,Culex pipiens,25,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-07-17,29,Culex pipiens,53,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-07-22,30,Culex pipiens,51,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-07-31,31,Culex pipiens,41,mid,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-08-07,32,Culex pipiens,19,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-08-14,33,Culex pipiens,25,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-08-21,34,Culex pipiens,27,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-08-21,34,Culex pipiens,27,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-08-28,35,Culex pipiens,8,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-09-05,36,Culex pipiens,28,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-09-11,37,Culex pipiens,27,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-09-18,38,Culex pipiens,15,late,urban 
+224,1700 E Church,-111.841969,40.729523,GRVD,2025-09-25,39,Culex pipiens,23,late,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-05-28,22,Culex pipiens,1,early,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-06-10,24,Culex pipiens,4,mid,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-06-24,26,Culex pipiens,1,mid,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-07-01,27,Culex pipiens,3,mid,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-07-08,28,Culex pipiens,42,mid,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-07-29,31,Culex pipiens,3,mid,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-08-12,33,Culex pipiens,7,late,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-08-26,35,Culex pipiens,3,late,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-03,36,Culex pipiens,9,late,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-09,37,Culex pipiens,7,late,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-16,38,Culex pipiens,9,late,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-23,39,Culex pipiens,10,late,urban 
+229,300 E Church,-111.883171,40.729612,GRVD,2025-09-30,40,Culex pipiens,5,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-05-21,21,Culex pipiens,1,early,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-05-28,22,Culex pipiens,9,early,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-06-10,24,Culex pipiens,1,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-06-18,25,Culex pipiens,7,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-06-24,26,Culex pipiens,5,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-07-01,27,Culex pipiens,48,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-07-08,28,Culex pipiens,34,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-07-15,29,Culex pipiens,49,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-07-24,30,Culex pipiens,17,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-07-29,31,Culex pipiens,16,mid,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-08-05,32,Culex pipiens,12,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-08-19,34,Culex pipiens,8,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-08-26,35,Culex pipiens,17,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-09-03,36,Culex pipiens,4,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-09-09,37,Culex pipiens,6,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-09-16,38,Culex pipiens,6,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-09-23,39,Culex pipiens,3,late,urban 
+230,700 S 200 W,-111.898097,40.752834,GRVD,2025-09-30,40,Culex pipiens,6,late,urban 
+27,Ambassador,-112.029156,40.846014,CO2,2025-04-11,15,Culex pipiens,1,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-04-23,17,Culex pipiens,1,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-15,20,Culex pipiens,1,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-05-28,22,Culex pipiens,76,early,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-10,24,Culex pipiens,79,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-18,25,Culex pipiens,5,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-24,26,Culex pipiens,231,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-06-26,26,Culex pipiens,7,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-03,27,Culex pipiens,33,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-08,28,Culex pipiens,69,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-07-31,31,Culex pipiens,23,mid,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-07,32,Culex pipiens,45,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-14,33,Culex pipiens,239,late,rural
+27,Ambassador,-112.029156,40.846014,CO2,2025-08-21,34,Culex pipiens,52,late,rural
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-04-11,15,Culex pipiens,1,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-04-16,16,Culex pipiens,10,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-04-23,17,Culex pipiens,4,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-02,18,Culex pipiens,1,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-23,21,Culex pipiens,3,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-05-30,22,Culex pipiens,17,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-05,23,Culex pipiens,7,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-10,24,Culex pipiens,27,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-12,24,Culex pipiens,26,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-18,25,Culex pipiens,61,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-24,26,Culex pipiens,6,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-06-26,26,Culex pipiens,4,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-01,27,Culex pipiens,4,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-03,27,Culex pipiens,130,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-08,28,Culex pipiens,145,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-10,28,Culex pipiens,98,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-15,29,Culex pipiens,254,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-17,29,Culex pipiens,108,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-24,30,Culex pipiens,206,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-29,31,Culex pipiens,14,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-29,31,Culex pipiens,14,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-07-31,31,Culex pipiens,168,mid,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-07,32,Culex pipiens,153,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-12,33,Culex pipiens,24,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-14,33,Culex pipiens,217,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-19,34,Culex pipiens,16,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-08-26,35,Culex pipiens,60,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-03,36,Culex pipiens,720,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-05,36,Culex pipiens,11,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-18,38,Culex pipiens,17,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-25,39,Culex pipiens,21,late,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-09-30,40,Culex pipiens,12,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-04-11,15,Culex pipiens,5,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-04-16,16,Culex pipiens,2,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-13,20,Culex pipiens,1,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-23,21,Culex pipiens,2,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-28,22,Culex pipiens,2,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-05-30,22,Culex pipiens,9,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-05,23,Culex pipiens,5,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-10,24,Culex pipiens,47,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-18,25,Culex pipiens,3,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-24,26,Culex pipiens,191,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-06-26,26,Culex pipiens,11,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-01,27,Culex pipiens,206,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-03,27,Culex pipiens,28,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-08,28,Culex pipiens,55,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-10,28,Culex pipiens,151,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-15,29,Culex pipiens,27,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-17,29,Culex pipiens,189,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-22,30,Culex pipiens,9,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-24,30,Culex pipiens,603,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-29,31,Culex pipiens,37,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-29,31,Culex pipiens,37,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-07-31,31,Culex pipiens,66,mid,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-05,32,Culex pipiens,21,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-07,32,Culex pipiens,145,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-14,33,Culex pipiens,47,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-19,34,Culex pipiens,193,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-08-21,34,Culex pipiens,74,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-03,36,Culex pipiens,11,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-05,36,Culex pipiens,3,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-09,37,Culex pipiens,15,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-11,37,Culex pipiens,2,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-16,38,Culex pipiens,63,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-18,38,Culex pipiens,33,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-23,39,Culex pipiens,1,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-25,39,Culex pipiens,16,late,peri
+29,ATV,-111.944005,40.826462,CO2,2025-09-30,40,Culex pipiens,15,late,peri
+52,Audubon,-112.114005,40.826291,CO2,2025-05-02,18,Culex pipiens,2,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-05-08,19,Culex pipiens,5,early,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-10,24,Culex pipiens,7,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-12,24,Culex pipiens,1,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-06-26,26,Culex pipiens,1,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-08,28,Culex pipiens,136,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-10,28,Culex pipiens,2,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-24,30,Culex pipiens,130,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-07-31,31,Culex pipiens,22,mid,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-08-21,34,Culex pipiens,55,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-11,37,Culex pipiens,38,late,rural
+52,Audubon,-112.114005,40.826291,CO2,2025-09-18,38,Culex pipiens,63,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-04-23,17,Culex pipiens,1,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-06-26,26,Culex pipiens,6,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-08,28,Culex pipiens,29,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-15,29,Culex pipiens,329,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-07-17,29,Culex pipiens,318,mid,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-12,33,Culex pipiens,213,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-14,33,Culex pipiens,108,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-08-19,34,Culex pipiens,58,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-09,37,Culex pipiens,186,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-11,37,Culex pipiens,60,late,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-09-18,38,Culex pipiens,337,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-04-11,15,Culex pipiens,1,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-04-23,17,Culex pipiens,7,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-08,19,Culex pipiens,1,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-21,21,Culex pipiens,2,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-23,21,Culex pipiens,11,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-28,22,Culex pipiens,4,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-05-30,22,Culex pipiens,43,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-03,23,Culex pipiens,10,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-05,23,Culex pipiens,50,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-10,24,Culex pipiens,19,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-12,24,Culex pipiens,18,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-06-18,25,Culex pipiens,50,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-01,27,Culex pipiens,241,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-08,28,Culex pipiens,52,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-10,28,Culex pipiens,32,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-17,29,Culex pipiens,171,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-24,30,Culex pipiens,143,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-29,31,Culex pipiens,76,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-07-29,31,Culex pipiens,76,mid,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-14,33,Culex pipiens,93,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-19,34,Culex pipiens,77,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-21,34,Culex pipiens,155,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-08-26,35,Culex pipiens,42,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-05,36,Culex pipiens,29,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-18,38,Culex pipiens,22,late,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-09-23,39,Culex pipiens,14,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-11,15,Culex pipiens,4,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-16,16,Culex pipiens,2,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-23,17,Culex pipiens,1,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-05-02,18,Culex pipiens,2,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-10,24,Culex pipiens,3,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-24,26,Culex pipiens,9,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-06-26,26,Culex pipiens,9,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-03,27,Culex pipiens,19,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-08,28,Culex pipiens,77,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-15,29,Culex pipiens,108,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-07-22,30,Culex pipiens,4,mid,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-19,34,Culex pipiens,3,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-21,34,Culex pipiens,314,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-08-26,35,Culex pipiens,44,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-05,36,Culex pipiens,54,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-18,38,Culex pipiens,94,late,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-09-23,39,Culex pipiens,2,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-05-21,21,Culex pipiens,1,early,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-03,23,Culex pipiens,6,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-10,24,Culex pipiens,3,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-12,24,Culex pipiens,18,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-18,25,Culex pipiens,25,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-06-24,26,Culex pipiens,73,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-08,28,Culex pipiens,49,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-17,29,Culex pipiens,8,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-22,30,Culex pipiens,3,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-29,31,Culex pipiens,15,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-07-29,31,Culex pipiens,15,mid,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-14,33,Culex pipiens,7,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-08-26,35,Culex pipiens,69,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-09,37,Culex pipiens,12,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-11,37,Culex pipiens,39,late,rural
+22,Blue Lake,-111.986131,40.829946,CO2,2025-09-18,38,Culex pipiens,25,late,rural
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-05-30,22,Culex pipiens,1,early,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-06-05,23,Culex pipiens,1,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-06-12,24,Culex pipiens,2,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-06-20,25,Culex pipiens,9,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-07-03,27,Culex pipiens,7,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-07-10,28,Culex pipiens,7,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-07-17,29,Culex pipiens,1,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-07-22,30,Culex pipiens,38,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-07-31,31,Culex pipiens,13,mid,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-08-07,32,Culex pipiens,8,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-08-14,33,Culex pipiens,5,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-08-21,34,Culex pipiens,9,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-08-21,34,Culex pipiens,9,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-08-28,35,Culex pipiens,4,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-09-05,36,Culex pipiens,10,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-09-11,37,Culex pipiens,8,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-09-18,38,Culex pipiens,16,late,urban 
+226,Canyon Rim Church,-111.806695,40.705864,GRVD,2025-09-25,39,Culex pipiens,2,late,urban 
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-04-11,15,Culex pipiens,2,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-02,18,Culex pipiens,1,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-28,22,Culex pipiens,33,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-05-30,22,Culex pipiens,3,early,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-03,23,Culex pipiens,69,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-05,23,Culex pipiens,14,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-10,24,Culex pipiens,227,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-12,24,Culex pipiens,67,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-18,25,Culex pipiens,205,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-24,26,Culex pipiens,1016,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-06-26,26,Culex pipiens,117,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-01,27,Culex pipiens,129,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-03,27,Culex pipiens,418,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-08,28,Culex pipiens,343,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-10,28,Culex pipiens,228,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-15,29,Culex pipiens,1885,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-17,29,Culex pipiens,120,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-22,30,Culex pipiens,5,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-24,30,Culex pipiens,2772,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-29,31,Culex pipiens,3152,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-29,31,Culex pipiens,3152,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-07-31,31,Culex pipiens,1832,mid,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-05,32,Culex pipiens,1797,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-07,32,Culex pipiens,1384,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-12,33,Culex pipiens,2386,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-14,33,Culex pipiens,2659,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-19,34,Culex pipiens,1048,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-21,34,Culex pipiens,1273,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-08-26,35,Culex pipiens,4896,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-03,36,Culex pipiens,73,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-09,37,Culex pipiens,389,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-11,37,Culex pipiens,149,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-16,38,Culex pipiens,19,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-18,38,Culex pipiens,133,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-23,39,Culex pipiens,37,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-25,39,Culex pipiens,183,late,peri
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-09-30,40,Culex pipiens,6,late,peri
+211,Downington Ave,-111.857223,40.730895,CO2,2025-05-21,21,Culex pipiens,9,early,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-05-28,22,Culex pipiens,1,early,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-06-03,23,Culex pipiens,29,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-06-10,24,Culex pipiens,2,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-06-10,24,Culex pipiens,1,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-06-18,25,Culex pipiens,1,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-06-18,25,Culex pipiens,8,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-06-24,26,Culex pipiens,221,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-06-24,26,Culex pipiens,44,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-01,27,Culex pipiens,5,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-01,27,Culex pipiens,21,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-08,28,Culex pipiens,37,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-08,28,Culex pipiens,68,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-15,29,Culex pipiens,448,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-15,29,Culex pipiens,45,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-24,30,Culex pipiens,266,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-24,30,Culex pipiens,10,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-07-29,31,Culex pipiens,62,mid,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-07-29,31,Culex pipiens,23,mid,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-05,32,Culex pipiens,59,late,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-08-05,32,Culex pipiens,2,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-12,33,Culex pipiens,105,late,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-08-12,33,Culex pipiens,18,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-19,34,Culex pipiens,115,late,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-08-19,34,Culex pipiens,15,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-08-26,35,Culex pipiens,60,late,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-08-26,35,Culex pipiens,4,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-03,36,Culex pipiens,11,late,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-09-03,36,Culex pipiens,7,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-09,37,Culex pipiens,124,late,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-09-09,37,Culex pipiens,3,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-16,38,Culex pipiens,16,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-23,39,Culex pipiens,138,late,urban 
+211,Downington Ave,-111.857223,40.730895,GRVD,2025-09-23,39,Culex pipiens,3,late,urban 
+211,Downington Ave,-111.857223,40.730895,CO2,2025-09-30,40,Culex pipiens,5,late,urban 
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-11,15,Culex pipiens,1,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-23,17,Culex pipiens,1,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-02,18,Culex pipiens,2,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-08,19,Culex pipiens,6,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-15,20,Culex pipiens,1,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-21,21,Culex pipiens,5,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-05-28,22,Culex pipiens,3,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-10,24,Culex pipiens,38,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-12,24,Culex pipiens,104,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-24,26,Culex pipiens,33,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-06-26,26,Culex pipiens,102,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-01,27,Culex pipiens,119,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-03,27,Culex pipiens,83,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-08,28,Culex pipiens,3,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-15,29,Culex pipiens,47,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-17,29,Culex pipiens,124,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-22,30,Culex pipiens,17,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-29,31,Culex pipiens,53,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-29,31,Culex pipiens,53,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-07-31,31,Culex pipiens,148,mid,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-05,32,Culex pipiens,69,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-07,32,Culex pipiens,465,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-14,33,Culex pipiens,637,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-21,34,Culex pipiens,1291,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-08-26,35,Culex pipiens,23,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-03,36,Culex pipiens,3,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-05,36,Culex pipiens,31,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-09,37,Culex pipiens,15,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-18,38,Culex pipiens,182,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-23,39,Culex pipiens,15,late,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-09-25,39,Culex pipiens,56,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-04-23,17,Culex pipiens,7,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-08,19,Culex pipiens,15,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-21,21,Culex pipiens,1,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-28,22,Culex pipiens,145,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-05-30,22,Culex pipiens,151,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-05,23,Culex pipiens,33,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-12,24,Culex pipiens,4,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-18,25,Culex pipiens,109,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-06-26,26,Culex pipiens,9,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-01,27,Culex pipiens,20,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-08,28,Culex pipiens,109,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-07-24,30,Culex pipiens,26,mid,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-19,34,Culex pipiens,35,late,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-08-21,34,Culex pipiens,150,late,rural
+32,Fair Park,-111.920029,40.772369,CO2,2025-04-11,15,Culex pipiens,15,early,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-04-23,17,Culex pipiens,7,early,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-23,21,Culex pipiens,1,early,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-28,22,Culex pipiens,4,early,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-05-30,22,Culex pipiens,3,early,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-05,23,Culex pipiens,1,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-12,24,Culex pipiens,3,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-18,25,Culex pipiens,6,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-06-26,26,Culex pipiens,2,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-01,27,Culex pipiens,2,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-03,27,Culex pipiens,2,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-08,28,Culex pipiens,4,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-10,28,Culex pipiens,8,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-15,29,Culex pipiens,5,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-17,29,Culex pipiens,6,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-29,31,Culex pipiens,3,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-29,31,Culex pipiens,3,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-07-31,31,Culex pipiens,12,mid,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-07,32,Culex pipiens,8,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-12,33,Culex pipiens,20,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-14,33,Culex pipiens,3,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-08-26,35,Culex pipiens,4,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-03,36,Culex pipiens,4,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-09,37,Culex pipiens,3,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-11,37,Culex pipiens,1,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-16,38,Culex pipiens,2,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-23,39,Culex pipiens,3,late,urban 
+32,Fair Park,-111.920029,40.772369,CO2,2025-09-30,40,Culex pipiens,4,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-05-23,21,Culex pipiens,NA,early,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-05-30,22,Culex pipiens,4,early,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-06-05,23,Culex pipiens,6,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-06-12,24,Culex pipiens,2,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-06-20,25,Culex pipiens,14,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-06-26,26,Culex pipiens,15,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-03,27,Culex pipiens,67,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-10,28,Culex pipiens,41,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-17,29,Culex pipiens,36,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-22,30,Culex pipiens,13,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-07-31,31,Culex pipiens,27,mid,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-07,32,Culex pipiens,4,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-14,33,Culex pipiens,8,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-21,34,Culex pipiens,10,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-21,34,Culex pipiens,10,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-08-28,35,Culex pipiens,10,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-09-11,37,Culex pipiens,5,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-09-18,38,Culex pipiens,4,late,urban 
+212,Fire Station 1,-111.876123,40.764295,GRVD,2025-09-25,39,Culex pipiens,5,late,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-05-30,22,Culex pipiens,1,early,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-05-30,22,Culex pipiens,3,early,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-06-05,23,Culex pipiens,2,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-06-12,24,Culex pipiens,1,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-06-12,24,Culex pipiens,25,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-06-20,25,Culex pipiens,22,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-06-26,26,Culex pipiens,12,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-06-26,26,Culex pipiens,10,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-07-03,27,Culex pipiens,1,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-07-03,27,Culex pipiens,7,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-07-10,28,Culex pipiens,19,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-07-10,28,Culex pipiens,9,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-07-17,29,Culex pipiens,86,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-07-22,30,Culex pipiens,58,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-07-31,31,Culex pipiens,3,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-07-31,31,Culex pipiens,34,mid,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-08-07,32,Culex pipiens,4,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-08-07,32,Culex pipiens,20,late,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-08-14,33,Culex pipiens,6,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-08-14,33,Culex pipiens,37,late,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-08-21,34,Culex pipiens,10,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-08-21,34,Culex pipiens,14,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-08-21,34,Culex pipiens,14,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-08-28,35,Culex pipiens,17,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-09-05,36,Culex pipiens,27,late,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-09-11,37,Culex pipiens,3,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-09-11,37,Culex pipiens,9,late,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-09-18,38,Culex pipiens,4,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-09-18,38,Culex pipiens,15,late,urban 
+218,Fire Station 13,-111.822666,40.723648,CO2,2025-09-25,39,Culex pipiens,5,late,urban 
+218,Fire Station 13,-111.822666,40.723648,GRVD,2025-09-25,39,Culex pipiens,3,late,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-05-30,22,Culex pipiens,1,early,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-05-30,22,Culex pipiens,1,early,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-06-05,23,Culex pipiens,2,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-06-12,24,Culex pipiens,9,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-06-12,24,Culex pipiens,4,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-06-20,25,Culex pipiens,1,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-06-20,25,Culex pipiens,13,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-06-26,26,Culex pipiens,12,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-03,27,Culex pipiens,11,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-03,27,Culex pipiens,43,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-10,28,Culex pipiens,2,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-10,28,Culex pipiens,38,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-17,29,Culex pipiens,5,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-17,29,Culex pipiens,15,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-22,30,Culex pipiens,13,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-22,30,Culex pipiens,33,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-07-31,31,Culex pipiens,3,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-07-31,31,Culex pipiens,2,mid,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-08-07,32,Culex pipiens,6,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-08-07,32,Culex pipiens,12,late,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-08-14,33,Culex pipiens,15,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-08-14,33,Culex pipiens,6,late,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-08-21,34,Culex pipiens,4,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-08-21,34,Culex pipiens,25,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-08-21,34,Culex pipiens,25,late,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-08-28,35,Culex pipiens,9,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-08-28,35,Culex pipiens,5,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-09-05,36,Culex pipiens,2,late,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-09-11,37,Culex pipiens,3,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-09-11,37,Culex pipiens,10,late,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-09-18,38,Culex pipiens,10,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-09-18,38,Culex pipiens,8,late,urban 
+214,Fire Station 2,-111.89899,40.776333,CO2,2025-09-25,39,Culex pipiens,7,late,urban 
+214,Fire Station 2,-111.89899,40.776333,GRVD,2025-09-25,39,Culex pipiens,13,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-06-10,24,Culex pipiens,6,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-06-18,25,Culex pipiens,8,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-06-24,26,Culex pipiens,20,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-07-01,27,Culex pipiens,21,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-07-08,28,Culex pipiens,20,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-07-15,29,Culex pipiens,42,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-07-24,30,Culex pipiens,13,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-07-29,31,Culex pipiens,71,mid,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-08-12,33,Culex pipiens,40,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-08-19,34,Culex pipiens,15,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-08-26,35,Culex pipiens,3,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-09-03,36,Culex pipiens,5,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-09-09,37,Culex pipiens,5,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-09-16,38,Culex pipiens,16,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-09-23,39,Culex pipiens,5,late,urban 
+220,Fire Station 3,-111.860128,40.722358,GRVD,2025-09-30,40,Culex pipiens,6,late,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-05-30,22,Culex pipiens,2,early,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-06-05,23,Culex pipiens,8,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-06-12,24,Culex pipiens,1,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-06-20,25,Culex pipiens,12,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-06-20,25,Culex pipiens,2,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-06-26,26,Culex pipiens,7,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-06-26,26,Culex pipiens,2,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-07-03,27,Culex pipiens,12,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-10,28,Culex pipiens,4,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-07-10,28,Culex pipiens,7,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-17,29,Culex pipiens,20,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-07-17,29,Culex pipiens,14,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-22,30,Culex pipiens,16,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-07-22,30,Culex pipiens,6,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-07-31,31,Culex pipiens,9,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-07-31,31,Culex pipiens,3,mid,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-08-07,32,Culex pipiens,1,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-07,32,Culex pipiens,4,late,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-08-14,33,Culex pipiens,29,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-14,33,Culex pipiens,17,late,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-08-21,34,Culex pipiens,41,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-21,34,Culex pipiens,17,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-21,34,Culex pipiens,17,late,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-08-28,35,Culex pipiens,27,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-08-28,35,Culex pipiens,7,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-09-05,36,Culex pipiens,2,late,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-09-11,37,Culex pipiens,31,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-09-11,37,Culex pipiens,4,late,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-09-18,38,Culex pipiens,18,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-09-18,38,Culex pipiens,4,late,urban 
+219,Fire Station 4,-111.864795,40.781594,CO2,2025-09-25,39,Culex pipiens,12,late,urban 
+219,Fire Station 4,-111.864795,40.781594,GRVD,2025-09-25,39,Culex pipiens,5,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-05-21,21,Culex pipiens,2,early,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-05-28,22,Culex pipiens,2,early,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-05-28,22,Culex pipiens,2,early,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-03,23,Culex pipiens,4,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-10,24,Culex pipiens,36,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-06-10,24,Culex pipiens,9,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-18,25,Culex pipiens,43,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-06-18,25,Culex pipiens,3,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-06-24,26,Culex pipiens,63,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-06-24,26,Culex pipiens,13,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-01,27,Culex pipiens,5,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-07-01,27,Culex pipiens,2,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-08,28,Culex pipiens,44,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-07-08,28,Culex pipiens,13,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-15,29,Culex pipiens,53,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-07-15,29,Culex pipiens,9,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-07-24,30,Culex pipiens,20,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-07-24,30,Culex pipiens,21,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-07-29,31,Culex pipiens,6,mid,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-08-05,32,Culex pipiens,3,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-08-12,33,Culex pipiens,40,late,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-08-12,33,Culex pipiens,11,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-08-19,34,Culex pipiens,8,late,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-08-19,34,Culex pipiens,4,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-08-26,35,Culex pipiens,12,late,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-08-26,35,Culex pipiens,8,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-03,36,Culex pipiens,23,late,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-09-03,36,Culex pipiens,NA,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-09,37,Culex pipiens,16,late,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-09-09,37,Culex pipiens,5,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-16,38,Culex pipiens,10,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-23,39,Culex pipiens,16,late,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-09-23,39,Culex pipiens,1,late,urban 
+215,Fire Station 5,-111.861323,40.750031,CO2,2025-09-30,40,Culex pipiens,5,late,urban 
+215,Fire Station 5,-111.861323,40.750031,GRVD,2025-09-30,40,Culex pipiens,2,late,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-05-28,22,Culex pipiens,2,early,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-06-03,23,Culex pipiens,2,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-06-10,24,Culex pipiens,11,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-06-10,24,Culex pipiens,15,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-06-18,25,Culex pipiens,2,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-06-18,25,Culex pipiens,14,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-06-24,26,Culex pipiens,10,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-06-24,26,Culex pipiens,15,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-01,27,Culex pipiens,75,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-07-01,27,Culex pipiens,11,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-08,28,Culex pipiens,4,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-07-08,28,Culex pipiens,20,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-15,29,Culex pipiens,111,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-07-15,29,Culex pipiens,43,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-24,30,Culex pipiens,164,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-07-24,30,Culex pipiens,38,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-07-29,31,Culex pipiens,67,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-07-29,31,Culex pipiens,19,mid,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-05,32,Culex pipiens,53,late,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-12,33,Culex pipiens,30,late,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-19,34,Culex pipiens,11,late,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-08-19,34,Culex pipiens,14,late,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-08-26,35,Culex pipiens,48,late,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-08-26,35,Culex pipiens,8,late,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-03,36,Culex pipiens,30,late,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-09-03,36,Culex pipiens,12,late,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-09,37,Culex pipiens,9,late,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-09-09,37,Culex pipiens,4,late,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-09-16,38,Culex pipiens,3,late,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-23,39,Culex pipiens,3,late,urban 
+231,Fire Station 6,-111.918378,40.752326,GRVD,2025-09-23,39,Culex pipiens,12,late,urban 
+231,Fire Station 6,-111.918378,40.752326,CO2,2025-09-30,40,Culex pipiens,1,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-05-21,21,Culex pipiens,1,early,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-05-21,21,Culex pipiens,1,early,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-05-28,22,Culex pipiens,33,early,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-05-28,22,Culex pipiens,21,early,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-03,23,Culex pipiens,3,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-10,24,Culex pipiens,83,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-06-10,24,Culex pipiens,34,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-18,25,Culex pipiens,15,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-06-18,25,Culex pipiens,12,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-06-24,26,Culex pipiens,77,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-06-24,26,Culex pipiens,22,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-01,27,Culex pipiens,217,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-07-01,27,Culex pipiens,53,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-08,28,Culex pipiens,74,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-07-08,28,Culex pipiens,34,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-15,29,Culex pipiens,96,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-07-15,29,Culex pipiens,45,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-24,30,Culex pipiens,29,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-07-24,30,Culex pipiens,20,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-07-29,31,Culex pipiens,13,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-07-29,31,Culex pipiens,16,mid,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-05,32,Culex pipiens,22,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-08-05,32,Culex pipiens,28,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-12,33,Culex pipiens,64,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-08-12,33,Culex pipiens,28,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-19,34,Culex pipiens,21,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-08-19,34,Culex pipiens,14,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-08-26,35,Culex pipiens,15,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-08-26,35,Culex pipiens,17,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-03,36,Culex pipiens,6,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-09-03,36,Culex pipiens,4,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-09,37,Culex pipiens,18,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-16,38,Culex pipiens,12,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-09-16,38,Culex pipiens,13,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-23,39,Culex pipiens,11,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-09-23,39,Culex pipiens,15,late,urban 
+213,Fire Station 8,-111.891203,40.740865,CO2,2025-09-30,40,Culex pipiens,10,late,urban 
+213,Fire Station 8,-111.891203,40.740865,GRVD,2025-09-30,40,Culex pipiens,15,late,urban 
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-05-08,19,Culex pipiens,1,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-05-30,22,Culex pipiens,1,early,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-05,23,Culex pipiens,7,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-10,24,Culex pipiens,5,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-12,24,Culex pipiens,39,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-24,26,Culex pipiens,15,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-06-26,26,Culex pipiens,16,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-01,27,Culex pipiens,6,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-10,28,Culex pipiens,2,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-15,29,Culex pipiens,46,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-17,29,Culex pipiens,40,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-24,30,Culex pipiens,298,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-07-31,31,Culex pipiens,8,mid,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-12,33,Culex pipiens,60,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-14,33,Culex pipiens,34,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-08-21,34,Culex pipiens,6,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-03,36,Culex pipiens,25,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-11,37,Culex pipiens,70,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-18,38,Culex pipiens,48,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-23,39,Culex pipiens,7,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-25,39,Culex pipiens,22,late,peri
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-09-30,40,Culex pipiens,12,late,peri
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-04-11,15,Culex pipiens,1,early,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-04-23,17,Culex pipiens,1,early,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-02,18,Culex pipiens,1,early,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-28,22,Culex pipiens,10,early,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-05-30,22,Culex pipiens,1,early,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-03,23,Culex pipiens,1,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-12,24,Culex pipiens,29,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-18,25,Culex pipiens,11,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-24,26,Culex pipiens,18,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-06-26,26,Culex pipiens,7,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-01,27,Culex pipiens,24,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-03,27,Culex pipiens,36,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-08,28,Culex pipiens,154,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-10,28,Culex pipiens,18,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-15,29,Culex pipiens,366,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-17,29,Culex pipiens,186,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-22,30,Culex pipiens,50,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-24,30,Culex pipiens,394,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-29,31,Culex pipiens,162,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-29,31,Culex pipiens,162,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-07-31,31,Culex pipiens,187,mid,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-05,32,Culex pipiens,100,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-07,32,Culex pipiens,190,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-12,33,Culex pipiens,30,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-14,33,Culex pipiens,71,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-19,34,Culex pipiens,147,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-21,34,Culex pipiens,119,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-08-26,35,Culex pipiens,91,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-03,36,Culex pipiens,96,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-09,37,Culex pipiens,52,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-11,37,Culex pipiens,20,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-16,38,Culex pipiens,21,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-18,38,Culex pipiens,18,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-23,39,Culex pipiens,2,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-25,39,Culex pipiens,2,late,urban 
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-09-30,40,Culex pipiens,2,late,urban 
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-08,19,Culex pipiens,2,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-05-28,22,Culex pipiens,25,early,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-03,23,Culex pipiens,15,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-05,23,Culex pipiens,7,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-10,24,Culex pipiens,18,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-12,24,Culex pipiens,64,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-18,25,Culex pipiens,59,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-24,26,Culex pipiens,18,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-06-26,26,Culex pipiens,20,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-03,27,Culex pipiens,164,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-08,28,Culex pipiens,304,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-22,30,Culex pipiens,33,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-24,30,Culex pipiens,96,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-29,31,Culex pipiens,791,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-29,31,Culex pipiens,791,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-07-31,31,Culex pipiens,453,mid,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-07,32,Culex pipiens,36,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-12,33,Culex pipiens,467,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-14,33,Culex pipiens,299,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-08-19,34,Culex pipiens,531,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-03,36,Culex pipiens,210,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-09,37,Culex pipiens,145,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-11,37,Culex pipiens,297,late,rural
+54,Goat Farm,-112.063284,40.787677,CO2,2025-09-18,38,Culex pipiens,51,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-04-16,16,Culex pipiens,3,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-04-23,17,Culex pipiens,1,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-02,18,Culex pipiens,14,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-08,19,Culex pipiens,7,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-21,21,Culex pipiens,3,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-05-30,22,Culex pipiens,128,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-03,23,Culex pipiens,7,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-10,24,Culex pipiens,138,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-18,25,Culex pipiens,13,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-24,26,Culex pipiens,118,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-06-26,26,Culex pipiens,81,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-01,27,Culex pipiens,21,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-08,28,Culex pipiens,132,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-10,28,Culex pipiens,36,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-22,30,Culex pipiens,11,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-07-31,31,Culex pipiens,216,mid,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-05,32,Culex pipiens,366,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-07,32,Culex pipiens,156,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-08-12,33,Culex pipiens,396,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-16,38,Culex pipiens,123,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-18,38,Culex pipiens,4,late,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-09-25,39,Culex pipiens,30,late,rural
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-05-28,22,Culex pipiens,3,early,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-06-10,24,Culex pipiens,22,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-06-18,25,Culex pipiens,8,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-06-24,26,Culex pipiens,24,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-07-01,27,Culex pipiens,129,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-07-08,28,Culex pipiens,28,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-07-15,29,Culex pipiens,29,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-07-24,30,Culex pipiens,20,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-07-29,31,Culex pipiens,25,mid,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-08-05,32,Culex pipiens,3,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-08-12,33,Culex pipiens,11,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-08-19,34,Culex pipiens,6,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-08-26,35,Culex pipiens,5,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-09-03,36,Culex pipiens,1,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-09-09,37,Culex pipiens,5,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-09-16,38,Culex pipiens,1,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-09-23,39,Culex pipiens,1,late,urban 
+222,Graystone Church,-111.859296,40.710842,GRVD,2025-09-30,40,Culex pipiens,2,late,urban 
+26,Harrison,-112.031522,40.830952,CO2,2025-05-02,18,Culex pipiens,1,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-05,23,Culex pipiens,9,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-10,24,Culex pipiens,111,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-24,26,Culex pipiens,56,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-06-26,26,Culex pipiens,1,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-01,27,Culex pipiens,47,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-08,28,Culex pipiens,15,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-22,30,Culex pipiens,1,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-24,30,Culex pipiens,101,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-07-31,31,Culex pipiens,49,mid,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-08-21,34,Culex pipiens,171,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-03,36,Culex pipiens,375,late,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-09-05,36,Culex pipiens,1258,late,rural
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-11,15,Culex pipiens,17,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-16,16,Culex pipiens,5,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-23,17,Culex pipiens,2,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-02,18,Culex pipiens,1,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-13,20,Culex pipiens,15,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-21,21,Culex pipiens,3,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-28,22,Culex pipiens,10,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-05-30,22,Culex pipiens,17,early,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-03,23,Culex pipiens,4,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-05,23,Culex pipiens,36,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-10,24,Culex pipiens,31,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-06-18,25,Culex pipiens,106,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-01,27,Culex pipiens,427,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-08,28,Culex pipiens,13,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-10,28,Culex pipiens,163,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-15,29,Culex pipiens,102,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-17,29,Culex pipiens,208,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-22,30,Culex pipiens,6,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-07-31,31,Culex pipiens,42,mid,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-05,32,Culex pipiens,77,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-14,33,Culex pipiens,358,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-21,34,Culex pipiens,7,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-08-26,35,Culex pipiens,15,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-03,36,Culex pipiens,452,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-09,37,Culex pipiens,24,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-16,38,Culex pipiens,10,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-18,38,Culex pipiens,29,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-23,39,Culex pipiens,93,late,peri
+3,Hinckley,-111.953357,40.84209,CO2,2025-09-30,40,Culex pipiens,42,late,peri
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-06-05,23,Culex pipiens,5,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-06-05,23,Culex pipiens,1,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-06-12,24,Culex pipiens,1,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-06-12,24,Culex pipiens,1,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-06-20,25,Culex pipiens,2,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-06-20,25,Culex pipiens,5,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-07-03,27,Culex pipiens,1,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-10,28,Culex pipiens,11,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-07-10,28,Culex pipiens,11,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-17,29,Culex pipiens,34,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-07-17,29,Culex pipiens,14,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-22,30,Culex pipiens,35,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-07-22,30,Culex pipiens,11,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-07-31,31,Culex pipiens,7,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-07-31,31,Culex pipiens,13,mid,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-08-07,32,Culex pipiens,57,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-08-07,32,Culex pipiens,9,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-08-21,34,Culex pipiens,65,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-08-21,34,Culex pipiens,13,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-08-21,34,Culex pipiens,13,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-08-28,35,Culex pipiens,22,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-08-28,35,Culex pipiens,1,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-09-05,36,Culex pipiens,10,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-09-11,37,Culex pipiens,14,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-09-11,37,Culex pipiens,8,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-09-18,38,Culex pipiens,7,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-09-18,38,Culex pipiens,3,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,CO2,2025-09-25,39,Culex pipiens,1,late,urban 
+209,Hogle Zoo,-111.813278,40.749919,GRVD,2025-09-25,39,Culex pipiens,2,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-05-23,21,Culex pipiens,1,early,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-05-30,22,Culex pipiens,7,early,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-06-12,24,Culex pipiens,15,mid,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-06-20,25,Culex pipiens,13,mid,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-06-26,26,Culex pipiens,11,mid,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-07-10,28,Culex pipiens,32,mid,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-07-17,29,Culex pipiens,18,mid,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-07-22,30,Culex pipiens,45,mid,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-07-31,31,Culex pipiens,26,mid,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-08-07,32,Culex pipiens,14,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-08-14,33,Culex pipiens,30,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-08-21,34,Culex pipiens,23,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-08-21,34,Culex pipiens,23,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-08-28,35,Culex pipiens,27,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-09-05,36,Culex pipiens,34,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-09-11,37,Culex pipiens,4,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-09-18,38,Culex pipiens,3,late,urban 
+208,Indian Hills Elementary School,-111.816866,40.74037,GRVD,2025-09-25,39,Culex pipiens,31,late,urban 
+35,Inland Sea,-112.101481,40.816002,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-08,19,Culex pipiens,2,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-23,21,Culex pipiens,19,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-05-28,22,Culex pipiens,30,early,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-06-24,26,Culex pipiens,13,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-03,27,Culex pipiens,58,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-15,29,Culex pipiens,93,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-17,29,Culex pipiens,195,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-22,30,Culex pipiens,2,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-07-31,31,Culex pipiens,29,mid,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-08-07,32,Culex pipiens,4,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-03,36,Culex pipiens,320,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-11,37,Culex pipiens,84,late,rural
+35,Inland Sea,-112.101481,40.816002,CO2,2025-09-18,38,Culex pipiens,31,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-04-23,17,Culex pipiens,1,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-05-08,19,Culex pipiens,1,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-05,23,Culex pipiens,1,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-10,24,Culex pipiens,10,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-18,25,Culex pipiens,16,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-24,26,Culex pipiens,28,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-06-26,26,Culex pipiens,3,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-01,27,Culex pipiens,92,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-03,27,Culex pipiens,27,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-07-24,30,Culex pipiens,59,mid,rural
+53,Jade,-112.069104,40.824112,CO2,2025-08-14,33,Culex pipiens,10,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-18,38,Culex pipiens,28,late,rural
+53,Jade,-112.069104,40.824112,CO2,2025-09-30,40,Culex pipiens,13,late,rural
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-11,15,Culex pipiens,4,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-16,16,Culex pipiens,8,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-23,17,Culex pipiens,2,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-05-21,21,Culex pipiens,1,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-05-23,21,Culex pipiens,7,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-05-30,22,Culex pipiens,16,early,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-03,23,Culex pipiens,22,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-05,23,Culex pipiens,6,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-10,24,Culex pipiens,31,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-12,24,Culex pipiens,173,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-18,25,Culex pipiens,149,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-24,26,Culex pipiens,50,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-06-26,26,Culex pipiens,19,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-01,27,Culex pipiens,23,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-03,27,Culex pipiens,234,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-08,28,Culex pipiens,48,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-10,28,Culex pipiens,149,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-15,29,Culex pipiens,138,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-17,29,Culex pipiens,104,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-22,30,Culex pipiens,3,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-24,30,Culex pipiens,189,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-29,31,Culex pipiens,259,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-29,31,Culex pipiens,259,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-07-31,31,Culex pipiens,109,mid,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-07,32,Culex pipiens,163,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-14,33,Culex pipiens,103,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-19,34,Culex pipiens,138,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-08-21,34,Culex pipiens,151,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-03,36,Culex pipiens,182,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-09,37,Culex pipiens,72,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-11,37,Culex pipiens,18,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-16,38,Culex pipiens,20,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-18,38,Culex pipiens,51,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-23,39,Culex pipiens,10,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-25,39,Culex pipiens,1,late,peri
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-09-30,40,Culex pipiens,2,late,peri
+57,Lakefront,-112.023355,40.86989,CO2,2025-05-08,19,Culex pipiens,2,early,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-10,24,Culex pipiens,75,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-24,26,Culex pipiens,172,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-06-26,26,Culex pipiens,67,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-03,27,Culex pipiens,179,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-07-17,29,Culex pipiens,290,mid,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-14,33,Culex pipiens,37,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-19,34,Culex pipiens,159,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-21,34,Culex pipiens,131,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-08-26,35,Culex pipiens,63,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-09,37,Culex pipiens,172,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-18,38,Culex pipiens,85,late,rural
+57,Lakefront,-112.023355,40.86989,CO2,2025-09-23,39,Culex pipiens,26,late,rural
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-02,18,Culex pipiens,1,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-08,19,Culex pipiens,5,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-05-28,22,Culex pipiens,8,early,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-03,23,Culex pipiens,7,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-10,24,Culex pipiens,288,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-12,24,Culex pipiens,22,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-24,26,Culex pipiens,41,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-06-26,26,Culex pipiens,1,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-01,27,Culex pipiens,53,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-03,27,Culex pipiens,5,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-08,28,Culex pipiens,13,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-10,28,Culex pipiens,10,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-15,29,Culex pipiens,108,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-17,29,Culex pipiens,39,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-29,31,Culex pipiens,209,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-07-29,31,Culex pipiens,209,mid,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-07,32,Culex pipiens,37,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-12,33,Culex pipiens,53,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-14,33,Culex pipiens,147,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-21,34,Culex pipiens,100,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-08-26,35,Culex pipiens,59,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-03,36,Culex pipiens,18,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-11,37,Culex pipiens,15,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-16,38,Culex pipiens,87,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-18,38,Culex pipiens,21,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-23,39,Culex pipiens,7,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-25,39,Culex pipiens,7,late,peri
+30,Lee Kay Dog Training Grounds,-112.045785,40.727823,CO2,2025-09-30,40,Culex pipiens,3,late,peri
+63,New State,-111.981345,40.871167,CO2,2025-05-02,18,Culex pipiens,2,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-05-08,19,Culex pipiens,1,early,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-05,23,Culex pipiens,59,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-12,24,Culex pipiens,59,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-18,25,Culex pipiens,13,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-06-26,26,Culex pipiens,28,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-15,29,Culex pipiens,114,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-17,29,Culex pipiens,140,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-07-24,30,Culex pipiens,8,mid,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-16,38,Culex pipiens,5,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-18,38,Culex pipiens,49,late,rural
+63,New State,-111.981345,40.871167,CO2,2025-09-30,40,Culex pipiens,149,late,rural
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-05-28,22,Culex pipiens,3,early,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-05-28,22,Culex pipiens,1,early,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-06-10,24,Culex pipiens,14,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-06-18,25,Culex pipiens,38,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-06-18,25,Culex pipiens,6,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-06-24,26,Culex pipiens,1,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-06-24,26,Culex pipiens,7,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-01,27,Culex pipiens,56,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-07-01,27,Culex pipiens,4,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-08,28,Culex pipiens,26,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-07-08,28,Culex pipiens,27,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-15,29,Culex pipiens,100,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-07-15,29,Culex pipiens,15,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-24,30,Culex pipiens,77,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-07-24,30,Culex pipiens,27,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-07-29,31,Culex pipiens,24,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-07-29,31,Culex pipiens,14,mid,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-05,32,Culex pipiens,45,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-08-05,32,Culex pipiens,15,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-12,33,Culex pipiens,21,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-08-12,33,Culex pipiens,2,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-19,34,Culex pipiens,33,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-08-19,34,Culex pipiens,6,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-08-26,35,Culex pipiens,37,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-03,36,Culex pipiens,4,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-09-03,36,Culex pipiens,4,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-09,37,Culex pipiens,8,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-09-09,37,Culex pipiens,5,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-16,38,Culex pipiens,4,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-09-16,38,Culex pipiens,1,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-23,39,Culex pipiens,11,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,GRVD,2025-09-23,39,Culex pipiens,2,late,urban 
+221,Nibley Golf Course,-111.872716,40.710398,CO2,2025-09-30,40,Culex pipiens,4,late,urban 
+65,Noggin,-112.059,40.81327,CO2,2025-04-16,16,Culex pipiens,2,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-04-23,17,Culex pipiens,3,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-02,18,Culex pipiens,8,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-21,21,Culex pipiens,88,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-28,22,Culex pipiens,173,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-05-30,22,Culex pipiens,12,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-03,23,Culex pipiens,57,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-10,24,Culex pipiens,47,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-06-24,26,Culex pipiens,22,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-01,27,Culex pipiens,100,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-08,28,Culex pipiens,62,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-07-17,29,Culex pipiens,197,mid,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-12,33,Culex pipiens,12,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-08-19,34,Culex pipiens,1,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-09,37,Culex pipiens,236,late,rural
+65,Noggin,-112.059,40.81327,CO2,2025-09-18,38,Culex pipiens,58,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-04-16,16,Culex pipiens,2,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-08,19,Culex pipiens,2,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-28,22,Culex pipiens,5,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-05-30,22,Culex pipiens,21,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-05,23,Culex pipiens,5,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-12,24,Culex pipiens,11,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-18,25,Culex pipiens,7,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-24,26,Culex pipiens,31,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-06-26,26,Culex pipiens,8,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-01,27,Culex pipiens,29,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-08,28,Culex pipiens,22,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-17,29,Culex pipiens,36,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-22,30,Culex pipiens,1,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-07-24,30,Culex pipiens,12,mid,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-19,34,Culex pipiens,22,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-08-26,35,Culex pipiens,70,late,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-09-30,40,Culex pipiens,34,late,rural
+59,O'Reillys,-112.038803,40.754836,CO2,2025-04-11,15,Culex pipiens,2,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-08,19,Culex pipiens,1,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-15,20,Culex pipiens,6,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-05-30,22,Culex pipiens,16,early,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-10,24,Culex pipiens,56,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-12,24,Culex pipiens,8,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-18,25,Culex pipiens,82,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-24,26,Culex pipiens,5,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-06-26,26,Culex pipiens,1,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-03,27,Culex pipiens,10,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-08,28,Culex pipiens,3,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-10,28,Culex pipiens,29,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-15,29,Culex pipiens,128,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-17,29,Culex pipiens,301,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-22,30,Culex pipiens,3,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-24,30,Culex pipiens,1169,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-29,31,Culex pipiens,650,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-29,31,Culex pipiens,650,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-07-31,31,Culex pipiens,272,mid,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-05,32,Culex pipiens,220,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-07,32,Culex pipiens,206,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-12,33,Culex pipiens,484,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-14,33,Culex pipiens,490,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-19,34,Culex pipiens,796,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-21,34,Culex pipiens,273,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-08-26,35,Culex pipiens,31,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-11,37,Culex pipiens,9,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-16,38,Culex pipiens,3,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-18,38,Culex pipiens,2,late,peri
+59,O'Reillys,-112.038803,40.754836,CO2,2025-09-23,39,Culex pipiens,4,late,peri
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-11,15,Culex pipiens,1,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-23,17,Culex pipiens,1,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-05-08,19,Culex pipiens,4,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-05-23,21,Culex pipiens,10,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-05-28,22,Culex pipiens,32,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-03,23,Culex pipiens,2,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-10,24,Culex pipiens,12,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-24,26,Culex pipiens,3,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-06-26,26,Culex pipiens,22,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-01,27,Culex pipiens,9,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-10,28,Culex pipiens,14,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-15,29,Culex pipiens,4,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-17,29,Culex pipiens,40,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-29,31,Culex pipiens,16,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-07-29,31,Culex pipiens,16,mid,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-07,32,Culex pipiens,85,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-14,33,Culex pipiens,11,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-08-19,34,Culex pipiens,41,late,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-09-23,39,Culex pipiens,1,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-04-11,15,Culex pipiens,1,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-21,21,Culex pipiens,1,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-05-28,22,Culex pipiens,13,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-05,23,Culex pipiens,64,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-10,24,Culex pipiens,42,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-18,25,Culex pipiens,14,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-06-26,26,Culex pipiens,4,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-03,27,Culex pipiens,36,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-17,29,Culex pipiens,169,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-22,30,Culex pipiens,1,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-24,30,Culex pipiens,89,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-29,31,Culex pipiens,40,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-07-29,31,Culex pipiens,40,mid,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-12,33,Culex pipiens,168,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-21,34,Culex pipiens,37,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-08-26,35,Culex pipiens,268,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-09,37,Culex pipiens,24,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-11,37,Culex pipiens,54,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-18,38,Culex pipiens,45,late,rural
+61,Prison,-112.084522,40.800948,CO2,2025-09-25,39,Culex pipiens,36,late,rural
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-11,15,Culex pipiens,6,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-16,16,Culex pipiens,2,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-23,17,Culex pipiens,2,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-02,18,Culex pipiens,2,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-08,19,Culex pipiens,4,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-13,20,Culex pipiens,2,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-15,20,Culex pipiens,1,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-21,21,Culex pipiens,3,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-23,21,Culex pipiens,7,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-28,22,Culex pipiens,5,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-05-30,22,Culex pipiens,13,early,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-03,23,Culex pipiens,19,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-05,23,Culex pipiens,21,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-10,24,Culex pipiens,582,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-12,24,Culex pipiens,3,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-18,25,Culex pipiens,62,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-24,26,Culex pipiens,131,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-06-26,26,Culex pipiens,44,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-01,27,Culex pipiens,20,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-03,27,Culex pipiens,258,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-08,28,Culex pipiens,148,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-10,28,Culex pipiens,84,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-15,29,Culex pipiens,79,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-17,29,Culex pipiens,168,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-22,30,Culex pipiens,85,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-24,30,Culex pipiens,632,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-07-31,31,Culex pipiens,255,mid,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-05,32,Culex pipiens,534,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-07,32,Culex pipiens,93,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-12,33,Culex pipiens,38,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-14,33,Culex pipiens,189,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-19,34,Culex pipiens,212,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-21,34,Culex pipiens,24,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-08-26,35,Culex pipiens,6,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-03,36,Culex pipiens,75,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-05,36,Culex pipiens,6,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-09,37,Culex pipiens,9,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-11,37,Culex pipiens,11,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-18,38,Culex pipiens,62,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-23,39,Culex pipiens,2,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-25,39,Culex pipiens,5,late,peri
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-09-30,40,Culex pipiens,99,late,peri
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-05-23,21,Culex pipiens,1,early,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-05-30,22,Culex pipiens,4,early,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-06-05,23,Culex pipiens,5,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-06-12,24,Culex pipiens,10,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-06-20,25,Culex pipiens,4,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-06-26,26,Culex pipiens,6,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-07-03,27,Culex pipiens,17,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-07-10,28,Culex pipiens,41,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-07-17,29,Culex pipiens,4,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-07-22,30,Culex pipiens,19,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-07-31,31,Culex pipiens,18,mid,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-07,32,Culex pipiens,7,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-14,33,Culex pipiens,5,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-21,34,Culex pipiens,13,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-21,34,Culex pipiens,13,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-08-28,35,Culex pipiens,10,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-09-05,36,Culex pipiens,20,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-09-11,37,Culex pipiens,18,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-09-18,38,Culex pipiens,7,late,urban 
+227,Rose Park Church,-111.9258517,40.7930466,GRVD,2025-09-25,39,Culex pipiens,3,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-04-11,15,Culex pipiens,1,early,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-04-23,17,Culex pipiens,2,early,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-02,18,Culex pipiens,1,early,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-21,21,Culex pipiens,1,early,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-05-30,22,Culex pipiens,1,early,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-10,24,Culex pipiens,12,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-18,25,Culex pipiens,5,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-24,26,Culex pipiens,4,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-06-26,26,Culex pipiens,28,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-03,27,Culex pipiens,38,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-08,28,Culex pipiens,23,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-10,28,Culex pipiens,31,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-15,29,Culex pipiens,21,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-17,29,Culex pipiens,40,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-24,30,Culex pipiens,85,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-29,31,Culex pipiens,61,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-29,31,Culex pipiens,61,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-07-31,31,Culex pipiens,3,mid,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-05,32,Culex pipiens,9,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-07,32,Culex pipiens,8,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-12,33,Culex pipiens,15,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-14,33,Culex pipiens,11,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-19,34,Culex pipiens,8,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-21,34,Culex pipiens,19,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-08-26,35,Culex pipiens,12,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-03,36,Culex pipiens,127,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-05,36,Culex pipiens,4,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-09,37,Culex pipiens,2,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-16,38,Culex pipiens,7,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-18,38,Culex pipiens,11,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-25,39,Culex pipiens,3,late,urban 
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-09-30,40,Culex pipiens,3,late,urban 
+4,Rudy,-112.003105,40.844458,CO2,2025-04-11,15,Culex pipiens,2,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-08,19,Culex pipiens,4,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-21,21,Culex pipiens,1,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-05-28,22,Culex pipiens,18,early,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-12,24,Culex pipiens,22,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-18,25,Culex pipiens,16,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-06-26,26,Culex pipiens,23,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-03,27,Culex pipiens,21,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-15,29,Culex pipiens,48,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-17,29,Culex pipiens,36,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-07-31,31,Culex pipiens,4,mid,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-14,33,Culex pipiens,88,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-19,34,Culex pipiens,9,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-08-21,34,Culex pipiens,460,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-05,36,Culex pipiens,10,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-23,39,Culex pipiens,7,late,rural
+4,Rudy,-112.003105,40.844458,CO2,2025-09-30,40,Culex pipiens,7,late,rural
+66,Runway,-112.074051,40.841498,CO2,2025-06-12,24,Culex pipiens,1,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-06-24,26,Culex pipiens,14,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-06-26,26,Culex pipiens,5,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-08,28,Culex pipiens,196,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-17,29,Culex pipiens,68,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-07-22,30,Culex pipiens,1,mid,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-14,33,Culex pipiens,30,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-19,34,Culex pipiens,7,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-08-21,34,Culex pipiens,470,late,peri
+66,Runway,-112.074051,40.841498,CO2,2025-09-16,38,Culex pipiens,4,late,peri
+228,Senior Center,-111.861971,40.764297,GRVD,2025-05-30,22,Culex pipiens,5,early,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-06-05,23,Culex pipiens,7,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-06-20,25,Culex pipiens,63,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-06-26,26,Culex pipiens,32,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-07-03,27,Culex pipiens,57,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-07-10,28,Culex pipiens,87,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-07-17,29,Culex pipiens,121,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-07-22,30,Culex pipiens,113,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-07-31,31,Culex pipiens,62,mid,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-07,32,Culex pipiens,40,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-14,33,Culex pipiens,22,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-21,34,Culex pipiens,18,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-21,34,Culex pipiens,18,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-08-28,35,Culex pipiens,4,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-09-05,36,Culex pipiens,8,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-09-11,37,Culex pipiens,2,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-09-18,38,Culex pipiens,11,late,urban 
+228,Senior Center,-111.861971,40.764297,GRVD,2025-09-25,39,Culex pipiens,19,late,urban 
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-02,18,Culex pipiens,1,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-28,22,Culex pipiens,3,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-05-30,22,Culex pipiens,13,early,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-03,23,Culex pipiens,7,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-10,24,Culex pipiens,2,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-12,24,Culex pipiens,1,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-18,25,Culex pipiens,1,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-24,26,Culex pipiens,1,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-06-26,26,Culex pipiens,7,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-01,27,Culex pipiens,1,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-08,28,Culex pipiens,6,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-10,28,Culex pipiens,49,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-17,29,Culex pipiens,88,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-24,30,Culex pipiens,3,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-07-31,31,Culex pipiens,2,mid,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-05,32,Culex pipiens,12,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-07,32,Culex pipiens,11,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-08-14,33,Culex pipiens,6,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-05,36,Culex pipiens,12,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-09,37,Culex pipiens,6,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-11,37,Culex pipiens,5,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-16,38,Culex pipiens,2,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-23,39,Culex pipiens,3,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-25,39,Culex pipiens,12,late,peri
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-09-30,40,Culex pipiens,4,late,peri
+50,South Saratoga,-112.109041,40.784374,CO2,2025-05-08,19,Culex pipiens,3,early,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-06-24,26,Culex pipiens,4,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-03,27,Culex pipiens,4,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-07-10,28,Culex pipiens,2,mid,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-05,32,Culex pipiens,17,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-12,33,Culex pipiens,59,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-14,33,Culex pipiens,3,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-08-21,34,Culex pipiens,93,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-03,36,Culex pipiens,105,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-05,36,Culex pipiens,19,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-11,37,Culex pipiens,24,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-16,38,Culex pipiens,21,late,rural
+50,South Saratoga,-112.109041,40.784374,CO2,2025-09-30,40,Culex pipiens,14,late,rural
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-05-28,22,Culex pipiens,2,early,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-06-10,24,Culex pipiens,7,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-06-18,25,Culex pipiens,20,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-06-24,26,Culex pipiens,37,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-07-01,27,Culex pipiens,85,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-07-08,28,Culex pipiens,77,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-07-15,29,Culex pipiens,48,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-07-24,30,Culex pipiens,37,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-07-29,31,Culex pipiens,16,mid,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-08-05,32,Culex pipiens,12,late,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-08-12,33,Culex pipiens,6,late,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-08-19,34,Culex pipiens,17,late,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-08-26,35,Culex pipiens,4,late,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-09-03,36,Culex pipiens,18,late,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-09-16,38,Culex pipiens,21,late,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-09-23,39,Culex pipiens,3,late,urban 
+223,Stratford Ward,-111.847231,40.715254,GRVD,2025-09-30,40,Culex pipiens,18,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-05-13,20,Culex pipiens,3,early,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-05-21,21,Culex pipiens,1,early,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-05-28,22,Culex pipiens,5,early,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-06-03,23,Culex pipiens,NA,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-06-10,24,Culex pipiens,35,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-06-18,25,Culex pipiens,16,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-06-24,26,Culex pipiens,97,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-07-01,27,Culex pipiens,39,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-07-08,28,Culex pipiens,91,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-07-15,29,Culex pipiens,71,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-07-24,30,Culex pipiens,97,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-07-29,31,Culex pipiens,25,mid,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-08-05,32,Culex pipiens,28,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-08-12,33,Culex pipiens,49,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-08-19,34,Culex pipiens,35,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-08-26,35,Culex pipiens,82,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-09-03,36,Culex pipiens,10,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-09-09,37,Culex pipiens,21,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-09-16,38,Culex pipiens,14,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-09-23,39,Culex pipiens,5,late,urban 
+207,Tracy Aviary,-111.875491,40.742217,GRVD,2025-09-30,40,Culex pipiens,3,late,urban 
+58,Train Tracks,-112.003557,40.754243,CO2,2025-04-11,15,Culex pipiens,2,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-04-16,16,Culex pipiens,4,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-02,18,Culex pipiens,3,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-08,19,Culex pipiens,2,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-23,21,Culex pipiens,2,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-28,22,Culex pipiens,11,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-05-30,22,Culex pipiens,31,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-05,23,Culex pipiens,7,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-12,24,Culex pipiens,173,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-18,25,Culex pipiens,61,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-24,26,Culex pipiens,51,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-06-26,26,Culex pipiens,279,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-01,27,Culex pipiens,99,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-03,27,Culex pipiens,164,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-08,28,Culex pipiens,49,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-10,28,Culex pipiens,133,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-17,29,Culex pipiens,441,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-22,30,Culex pipiens,23,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-24,30,Culex pipiens,811,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-29,31,Culex pipiens,810,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-29,31,Culex pipiens,810,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-07-31,31,Culex pipiens,859,mid,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-07,32,Culex pipiens,617,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-12,33,Culex pipiens,517,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-14,33,Culex pipiens,17,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-19,34,Culex pipiens,1108,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-21,34,Culex pipiens,408,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-08-26,35,Culex pipiens,134,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-03,36,Culex pipiens,86,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-05,36,Culex pipiens,579,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-09,37,Culex pipiens,60,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-11,37,Culex pipiens,391,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-18,38,Culex pipiens,49,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-23,39,Culex pipiens,1,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-25,39,Culex pipiens,10,late,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-09-30,40,Culex pipiens,40,late,peri
+225,White Church,-111.837254,40.738721,GRVD,2025-05-30,22,Culex pipiens,1,early,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-06-05,23,Culex pipiens,3,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-06-12,24,Culex pipiens,1,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-06-20,25,Culex pipiens,10,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-06-26,26,Culex pipiens,6,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-07-10,28,Culex pipiens,23,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-07-17,29,Culex pipiens,13,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-07-22,30,Culex pipiens,56,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-07-31,31,Culex pipiens,13,mid,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-08-07,32,Culex pipiens,17,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-08-14,33,Culex pipiens,20,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-08-21,34,Culex pipiens,32,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-08-21,34,Culex pipiens,32,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-08-28,35,Culex pipiens,2,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-09-05,36,Culex pipiens,28,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-09-11,37,Culex pipiens,8,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-09-18,38,Culex pipiens,6,late,urban 
+225,White Church,-111.837254,40.738721,GRVD,2025-09-25,39,Culex pipiens,6,late,urban 
+34,Wingpointe,-111.97708,40.771529,CO2,2025-04-16,16,Culex pipiens,2,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-04-23,17,Culex pipiens,1,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-08,19,Culex pipiens,7,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-15,20,Culex pipiens,1,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-21,21,Culex pipiens,1,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-23,21,Culex pipiens,8,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-28,22,Culex pipiens,10,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-05-30,22,Culex pipiens,32,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-03,23,Culex pipiens,29,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-05,23,Culex pipiens,4,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-10,24,Culex pipiens,131,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-12,24,Culex pipiens,585,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-18,25,Culex pipiens,298,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-24,26,Culex pipiens,298,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-06-26,26,Culex pipiens,56,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-01,27,Culex pipiens,185,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-03,27,Culex pipiens,617,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-08,28,Culex pipiens,634,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-10,28,Culex pipiens,3,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-15,29,Culex pipiens,42,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-17,29,Culex pipiens,395,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-22,30,Culex pipiens,33,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-24,30,Culex pipiens,873,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-29,31,Culex pipiens,1562,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-29,31,Culex pipiens,1562,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-07-31,31,Culex pipiens,537,mid,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-05,32,Culex pipiens,714,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-07,32,Culex pipiens,138,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-12,33,Culex pipiens,68,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-14,33,Culex pipiens,247,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-19,34,Culex pipiens,274,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-08-21,34,Culex pipiens,583,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-03,36,Culex pipiens,425,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-09,37,Culex pipiens,67,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-11,37,Culex pipiens,370,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-18,38,Culex pipiens,131,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-25,39,Culex pipiens,12,late,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-09-30,40,Culex pipiens,5,late,peri
