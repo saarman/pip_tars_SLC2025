@@ -2,9 +2,10 @@ Weekly **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
 season
 ================
 Norah Saarman
-2026-03-13
+2026-03-16
 
-- [Load data](#load-data)
+- [Salamander example](#salamander-example)
+- [Culex tarsalis](#culex-tarsalis)
 - [GLMM by season and urbanization, each mosquito species
   separately](#glmm-by-season-and-urbanization-each-mosquito-species-separately)
   - [Random effects (1 \|
@@ -12,6 +13,14 @@ Norah Saarman
   - [Random effects (1 \|
     site_name/collection_date)](#random-effects-1--site_namecollection_date)
   - [Marginal effects](#marginal-effects)
+- [Culex pipiens](#culex-pipiens)
+- [GLMM by season and urbanization, each mosquito species
+  separately](#glmm-by-season-and-urbanization-each-mosquito-species-separately-1)
+  - [Random effects (1 \|
+    site_name/disease_week)](#random-effects-1--site_namedisease_week-1)
+  - [Random effects (1 \|
+    site_name/collection_date)](#random-effects-1--site_namecollection_date-1)
+  - [Marginal effects](#marginal-effects-1)
 
 **Research Topic:** testing whether habitat and seasonal partitioning
 between Culex pipiens s.l. and Culex tarsalis shapes West Nile Virus
@@ -96,349 +105,11 @@ library(multcomp)  # for statistical comparisons on fitted models
     ## 
     ##     geyser
 
-## Load data
-
 ``` r
-## tarsalis datasets from SLCMAD:
-tarsalis <- read.csv("../data/tarsalis_2025.csv")
-
-head(tarsalis, 5)
+library(dplyr)     # for mutating dataframe to change labels in dataset
 ```
 
-    ##   site_code     site_name longitude latitude trap_type collection_date
-    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-07-10
-    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-07-17
-    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-08-21
-    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-08-21
-    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-09-05
-    ##   disease_week        species count season urban_cat
-    ## 1           28 Culex tarsalis    NA    mid     urban
-    ## 2           29 Culex tarsalis     1    mid     urban
-    ## 3           34 Culex tarsalis    NA   late     urban
-    ## 4           34 Culex tarsalis    NA   late     urban
-    ## 5           36 Culex tarsalis    NA   late     urban
-
-``` r
-## pipiens datasets from SLCMAD:
-pipiens <- read.csv("../data/pipiens_2025.csv")
-head(pipiens, 5)
-```
-
-    ##   site_code     site_name longitude latitude trap_type collection_date
-    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-05-30
-    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-05
-    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-12
-    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-20
-    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-26
-    ##   disease_week       species count season urban_cat
-    ## 1           22 Culex pipiens     3  early    urban 
-    ## 2           23 Culex pipiens     9    mid    urban 
-    ## 3           24 Culex pipiens    10    mid    urban 
-    ## 4           25 Culex pipiens     5    mid    urban 
-    ## 5           26 Culex pipiens    30    mid    urban
-
-# GLMM by season and urbanization, each mosquito species separately
-
-Start by binning into discrete seasons: early, mid, late
-
-``` r
-table(tarsalis$season, tarsalis$disease_week)
-```
-
-    ##        
-    ##          15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32
-    ##   early  28  33  29  27  32  33  75  79   0   0   0   0   0   0   0   0   0   0
-    ##   late    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  89
-    ##   mid     0   0   0   0   0   0   0   0  80  82  48  88  82  88  88  76 119   0
-    ##        
-    ##          33  34  35  36  37  38  39  40
-    ##   early   0   0   0   0   0   0   0   0
-    ##   late   89  94  48  73  83  90  82  39
-    ##   mid     0   0   0   0   0   0   0   0
-
-First, look at the response distribution
-
-``` r
-# sub in tarsalis dataset here instead of salamander 
-hist(tarsalis$count) 
-```
-
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/response-1.png)<!-- -->
-
-``` r
-hist(log(tarsalis$count))
-```
-
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/response-2.png)<!-- -->
-
-## Random effects (1 \| site_name/disease_week)
-
-Fit the model with poisson(link=“log”), using random effects (1 \|
-site_name/disease_week)
-
-``` r
-# tarsalis count data, starting with poisson model:
-fit_pois <- glmmTMB(count ~ season*urban_cat + trap_type + (1 | site_name/disease_week),
-                    family = poisson(link = "log"),
-                    data = tarsalis)
-summary(fit_pois)
-```
-
-    ##  Family: poisson  ( log )
-    ## Formula:          
-    ## count ~ season * urban_cat + trap_type + (1 | site_name/disease_week)
-    ## Data: tarsalis
-    ## 
-    ##       AIC       BIC    logLik -2*log(L)  df.resid 
-    ##  300226.7  300292.2 -150101.4  300202.7      1721 
-    ## 
-    ## Random effects:
-    ## 
-    ## Conditional model:
-    ##  Groups                 Name        Variance Std.Dev.
-    ##  disease_week:site_name (Intercept) 2.1537   1.4675  
-    ##  site_name              (Intercept) 0.2329   0.4826  
-    ## Number of obs: 1733, groups:  disease_week:site_name, 1088; site_name, 56
-    ## 
-    ## Conditional model:
-    ##                           Estimate Std. Error z value Pr(>|z|)    
-    ## (Intercept)                2.60997    0.21341  12.230  < 2e-16 ***
-    ## seasonlate                 2.87337    0.21572  13.320  < 2e-16 ***
-    ## seasonmid                  3.16284    0.21480  14.724  < 2e-16 ***
-    ## urban_catrural            -0.06776    0.27131  -0.250 0.802791    
-    ## urban_caturban            -1.06669    0.36373  -2.933 0.003361 ** 
-    ## trap_typeGRVD             -2.75024    0.14330 -19.192  < 2e-16 ***
-    ## seasonlate:urban_catrural  0.62952    0.27461   2.292 0.021880 *  
-    ## seasonmid:urban_catrural   0.75489    0.27301   2.765 0.005692 ** 
-    ## seasonlate:urban_caturban -1.41319    0.37043  -3.815 0.000136 ***
-    ## seasonmid:urban_caturban  -1.66376    0.36876  -4.512 6.43e-06 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Look at the residuals:
-
-``` r
-simulateResiduals(fit_pois, plot = T)
-```
-
-    ## DHARMa:testOutliers with type = binomial may have inflated Type I error rates for integer-valued distributions. To get a more exact result, it is recommended to re-run testOutliers with type = 'bootstrap'. See ?testOutliers for details
-
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/resids-poisson-log-link-week-1.png)<!-- -->
-
-    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
-    ##  
-    ## Scaled residual values: 0.3757723 0.6631096 0.8546529 0.472019 0.5208264 0.5681077 0.4845933 0.7686813 0.3847694 0.1291647 0.1217306 0.3483495 0.7032616 0.06760113 0.6509805 0.98 0.992 0.992 0.09160973 0.204 ...
-
-## Random effects (1 \| site_name/collection_date)
-
-Fit the model with poisson(link=“log”), using random effects (1 \|
-site_name/collection_date)
-
-``` r
-# tarsalis count data, starting with poisson model:
-fit_pois_date <- glmmTMB(count ~ season*urban_cat + trap_type + (1 | site_name/collection_date),
-                    family = poisson(link = "log"),
-                    data = tarsalis)
-summary(fit_pois_date)
-```
-
-    ##  Family: poisson  ( log )
-    ## Formula:          
-    ## count ~ season * urban_cat + trap_type + (1 | site_name/collection_date)
-    ## Data: tarsalis
-    ## 
-    ##       AIC       BIC    logLik -2*log(L)  df.resid 
-    ##   22644.3   22709.8  -11310.2   22620.3      1721 
-    ## 
-    ## Random effects:
-    ## 
-    ## Conditional model:
-    ##  Groups                    Name        Variance Std.Dev.
-    ##  collection_date:site_name (Intercept) 2.8366   1.6842  
-    ##  site_name                 (Intercept) 0.2325   0.4822  
-    ## Number of obs: 1733, groups:  collection_date:site_name, 1668; site_name, 56
-    ## 
-    ## Conditional model:
-    ##                           Estimate Std. Error z value Pr(>|z|)    
-    ## (Intercept)                2.77945    0.21334  13.029  < 2e-16 ***
-    ## seasonlate                 2.45969    0.20531  11.980  < 2e-16 ***
-    ## seasonmid                  2.66287    0.20259  13.144  < 2e-16 ***
-    ## urban_catrural            -0.01155    0.27059  -0.043  0.96595    
-    ## urban_caturban            -1.19776    0.37425  -3.200  0.00137 ** 
-    ## trap_typeGRVD             -2.75428    0.14530 -18.956  < 2e-16 ***
-    ## seasonlate:urban_catrural  0.76447    0.26047   2.935  0.00334 ** 
-    ## seasonmid:urban_catrural   0.67223    0.25683   2.617  0.00886 ** 
-    ## seasonlate:urban_caturban -1.04970    0.37584  -2.793  0.00522 ** 
-    ## seasonmid:urban_caturban  -1.21580    0.37190  -3.269  0.00108 ** 
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-``` r
-# Look at the residuals
-simulateResiduals(fit_pois_date, plot = T)
-```
-
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/poisson-log-link-date-1.png)<!-- -->
-
-    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
-    ##  
-    ## Scaled residual values: 0.451173 0.570916 0.8657983 0.4242838 0.6669795 0.5438227 0.3057994 0.7070638 0.2808567 0.137651 0.06285764 0.2788065 0.6499876 0.1160842 0.576 0.92 0.984 0.992 0.076 0.284 ...
-
-I think it still doesn’t look great… KS test shows significant
-deviation, dispersion test shows significant deviation, and there is a
-funnel shape. Maybe the negative binomial distribution can help with
-this as it helped with the salamanders? But this is all beyond me… give
-it a shot!
-
-``` r
-fit_nbinom <- glmmTMB(count ~ season*urban_cat + trap_type + (1 | site_name/collection_date),
-                    family = nbinom1(link = "log"),
-                    data = tarsalis)
-
-simulateResiduals(fit_nbinom, plot = T)
-```
-
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/nbinom-log-link-date-1.png)<!-- -->
-
-    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
-    ##  
-    ## Scaled residual values: 0.4321881 0.6137061 0.8431486 0.4433061 0.6047028 0.6146553 0.4889945 0.7055691 0.357675 0.158536 0.1110842 0.3167209 0.6085761 0.0709376 0.5811151 0.944 0.968 0.968 0.128 0.28 ...
-
-I think it looks the same!!! So, stick with the poisson log-link? But I
-do think that random effects (1 \| site_name/collection_date) looked
-better than disease_week. Not sure if that is good justification to use
-collection_date though.
-
-## Marginal effects
-
-Sticking with model with poisson(link=“log”), using random effects (1 \|
-site_name/collection_date) `fit_pois_date`
-
-glmmTMB(count ~ season\*urban_cat + trap_type + (1 \|
-site_name/collection_date), family = nbinom1(link = “log”), data =
-tarsalis)
-
-``` r
-# First, just look at the effect of season, doing a 1-way pairwise comparison
-em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
-```
-
-    ## NOTE: Results may be misleading due to involvement in interactions
-
-``` r
-em_season
-```
-
-    ## $emmeans
-    ##  season  rate    SE  df asymp.LCL asymp.UCL
-    ##  early   2.72 0.411 Inf      2.02      3.65
-    ##  late   28.90 3.400 Inf     22.95     36.40
-    ##  mid    32.49 3.810 Inf     25.81     40.89
-    ## 
-    ## Results are averaged over the levels of: urban_cat, trap_type 
-    ## Confidence level used: 0.95 
-    ## Intervals are back-transformed from the log scale 
-    ## 
-    ## $contrasts
-    ##  contrast      ratio     SE  df null z.ratio p.value
-    ##  early / late 0.0940 0.0128 Inf    1 -17.356  <.0001
-    ##  early / mid  0.0836 0.0113 Inf    1 -18.418  <.0001
-    ##  late / mid   0.8895 0.0896 Inf    1  -1.163  0.4756
-    ## 
-    ## Results are averaged over the levels of: urban_cat, trap_type 
-    ## P value adjustment: tukey method for comparing a family of 3 estimates 
-    ## Tests are performed on the log scale
-
-``` r
-cl = cld(em_season, Letters = letters)
-
-ggplot(data = cl, aes(x = season, y = rate)) +
-    geom_point(size=2.5, color="black") +
-    geom_errorbar(aes(x=season, ymin = asymp.LCL,
-                      ymax = asymp.UCL),
-                  width = 0.2, size=1, color="black") +
-    geom_text(aes(label = gsub(" ", "", .group)),
-              position = position_nudge(x = 0.3)) +
-    ggeasy::easy_remove_axes("both", "title")
-```
-
-    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ## ℹ Please use `linewidth` instead.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-    ## generated.
-
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
-
-``` r
-# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
-em_spp2 = emmeans(fit_pois_date, pairwise ~ season | urban_cat, type = "response")
-em_spp2
-```
-
-    ## $emmeans
-    ## urban_cat = peri:
-    ##  season   rate     SE  df asymp.LCL asymp.UCL
-    ##  early    4.06  0.916 Inf     2.613      6.32
-    ##  late    47.56  9.250 Inf    32.490     69.62
-    ##  mid     58.28 11.200 Inf    40.024     84.85
-    ## 
-    ## urban_cat = rural:
-    ##  season   rate     SE  df asymp.LCL asymp.UCL
-    ##  early    4.02  0.730 Inf     2.814      5.74
-    ##  late   100.98 16.100 Inf    73.877    138.02
-    ##  mid    112.83 17.700 Inf    82.940    153.49
-    ## 
-    ## urban_cat = urban:
-    ##  season   rate     SE  df asymp.LCL asymp.UCL
-    ##  early    1.23  0.382 Inf     0.667      2.26
-    ##  late     5.03  1.000 Inf     3.398      7.43
-    ##  mid      5.22  1.030 Inf     3.537      7.69
-    ## 
-    ## Results are averaged over the levels of: trap_type 
-    ## Confidence level used: 0.95 
-    ## Intervals are back-transformed from the log scale 
-    ## 
-    ## $contrasts
-    ## urban_cat = peri:
-    ##  contrast      ratio      SE  df null z.ratio p.value
-    ##  early / late 0.0855 0.01750 Inf    1 -11.980  <.0001
-    ##  early / mid  0.0697 0.01410 Inf    1 -13.144  <.0001
-    ##  late / mid   0.8161 0.13700 Inf    1  -1.210  0.4473
-    ## 
-    ## urban_cat = rural:
-    ##  contrast      ratio      SE  df null z.ratio p.value
-    ##  early / late 0.0398 0.00638 Inf    1 -20.110  <.0001
-    ##  early / mid  0.0356 0.00562 Inf    1 -21.122  <.0001
-    ##  late / mid   0.8950 0.11800 Inf    1  -0.842  0.6771
-    ## 
-    ## urban_cat = urban:
-    ##  contrast      ratio      SE  df null z.ratio p.value
-    ##  early / late 0.2441 0.07690 Inf    1  -4.478  <.0001
-    ##  early / mid  0.2353 0.07340 Inf    1  -4.638  <.0001
-    ##  late / mid   0.9636 0.20600 Inf    1  -0.174  0.9835
-    ## 
-    ## Results are averaged over the levels of: trap_type 
-    ## P value adjustment: tukey method for comparing a family of 3 estimates 
-    ## Tests are performed on the log scale
-
-``` r
-cl2 <- cld(em_spp2$emmeans, Letters = letters)
-
-ggplot(data = cl2, aes(x = season, y = rate)) +
-    geom_point(size=2.5, color="black") +
-    geom_errorbar(aes(x=season, ymin = asymp.LCL,
-                      ymax = asymp.UCL),
-                  width = 0.2, size=1, color="black") +
-    facet_wrap(~ urban_cat, #nrow = 2,
-               labeller = label_both) +
-    geom_text(aes(label = gsub(" ", "", .group)),
-              position = position_nudge(x = 0.4)) +
-    ggeasy::easy_remove_axes("y", "title")
-```
-
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
-\# Salamander example
+# Salamander example
 
 Just to understand a bit better what it looks like when residuals don’t
 “look good”:
@@ -531,9 +202,7 @@ simulateResiduals(fit_pois, plot = T)
 ``` r
 # this doesn't look great. It seems like there is a trend in the residuals with
 # greater error at higher values. Maybe the negative binomial distribution can help with this
-```
 
-``` r
 #continue salamander dataset example
 # this doesn't look great. It seems like there is a trend in the residuals with
 # greater error at higher values. Maybe the negative binomial distribution can help with this
@@ -544,7 +213,7 @@ fit_nbinom <- glmmTMB(count ~ spp*mined + (1 | site),
 simulateResiduals(fit_nbinom, plot = T)
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamanders-nbinom-1.png)<!-- -->
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-4.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -552,9 +221,7 @@ simulateResiduals(fit_nbinom, plot = T)
 
 ``` r
 # this looks much better. Now we can look at the marginal effects:
-```
 
-``` r
 # First, just look at the effect of species, doing a 1-way pairwise comparison
 em_spp = emmeans(fit_nbinom, pairwise ~ spp, type = "response")
 ```
@@ -620,7 +287,13 @@ ggplot(data = cl, aes(x = spp, y = response)) +
   ggeasy::easy_remove_axes("both", "title")
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamanders-effect-1.png)<!-- -->
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-5.png)<!-- -->
 
 ``` r
 # Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
@@ -719,4 +392,716 @@ ggplot(data = cl2, aes(x = spp, y = response)) +
   ggeasy::easy_remove_axes("y", "title")
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamanders-effect-2.png)<!-- -->
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-6.png)<!-- -->
+
+# Culex tarsalis
+
+``` r
+## tarsalis datasets from SLCMAD:
+tarsalis <- read.csv("../data/tarsalis_2025.csv")
+
+tarsalis <- tarsalis %>%
+  mutate(
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban"),
+      labels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late"),
+      labels = c("early", "mid", "late")
+    )
+  )
+
+head(tarsalis, 5)
+```
+
+    ##   site_code     site_name longitude latitude trap_type collection_date
+    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-07-10
+    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-07-17
+    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-08-21
+    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-08-21
+    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-09-05
+    ##   disease_week        species count season urban_cat urbanization
+    ## 1           28 Culex tarsalis    NA    mid     urban        urban
+    ## 2           29 Culex tarsalis     1    mid     urban        urban
+    ## 3           34 Culex tarsalis    NA   late     urban        urban
+    ## 4           34 Culex tarsalis    NA   late     urban        urban
+    ## 5           36 Culex tarsalis    NA   late     urban        urban
+
+# GLMM by season and urbanization, each mosquito species separately
+
+Start by binning into discrete seasons: early, mid, late
+
+``` r
+table(tarsalis$season, tarsalis$disease_week)
+```
+
+    ##        
+    ##          15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32
+    ##   early  28  33  29  27  32  33  75  79   0   0   0   0   0   0   0   0   0   0
+    ##   mid     0   0   0   0   0   0   0   0  80  82  48  88  82  88  88  76 119   0
+    ##   late    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  89
+    ##        
+    ##          33  34  35  36  37  38  39  40
+    ##   early   0   0   0   0   0   0   0   0
+    ##   mid     0   0   0   0   0   0   0   0
+    ##   late   89  94  48  73  83  90  82  39
+
+First, look at the response distribution
+
+``` r
+# sub in tarsalis dataset here instead of salamander 
+hist(tarsalis$count) 
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/response-1.png)<!-- -->
+
+``` r
+hist(log(tarsalis$count))
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/response-2.png)<!-- -->
+
+## Random effects (1 \| site_name/disease_week)
+
+Fit the model with poisson(link=“log”), using random effects (1 \|
+site_name/disease_week)
+
+``` r
+# tarsalis count data, starting with poisson model:
+fit_pois <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/disease_week),
+                    family = poisson(link = "log"),
+                    data = tarsalis)
+summary(fit_pois)
+```
+
+    ##  Family: poisson  ( log )
+    ## Formula:          
+    ## count ~ season * urbanization + trap_type + (1 | site_name/disease_week)
+    ## Data: tarsalis
+    ## 
+    ##       AIC       BIC    logLik -2*log(L)  df.resid 
+    ##  300226.7  300292.2 -150101.4  300202.7      1721 
+    ## 
+    ## Random effects:
+    ## 
+    ## Conditional model:
+    ##  Groups                 Name        Variance Std.Dev.
+    ##  disease_week:site_name (Intercept) 2.1536   1.4675  
+    ##  site_name              (Intercept) 0.2329   0.4826  
+    ## Number of obs: 1733, groups:  disease_week:site_name, 1088; site_name, 56
+    ## 
+    ## Conditional model:
+    ##                              Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)                   2.54222    0.16765  15.164  < 2e-16 ***
+    ## seasonmid                     3.91765    0.16861  23.235  < 2e-16 ***
+    ## seasonlate                    3.50289    0.16999  20.606  < 2e-16 ***
+    ## urbanizationperi              0.06767    0.27131   0.249   0.8030    
+    ## urbanizationurban            -0.99887    0.33890  -2.947   0.0032 ** 
+    ## trap_typeGRVD                -2.75027    0.14330 -19.192  < 2e-16 ***
+    ## seasonmid:urbanizationperi   -0.75471    0.27301  -2.764   0.0057 ** 
+    ## seasonlate:urbanizationperi  -0.62940    0.27460  -2.292   0.0219 *  
+    ## seasonmid:urbanizationurban  -2.41867    0.34393  -7.033 2.03e-12 ***
+    ## seasonlate:urbanizationurban -2.04276    0.34579  -5.908 3.47e-09 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Look at the residuals:
+
+``` r
+simulateResiduals(fit_pois, plot = T)
+```
+
+    ## DHARMa:testOutliers with type = binomial may have inflated Type I error rates for integer-valued distributions. To get a more exact result, it is recommended to re-run testOutliers with type = 'bootstrap'. See ?testOutliers for details
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/resids-poisson-log-link-week-1.png)<!-- -->
+
+    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+    ##  
+    ## Scaled residual values: 0.3603315 0.6088512 0.8789793 0.3473587 0.5587588 0.6029112 0.3583864 0.7524882 0.4384193 0.1497614 0.04138747 0.2835615 0.704 0.05970947 0.662701 0.972 1 1 0.084 0.22 ...
+
+## Random effects (1 \| site_name/collection_date)
+
+Fit the model with poisson(link=“log”), using random effects (1 \|
+site_name/collection_date)
+
+``` r
+# tarsalis count data, starting with poisson model:
+fit_pois_date <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = poisson(link = "log"),
+                    data = tarsalis)
+summary(fit_pois_date)
+```
+
+    ##  Family: poisson  ( log )
+    ## Formula:          
+    ## count ~ season * urbanization + trap_type + (1 | site_name/collection_date)
+    ## Data: tarsalis
+    ## 
+    ##       AIC       BIC    logLik -2*log(L)  df.resid 
+    ##   22644.3   22709.8  -11310.2   22620.3      1721 
+    ## 
+    ## Random effects:
+    ## 
+    ## Conditional model:
+    ##  Groups                    Name        Variance Std.Dev.
+    ##  collection_date:site_name (Intercept) 2.8367   1.6842  
+    ##  site_name                 (Intercept) 0.2325   0.4822  
+    ## Number of obs: 1733, groups:  collection_date:site_name, 1668; site_name, 56
+    ## 
+    ## Conditional model:
+    ##                              Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)                   2.76790    0.16654  16.620  < 2e-16 ***
+    ## seasonmid                     3.33510    0.15790  21.122  < 2e-16 ***
+    ## seasonlate                    3.22414    0.16032  20.110  < 2e-16 ***
+    ## urbanizationperi              0.01161    0.27059   0.043 0.965775    
+    ## urbanizationurban            -1.18620    0.34980  -3.391 0.000696 ***
+    ## trap_typeGRVD                -2.75430    0.14530 -18.956  < 2e-16 ***
+    ## seasonmid:urbanizationperi   -0.67229    0.25683  -2.618 0.008853 ** 
+    ## seasonlate:urbanizationperi  -0.76451    0.26047  -2.935 0.003334 ** 
+    ## seasonmid:urbanizationurban  -1.88802    0.34965  -5.400 6.68e-08 ***
+    ## seasonlate:urbanizationurban -1.81413    0.35330  -5.135 2.83e-07 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+# Look at the residuals
+simulateResiduals(fit_pois_date, plot = T)
+```
+
+    ## qu = 0.25, log(sigma) = -2.118268 : outer Newton did not converge fully.
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/poisson-log-link-date-1.png)<!-- -->
+
+    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+    ##  
+    ## Scaled residual values: 0.4093399 0.6479994 0.8259321 0.5479739 0.5808307 0.6330922 0.3437047 0.7582007 0.2929928 0.1082385 0.03846193 0.2581041 0.5930637 0.1071152 0.548 0.908 0.988 0.996 0.12 0.308 ...
+
+I think it still doesn’t look great… KS test shows significant
+deviation, dispersion test shows significant deviation, and there is a
+funnel shape. Maybe the negative binomial distribution can help with
+this as it helped with the salamanders? But this is all beyond me… give
+it a shot!
+
+``` r
+fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = nbinom1(link = "log"),
+                    data = tarsalis)
+
+simulateResiduals(fit_nbinom, plot = T)
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/nbinom-log-link-date-1.png)<!-- -->
+
+    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+    ##  
+    ## Scaled residual values: 0.4995076 0.5699429 0.8336987 0.4114965 0.5768046 0.5982225 0.4214291 0.6996921 0.3359942 0.145494 0.0840898 0.2919513 0.645457 0.094109 0.5596682 0.96 0.98 0.996 0.148 0.264 ...
+
+I think it looks the same!!! So, stick with the poisson log-link? But I
+do think that random effects (1 \| site_name/collection_date) looked
+better than disease_week. Not sure if that is good justification to use
+collection_date though.
+
+## Marginal effects
+
+Sticking with model with poisson(link=“log”), using random effects (1 \|
+site_name/collection_date) `fit_pois_date`
+
+glmmTMB(count ~ season\*urbanization + trap_type + (1 \|
+site_name/collection_date), family = nbinom1(link = “log”), data =
+tarsalis)
+
+``` r
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+```
+
+    ## NOTE: Results may be misleading due to involvement in interactions
+
+``` r
+em_season
+```
+
+    ## $emmeans
+    ##  season  rate    SE  df asymp.LCL asymp.UCL
+    ##  early   2.72 0.411 Inf      2.02      3.65
+    ##  mid    32.49 3.810 Inf     25.81     40.89
+    ##  late   28.90 3.400 Inf     22.95     36.40
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ##  contrast      ratio     SE  df null z.ratio p.value
+    ##  early / mid  0.0836 0.0113 Inf    1 -18.418  <.0001
+    ##  early / late 0.0940 0.0128 Inf    1 -17.356  <.0001
+    ##  mid / late   1.1242 0.1130 Inf    1   1.163  0.4757
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl = cld(em_season, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-1.png)<!-- -->
+
+``` r
+# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ season | urbanization, type = "response")
+em_spp2
+```
+
+    ## $emmeans
+    ## urbanization = rural:
+    ##  season   rate     SE  df asymp.LCL asymp.UCL
+    ##  early    4.02  0.730 Inf     2.814      5.74
+    ##  mid    112.83 17.700 Inf    82.939    153.48
+    ##  late   100.98 16.100 Inf    73.875    138.02
+    ## 
+    ## urbanization = peri:
+    ##  season   rate     SE  df asymp.LCL asymp.UCL
+    ##  early    4.06  0.916 Inf     2.614      6.32
+    ##  mid     58.27 11.200 Inf    40.024     84.85
+    ##  late    47.56  9.250 Inf    32.490     69.62
+    ## 
+    ## urbanization = urban:
+    ##  season   rate     SE  df asymp.LCL asymp.UCL
+    ##  early    1.23  0.382 Inf     0.667      2.26
+    ##  mid      5.22  1.030 Inf     3.537      7.69
+    ##  late     5.03  1.000 Inf     3.398      7.43
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ## urbanization = rural:
+    ##  contrast      ratio      SE  df null z.ratio p.value
+    ##  early / mid  0.0356 0.00562 Inf    1 -21.122  <.0001
+    ##  early / late 0.0398 0.00638 Inf    1 -20.110  <.0001
+    ##  mid / late   1.1173 0.14700 Inf    1   0.842  0.6770
+    ## 
+    ## urbanization = peri:
+    ##  contrast      ratio      SE  df null z.ratio p.value
+    ##  early / mid  0.0698 0.01410 Inf    1 -13.144  <.0001
+    ##  early / late 0.0855 0.01750 Inf    1 -11.980  <.0001
+    ##  mid / late   1.2253 0.20600 Inf    1   1.210  0.4473
+    ## 
+    ## urbanization = urban:
+    ##  contrast      ratio      SE  df null z.ratio p.value
+    ##  early / mid  0.2353 0.07340 Inf    1  -4.638  <.0001
+    ##  early / late 0.2441 0.07690 Inf    1  -4.478  <.0001
+    ##  mid / late   1.0378 0.22200 Inf    1   0.173  0.9836
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = season, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ urbanization, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Seasonal abundance of Culex tarsalis across urbanization classes",
+        x = "Season",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-2.png)<!-- -->
+
+# Culex pipiens
+
+``` r
+## pipiens datasets from SLCMAD:
+pipiens <- read.csv("../data/pipiens_2025.csv")
+
+head(pipiens, 5)
+```
+
+    ##   site_code     site_name longitude latitude trap_type collection_date
+    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-05-30
+    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-05
+    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-12
+    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-20
+    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-26
+    ##   disease_week       species count season urban_cat
+    ## 1           22 Culex pipiens     3  early    urban 
+    ## 2           23 Culex pipiens     9    mid    urban 
+    ## 3           24 Culex pipiens    10    mid    urban 
+    ## 4           25 Culex pipiens     5    mid    urban 
+    ## 5           26 Culex pipiens    30    mid    urban
+
+``` r
+table(pipiens$season, pipiens$urban_cat)
+```
+
+    ##        
+    ##         peri rural urban 
+    ##   early   68    75     50
+    ##   late   148   110    290
+    ##   mid    185   172    296
+
+``` r
+library(dplyr)
+
+pipiens <- pipiens %>%
+  mutate(
+    urban_cat = trimws(tolower(urban_cat)),
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban"),
+      labels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late"),
+      labels = c("early", "mid", "late")
+    )
+  )
+
+head(pipiens, 5)
+```
+
+    ##   site_code     site_name longitude latitude trap_type collection_date
+    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-05-30
+    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-05
+    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-12
+    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-20
+    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-26
+    ##   disease_week       species count season urban_cat urbanization
+    ## 1           22 Culex pipiens     3  early     urban        urban
+    ## 2           23 Culex pipiens     9    mid     urban        urban
+    ## 3           24 Culex pipiens    10    mid     urban        urban
+    ## 4           25 Culex pipiens     5    mid     urban        urban
+    ## 5           26 Culex pipiens    30    mid     urban        urban
+
+# GLMM by season and urbanization, each mosquito species separately
+
+Start by binning into discrete seasons: early, mid, late
+
+``` r
+table(pipiens$season, pipiens$disease_week)
+```
+
+    ##        
+    ##         15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
+    ##   early 18 15 18 16 20  9 32 65  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+    ##   mid    0  0  0  0  0  0  0  0 56 76 53 86 71 79 77 69 86  0  0  0  0  0  0  0
+    ##   late   0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 58 71 86 46 56 66 69
+    ##        
+    ##         39 40
+    ##   early  0  0
+    ##   mid    0  0
+    ##   late  64 32
+
+``` r
+table(pipiens$season, pipiens$urbanization)
+```
+
+    ##        
+    ##         rural peri urban
+    ##   early    75   68    50
+    ##   mid     172  185   296
+    ##   late    110  148   290
+
+First, look at the response distribution
+
+``` r
+# sub in pipiens dataset here instead of salamander 
+hist(pipiens$count) 
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-response-1.png)<!-- -->
+
+``` r
+hist(log(pipiens$count))
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-response-2.png)<!-- -->
+
+## Random effects (1 \| site_name/disease_week)
+
+Fit the model with poisson(link=“log”), using random effects (1 \|
+site_name/disease_week)
+
+``` r
+# pipiens count data, starting with poisson model:
+fit_pois <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/disease_week),
+                    family = poisson(link = "log"),
+                    data = pipiens)
+summary(fit_pois)
+```
+
+    ##  Family: poisson  ( log )
+    ## Formula:          
+    ## count ~ season * urbanization + trap_type + (1 | site_name/disease_week)
+    ## Data: pipiens
+    ## 
+    ##       AIC       BIC    logLik -2*log(L)  df.resid 
+    ##   42531.3   42594.1  -21253.7   42507.3      1371 
+    ## 
+    ## Random effects:
+    ## 
+    ## Conditional model:
+    ##  Groups                 Name        Variance Std.Dev.
+    ##  disease_week:site_name (Intercept) 1.3219   1.1498  
+    ##  site_name              (Intercept) 0.3634   0.6028  
+    ## Number of obs: 1383, groups:  disease_week:site_name, 1012; site_name, 59
+    ## 
+    ## Conditional model:
+    ##                              Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)                   1.31517    0.20702    6.35 2.12e-10 ***
+    ## seasonmid                     2.03037    0.18886   10.75  < 2e-16 ***
+    ## seasonlate                    2.66443    0.20271   13.14  < 2e-16 ***
+    ## urbanizationperi             -0.25120    0.31809   -0.79 0.429693    
+    ## urbanizationurban            -0.04281    0.31993   -0.13 0.893556    
+    ## trap_typeGRVD                -0.93579    0.02784  -33.62  < 2e-16 ***
+    ## seasonmid:urbanizationperi    0.97603    0.27932    3.49 0.000475 ***
+    ## seasonlate:urbanizationperi   0.06875    0.29001    0.24 0.812618    
+    ## seasonmid:urbanizationurban   0.12010    0.29522    0.41 0.684138    
+    ## seasonlate:urbanizationurban -1.01629    0.30437   -3.34 0.000841 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Look at the residuals:
+
+``` r
+simulateResiduals(fit_pois, plot = T)
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-resids-poisson-log-link-week-1.png)<!-- -->
+
+    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+    ##  
+    ## Scaled residual values: 0.6757619 0.4121808 0.3646673 0.2641053 0.7477844 0.916 0.6644511 0.8907488 0.88 0.8148967 0.7537521 0.7027494 0.8241093 0.8490002 0.4828236 0.837688 0.8487242 0.6957086 0.8333555 0.5124638 ...
+
+## Random effects (1 \| site_name/collection_date)
+
+Fit the model with poisson(link=“log”), using random effects (1 \|
+site_name/collection_date)
+
+``` r
+# pipiens count data, starting with poisson model:
+fit_pois_date <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = poisson(link = "log"),
+                    data = pipiens)
+summary(fit_pois_date)
+```
+
+    ##  Family: poisson  ( log )
+    ## Formula:          
+    ## count ~ season * urbanization + trap_type + (1 | site_name/collection_date)
+    ## Data: pipiens
+    ## 
+    ##       AIC       BIC    logLik -2*log(L)  df.resid 
+    ##   13899.0   13961.8   -6937.5   13875.0      1371 
+    ## 
+    ## Random effects:
+    ## 
+    ## Conditional model:
+    ##  Groups                    Name        Variance Std.Dev.
+    ##  collection_date:site_name (Intercept) 1.6098   1.2688  
+    ##  site_name                 (Intercept) 0.3792   0.6158  
+    ## Number of obs: 1383, groups:  collection_date:site_name, 1227; site_name, 59
+    ## 
+    ## Conditional model:
+    ##                              Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)                   1.36506    0.21459    6.36    2e-10 ***
+    ## seasonmid                     1.92951    0.19451    9.92  < 2e-16 ***
+    ## seasonlate                    2.56389    0.20928   12.25  < 2e-16 ***
+    ## urbanizationperi             -0.26938    0.32480   -0.83  0.40689    
+    ## urbanizationurban            -0.10948    0.33440   -0.33  0.74338    
+    ## trap_typeGRVD                -0.93656    0.02785  -33.63  < 2e-16 ***
+    ## seasonmid:urbanizationperi    0.81593    0.27703    2.95  0.00323 ** 
+    ## seasonlate:urbanizationperi   0.08115    0.29074    0.28  0.78015    
+    ## seasonmid:urbanizationurban   0.21921    0.30893    0.71  0.47797    
+    ## seasonlate:urbanizationurban -0.90745    0.31870   -2.85  0.00441 ** 
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+# Look at the residuals
+simulateResiduals(fit_pois_date, plot = T)
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-poisson-log-link-date-1.png)<!-- -->
+
+    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+    ##  
+    ## Scaled residual values: 0.7044489 0.4027836 0.4321746 0.2432131 0.74 0.912 0.681308 0.84 0.804 0.7668149 0.7360402 0.8388474 0.8279752 0.8286905 0.5875638 0.7939729 0.7991941 0.6996685 0.7749739 0.415216 ...
+
+I think it still doesn’t look great… KS test shows significant
+deviation, dispersion test shows significant deviation, and there is a
+funnel shape. Maybe the negative binomial distribution can help with
+this as it helped with the salamanders? But this is all beyond me… give
+it a shot!
+
+``` r
+fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = nbinom1(link = "log"),
+                    data = pipiens)
+
+simulateResiduals(fit_nbinom, plot = T)
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-nbinom-log-link-date-1.png)<!-- -->
+
+    ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
+    ##  
+    ## Scaled residual values: 0.6746027 0.4044072 0.4756347 0.298882 0.7515702 0.92 0.7259046 0.8683943 0.8560478 0.782299 0.7125544 0.831516 0.8404351 0.8285245 0.5222331 0.84 0.8590048 0.6805351 0.7645818 0.5083352 ...
+
+I think it looks the same!!! So, stick with the poisson log-link? But I
+do think that random effects (1 \| site_name/collection_date) looked
+better than disease_week. Not sure if that is good justification to use
+collection_date though.
+
+## Marginal effects
+
+Sticking with model with poisson(link=“log”), using random effects (1 \|
+site_name/collection_date) `fit_pois_date`
+
+glmmTMB(count ~ season\*urbanization + trap_type + (1 \|
+site_name/collection_date), family = nbinom1(link = “log”), data =
+pipiens)
+
+``` r
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+```
+
+    ## NOTE: Results may be misleading due to involvement in interactions
+
+``` r
+em_season
+```
+
+    ## $emmeans
+    ##  season  rate    SE  df asymp.LCL asymp.UCL
+    ##  early   2.16 0.299 Inf      1.65      2.83
+    ##  mid    21.01 2.120 Inf     17.25     25.60
+    ##  late   21.31 2.230 Inf     17.35     26.16
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ##  contrast     ratio     SE  df null z.ratio p.value
+    ##  early / mid  0.103 0.0126 Inf    1 -18.608  <.0001
+    ##  early / late 0.101 0.0128 Inf    1 -18.189  <.0001
+    ##  mid / late   0.986 0.0823 Inf    1  -0.166  0.9848
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl = cld(em_season, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-1.png)<!-- -->
+
+``` r
+# Next, let's see how the effects vary in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ season | urbanization, type = "response")
+em_spp2
+```
+
+    ## $emmeans
+    ## urbanization = rural:
+    ##  season  rate    SE  df asymp.LCL asymp.UCL
+    ##  early   2.45 0.527 Inf      1.61      3.74
+    ##  mid    16.88 2.870 Inf     12.11     23.54
+    ##  late   31.84 5.870 Inf     22.18     45.71
+    ## 
+    ## urbanization = peri:
+    ##  season  rate    SE  df asymp.LCL asymp.UCL
+    ##  early   1.87 0.458 Inf      1.16      3.02
+    ##  mid    29.16 5.780 Inf     19.78     42.99
+    ##  late   26.38 5.350 Inf     17.73     39.25
+    ## 
+    ## urbanization = urban:
+    ##  season  rate    SE  df asymp.LCL asymp.UCL
+    ##  early   2.20 0.563 Inf      1.33      3.63
+    ##  mid    18.84 2.860 Inf     14.00     25.36
+    ##  late   11.52 1.750 Inf      8.54     15.52
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ## urbanization = rural:
+    ##  contrast      ratio     SE  df null z.ratio p.value
+    ##  early / mid  0.1452 0.0282 Inf    1  -9.920  <.0001
+    ##  early / late 0.0770 0.0161 Inf    1 -12.251  <.0001
+    ##  mid / late   0.5303 0.0859 Inf    1  -3.914  0.0003
+    ## 
+    ## urbanization = peri:
+    ##  contrast      ratio     SE  df null z.ratio p.value
+    ##  early / mid  0.0642 0.0127 Inf    1 -13.912  <.0001
+    ##  early / late 0.0710 0.0143 Inf    1 -13.100  <.0001
+    ##  mid / late   1.1056 0.1600 Inf    1   0.696  0.7661
+    ## 
+    ## urbanization = urban:
+    ##  contrast      ratio     SE  df null z.ratio p.value
+    ##  early / mid  0.1166 0.0280 Inf    1  -8.950  <.0001
+    ##  early / late 0.1908 0.0459 Inf    1  -6.889  <.0001
+    ##  mid / late   1.6360 0.2050 Inf    1   3.936  0.0002
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = season, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ urbanization, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Seasonal abundance of Culex pipiens across urbanization classes",
+        x = "Season",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-2.png)<!-- -->

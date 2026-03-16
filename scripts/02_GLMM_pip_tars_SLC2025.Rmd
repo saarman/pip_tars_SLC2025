@@ -30,124 +30,10 @@ library(glmmTMB)   # for model fitting
 library(DHARMa)    # for residual plots
 library(emmeans)   # for estimating marginal effects
 library(multcomp)  # for statistical comparisons on fitted models
-```
-
-## Load data
-  
-```{r tarsalis}
-## tarsalis datasets from SLCMAD:
-tarsalis <- read.csv("../data/tarsalis_2025.csv")
-
-head(tarsalis, 5)
-
-## pipiens datasets from SLCMAD:
-pipiens <- read.csv("../data/pipiens_2025.csv")
-head(pipiens, 5)
+library(dplyr)     # for mutating dataframe to change labels in dataset
 
 ```
 
-# GLMM by season and urbanization, each mosquito species separately
-
-Start by binning into discrete seasons: early, mid, late
-
-```{r seasons-bins}
-table(tarsalis$season, tarsalis$disease_week)
-```
-  
-First, look at the response distribution
-```{r response}
-# sub in tarsalis dataset here instead of salamander 
-hist(tarsalis$count) 
-hist(log(tarsalis$count))
-
-```
-
-## Random effects (1 | site_name/disease_week)
-
-Fit the model with poisson(link="log"), using random effects (1 | site_name/disease_week)
-
-```{r poisson-log-link-week}
-# tarsalis count data, starting with poisson model:
-fit_pois <- glmmTMB(count ~ season*urban_cat + trap_type + (1 | site_name/disease_week),
-                    family = poisson(link = "log"),
-                    data = tarsalis)
-summary(fit_pois)
-```
-
-Look at the residuals:
-```{r resids-poisson-log-link-week}
-simulateResiduals(fit_pois, plot = T)
-```
-## Random effects (1 | site_name/collection_date)
-
-Fit the model with poisson(link="log"), using random effects (1 | site_name/collection_date)
-
-```{r poisson-log-link-date}
-# tarsalis count data, starting with poisson model:
-fit_pois_date <- glmmTMB(count ~ season*urban_cat + trap_type + (1 | site_name/collection_date),
-                    family = poisson(link = "log"),
-                    data = tarsalis)
-summary(fit_pois_date)
-
-# Look at the residuals
-simulateResiduals(fit_pois_date, plot = T)
-```
-
-I think it still doesn't look great... KS test shows significant deviation, dispersion test shows significant deviation, and there is a funnel shape. Maybe the negative binomial distribution can help with this as it helped with the salamanders? But this is all beyond me... give it a shot!
-
-```{r nbinom-log-link-date}
-
-fit_nbinom <- glmmTMB(count ~ season*urban_cat + trap_type + (1 | site_name/collection_date),
-                    family = nbinom1(link = "log"),
-                    data = tarsalis)
-
-simulateResiduals(fit_nbinom, plot = T)
-```
-  
-I think it looks the same!!! So, stick with the poisson log-link? But I do think that random effects (1 | site_name/collection_date) looked better than disease_week. Not sure if that is good justification to use collection_date though.
-
-## Marginal effects
-
-Sticking with model with poisson(link="log"), using random effects (1 | site_name/collection_date) `fit_pois_date`
-
-glmmTMB(count ~ season*urban_cat + trap_type + (1 | site_name/collection_date),
-                    family = nbinom1(link = "log"),
-                    data = tarsalis)
-
-```{r}
-# First, just look at the effect of season, doing a 1-way pairwise comparison
-em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
-em_season
-
-cl = cld(em_season, Letters = letters)
-
-ggplot(data = cl, aes(x = season, y = rate)) +
-    geom_point(size=2.5, color="black") +
-    geom_errorbar(aes(x=season, ymin = asymp.LCL,
-                      ymax = asymp.UCL),
-                  width = 0.2, size=1, color="black") +
-    geom_text(aes(label = gsub(" ", "", .group)),
-              position = position_nudge(x = 0.3)) +
-    ggeasy::easy_remove_axes("both", "title")
-
-# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
-em_spp2 = emmeans(fit_pois_date, pairwise ~ season | urban_cat, type = "response")
-em_spp2
-
-cl2 <- cld(em_spp2$emmeans, Letters = letters)
-
-ggplot(data = cl2, aes(x = season, y = rate)) +
-    geom_point(size=2.5, color="black") +
-    geom_errorbar(aes(x=season, ymin = asymp.LCL,
-                      ymax = asymp.UCL),
-                  width = 0.2, size=1, color="black") +
-    facet_wrap(~ urban_cat, #nrow = 2,
-               labeller = label_both) +
-    geom_text(aes(label = gsub(" ", "", .group)),
-              position = position_nudge(x = 0.4)) +
-    ggeasy::easy_remove_axes("y", "title")
-
-```
 # Salamander example
 
 Just to understand a bit better what it looks like when residuals don't "look good":
@@ -173,9 +59,7 @@ summary(fit_pois)
 simulateResiduals(fit_pois, plot = T)
 # this doesn't look great. It seems like there is a trend in the residuals with
 # greater error at higher values. Maybe the negative binomial distribution can help with this
-```
 
-```{r salamanders-nbinom}
 #continue salamander dataset example
 # this doesn't look great. It seems like there is a trend in the residuals with
 # greater error at higher values. Maybe the negative binomial distribution can help with this
@@ -186,9 +70,7 @@ fit_nbinom <- glmmTMB(count ~ spp*mined + (1 | site),
 simulateResiduals(fit_nbinom, plot = T)
 
 # this looks much better. Now we can look at the marginal effects:
-```
 
-```{r salamanders-effect}
 # First, just look at the effect of species, doing a 1-way pairwise comparison
 em_spp = emmeans(fit_nbinom, pairwise ~ spp, type = "response")
 em_spp
@@ -222,3 +104,276 @@ ggplot(data = cl2, aes(x = spp, y = response)) +
             position = position_nudge(x = 0.4)) +
   ggeasy::easy_remove_axes("y", "title")
 ```
+
+  
+# Culex tarsalis
+
+ 
+  
+```{r tarsalis}
+## tarsalis datasets from SLCMAD:
+tarsalis <- read.csv("../data/tarsalis_2025.csv")
+
+tarsalis <- tarsalis %>%
+  mutate(
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban"),
+      labels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late"),
+      labels = c("early", "mid", "late")
+    )
+  )
+
+head(tarsalis, 5)
+```
+
+
+# GLMM by season and urbanization, each mosquito species separately
+
+Start by binning into discrete seasons: early, mid, late
+
+```{r seasons-bins}
+table(tarsalis$season, tarsalis$disease_week)
+```
+  
+First, look at the response distribution
+```{r response}
+# sub in tarsalis dataset here instead of salamander 
+hist(tarsalis$count) 
+hist(log(tarsalis$count))
+
+```
+
+## Random effects (1 | site_name/disease_week)
+
+Fit the model with poisson(link="log"), using random effects (1 | site_name/disease_week)
+
+```{r poisson-log-link-week}
+# tarsalis count data, starting with poisson model:
+fit_pois <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/disease_week),
+                    family = poisson(link = "log"),
+                    data = tarsalis)
+summary(fit_pois)
+```
+
+Look at the residuals:
+```{r resids-poisson-log-link-week}
+simulateResiduals(fit_pois, plot = T)
+```
+## Random effects (1 | site_name/collection_date)
+
+Fit the model with poisson(link="log"), using random effects (1 | site_name/collection_date)
+
+```{r poisson-log-link-date}
+# tarsalis count data, starting with poisson model:
+fit_pois_date <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = poisson(link = "log"),
+                    data = tarsalis)
+summary(fit_pois_date)
+
+# Look at the residuals
+simulateResiduals(fit_pois_date, plot = T)
+```
+
+I think it still doesn't look great... KS test shows significant deviation, dispersion test shows significant deviation, and there is a funnel shape. Maybe the negative binomial distribution can help with this as it helped with the salamanders? But this is all beyond me... give it a shot!
+
+```{r nbinom-log-link-date}
+
+fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = nbinom1(link = "log"),
+                    data = tarsalis)
+
+simulateResiduals(fit_nbinom, plot = T)
+```
+  
+I think it looks the same!!! So, stick with the poisson log-link? But I do think that random effects (1 | site_name/collection_date) looked better than disease_week. Not sure if that is good justification to use collection_date though.
+
+## Marginal effects
+
+Sticking with model with poisson(link="log"), using random effects (1 | site_name/collection_date) `fit_pois_date`
+
+glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = nbinom1(link = "log"),
+                    data = tarsalis)
+
+```{r tar-marginal}
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_season
+
+cl = cld(em_season, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+
+# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ season | urbanization, type = "response")
+em_spp2
+
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = season, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ urbanization, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Seasonal abundance of Culex tarsalis across urbanization classes",
+        x = "Season",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+```
+  
+# Culex pipiens
+  
+```{r pipiens}
+## pipiens datasets from SLCMAD:
+pipiens <- read.csv("../data/pipiens_2025.csv")
+
+head(pipiens, 5)
+table(pipiens$season, pipiens$urban_cat)
+
+library(dplyr)
+
+pipiens <- pipiens %>%
+  mutate(
+    urban_cat = trimws(tolower(urban_cat)),
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban"),
+      labels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late"),
+      labels = c("early", "mid", "late")
+    )
+  )
+
+head(pipiens, 5)
+```
+
+
+# GLMM by season and urbanization, each mosquito species separately
+
+Start by binning into discrete seasons: early, mid, late
+
+```{r pip-seasons-bins}
+table(pipiens$season, pipiens$disease_week)
+
+table(pipiens$season, pipiens$urbanization)
+```
+  
+First, look at the response distribution
+```{r pip-response}
+# sub in pipiens dataset here instead of salamander 
+hist(pipiens$count) 
+hist(log(pipiens$count))
+
+```
+
+## Random effects (1 | site_name/disease_week)
+
+Fit the model with poisson(link="log"), using random effects (1 | site_name/disease_week)
+
+```{r pip-poisson-log-link-week}
+# pipiens count data, starting with poisson model:
+fit_pois <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/disease_week),
+                    family = poisson(link = "log"),
+                    data = pipiens)
+summary(fit_pois)
+```
+
+Look at the residuals:
+```{r pip-resids-poisson-log-link-week}
+simulateResiduals(fit_pois, plot = T)
+```
+## Random effects (1 | site_name/collection_date)
+
+Fit the model with poisson(link="log"), using random effects (1 | site_name/collection_date)
+
+```{r pip-poisson-log-link-date}
+# pipiens count data, starting with poisson model:
+fit_pois_date <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = poisson(link = "log"),
+                    data = pipiens)
+summary(fit_pois_date)
+
+# Look at the residuals
+simulateResiduals(fit_pois_date, plot = T)
+```
+
+I think it still doesn't look great... KS test shows significant deviation, dispersion test shows significant deviation, and there is a funnel shape. Maybe the negative binomial distribution can help with this as it helped with the salamanders? But this is all beyond me... give it a shot!
+
+```{r pip-nbinom-log-link-date}
+fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = nbinom1(link = "log"),
+                    data = pipiens)
+
+simulateResiduals(fit_nbinom, plot = T)
+```
+  
+I think it looks the same!!! So, stick with the poisson log-link? But I do think that random effects (1 | site_name/collection_date) looked better than disease_week. Not sure if that is good justification to use collection_date though.
+
+## Marginal effects
+
+Sticking with model with poisson(link="log"), using random effects (1 | site_name/collection_date) `fit_pois_date`
+
+glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
+                    family = nbinom1(link = "log"),
+                    data = pipiens)
+
+```{r pip-marginal}
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_season
+
+cl = cld(em_season, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+
+# Next, let's see how the effects vary in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ season | urbanization, type = "response")
+em_spp2
+
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = season, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ urbanization, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Seasonal abundance of Culex pipiens across urbanization classes",
+        x = "Season",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+```
+
