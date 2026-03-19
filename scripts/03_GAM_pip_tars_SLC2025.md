@@ -18,9 +18,14 @@ Norah Saarman
     - [Plot marginal means by species and season within each trap
       type](#plot-marginal-means-by-species-and-season-within-each-trap-type)
 - [GAM-style smooth over weeks](#gam-style-smooth-over-weeks)
-  - [GAM with site_name ONLY:](#gam-with-site_name-only)
-  - [GAM with site_date as a combined
-    group:](#gam-with-site_date-as-a-combined-group)
+  - [GAM with site_name:](#gam-with-site_name)
+    - [Plot results with site_name
+      ONLY:](#plot-results-with-site_name-only)
+    - [Temporal/Seasonal effects:](#temporalseasonal-effects)
+    - [Effect size (forest) plot](#effect-size-forest-plot)
+  - [TODO in FUTURE… GAM with site_date as a combined group…code shown
+    below but not
+    run.](#todo-in-future-gam-with-site_date-as-a-combined-groupcode-shown-below-but-not-run)
 
 **Research Topic:** testing whether habitat and seasonal partitioning
 between Culex pipiens s.l. and Culex tarsalis shapes West Nile Virus
@@ -395,6 +400,14 @@ ggplot(em_df, aes(x = season, y = rate, color = species, group = species)) +
   geom_point(size = 2.5) +
   geom_line(linewidth = 1) +
   geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
   facet_wrap(~ trap_type) +
   labs(
     title = "Seasonal abundance by species and trap type",
@@ -534,7 +547,10 @@ change the result?
 Let’s start with a simple comparison of including ONLY site_name, or
 including both site_name and site_date:
 
-### GAM with site_name ONLY:
+## GAM with site_name:
+
+**NOTE:** I’m worried that we might need to use the \* trap_type to
+fully capture species-specific trap effects.
 
 ``` r
 # Fit GAM model with site_name only
@@ -549,7 +565,7 @@ fit_gam_site <- bam(
 )
 ```
 
-Plot results with site_name ONLY:
+### Plot results with site_name ONLY:
 
 ``` r
 # Create prediction data. 
@@ -641,6 +657,52 @@ ggplot(newdat_site_GRVD, aes(x = disease_week, y = fit, color = species, group =
 ![](03_GAM_pip_tars_SLC2025_files/figure-gfm/plot-gam-site-name-only-1.png)<!-- -->
 
 ``` r
+# Plot for GRVD without free y
+ggplot(newdat_site_GRVD, aes(x = disease_week, y = fit, color = species, group = species)) +
+  geom_line(linewidth = 1.2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
+  
+  geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
+ 
+  annotate("text",
+           x = 33,
+           y = Inf,
+           label = "1st WNV cases",
+           angle = 0,
+           vjust = 1,
+           hjust = -.07,
+           size = 3) +
+  
+  facet_wrap(~ urbanization, ncol = 1) +
+  
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  
+  labs(
+    title = "Predicted abundance (GRVD traps)",
+    x = "Disease week",
+    y = "Predicted abundance",
+    color = "Species",
+    fill = "Species"
+  ) +
+  
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/plot-gam-site-name-only-2.png)<!-- -->
+
+``` r
 # Plot for CO2
 ggplot(newdat_site_CO2, aes(x = disease_week, y = fit, color = species, group = species)) +
   geom_line(linewidth = 1.2) +
@@ -684,9 +746,357 @@ ggplot(newdat_site_CO2, aes(x = disease_week, y = fit, color = species, group = 
   )
 ```
 
-![](03_GAM_pip_tars_SLC2025_files/figure-gfm/plot-gam-site-name-only-2.png)<!-- -->
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/plot-gam-site-name-only-3.png)<!-- -->
 
-### GAM with site_date as a combined group:
+``` r
+# Plot for CO2 without free y
+ggplot(newdat_site_CO2, aes(x = disease_week, y = fit, color = species, group = species)) +
+  geom_line(linewidth = 1.2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
+  
+  geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
+ 
+  annotate("text",
+           x = 33,
+           y = Inf,
+           label = "1st WNV cases",
+           angle = 0,
+           vjust = 1,
+           hjust = -.07,
+           size = 3) +
+  
+  facet_wrap(~ urbanization, ncol = 1) +
+  
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  
+  labs(
+    title = "Predicted abundance (CO2 traps)",
+    x = "Disease week",
+    y = "Predicted abundance",
+    color = "Species",
+    fill = "Species"
+  ) +
+  
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/plot-gam-site-name-only-4.png)<!-- -->
+\### Summary of GAM Results
+
+``` r
+summary(fit_gam_site)
+```
+
+    ## 
+    ## Family: Negative Binomial(0.899) 
+    ## Link function: log 
+    ## 
+    ## Formula:
+    ## count ~ species * urbanization + s(disease_week, by = species) + 
+    ##     trap_type + s(site_name, bs = "re")
+    ## 
+    ## Parametric coefficients:
+    ##                                         Estimate Std. Error t value Pr(>|t|)
+    ## (Intercept)                               3.8747     0.1292  29.993  < 2e-16
+    ## speciesCulex tarsalis                     2.2394     0.0685  32.693  < 2e-16
+    ## urbanizationperi                          0.3503     0.2029   1.727   0.0843
+    ## urbanizationurban                        -0.7838     0.1872  -4.187 2.91e-05
+    ## trap_typeGRVD                            -0.8541     0.1022  -8.354  < 2e-16
+    ## speciesCulex tarsalis:urbanizationperi   -0.8769     0.0987  -8.885  < 2e-16
+    ## speciesCulex tarsalis:urbanizationurban  -2.0735     0.1070 -19.376  < 2e-16
+    ##                                            
+    ## (Intercept)                             ***
+    ## speciesCulex tarsalis                   ***
+    ## urbanizationperi                        .  
+    ## urbanizationurban                       ***
+    ## trap_typeGRVD                           ***
+    ## speciesCulex tarsalis:urbanizationperi  ***
+    ## speciesCulex tarsalis:urbanizationurban ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                          edf Ref.df      F p-value    
+    ## s(disease_week):speciesCulex pipiens   7.850  8.633 135.65  <2e-16 ***
+    ## s(disease_week):speciesCulex tarsalis  8.707  8.974 338.04  <2e-16 ***
+    ## s(site_name)                          50.875 56.000  13.69  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.543   Deviance explained = 69.8%
+    ## fREML = 4899.7  Scale est. = 1         n = 3116
+
+``` r
+# effect size figure
+# prediction grid
+newdata <- expand.grid(
+  species = c("Culex pipiens", "Culex tarsalis"),
+  urbanization = c("rural", "peri", "urban"),
+  trap_type = "GRVD",
+  disease_week = median(combined$disease_week, na.rm = TRUE),
+  site_name = levels(combined$site_name)[1]   # any valid level is fine
+)
+
+pred <- predict(
+  fit_gam_site,
+  newdata = newdata,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_name)"
+)
+
+newdata <- newdata %>%
+  mutate(
+    fit   = exp(pred$fit),
+    lower = exp(pred$fit - 1.96 * pred$se.fit),
+    upper = exp(pred$fit + 1.96 * pred$se.fit),
+    urbanization = factor(urbanization, levels = c("rural", "peri", "urban"))
+  )
+
+ggplot(newdata, aes(x = urbanization, y = fit, color = species, group = species)) +
+  geom_point(position = position_dodge(width = 0.3), size = 3) +
+  geom_line(position = position_dodge(width = 0.3), linewidth = 1) +
+  geom_errorbar(
+    aes(ymin = lower, ymax = upper),
+    position = position_dodge(width = 0.3),
+    width = 0.2
+  ) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#00E5FF",
+    "Culex tarsalis" = "#FF00AA"
+  )) +
+  labs(
+    x = "Urbanization",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_minimal()
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/summary-fit_gam_site-1.png)<!-- -->
+
+``` r
+# trap type effect:
+library(dplyr)
+library(ggplot2)
+
+newdata_trap <- expand.grid(
+  species = c("Culex pipiens", "Culex tarsalis"),
+  urbanization = c("rural", "peri", "urban"),
+  trap_type = c("CO2", "GRVD"),
+  disease_week = median(combined$disease_week, na.rm = TRUE),
+  site_name = levels(combined$site_name)[1]
+)
+
+pred_trap <- predict(
+  fit_gam_site,
+  newdata = newdata_trap,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_name)"
+)
+
+newdata_trap <- newdata_trap %>%
+  mutate(
+    fit   = exp(pred_trap$fit),
+    lower = exp(pred_trap$fit - 1.96 * pred_trap$se.fit),
+    upper = exp(pred_trap$fit + 1.96 * pred_trap$se.fit),
+    urbanization = factor(urbanization, levels = c("rural", "peri", "urban"))
+  )
+
+ggplot(newdata_trap, aes(x = trap_type, y = fit, color = species, group = species)) +
+  geom_point(position = position_dodge(width = 0.3), size = 3) +
+  geom_line(position = position_dodge(width = 0.3), linewidth = 1) +
+  geom_errorbar(
+    aes(ymin = lower, ymax = upper),
+    position = position_dodge(width = 0.3),
+    width = 0.2
+  ) +
+  facet_wrap(~ urbanization) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#00E5FF",
+    "Culex tarsalis" = "#FF00AA"
+  )) +
+  labs(
+    x = "Trap type",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_minimal()
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/summary-fit_gam_site-2.png)<!-- -->
+
+**A. Species effect**  
+Culex tarsalis \>\> Culex pipiens  
+Very strong positive effect (Estimate = 2.24, p \< 2e-16)  
+**B. Urbanization (urban vs rural)**  
+Negative effect (Estimate = -0.78, p = 2.9e-05)  
+→ Fewer mosquitoes in urban vs rural
+
+**C. Trap type (GRVD)**  
+Strong negative effect (p \< 2e-16)  
+→ trap bias matters
+
+**D. Species × urbanization interaction**  
+Both peri and urban interactions highly significant… species respond
+differently to urbanization EVEN AFTER ACCOUNTING FOR TRAP TYPE  
+→ species:tarsalis × urban = -2.07 → huge drop  
+→ species:tarsalis × peri = -0.88 → moderate drop
+
+Key takeaways:  
+- The decline of Culex tarsalis in urban environments remained strong
+after accounting for trap type, seasonal variation, and site-level
+differences.  
+- The decline of Cx. tarsalis in urban environments is robust to
+differences in trap type, seasonal dynamics, and site-level variation,
+indicating that this pattern is unlikely to be driven by sampling bias.
+
+### Temporal/Seasonal effects:
+
+``` r
+summary(fit_gam_site)$s.table
+```
+
+    ##                                            edf    Ref.df        F p-value
+    ## s(disease_week):speciesCulex pipiens   7.84957  8.632885 135.6450       0
+    ## s(disease_week):speciesCulex tarsalis  8.70692  8.974065 338.0438       0
+    ## s(site_name)                          50.87512 56.000000  13.6856       0
+
+``` r
+# plot the smooths
+plot(fit_gam_site, pages = 2, shade = TRUE)
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/smooth-1.png)<!-- -->![](03_GAM_pip_tars_SLC2025_files/figure-gfm/smooth-2.png)<!-- -->
+
+``` r
+# seasonal effects across all habitats:
+newdata_season <- expand.grid(
+  disease_week = seq(min(combined$disease_week), max(combined$disease_week), by = 1),
+  species = c("Culex pipiens", "Culex tarsalis"),
+  urbanization = "rural",
+  trap_type = "GRVD",
+  site_name = levels(combined$site_name)[1]
+)
+
+pred_season <- predict(
+  fit_gam_site,
+  newdata = newdata_season,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_name)"
+)
+
+newdata_season <- newdata_season %>%
+  mutate(
+    fit   = exp(pred_season$fit),
+    lower = exp(pred_season$fit - 1.96 * pred_season$se.fit),
+    upper = exp(pred_season$fit + 1.96 * pred_season$se.fit)
+  )
+
+ggplot(newdata_season, aes(x = disease_week, y = fit, color = species, fill = species)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#00E5FF",
+    "Culex tarsalis" = "#FF00AA"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#00E5FF",
+    "Culex tarsalis" = "#FF00AA"
+  )) +
+  labs(
+    x = "Disease week",
+    y = "Predicted abundance",
+    color = "Species",
+    fill = "Species"
+  ) +
+  theme_minimal()
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/smooth-3.png)<!-- -->
+
+**E. Both species show strong seasonality**  
+p ≈ 0 → extremely significant  
+→ abundance clearly changes over time
+
+**F. The patterns are highly non-linear**  
+pipiens edf ≈ 7.85, p ≈ 0 → very wiggly, not linear  
+tarsalis edf ≈ 8.71, p ≈ 0 → also very wiggly, not linear  
+→ this is a true seasonal curve, not just “increase then decrease”
+
+**G. Tarsalis has a stronger seasonal signal**  
+F ≈ 338 vs 136 → more pronounced seasonal dynamics
+
+**Key takeaway on temporal dynamics:**  
+In addition, both species show strong seasonal dynamics, with Cx.
+tarsalis exhibiting a sharper and more pronounced seasonal pattern with
+two peaks in abundance, whereas Cx. pipiens exhibited a broader and more
+sustained seasonal pattern.
+
+### Effect size (forest) plot
+
+``` r
+library(broom)
+library(dplyr)
+
+# extract coefficients
+coef_df <- tidy(fit_gam_site, parametric = TRUE) %>%
+  filter(term != "(Intercept)")
+
+# convert to interpretable scale
+coef_df <- coef_df %>%
+  mutate(
+    effect = exp(estimate),
+    lower = exp(estimate - 1.96 * std.error),
+    upper = exp(estimate + 1.96 * std.error)
+  )
+
+# clean labels
+coef_df <- coef_df %>%
+  mutate(
+    term_clean = recode(term,
+      "speciesCulex tarsalis" = "Cx. tarsalis relative to Cx. pipiens",
+      "urbanizationperi" = "Peri relative to Rural",
+      "urbanizationurban" = "Urban relative to Rural",
+      "trap_typeGRVD" = "GRVD vs CO2",
+      "speciesCulex tarsalis:urbanizationperi" = "Cx. tarsalis × peri",
+      "speciesCulex tarsalis:urbanizationurban" = "Cx. tarsalis × urban"
+    )
+  )
+
+# plot as a figure
+library(ggplot2)
+
+ggplot(coef_df, aes(x = effect, y = reorder(term_clean, effect))) +
+  geom_point(size = 3) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_x_log10() +
+  labs(
+    x = "Multiplicative effect on abundance (log scale)",
+    y = "",
+    title = "Effect sizes from GAM model"
+  ) +
+  theme_minimal()
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/effect-forest-1.png)<!-- -->
+
+## TODO in FUTURE… GAM with site_date as a combined group…code shown below but not run.
 
 ``` r
 # Fit GAM model with site_date
