@@ -1,0 +1,49 @@
+site_code,site_name,longitude,latitude,trap_type,collection_date,disease_week,species,count,season,urban_cat
+27,Ambassador,-112.029156,40.846014,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-04-16,16,Culex tarsalis,9,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-04-16,16,Culex tarsalis,25,early,peri
+52,Audubon,-112.114005,40.826291,CO2,2025-04-16,16,Culex tarsalis,3,early,rural
+51,Avocet,-112.122441,40.794842,CO2,2025-04-16,16,Culex tarsalis,1,early,rural
+28,Bird Reclamation,-112.050242,40.802139,CO2,2025-04-16,16,Culex tarsalis,7,early,rural
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-16,16,Culex tarsalis,4,early,rural
+37,Deseret Nursery,-112.029477,40.740352,CO2,2025-04-16,16,Culex tarsalis,9,early,peri
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-16,16,Culex tarsalis,5,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-04-16,16,Culex tarsalis,3,early,rural
+32,Fair Park,-111.920029,40.772369,CO2,2025-04-16,16,Culex tarsalis,14,early,urban
+49,Frontage Corral,-112.083321,40.768911,CO2,2025-04-16,16,Culex tarsalis,1,early,peri
+33,Glendale Golf Course,-111.931808,40.727647,CO2,2025-04-16,16,Culex tarsalis,2,early,urban
+54,Goat Farm,-112.063284,40.787677,CO2,2025-04-16,16,Culex tarsalis,11,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-04-16,16,Culex tarsalis,15,early,rural
+26,Harrison,-112.031522,40.830952,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-16,16,Culex tarsalis,24,early,peri
+35,Inland Sea,-112.101481,40.816002,CO2,2025-04-16,16,Culex tarsalis,10,early,rural
+53,Jade,-112.069104,40.824112,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-16,16,Culex tarsalis,22,early,peri
+57,Lakefront,-112.023355,40.86989,CO2,2025-04-16,16,Culex tarsalis,7,early,rural
+65,Noggin,-112.059,40.81327,CO2,2025-04-16,16,Culex tarsalis,12,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-04-16,16,Culex tarsalis,1,early,rural
+59,O'Reillys,-112.038803,40.754836,CO2,2025-04-16,16,Culex tarsalis,7,early,peri
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-16,16,Culex tarsalis,2,early,rural
+61,Prison,-112.084522,40.800948,CO2,2025-04-16,16,Culex tarsalis,5,early,rural
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-16,16,Culex tarsalis,27,early,peri
+31,Rose Park Golf Course,-111.937342,40.80014,CO2,2025-04-16,16,Culex tarsalis,11,early,urban
+4,Rudy,-112.003105,40.844458,CO2,2025-04-16,16,Culex tarsalis,9,early,rural
+64,SLCMAD Facility,-111.955752,40.816544,CO2,2025-04-16,16,Culex tarsalis,4,early,peri
+50,South Saratoga,-112.109041,40.784374,CO2,2025-04-16,16,Culex tarsalis,5,early,rural
+58,Train Tracks,-112.003557,40.754243,CO2,2025-04-16,16,Culex tarsalis,13,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-04-16,16,Culex tarsalis,7,early,peri
+5,Amelia Earhart (F.S. #9),-112.02854,40.778689,CO2,2025-04-16,16,Culex pipiens,10,early,peri
+29,ATV,-111.944005,40.826462,CO2,2025-04-16,16,Culex pipiens,2,early,peri
+24,Blackhawk,-112.016928,40.806671,CO2,2025-04-16,16,Culex pipiens,2,early,rural
+9,Drechsel,-111.970167,40.841775,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+62,Elephant Island,-112.049517,40.852033,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+25,Goggin,-112.012101,40.793303,CO2,2025-04-16,16,Culex pipiens,3,early,rural
+3,Hinckley,-111.953357,40.84209,CO2,2025-04-16,16,Culex pipiens,5,early,peri
+35,Inland Sea,-112.101481,40.816002,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+60,KETO Pumps,-111.967566,40.747503,CO2,2025-04-16,16,Culex pipiens,8,early,peri
+65,Noggin,-112.059,40.81327,CO2,2025-04-16,16,Culex pipiens,2,early,rural
+56,Northpoint,-111.982075,40.845859,CO2,2025-04-16,16,Culex pipiens,2,early,rural
+23,Power Pole Road,-112.015109,40.822043,CO2,2025-04-16,16,Culex pipiens,1,early,rural
+1,RAC Soccer,-111.942333,40.815674,CO2,2025-04-16,16,Culex pipiens,2,early,peri
+58,Train Tracks,-112.003557,40.754243,CO2,2025-04-16,16,Culex pipiens,4,early,peri
+34,Wingpointe,-111.97708,40.771529,CO2,2025-04-16,16,Culex pipiens,2,early,peri

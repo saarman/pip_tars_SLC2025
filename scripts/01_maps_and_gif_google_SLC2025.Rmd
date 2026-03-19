@@ -1,0 +1,1116 @@
+---
+title: "Weekly Maps **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field season"
+author: "Norah Saarman"
+date: "`r Sys.Date()`"
+output:
+  github_document:
+    toc: true
+---
+
+# Setup
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Weekly maps of **Culex pipiens** and **Culex tarsalis** abundance across SLC for the 2025 field season, overlay onto Google satellite image.
+
+Load libraries:
+
+```{r}
+library(ggmap)
+library(ggplot2)
+library(sf)
+library(dplyr)
+library(gifski)
+#library(magick)
+```
+
+# SQRT Weekly Maps (Square-Root Scaling)
+
+Loop over all weeks with square-root scaling
+
+Notes: 
+
+Weekly file contained multiple observations per site and species (from different trap types or sampling dates), so added code to combine multiple observations from different trap types and sampling dates per week.
+
+Also applied a square-root transformation to the variable before it is mapped to point size.
+
+
+### Zoom 11
+
+```{r all-weeks-zoom11, warning=FALSE}
+
+# Weeks to plot
+weeks <- 15:40
+
+# Read the two species files once and combine them
+pipiens_2025  <- read.csv("../data/pipiens_2025.csv")
+tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
+
+all_data <- bind_rows(pipiens_2025, tarsalis_2025)
+
+# 1. Register your Google Maps API key
+register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+
+# 2. Build a bounding box
+lon_min <- -112.8
+lon_max <- -111.2
+lat_min <- 40.6
+lat_max <- 41
+
+# 3. Download the satellite map using the bounding box
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "satellite",
+  zoom = 11   #zoom in with zoom = 12
+)
+
+# 4. Find the global max across all weeks so the size scale is identical
+global_max <- all_data %>%
+  filter(disease_week %in% weeks) %>%
+  group_by(disease_week, site_code, site_name, longitude, latitude, species) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  summarise(global_max = max(count, na.rm = TRUE)) %>%
+  pull(global_max)
+
+print(paste("global max:", global_max))
+
+# 5. Loop over all weeks
+for (w in weeks) {
+
+  spatial_data_raw <- all_data %>%
+    filter(disease_week == w)
+  
+  # Combine multiple observations from different trap types and sampling dates per week
+  spatial_data <- spatial_data_raw %>%
+    group_by(site_code, site_name, longitude, latitude, species) %>%
+    summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+  # Reorder species so pipiens is plotted last (on top)
+  spatial_data$species <- factor(
+    spatial_data$species,
+    levels = c("Culex tarsalis", "Culex pipiens")
+  )
+
+  map <- ggmap(bg) +
+
+    # 1. Draw tarsalis FIRST (underneath)
+    geom_point(
+      data = subset(spatial_data, species == "Culex tarsalis"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    # 2. Draw pipiens SECOND (on top)
+    geom_point(
+      data = subset(spatial_data, species == "Culex pipiens"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    scale_color_manual(
+      values = c(
+        "Culex pipiens"  = "#00E5FF",
+        "Culex tarsalis" = "#FF00AA"
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_shape_manual(
+      values = c(
+        "Culex pipiens"  = 16,  # circle
+        "Culex tarsalis" = 16   # circle
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_alpha_manual(
+      values = c(
+        "Culex pipiens"  = 0.6,
+        "Culex tarsalis" = 0.6
+      ),
+      guide = "none",
+      drop = FALSE
+    ) +
+
+    scale_size_continuous(
+      trans = "sqrt",
+      range = c(3, 20),
+      limits = c(1, global_max),
+      breaks = c(1, 10, 50, 500, 5000),
+      name = "Count"
+    ) +
+    
+    #scale_size( # calls continuous automatically
+    #  range = c(3, 20),
+    #  limits = c(1, global_max),
+    #  breaks = c(1, 10, 50, 100, 500, 5000),
+    #  name = "Count"
+    #) +
+
+    labs(
+      title = paste("Week", w),
+      x = "Longitude",
+      y = "Latitude"
+    ) +
+
+    theme_minimal()
+
+  print(map)
+
+  file_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom11/week_",
+    w,
+    "_zoom11.png"
+  )
+  
+  # save one high res image
+  ggsave(filename = file_name, plot = map, width = 8, height = 8, dpi = 300)
+
+
+  gif_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom11/week_",
+    w,
+    "_zoom11_gif.png"
+  )
+  
+  # save one low res image for gif
+  ggsave(filename = gif_name, plot = map, width = 5, height = 5, dpi = 140)
+}
+
+```
+  
+  
+### Zoom 12
+
+```{r all-weeks-zoom12, warning=FALSE}
+
+# Weeks to plot
+weeks <- 15:40
+
+# Read the two species files once and combine them
+pipiens_2025  <- read.csv("../data/pipiens_2025.csv")
+tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
+
+all_data <- bind_rows(pipiens_2025, tarsalis_2025)
+
+# 1. Register your Google Maps API key
+register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+
+# 2. Build a bounding box
+lon_min <- -112.8
+lon_max <- -111.2
+lat_min <- 40.6
+lat_max <- 41
+
+# 3. Download the satellite map using the bounding box
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "satellite",
+  zoom = 12   #zoom out with zoom = 11
+)
+
+# 4. Find the global max across all weeks so the size scale is identical
+global_max <- all_data %>%
+  filter(disease_week %in% weeks) %>%
+  group_by(disease_week, site_code, site_name, longitude, latitude, species) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  summarise(global_max = max(count, na.rm = TRUE)) %>%
+  pull(global_max)
+
+print(paste("global max:", global_max))
+
+# 5. Loop over all weeks
+for (w in weeks) {
+
+  spatial_data_raw <- all_data %>%
+    filter(disease_week == w)
+  
+  # Combine multiple observations from different trap types and sampling dates per week
+  spatial_data <- spatial_data_raw %>%
+    group_by(site_code, site_name, longitude, latitude, species) %>%
+    summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+  # Reorder species so pipiens is plotted last (on top)
+  spatial_data$species <- factor(
+    spatial_data$species,
+    levels = c("Culex tarsalis", "Culex pipiens")
+  )
+
+  map <- ggmap(bg) +
+
+    # 1. Draw tarsalis FIRST (underneath)
+    geom_point(
+      data = subset(spatial_data, species == "Culex tarsalis"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    # 2. Draw pipiens SECOND (on top)
+    geom_point(
+      data = subset(spatial_data, species == "Culex pipiens"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    scale_color_manual(
+      values = c(
+        "Culex pipiens"  = "#00E5FF",
+        "Culex tarsalis" = "#FF00AA"
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_shape_manual(
+      values = c(
+        "Culex pipiens"  = 16,  # circle
+        "Culex tarsalis" = 16   # circle
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_alpha_manual(
+      values = c(
+        "Culex pipiens"  = 0.6,
+        "Culex tarsalis" = 0.6
+      ),
+      guide = "none",
+      drop = FALSE
+    ) +
+
+    scale_size_continuous(
+      trans = "sqrt",
+      range = c(3, 20),
+      limits = c(1, global_max),
+      breaks = c(1, 10, 50, 500, 5000),
+      name = "Count"
+    ) +
+    
+    #scale_size( # calls continuous automatically
+    #  range = c(3, 20),
+    #  limits = c(1, global_max),
+    #  breaks = c(1, 10, 50, 100, 500, 5000),
+    #  name = "Count"
+    #) +
+
+    labs(
+      title = paste("Week", w),
+      x = "Longitude",
+      y = "Latitude"
+    ) +
+
+    theme_minimal()
+
+  print(map)
+
+  file_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12/week_",
+    w,
+    "_zoom12.png"
+  )
+
+  ggsave(filename = file_name, plot = map, width = 8, height = 8, dpi = 300)
+  
+  
+  gif_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12/week_",
+    w,
+    "_zoom12_gif.png"
+  )
+  
+  # save one low res image for gif
+  ggsave(filename = gif_name, plot = map, width = 5, height = 5, dpi = 140)
+}
+```
+  
+### SQRT weekly GIFS for Zoom 11 and 12
+
+```{r create-gifs}
+library(gifski)
+
+# Create GIF for zoom 11
+gif_dir <- "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom11"
+
+gif_imgs <- list.files(
+  gif_dir,
+  pattern = "week_.*_zoom11_gif\\.png$",
+  full.names = TRUE
+)
+
+gif_weeks <- as.numeric(sub(".*week_([0-9]+).*", "\\1", basename(gif_imgs)))
+gif_imgs <- gif_imgs[order(gif_weeks)]
+
+gifski(
+  png_files = gif_imgs,
+  gif_file  = file.path(gif_dir, "mosquito_2025_zoom11.gif"),
+  width     = 700,
+  height    = 700,
+  delay     = 0.6
+)
+
+
+# Create GIF for zoom 12
+gif_dir <- "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12"
+
+gif_imgs <- list.files(
+  gif_dir,
+  pattern = "week_.*_zoom12_gif\\.png$",
+  full.names = TRUE
+)
+
+gif_weeks <- as.numeric(sub(".*week_([0-9]+).*", "\\1", basename(gif_imgs)))
+gif_imgs <- gif_imgs[order(gif_weeks)]
+
+gifski(
+  png_files = gif_imgs,
+  gif_file  = file.path(gif_dir, "mosquito_2025_zoom12.gif"),
+  width     = 700,
+  height    = 700,
+  delay     = 0.6
+)
+```
+
+# SQRT Seasonal  Seasonal averages (Square-Root Scaling)
+
+```{r}
+library(dplyr)
+
+# read data
+pipiens  <- read.csv("../data/pipiens_2025.csv")
+tarsalis <- read.csv("../data/tarsalis_2025.csv")
+
+all_data <- bind_rows(pipiens, tarsalis)
+
+# define seasons from week numbers
+all_data <- all_data %>%
+  mutate(
+    season_calc = case_when(
+      disease_week %in% 15:22 ~ "early",
+      disease_week %in% 23:31 ~ "mid",
+      disease_week %in% 32:40 ~ "late",
+      TRUE ~ NA_character_
+    )
+  )
+
+# compute mean counts across weeks
+seasonal_avg <- all_data %>%
+  filter(!is.na(season_calc)) %>%
+  group_by(season_calc, site_code, site_name, longitude, latitude, species, disease_week) %>%
+  summarise(weekly_count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  group_by(season_calc, site_code, site_name, longitude, latitude, species) %>%
+  summarise(mean_count = mean(weekly_count, na.rm = TRUE), .groups = "drop")
+
+seasonal_avg
+```
+
+### Zoom 11
+```{r all-seasons-zoom11, warning=FALSE}
+
+# Seasons to plot
+seasons <- c("early", "mid", "late")
+
+# Read the two species files once and combine them
+pipiens_2025  <- read.csv("../data/pipiens_2025.csv")
+tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
+
+all_data <- bind_rows(pipiens_2025, tarsalis_2025) %>%
+  mutate(
+    season_plot = case_when(
+      disease_week %in% 15:22 ~ "early",
+      disease_week %in% 23:31 ~ "mid",
+      disease_week %in% 32:40 ~ "late",
+      TRUE ~ NA_character_
+    )
+  )
+
+# 1. Register your Google Maps API key
+register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+
+# 2. Build a bounding box
+lon_min <- -112.8
+lon_max <- -111.2
+lat_min <- 40.6
+lat_max <- 41
+
+# 3. Download the satellite map using the bounding box
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "satellite",
+  zoom = 11   #zoom in with zoom = 12
+)
+
+# 4. Find the global max across all seasons so the size scale is identical
+global_max <- all_data %>%
+  filter(!is.na(season_plot)) %>%
+  group_by(season_plot, site_code, site_name, longitude, latitude, species, disease_week) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  group_by(season_plot, site_code, site_name, longitude, latitude, species) %>%
+  summarise(mean_count = mean(count, na.rm = TRUE), .groups = "drop") %>%
+  summarise(global_max = max(mean_count, na.rm = TRUE)) %>%
+  pull(global_max)
+
+print(paste("global max:", global_max))
+
+# 5. Loop over all seasons
+for (s in seasons) {
+
+  spatial_data_raw <- all_data %>%
+    filter(season_plot == s)
+  
+  # Combine multiple observations from different trap types and sampling dates per week,
+  # then average across weeks within season
+  spatial_data <- spatial_data_raw %>%
+    group_by(site_code, site_name, longitude, latitude, species, disease_week) %>%
+    summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+    group_by(site_code, site_name, longitude, latitude, species) %>%
+    summarise(mean_count = mean(count, na.rm = TRUE), .groups = "drop")
+
+  # Reorder species so pipiens is plotted last (on top)
+  spatial_data$species <- factor(
+    spatial_data$species,
+    levels = c("Culex tarsalis", "Culex pipiens")
+  )
+
+  map <- ggmap(bg) +
+
+    # 1. Draw tarsalis FIRST (underneath)
+    geom_point(
+      data = subset(spatial_data, species == "Culex tarsalis"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = mean_count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    # 2. Draw pipiens SECOND (on top)
+    geom_point(
+      data = subset(spatial_data, species == "Culex pipiens"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = mean_count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    scale_color_manual(
+      values = c(
+        "Culex pipiens"  = "#00E5FF",
+        "Culex tarsalis" = "#FF00AA"
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_shape_manual(
+      values = c(
+        "Culex pipiens"  = 16,  # circle
+        "Culex tarsalis" = 16   # circle
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_alpha_manual(
+      values = c(
+        "Culex pipiens"  = 0.6,
+        "Culex tarsalis" = 0.6
+      ),
+      guide = "none",
+      drop = FALSE
+    ) +
+
+    scale_size_continuous(
+      trans = "sqrt",
+      range = c(3, 20),
+      limits = c(1, global_max),
+      breaks = c(1, 10, 50, 500, 5000),
+      name = "Mean count"
+    ) +
+
+    labs(
+      title = paste(tools::toTitleCase(s), "season"),
+      x = "Longitude",
+      y = "Latitude"
+    ) +
+
+    theme_minimal()
+
+  print(map)
+
+  file_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom11/",
+    s,
+    "_zoom11.png"
+  )
+  
+  # save one high res image
+  ggsave(filename = file_name, plot = map, width = 8, height = 8, dpi = 300)
+}
+```
+  
+### Zoom 12
+
+```{r all-seasons-zoom12, warning=FALSE}
+
+# Seasons to plot
+seasons <- c("early", "mid", "late")
+
+# Read the two species files once and combine them
+pipiens_2025  <- read.csv("../data/pipiens_2025.csv")
+tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
+
+all_data <- bind_rows(pipiens_2025, tarsalis_2025) %>%
+  mutate(
+    season_plot = case_when(
+      disease_week %in% 15:22 ~ "early",
+      disease_week %in% 23:31 ~ "mid",
+      disease_week %in% 32:40 ~ "late",
+      TRUE ~ NA_character_
+    )
+  )
+
+# 1. Register your Google Maps API key
+register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+
+# 2. Build a bounding box
+lon_min <- -112.8
+lon_max <- -111.2
+lat_min <- 40.6
+lat_max <- 41
+
+# 3. Download the satellite map using the bounding box
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "satellite",
+  zoom = 12   #zoom out with zoom = 11
+)
+
+# 4. Find the global max across all seasons so the size scale is identical
+global_max <- all_data %>%
+  filter(!is.na(season_plot)) %>%
+  group_by(season_plot, site_code, site_name, longitude, latitude, species, disease_week) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  group_by(season_plot, site_code, site_name, longitude, latitude, species) %>%
+  summarise(mean_count = mean(count, na.rm = TRUE), .groups = "drop") %>%
+  summarise(global_max = max(mean_count, na.rm = TRUE)) %>%
+  pull(global_max)
+
+print(paste("global max:", global_max))
+
+# 5. Loop over all seasons
+for (s in seasons) {
+
+  spatial_data_raw <- all_data %>%
+    filter(season_plot == s)
+  
+  # Combine multiple observations from different trap types and sampling dates per week,
+  # then average across weeks within season
+  spatial_data <- spatial_data_raw %>%
+    group_by(site_code, site_name, longitude, latitude, species, disease_week) %>%
+    summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+    group_by(site_code, site_name, longitude, latitude, species) %>%
+    summarise(mean_count = mean(count, na.rm = TRUE), .groups = "drop")
+
+  # Reorder species so pipiens is plotted last (on top)
+  spatial_data$species <- factor(
+    spatial_data$species,
+    levels = c("Culex tarsalis", "Culex pipiens")
+  )
+
+  map <- ggmap(bg) +
+
+    # 1. Draw tarsalis FIRST (underneath)
+    geom_point(
+      data = subset(spatial_data, species == "Culex tarsalis"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = mean_count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    # 2. Draw pipiens SECOND (on top)
+    geom_point(
+      data = subset(spatial_data, species == "Culex pipiens"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = mean_count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    scale_color_manual(
+      values = c(
+        "Culex pipiens"  = "#00E5FF",
+        "Culex tarsalis" = "#FF00AA"
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_shape_manual(
+      values = c(
+        "Culex pipiens"  = 16,  # circle
+        "Culex tarsalis" = 16   # circle
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_alpha_manual(
+      values = c(
+        "Culex pipiens"  = 0.6,
+        "Culex tarsalis" = 0.6
+      ),
+      guide = "none",
+      drop = FALSE
+    ) +
+
+    scale_size_continuous(
+      trans = "sqrt",
+      range = c(3, 20),
+      limits = c(1, global_max),
+      breaks = c(1, 10, 50, 500, 5000),
+      name = "Mean count"
+    ) +
+
+    labs(
+      title = paste(tools::toTitleCase(s), "season"),
+      x = "Longitude",
+      y = "Latitude"
+    ) +
+
+    theme_minimal()
+
+  print(map)
+
+  file_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12/",
+    s,
+    "_zoom12.png"
+  )
+
+  ggsave(filename = file_name, plot = map, width = 8, height = 8, dpi = 300)
+}
+
+```
+
+
+# Raw Weekly Maps (Raw Scaling)
+
+Loop over all weeks with raw scaling.
+
+Notes:
+
+Weekly file contained multiple observations per site and species (from different trap types or sampling dates), so added code to combine multiple observations from different trap types and sampling dates per week.
+
+Point size is mapped directly to the raw count value for visualization only.
+
+### Zoom 11
+```{r z11-raw}
+
+# Weeks to plot
+weeks <- 15:40
+
+# Read the two species files once and combine them
+pipiens_2025  <- read.csv("../data/pipiens_2025.csv")
+tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
+
+all_data <- bind_rows(pipiens_2025, tarsalis_2025)
+
+# 1. Register your Google Maps API key
+register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+
+# 2. Build a bounding box
+lon_min <- -112.8
+lon_max <- -111.2
+lat_min <- 40.6
+lat_max <- 41
+
+# 3. Download the satellite map using the bounding box
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "satellite",
+  zoom = 11
+)
+
+# 4. Find the global max across all weeks so the size scale is identical
+global_max <- all_data %>%
+  filter(disease_week %in% weeks) %>%
+  group_by(disease_week, site_code, site_name, longitude, latitude, species) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  summarise(global_max = max(count, na.rm = TRUE)) %>%
+  pull(global_max)
+
+print(paste("global max:", global_max))
+
+# 5. Loop over all weeks
+for (w in weeks) {
+
+  spatial_data_raw <- all_data %>%
+    filter(disease_week == w)
+
+  # Combine multiple observations from different trap types and sampling dates per week
+  spatial_data <- spatial_data_raw %>%
+    group_by(site_code, site_name, longitude, latitude, species) %>%
+    summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+  # Reorder species so pipiens is plotted last (on top)
+  spatial_data$species <- factor(
+    spatial_data$species,
+    levels = c("Culex tarsalis", "Culex pipiens")
+  )
+
+  map <- ggmap(bg) +
+
+    # 1. Draw tarsalis FIRST (underneath)
+    geom_point(
+      data = subset(spatial_data, species == "Culex tarsalis"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    # 2. Draw pipiens SECOND (on top)
+    geom_point(
+      data = subset(spatial_data, species == "Culex pipiens"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    scale_color_manual(
+      values = c(
+        "Culex pipiens"  = "#00E5FF",
+        "Culex tarsalis" = "#FF00AA"
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_shape_manual(
+      values = c(
+        "Culex pipiens"  = 16,
+        "Culex tarsalis" = 16
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_alpha_manual(
+      values = c(
+        "Culex pipiens"  = 0.6,
+        "Culex tarsalis" = 0.6
+      ),
+      guide = "none",
+      drop = FALSE
+    ) +
+
+    scale_size_continuous(
+      range = c(3, 20),
+      limits = c(1, global_max),
+      breaks = c(1, 10, 50, 500, 5000),
+      name = "Count"
+    ) +
+
+    labs(
+      title = paste("Week", w),
+      x = "Longitude",
+      y = "Latitude"
+    ) +
+
+    theme_minimal()
+
+  print(map)
+
+  file_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom11/week_",
+    w,
+    "_zoom11_raw.png"
+  )
+
+  # save one high res image
+  ggsave(filename = file_name, plot = map, width = 8, height = 8, dpi = 300)
+
+  gif_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom11/week_",
+    w,
+    "_zoom11_gif_raw.png"
+  )
+
+  # save one low res image for gif
+  ggsave(filename = gif_name, plot = map, width = 5, height = 5, dpi = 140)
+}
+```
+
+### Zoom 12
+
+```{r z12-raw}
+# Weeks to plot
+weeks <- 15:40
+
+# Read the two species files once and combine them
+pipiens_2025  <- read.csv("../data/pipiens_2025.csv")
+tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
+
+all_data <- bind_rows(pipiens_2025, tarsalis_2025)
+
+# 1. Register your Google Maps API key
+register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+
+# 2. Build a bounding box
+lon_min <- -112.8
+lon_max <- -111.2
+lat_min <- 40.6
+lat_max <- 41
+
+# 3. Download the satellite map using the bounding box
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "satellite",
+  zoom = 12
+)
+
+# 4. Find the global max across all weeks so the size scale is identical
+global_max <- all_data %>%
+  filter(disease_week %in% weeks) %>%
+  group_by(disease_week, site_code, site_name, longitude, latitude, species) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  summarise(global_max = max(count, na.rm = TRUE)) %>%
+  pull(global_max)
+
+print(paste("global max:", global_max))
+
+# 5. Loop over all weeks
+for (w in weeks) {
+
+  spatial_data_raw <- all_data %>%
+    filter(disease_week == w)
+
+  # Combine multiple observations from different trap types and sampling dates per week
+  spatial_data <- spatial_data_raw %>%
+    group_by(site_code, site_name, longitude, latitude, species) %>%
+    summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+  # Reorder species so pipiens is plotted last (on top)
+  spatial_data$species <- factor(
+    spatial_data$species,
+    levels = c("Culex tarsalis", "Culex pipiens")
+  )
+
+  map <- ggmap(bg) +
+
+    # 1. Draw tarsalis FIRST (underneath)
+    geom_point(
+      data = subset(spatial_data, species == "Culex tarsalis"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    # 2. Draw pipiens SECOND (on top)
+    geom_point(
+      data = subset(spatial_data, species == "Culex pipiens"),
+      aes(
+        x = longitude,
+        y = latitude,
+        size = count,
+        color = species,
+        shape = species,
+        alpha = species
+      )
+    ) +
+
+    scale_color_manual(
+      values = c(
+        "Culex pipiens"  = "#00E5FF",
+        "Culex tarsalis" = "#FF00AA"
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_shape_manual(
+      values = c(
+        "Culex pipiens"  = 16,
+        "Culex tarsalis" = 16
+      ),
+      name = "Species",
+      drop = FALSE
+    ) +
+
+    scale_alpha_manual(
+      values = c(
+        "Culex pipiens"  = 0.6,
+        "Culex tarsalis" = 0.6
+      ),
+      guide = "none",
+      drop = FALSE
+    ) +
+
+    scale_size_continuous(
+      range = c(3, 20),
+      limits = c(1, global_max),
+      breaks = c(1, 10, 50, 500, 5000),
+      name = "Count"
+    ) +
+
+    labs(
+      title = paste("Week", w),
+      x = "Longitude",
+      y = "Latitude"
+    ) +
+
+    theme_minimal()
+
+  print(map)
+
+  file_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12/week_",
+    w,
+    "_zoom12_raw.png"
+  )
+
+  ggsave(filename = file_name, plot = map, width = 8, height = 8, dpi = 300)
+
+  gif_name <- paste0(
+    "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12/week_",
+    w,
+    "_zoom12_gif_raw.png"
+  )
+
+  # save one low res image for gif
+  ggsave(filename = gif_name, plot = map, width = 5, height = 5, dpi = 140)
+}
+```
+
+### Raw weekly GIFs for raw, zoom 11 and 12
+```{r gifs-raw}
+library(gifski)
+
+# Create GIF for zoom 11
+gif_dir <- "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom11"
+
+gif_imgs <- list.files(
+  gif_dir,
+  pattern = "week_.*_zoom11_gif\\_raw.png$",
+  full.names = TRUE
+)
+
+gif_weeks <- as.numeric(sub(".*week_([0-9]+).*", "\\1", basename(gif_imgs)))
+gif_imgs <- gif_imgs[order(gif_weeks)]
+
+gifski(
+  png_files = gif_imgs,
+  gif_file  = file.path(gif_dir, "mosquito_2025_zoom11_raw.gif"),
+  width     = 700,
+  height    = 700,
+  delay     = 0.6
+)
+
+# Create GIF for zoom 12
+gif_dir <- "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12"
+
+gif_imgs <- list.files(
+  gif_dir,
+  pattern = "week_.*_zoom12_gif\\_raw.png$",
+  full.names = TRUE
+)
+
+gif_weeks <- as.numeric(sub(".*week_([0-9]+).*", "\\1", basename(gif_imgs)))
+gif_imgs <- gif_imgs[order(gif_weeks)]
+
+gifski(
+  png_files = gif_imgs,
+  gif_file  = file.path(gif_dir, "mosquito_2025_zoom12_raw.gif"),
+  width     = 700,
+  height    = 700,
+  delay     = 0.6
+)
+```

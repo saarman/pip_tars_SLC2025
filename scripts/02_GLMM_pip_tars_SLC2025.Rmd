@@ -1,5 +1,5 @@
 ---
-title: "Weekly **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field season"
+title: "GLMM **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field season"
 author: "Norah Saarman"
 date: "`r Sys.Date()`"
 output:
@@ -192,7 +192,7 @@ simulateResiduals(fit_nbinom, plot = T)
   
 I think it looks the same!!! So, stick with the poisson log-link? But I do think that random effects (1 | site_name/collection_date) looked better than disease_week. Not sure if that is good justification to use collection_date though.
 
-## Marginal effects
+## Marginal effects across seasons
 
 Sticking with model with poisson(link="log"), using random effects (1 | site_name/collection_date) `fit_pois_date`
 
@@ -202,10 +202,10 @@ glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date
 
 ```{r tar-marginal}
 # First, just look at the effect of season, doing a 1-way pairwise comparison
-em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
-em_season
+em_season_tar = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_season_tar
 
-cl = cld(em_season, Letters = letters)
+cl = cld(em_season_tar, Letters = letters)
 
 ggplot(data = cl, aes(x = season, y = rate)) +
     geom_point(size=2.5, color="black") +
@@ -238,7 +238,46 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 
 ```
-  
+
+## Marginal effects across urbanization
+```{r tar-marginal-urbanization}
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_urban_tar = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_urban_tar
+
+cl = cld(em_urban_tar, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+
+# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ urbanization | season, type = "response")
+em_spp2
+
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = urbanization, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ season, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Abundance of Culex tarsalis across season",
+        x = "Urbanization",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+```
 # Culex pipiens
   
 ```{r pipiens}
@@ -340,10 +379,10 @@ glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date
 
 ```{r pip-marginal}
 # First, just look at the effect of season, doing a 1-way pairwise comparison
-em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
-em_season
+em_season_pip = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_season_pip
 
-cl = cld(em_season, Letters = letters)
+cl = cld(em_season_pip, Letters = letters)
 
 ggplot(data = cl, aes(x = season, y = rate)) +
     geom_point(size=2.5, color="black") +
@@ -376,4 +415,44 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 
 ```
+  
 
+## Marginal effects across urbanization
+```{r pip-marginal-urbanization}
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_urban_pip = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_urban_pip
+
+cl = cld(em_urban_pip, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+
+# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ urbanization | season, type = "response")
+em_spp2
+
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = urbanization, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ season, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Abundance of Culex pipiens across season",
+        x = "Urbanization",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+```

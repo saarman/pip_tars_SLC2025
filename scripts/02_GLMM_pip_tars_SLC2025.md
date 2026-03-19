@@ -1,8 +1,8 @@
-Weekly **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
+GLMM **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
 season
 ================
 Norah Saarman
-2026-03-16
+2026-03-19
 
 - [Salamander example](#salamander-example)
 - [Culex tarsalis](#culex-tarsalis)
@@ -12,15 +12,18 @@ Norah Saarman
     site_name/disease_week)](#random-effects-1--site_namedisease_week)
   - [Random effects (1 \|
     site_name/collection_date)](#random-effects-1--site_namecollection_date)
-  - [Marginal effects](#marginal-effects)
-- [Culex pipiens](#culex-pipiens)
+  - [Marginal effects across seasons](#marginal-effects-across-seasons)
+  - [Marginal effects across
+    urbanization](#marginal-effects-across-urbanization)
 - [GLMM by season and urbanization, each mosquito species
   separately](#glmm-by-season-and-urbanization-each-mosquito-species-separately-1)
   - [Random effects (1 \|
     site_name/disease_week)](#random-effects-1--site_namedisease_week-1)
   - [Random effects (1 \|
     site_name/collection_date)](#random-effects-1--site_namecollection_date-1)
-  - [Marginal effects](#marginal-effects-1)
+  - [Marginal effects](#marginal-effects)
+  - [Marginal effects across
+    urbanization](#marginal-effects-across-urbanization-1)
 
 **Research Topic:** testing whether habitat and seasonal partitioning
 between Culex pipiens s.l. and Culex tarsalis shapes West Nile Virus
@@ -604,7 +607,7 @@ do think that random effects (1 \| site_name/collection_date) looked
 better than disease_week. Not sure if that is good justification to use
 collection_date though.
 
-## Marginal effects
+## Marginal effects across seasons
 
 Sticking with model with poisson(link=“log”), using random effects (1 \|
 site_name/collection_date) `fit_pois_date`
@@ -615,13 +618,13 @@ tarsalis)
 
 ``` r
 # First, just look at the effect of season, doing a 1-way pairwise comparison
-em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_season_tar = emmeans(fit_pois_date, pairwise ~ season, type = "response")
 ```
 
     ## NOTE: Results may be misleading due to involvement in interactions
 
 ``` r
-em_season
+em_season_tar
 ```
 
     ## $emmeans
@@ -645,7 +648,7 @@ em_season
     ## Tests are performed on the log scale
 
 ``` r
-cl = cld(em_season, Letters = letters)
+cl = cld(em_season_tar, Letters = letters)
 
 ggplot(data = cl, aes(x = season, y = rate)) +
     geom_point(size=2.5, color="black") +
@@ -732,7 +735,127 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
 
 ![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-2.png)<!-- -->
 
-# Culex pipiens
+## Marginal effects across urbanization
+
+``` r
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_urban_tar = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+```
+
+    ## NOTE: Results may be misleading due to involvement in interactions
+
+``` r
+em_urban_tar
+```
+
+    ## $emmeans
+    ##  season  rate    SE  df asymp.LCL asymp.UCL
+    ##  early   2.72 0.411 Inf      2.02      3.65
+    ##  mid    32.49 3.810 Inf     25.81     40.89
+    ##  late   28.90 3.400 Inf     22.95     36.40
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ##  contrast      ratio     SE  df null z.ratio p.value
+    ##  early / mid  0.0836 0.0113 Inf    1 -18.418  <.0001
+    ##  early / late 0.0940 0.0128 Inf    1 -17.356  <.0001
+    ##  mid / late   1.1242 0.1130 Inf    1   1.163  0.4757
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl = cld(em_urban_tar, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-urbanization-1.png)<!-- -->
+
+``` r
+# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ urbanization | season, type = "response")
+em_spp2
+```
+
+    ## $emmeans
+    ## season = early:
+    ##  urbanization   rate     SE  df asymp.LCL asymp.UCL
+    ##  rural          4.02  0.730 Inf     2.814      5.74
+    ##  peri           4.06  0.916 Inf     2.614      6.32
+    ##  urban          1.23  0.382 Inf     0.667      2.26
+    ## 
+    ## season = mid:
+    ##  urbanization   rate     SE  df asymp.LCL asymp.UCL
+    ##  rural        112.83 17.700 Inf    82.939    153.48
+    ##  peri          58.27 11.200 Inf    40.024     84.85
+    ##  urban          5.22  1.030 Inf     3.537      7.69
+    ## 
+    ## season = late:
+    ##  urbanization   rate     SE  df asymp.LCL asymp.UCL
+    ##  rural        100.98 16.100 Inf    73.875    138.02
+    ##  peri          47.56  9.250 Inf    32.490     69.62
+    ##  urban          5.03  1.000 Inf     3.398      7.43
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ## season = early:
+    ##  contrast       ratio    SE  df null z.ratio p.value
+    ##  rural / peri   0.988 0.267 Inf    1  -0.043  0.9990
+    ##  rural / urban  3.275 1.150 Inf    1   3.391  0.0020
+    ##  peri / urban   3.313 1.240 Inf    1   3.201  0.0039
+    ## 
+    ## season = mid:
+    ##  contrast       ratio    SE  df null z.ratio p.value
+    ##  rural / peri   1.936 0.437 Inf    1   2.930  0.0095
+    ##  rural / urban 21.633 5.190 Inf    1  12.814  <.0001
+    ##  peri / urban  11.173 2.950 Inf    1   9.146  <.0001
+    ## 
+    ## season = late:
+    ##  contrast       ratio    SE  df null z.ratio p.value
+    ##  rural / peri   2.123 0.487 Inf    1   3.281  0.0030
+    ##  rural / urban 20.092 4.920 Inf    1  12.264  <.0001
+    ##  peri / urban   9.463 2.540 Inf    1   8.364  <.0001
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = urbanization, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ season, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Abundance of Culex tarsalis across season",
+        x = "Urbanization",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-urbanization-2.png)<!-- -->
+\# Culex pipiens
 
 ``` r
 ## pipiens datasets from SLCMAD:
@@ -989,13 +1112,13 @@ pipiens)
 
 ``` r
 # First, just look at the effect of season, doing a 1-way pairwise comparison
-em_season = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+em_season_pip = emmeans(fit_pois_date, pairwise ~ season, type = "response")
 ```
 
     ## NOTE: Results may be misleading due to involvement in interactions
 
 ``` r
-em_season
+em_season_pip
 ```
 
     ## $emmeans
@@ -1019,7 +1142,7 @@ em_season
     ## Tests are performed on the log scale
 
 ``` r
-cl = cld(em_season, Letters = letters)
+cl = cld(em_season_pip, Letters = letters)
 
 ggplot(data = cl, aes(x = season, y = rate)) +
     geom_point(size=2.5, color="black") +
@@ -1105,3 +1228,124 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
 ```
 
 ![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-2.png)<!-- -->
+
+## Marginal effects across urbanization
+
+``` r
+# First, just look at the effect of season, doing a 1-way pairwise comparison
+em_urban_pip = emmeans(fit_pois_date, pairwise ~ season, type = "response")
+```
+
+    ## NOTE: Results may be misleading due to involvement in interactions
+
+``` r
+em_urban_pip
+```
+
+    ## $emmeans
+    ##  season  rate    SE  df asymp.LCL asymp.UCL
+    ##  early   2.16 0.299 Inf      1.65      2.83
+    ##  mid    21.01 2.120 Inf     17.25     25.60
+    ##  late   21.31 2.230 Inf     17.35     26.16
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ##  contrast     ratio     SE  df null z.ratio p.value
+    ##  early / mid  0.103 0.0126 Inf    1 -18.608  <.0001
+    ##  early / late 0.101 0.0128 Inf    1 -18.189  <.0001
+    ##  mid / late   0.986 0.0823 Inf    1  -0.166  0.9848
+    ## 
+    ## Results are averaged over the levels of: urbanization, trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl = cld(em_urban_pip, Letters = letters)
+
+ggplot(data = cl, aes(x = season, y = rate)) +
+    geom_point(size=2.5, color="black") +
+    geom_errorbar(aes(x=season, ymin = asymp.LCL,
+                      ymax = asymp.UCL),
+                  width = 0.2, size=1, color="black") +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.3)) +
+    ggeasy::easy_remove_axes("both", "title")
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-urbanization-1.png)<!-- -->
+
+``` r
+# Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
+em_spp2 = emmeans(fit_pois_date, pairwise ~ urbanization | season, type = "response")
+em_spp2
+```
+
+    ## $emmeans
+    ## season = early:
+    ##  urbanization  rate    SE  df asymp.LCL asymp.UCL
+    ##  rural         2.45 0.527 Inf      1.61      3.74
+    ##  peri          1.87 0.458 Inf      1.16      3.02
+    ##  urban         2.20 0.563 Inf      1.33      3.63
+    ## 
+    ## season = mid:
+    ##  urbanization  rate    SE  df asymp.LCL asymp.UCL
+    ##  rural        16.88 2.870 Inf     12.11     23.54
+    ##  peri         29.16 5.780 Inf     19.78     42.99
+    ##  urban        18.84 2.860 Inf     14.00     25.36
+    ## 
+    ## season = late:
+    ##  urbanization  rate    SE  df asymp.LCL asymp.UCL
+    ##  rural        31.84 5.870 Inf     22.18     45.71
+    ##  peri         26.38 5.350 Inf     17.73     39.25
+    ##  urban        11.52 1.750 Inf      8.54     15.52
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## Confidence level used: 0.95 
+    ## Intervals are back-transformed from the log scale 
+    ## 
+    ## $contrasts
+    ## season = early:
+    ##  contrast      ratio    SE  df null z.ratio p.value
+    ##  rural / peri  1.309 0.425 Inf    1   0.829  0.6848
+    ##  rural / urban 1.116 0.373 Inf    1   0.327  0.9426
+    ##  peri / urban  0.852 0.302 Inf    1  -0.452  0.8937
+    ## 
+    ## season = mid:
+    ##  contrast      ratio    SE  df null z.ratio p.value
+    ##  rural / peri  0.579 0.151 Inf    1  -2.102  0.0894
+    ##  rural / urban 0.896 0.204 Inf    1  -0.482  0.8800
+    ##  peri / urban  1.548 0.386 Inf    1   1.750  0.1869
+    ## 
+    ## season = late:
+    ##  contrast      ratio    SE  df null z.ratio p.value
+    ##  rural / peri  1.207 0.330 Inf    1   0.688  0.7702
+    ##  rural / urban 2.765 0.662 Inf    1   4.248  0.0001
+    ##  peri / urban  2.290 0.581 Inf    1   3.265  0.0031
+    ## 
+    ## Results are averaged over the levels of: trap_type 
+    ## P value adjustment: tukey method for comparing a family of 3 estimates 
+    ## Tests are performed on the log scale
+
+``` r
+cl2 <- cld(em_spp2$emmeans, Letters = letters)
+
+ggplot(data = cl2, aes(x = urbanization, y = rate)) +
+    geom_point(size = 2.5, color = "black") +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL),
+                  width = 0.2, size = 1, color = "black") +
+    facet_wrap(~ season, labeller = label_both) +
+    geom_text(aes(label = gsub(" ", "", .group)),
+              position = position_nudge(x = 0.4)) +
+    labs(
+        title = "Abundance of Culex pipiens across season",
+        x = "Urbanization",
+        y = "Predicted abundance"
+    ) +
+    ggeasy::easy_remove_axes("y", "title") +
+    theme(plot.title = element_text(hjust = 0.5))
+```
+
+![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-urbanization-2.png)<!-- -->
