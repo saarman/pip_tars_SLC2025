@@ -2,7 +2,7 @@ GAM **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
 season
 ================
 Norah Saarman
-2026-03-19
+2026-03-20
 
 - [Prepare Data](#prepare-data)
   - [Culex tarsalis data](#culex-tarsalis-data)
@@ -23,6 +23,7 @@ Norah Saarman
       ONLY:](#plot-results-with-site_name-only)
     - [Temporal/Seasonal effects:](#temporalseasonal-effects)
     - [Effect size (forest) plot](#effect-size-forest-plot)
+    - [Relative abundance](#relative-abundance)
   - [TODO in FUTURE… GAM with site_date as a combined group…code shown
     below but not
     run.](#todo-in-future-gam-with-site_date-as-a-combined-groupcode-shown-below-but-not-run)
@@ -1095,6 +1096,96 @@ ggplot(coef_df, aes(x = effect, y = reorder(term_clean, effect))) +
 ```
 
 ![](03_GAM_pip_tars_SLC2025_files/figure-gfm/effect-forest-1.png)<!-- -->
+
+### Relative abundance
+
+Does relative abundance differ across space?
+
+Trying to create the same plot from our original GAM model, accounting
+for all of the things. Plot with confidence intervals:
+
+``` r
+library(dplyr)
+library(ggplot2)
+
+# Build prediction grid
+newdat <- expand.grid(
+  species = levels(combined$species),
+  urbanization = levels(combined$urbanization),
+  disease_week = median(combined$disease_week, na.rm = TRUE),
+  trap_type = "CO2",
+  site_name = levels(combined$site_name)[1]
+)
+
+# Ensure factor levels match
+newdat$species <- factor(newdat$species, levels = levels(combined$species))
+newdat$urbanization <- factor(newdat$urbanization, levels = levels(combined$urbanization))
+newdat$trap_type <- factor(newdat$trap_type, levels = levels(combined$trap_type))
+newdat$site_name <- factor(newdat$site_name, levels = levels(combined$site_name))
+
+# Predict on link scale
+pred <- predict(
+  fit_gam_site,
+  newdata = newdat,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_name)"
+)
+
+# Add predictions + SE
+newdat$fit_link <- pred$fit
+newdat$se_link  <- pred$se.fit
+
+# Convert to response scale (NB with log link → exp)
+newdat <- newdat %>%
+  mutate(
+    fit = exp(fit_link),
+    lower = exp(fit_link - 1.96 * se_link),
+    upper = exp(fit_link + 1.96 * se_link)
+  )
+
+# Convert to proportions within each urbanization level
+newdat <- newdat %>%
+  group_by(urbanization) %>%
+  mutate(
+    prop = fit / sum(fit),
+    prop_lower = lower / sum(upper),  # conservative CI
+    prop_upper = upper / sum(lower)
+  ) %>%
+  ungroup()
+
+newdat <- newdat %>%
+  mutate(
+    prop_lower = pmax(0, prop_lower),
+    prop_upper = pmin(1, prop_upper)
+  )
+
+# Colors
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex tarsalis" = "#FF2DA0"
+)
+
+# Plot with CI
+ggplot(newdat, aes(x = urbanization, y = prop, color = species, group = species)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(
+    aes(ymin = prop_lower, ymax = prop_upper),
+    width = 0.1
+  ) +
+  scale_color_manual(values = cols) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(
+    x = "Urbanization",
+    y = "Relative abundance",
+    color = NULL
+  ) +
+  theme_classic() +
+  theme(legend.position = "right")
+```
+
+![](03_GAM_pip_tars_SLC2025_files/figure-gfm/relative-gam-CI-1.png)<!-- -->
 
 ## TODO in FUTURE… GAM with site_date as a combined group…code shown below but not run.
 
