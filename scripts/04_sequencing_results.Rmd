@@ -1,0 +1,654 @@
+---
+title: "Oxford nanopore results for CT and UT"
+author: "Norah Saarman"
+date: "`r Sys.Date()`"
+output:
+  github_document:
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+
+# -------------------------
+# Connecticut
+# -------------------------
+ct <- tribble(
+  ~City, ~Code, ~N, ~ITS2, ~kdr, ~pip_M, ~pip_its2, ~rest_M, ~rest_its2,
+  "Bridgeport",   "BP39", 128, 122, 118, 109, 119, 15,  2,
+  "Glastonbury",  "GL77", 118, 117, 115,  23, 111, 44,  4,
+  "Hartford",     "HA78", 225, 221, 221, 177, 209, 32, 11,
+  "Killingworth", "K27",   30,  29,  28,   8,   1, 22, 27,
+  "New Haven",    "NH54", 174, 168, 170, 110, 164, 30,  2,
+  "Salem",        "SA105", 60,  57,  57,  25,  23, 23, 32,
+  "West Haven",   "WH104",195, 189, 185, 123, 161, 34, 25,
+  "Westport",     "WP69", 134, 129, 130,  99,  84, 31, 43
+)
+
+
+ct_plot <- ct %>%
+  mutate(
+    pipiens    = pip_its2,
+    restuans   = rest_its2,
+    unassigned = ITS2 - pip_its2 - rest_its2
+  ) %>%
+  select(Code, ITS2, pipiens, restuans, unassigned) %>%
+  pivot_longer(cols = c(pipiens, restuans, unassigned),
+               names_to = "species", values_to = "count") %>%
+  mutate(prop = count / ITS2,
+         dataset = "Connecticut")
+
+# ADD CONNECTICUT ORDERING
+ct_order <- tribble(
+  ~Code, ~urbanization,
+  "WP69", "Rural",
+  "GL77", "Rural",
+  "K27",  "Rural",
+  "SA105","Rural",
+  "BP39", "Urban",
+  "HA78", "Urban",
+  "NH54", "Urban",
+  "WH104","Urban"
+)
+
+ct_plot <- ct_plot %>%
+  left_join(ct_order, by = "Code") %>%
+  mutate(
+    urbanization = factor(urbanization, levels = c("Rural", "Urban")),
+    Code = factor(Code, levels = ct_order$Code)
+  )
+
+# -------------------------
+# Utah
+# -------------------------
+ut <- tribble(
+  ~City, ~Code, ~N, ~cqm1, ~ace2, ~pip_ace2, ~hyb_ace2, ~other_ace2, ~pip_sl_M, ~tars_M,
+  "Audubon",              "AUDU",   1,   1,   1,   1, 0, 0,   462, 17063,
+  "Avocet",               "AVOC",   1,   1,   1,   1, 0, 0,  1645, 40675,
+  "Bird Rec",             "BIRD",   5,   4,   4,   3, 0, 1,  1439, 49430,
+  "Blue Lake",            "BLUE",   5,   4,   4,   3, 0, 0,   368, 20997,
+  "Conduit",              "COND",  13,  13,  13,  12, 1, 0,   815, 47352,
+  "Downington",           "DOWA",  96,  95,  90,  89, 1, 0,   289, 14699,
+  "Elephant Island",      "ELIS",   4,   4,   4,   3, 0, 1,  1458, 51701,
+  "Fair Park",            "FAIR",  17,  17,  17,  17, 0, 0,   627, 48786,
+  "Frontage Corral",      "FRCO",   7,   6,   6,   5, 0, 1,   325, 14443,
+  "F.S.#13 Parley Way",   "FS13",  48,  46,  43,  43, 0, 0,   368, 12756,
+  "F.S.#2 West High",     "FS2W",  34,  33,  33,  33, 0, 0,   139,   725,
+  "F.S.#4 Avenues",       "FS4A",  20,  20,  19,  19, 0, 0,   768, 11848,
+  "F.S.#5 Harvey Milk",   "FS5H",  52,  45,  46,  44, 2, 0,  2559, 13305,
+  "F.S.#6 Indiana",       "FS6I",  57,  55,  55,  55, 0, 0,  2780,  2644,
+  "F.S.#8 Ballpark",      "FS8B",  35,  31,  28,  27, 1, 0,  2914,  4035,
+  "F.S.#9 Amelia Earhart","FS9A",  43,  42,  41,  41, 0, 0,  1573, 21291,
+  "Glendale",             "GLEN",  80,  76,  74,  74, 0, 0,  5910, 13971,
+  "Graystone Church",     "GRAYS",  1,   1,   1,   1, 0, 0,   258,  9847,
+  "Hogle Zoo - Primates", "HOGL",  31,  30,  24,  24, 0, 0,  8842, 31066,
+  "Jade",                 "JADE",   8,   7,   8,   7, 0, 1, 10940, 25024,
+  "KETO",                 "KETO",  64,  64,  64,  64, 0, 0,   249,     5,
+  "Lakefront",            "LAKE",   1,   1,   1,   1, 0, 0,  1986,  1280,
+  "Lee Kay",              "LEEK",  35,  32,  32,  31, 0, 1,   481,    64,
+  "New State",            "NEWS",  12,  12,  12,  12, 0, 0,   368,   188,
+  "Nibley Golf Course",   "NIBL",  36,  35,  33,  33, 0, 0,   361,   746,
+  "O'Reillys",            "OREI",   3,   3,   3,   3, 0, 0,   514,   281,
+  "Power Pole",           "POPO",   5,   4,   5,   4, 0, 1,   861,  1062,
+  "SLCMAD",               "SLCM",  14,  14,  14,  14, 0, 0,  1212,   563,
+  "South Saratoga",       "SOSA",   7,   7,   6,   6, 0, 0,   323,     0,
+  "Train Tracks",         "TRTR", 110, 103, 105, 101, 0, 4,   377,   219,
+  "Wingpointe",           "WING", 119, 116, 115, 114, 0, 1,   642,   928
+)
+
+ut_plot <- ut %>%
+  mutate(
+    pipiens    = pip_ace2,
+    hybrid     = hyb_ace2,
+    other      = other_ace2,
+    unassigned = ace2 - pip_ace2 - hyb_ace2 - other_ace2
+  ) %>%
+  select(Code, ace2, pipiens, hybrid, other, unassigned) %>%
+  pivot_longer(cols = c(pipiens, hybrid, other, unassigned),
+               names_to = "species", values_to = "count") %>%
+  mutate(prop = count / ace2,
+         dataset = "Utah")
+
+# ADD UTAH ORDERING
+ut_order <- tribble(
+  ~Code, ~urbanization,
+  "AUDU","Rural",
+  "AVOC","Rural",
+  "BIRD","Rural",
+  "BLUE","Rural",
+  "ELIS","Rural",
+  "JADE","Rural",
+  "LAKE","Rural",
+  "NEWS","Rural",
+  "POPO","Rural",
+  "SOSA","Rural",
+  "FAIR","Peri",
+  "FRCO","Peri",
+  "FS9A","Peri",
+  "GLEN","Peri",
+  "KETO","Peri",
+  "LEEK","Peri",
+  "OREI","Peri",
+  "SLCM","Peri",
+  "TRTR","Peri",
+  "WING","Peri",
+  "COND","Urban",
+  "DOWA","Urban",
+  "FS13","Urban",
+  "FS2W","Urban",
+  "FS4A","Urban",
+  "FS5H","Urban",
+  "FS6I","Urban",
+  "FS8B","Urban",
+  "GRAYS","Urban",
+  "HOGL","Urban",
+  "NIBL","Urban"
+)
+
+ut_plot <- ut_plot %>%
+  left_join(ut_order, by = "Code") %>%
+  mutate(
+    urbanization = factor(urbanization, levels = c("Rural", "Peri", "Urban")),
+    Code = factor(Code, levels = ut_order$Code)
+  )
+
+
+# -------------------------
+# combine
+# -------------------------
+plot_df <- bind_rows(
+  ct_plot %>% rename(genotyped_n = ITS2),
+  ut_plot %>% rename(genotyped_n = ace2)
+)
+
+plot_df$species <- factor(
+  plot_df$species,
+  levels = c("pipiens", "restuans", "hybrid", "other", "unassigned")
+)
+
+ggplot(plot_df, aes(x = Code, y = prop, fill = species)) +
+  geom_col(width = 0.8) +
+  facet_wrap(~dataset, scales = "free_x", ncol = 1) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  scale_fill_manual(
+    values = c(
+      pipiens = "#00E5FF",
+      restuans = "#FDAE61",
+      hybrid = "#7B3294",
+      other = "#FF00AA",
+      unassigned = "grey80"
+    ),
+    na.value = "grey80"
+  ) +
+  
+  labs(
+    x = "Site",
+    y = "Proportion of genotyped individuals",
+    fill = NULL
+  ) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "right",
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold"),
+)
+```
+
+```{r}
+ct_long <- ct %>%
+  left_join(ct_order, by = "Code") %>%
+  mutate(
+    pipiens = pip_its2,
+    restuans = rest_its2
+  ) %>%
+  pivot_longer(cols = c(pipiens, restuans),
+               names_to = "species", values_to = "count") %>%
+  uncount(count) %>%
+  mutate(species_bin = ifelse(species == "pipiens", 1, 0))
+
+
+# simple glm
+glm_fit <- glm(species_bin ~ urbanization, data = ct_long, family = binomial)
+
+summary(glm_fit)
+
+# glm with site random effect
+library(lme4)
+
+glm_fit <- glmer(
+  species_bin ~ urbanization + (1 | Code),
+  data = ct_long,
+  family = binomial
+)
+
+summary(glm_fit)
+```
+
+
+```{r plot-abundance}
+ct_habitat_counts <- ct_plot %>%
+  filter(species %in% c("pipiens", "restuans")) %>%
+  group_by(urbanization, species) %>%
+  summarise(count = sum(count), .groups = "drop") %>%
+  mutate(
+    species = factor(species, levels = c("pipiens", "restuans")),
+    urbanization = factor(urbanization, levels = c("Rural", "Urban"))
+  )
+
+ggplot(ct_habitat_counts, aes(x = urbanization, y = count, fill = species)) +
+  geom_col(position = position_dodge(width = 0.75), width = 0.7) +
+  scale_fill_manual(
+    values = c(
+      pipiens = "#00E5FF",
+      restuans = "#FDAE61"
+    ),
+    labels = c(
+      pipiens = "Culex pipiens",
+      restuans = "Culex restuans"
+    )
+  ) +
+  labs(
+    x = "Habitat",
+    y = "Abundance (count)",
+    fill = NULL
+  ) +
+  theme_classic() +
+  theme(legend.position = "right")
+```
+Predicted response is:  
+ - P(species_bin = 1) = predicted relative abundance of pipiens  
+ - 1 - P(species_bin = 1) = predicted relative abundance of restuans  
+
+To get the overall effect of urbanization, you want to exclude the random site effect, so use re.form = NA. 
+```{r}
+library(dplyr)
+library(ggplot2)
+
+# prediction data
+newdat <- data.frame(
+  urbanization = factor(levels(ct_long$urbanization),
+                        levels = levels(ct_long$urbanization))
+)
+
+# predict overall effect, excluding random Code effect
+pred_link <- predict(
+  glm_fit,
+  newdata = newdat,
+  type = "link",
+  se.fit = TRUE,
+  re.form = NA
+)
+
+# add predicted probabilities and CIs
+newdat <- newdat %>%
+  mutate(
+    fit_link = pred_link$fit,
+    se_link  = pred_link$se.fit,
+    pred_pipiens   = plogis(fit_link),
+    lower_pipiens  = plogis(fit_link - 1.96 * se_link),
+    upper_pipiens  = plogis(fit_link + 1.96 * se_link),
+    pred_restuans  = 1 - pred_pipiens,
+    lower_restuans = 1 - upper_pipiens,
+    upper_restuans = 1 - lower_pipiens
+  )
+
+# build plotting dataframe manually
+plotdat <- bind_rows(
+  newdat %>%
+    transmute(
+      urbanization,
+      species = "Culex pipiens",
+      pred = pred_pipiens,
+      lower = lower_pipiens,
+      upper = upper_pipiens
+    ),
+  newdat %>%
+    transmute(
+      urbanization,
+      species = "Culex restuans",
+      pred = pred_restuans,
+      lower = lower_restuans,
+      upper = upper_restuans
+    )
+)
+
+# check exact labels
+print(unique(plotdat$species))
+
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex restuans" = "#FF2DA0"
+)
+
+ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.08) +
+  scale_color_manual(values = cols) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(
+    x = "Urbanization",
+    y = "Predicted relative abundance",
+    color = NULL
+  ) +
+  theme_classic() +
+  theme(legend.position = "right")
+```
+```{r plot-pred}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+ct_long$species_bin
+ct_long$species
+
+# prediction data
+newdat <- data.frame(
+  urbanization = factor(levels(ct_long$urbanization),
+                        levels = levels(ct_long$urbanization))
+)
+
+# predict overall effect (exclude random site effect)
+pred_link <- predict(
+  glm_fit,
+  newdata = newdat,
+  type = "link",
+  se.fit = TRUE,
+  re.form = NA
+)
+
+# add fitted values and CIs
+newdat <- newdat %>%
+  mutate(
+    fit_link = pred_link$fit,
+    se_link  = pred_link$se.fit,
+    pred_pipiens   = plogis(fit_link),
+    lower_pipiens  = plogis(fit_link - 1.96 * se_link),
+    upper_pipiens  = plogis(fit_link + 1.96 * se_link),
+    pred_restuans  = 1 - pred_pipiens,
+    lower_restuans = 1 - upper_pipiens,
+    upper_restuans = 1 - lower_pipiens
+  )
+
+# reshape ONLY the prediction columns
+plotdat <- newdat %>%
+  select(
+    urbanization,
+    pred_pipiens, lower_pipiens, upper_pipiens,
+    pred_restuans, lower_restuans, upper_restuans
+  ) %>%
+  pivot_longer(
+    cols = -urbanization,
+    names_to = c(".value", "species"),
+    names_pattern = "(pred|lower|upper)_(pipiens|restuans)"
+  ) %>%
+  mutate(
+    species = factor(
+      species,
+      levels = c("pipiens", "restuans"),
+    )
+  )
+
+cols <- c(
+  "pipiens"  = "#1bc8ea",
+  "restuans" = "#FDAE61"
+)
+
+ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.08) +
+  scale_color_manual(values = cols) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(
+    x = "Urbanization",
+    y = "Predicted relative abundance",
+    color = NULL
+  ) +
+  theme_classic() +
+  theme(legend.position = "right")
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# prediction data
+newdat <- data.frame(
+  urbanization = factor(levels(ct_long$urbanization),
+                        levels = levels(ct_long$urbanization))
+)
+
+# predict overall effect (exclude random effect)
+pred_link <- predict(
+  glm_fit,
+  newdata = newdat,
+  type = "link",
+  se.fit = TRUE,
+  re.form = NA
+)
+
+# add fitted values and CIs
+newdat <- newdat %>%
+  mutate(
+    fit_link = pred_link$fit,
+    se_link  = pred_link$se.fit,
+    pred_pipiens   = plogis(fit_link),
+    lower_pipiens  = plogis(fit_link - 1.96 * se_link),
+    upper_pipiens  = plogis(fit_link + 1.96 * se_link),
+    pred_restuans  = 1 - pred_pipiens,
+    lower_restuans = 1 - upper_pipiens,
+    upper_restuans = 1 - lower_pipiens
+  )
+
+# reshape
+plotdat <- newdat %>%
+  pivot_longer(
+    cols = -urbanization,
+    names_to = c(".value", "species"),
+    names_pattern = "(pred|lower|upper)_(pipiens|restuans)"
+  ) %>%
+  mutate(
+    species = factor(species,
+      levels = c("pipiens", "restuans"),
+      labels = c("Culex pipiens", "Culex restuans")
+    )
+  )
+
+# colors
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex restuans" = "#FDAE61"
+)
+
+# quick check
+print(unique(plotdat$species))
+
+# plot
+ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.08) +
+  scale_color_manual(values = cols) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(
+    x = "Urbanization",
+    y = "Predicted relative abundance",
+    color = NULL
+  ) +
+  theme_classic() +
+  theme(legend.position = "right")
+
+unique(plotdat$species)
+
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# prediction data: one row per urbanization level
+newdat <- expand.grid(
+  urbanization = levels(ct_long$urbanization)
+)
+
+newdat$urbanization <- factor(newdat$urbanization, levels = levels(ct_long$urbanization))
+
+# predict on link scale, excluding random effect
+pred_link <- predict(glm_fit, newdata = newdat, type = "link", se.fit = TRUE, re.form = NA)
+
+# convert to probabilities
+newdat <- newdat %>%
+  mutate(
+    fit_link = pred_link$fit,
+    se_link  = pred_link$se.fit,
+    pred_pipiens = plogis(fit_link),
+    lower_pipiens = plogis(fit_link - 1.96 * se_link),
+    upper_pipiens = plogis(fit_link + 1.96 * se_link),
+    pred_restuans = 1 - pred_pipiens,
+    lower_restuans = 1 - upper_pipiens,
+    upper_restuans = 1 - lower_pipiens
+  )
+
+# reshape for plotting
+plotdat <- newdat %>%
+  pivot_longer(
+    cols = c(pred_pipiens, lower_pipiens, upper_pipiens,
+             pred_restuans, lower_restuans, upper_restuans),
+    names_to = c(".value", "species"),
+    names_pattern = "(pred|lower|upper)_(pipiens|restuans)"
+  ) %>%
+  mutate(
+    species = recode(species,
+      pipiens = "Culex pipiens",
+      restuans = "Culex restuans"
+    )
+  )
+
+# colors
+cols <- c(
+  "pipiens"  = "#1bc8ea",
+  "restuans" = "#FDAE61"
+)
+
+# plot
+ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.08) +
+  scale_color_manual(values = cols) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(
+    x = "Urbanization",
+    y = "Predicted relative abundance",
+    color = NULL
+  ) +
+  theme_classic() +
+  theme(legend.position = "right")
+
+unique(ct_long$species)
+```
+```{r plot-predicted}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# prediction grid
+newdat <- expand.grid(
+  urbanization = levels(ct_long$urbanization)
+)
+
+# make sure factor levels match the model data
+newdat$urbanization <- factor(newdat$urbanization, levels = levels(ct_long$urbanization))
+
+# predicted probability of pipiens from the binomial model
+newdat$pred_pipiens <- predict(glm_fit, newdata = newdat, type = "response")
+
+# get SE on link scale, then convert to CI on response scale
+pred_link <- predict(glm_fit, newdata = newdat, type = "link", se.fit = TRUE)
+
+newdat <- newdat %>%
+  mutate(
+    fit_link = pred_link$fit,
+    se_link  = pred_link$se.fit,
+    lower_pipiens = plogis(fit_link - 1.96 * se_link),
+    upper_pipiens = plogis(fit_link + 1.96 * se_link),
+    pred_restuans = 1 - pred_pipiens,
+    lower_restuans = 1 - upper_pipiens,
+    upper_restuans = 1 - lower_pipiens
+  )
+
+# reshape for plotting both species
+plotdat <- newdat %>%
+  select(
+    urbanization,
+    pred_pipiens, lower_pipiens, upper_pipiens,
+    pred_restuans, lower_restuans, upper_restuans
+  ) %>%
+  pivot_longer(
+    cols = -urbanization,
+    names_to = c(".value", "species"),
+    names_pattern = "(pred|lower|upper)_(pipiens|restuans)"
+  ) %>%
+  mutate(
+    species = recode(species,
+      pipiens = "Culex pipiens",
+      restuans = "Culex restuans"
+    )
+  )
+
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex restuans" = "#FDAE61"
+)
+
+ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.08) +
+  scale_color_manual(values = cols) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(
+    x = "Urbanization",
+    y = "Predicted relative abundance",
+    color = NULL
+  ) +
+  theme_classic() +
+  theme(legend.position = "right")
+```
+```{r plot-odds}
+
+library(broom.mixed)
+library(dplyr)
+library(ggplot2)
+
+coef_df <- tidy(glm_fit, effects = "fixed") %>%
+  filter(term != "(Intercept)") %>%
+  mutate(
+    odds_ratio = exp(estimate),
+    lower = exp(estimate - 1.96 * std.error),
+    upper = exp(estimate + 1.96 * std.error),
+    term_clean = recode(term,
+      "urbanizationUrban" = "Urban vs Rural"
+    )
+  )
+
+ggplot(coef_df, aes(x = term_clean, y = odds_ratio)) +
+  geom_point(size = 4) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.1) +
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  scale_y_continuous(trans = "log10") +
+  labs(
+    x = NULL,
+    y = "Odds ratio (pipiens vs restuans)"
+  ) +
+  theme_classic()
+```

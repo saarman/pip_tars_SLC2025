@@ -910,7 +910,6 @@ fit_gam_site_date <- bam(
   data = combined,
   method = "fREML"
 )
-
 ```
 Plot results with site_date as a combined group:
 ```{r plot-gam-site-date, eval = FALSE}
