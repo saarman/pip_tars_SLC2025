@@ -7,10 +7,15 @@ output:
     toc: true
 ---
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Setup
+```{r 1-setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  # Saves PNGs to the root /figures folder
+  fig.path = "../figures/" 
+)
 ```
+
 
 **Research Topic:** testing whether habitat and seasonal partitioning between Culex pipiens s.l. and Culex tarsalis shapes West Nile Virus (WNV) dynamics across urban–rural gradients. 
 
@@ -24,7 +29,7 @@ knitr::opts_chunk$set(echo = TRUE)
  - The family = poisson (link = "log")... why again?  
 
 Load libraries
-```{r}
+```{r 2-libraries}
 library(tidyverse) # for data wrangling
 library(glmmTMB)   # for model fitting
 library(DHARMa)    # for residual plots
@@ -37,7 +42,7 @@ library(dplyr)     # for mutating dataframe to change labels in dataset
 # Salamander example
 
 Just to understand a bit better what it looks like when residuals don't "look good":
-```{r salamander}
+```{r 3-salamander}
 # use the salamanders dataset from glmmTMB:
 data("Salamanders")
 head(Salamanders)
@@ -110,7 +115,7 @@ ggplot(data = cl2, aes(x = spp, y = response)) +
 
  
   
-```{r tarsalis}
+```{r 4-tarsalis-1}
 ## tarsalis datasets from SLCMAD:
 tarsalis <- read.csv("../data/tarsalis_2025.csv")
 
@@ -136,12 +141,12 @@ head(tarsalis, 5)
 
 Start by binning into discrete seasons: early, mid, late
 
-```{r seasons-bins}
+```{r 5-seasons-bins}
 table(tarsalis$season, tarsalis$disease_week)
 ```
   
 First, look at the response distribution
-```{r response}
+```{r 6-response}
 # sub in tarsalis dataset here instead of salamander 
 hist(tarsalis$count) 
 hist(log(tarsalis$count))
@@ -152,7 +157,7 @@ hist(log(tarsalis$count))
 
 Fit the model with poisson(link="log"), using random effects (1 | site_name/disease_week)
 
-```{r poisson-log-link-week}
+```{r 7-poisson-log-link-week}
 # tarsalis count data, starting with poisson model:
 fit_pois <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/disease_week),
                     family = poisson(link = "log"),
@@ -161,14 +166,14 @@ summary(fit_pois)
 ```
 
 Look at the residuals:
-```{r resids-poisson-log-link-week}
+```{r 8-resids-poisson-log-link-week}
 simulateResiduals(fit_pois, plot = T)
 ```
 ## Random effects (1 | site_name/collection_date)
 
 Fit the model with poisson(link="log"), using random effects (1 | site_name/collection_date)
 
-```{r poisson-log-link-date}
+```{r 9-poisson-log-link-date}
 # tarsalis count data, starting with poisson model:
 fit_pois_date <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
                     family = poisson(link = "log"),
@@ -181,7 +186,7 @@ simulateResiduals(fit_pois_date, plot = T)
 
 I think it still doesn't look great... KS test shows significant deviation, dispersion test shows significant deviation, and there is a funnel shape. Maybe the negative binomial distribution can help with this as it helped with the salamanders? But this is all beyond me... give it a shot!
 
-```{r nbinom-log-link-date}
+```{r 10-nbinom-log-link-date}
 
 fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
                     family = nbinom1(link = "log"),
@@ -200,7 +205,7 @@ glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date
                     family = nbinom1(link = "log"),
                     data = tarsalis)
 
-```{r tar-marginal}
+```{r 11-tar-marginal}
 # First, just look at the effect of season, doing a 1-way pairwise comparison
 em_season_tar = emmeans(fit_pois_date, pairwise ~ season, type = "response")
 em_season_tar
@@ -240,7 +245,7 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
 ```
 
 ## Marginal effects across urbanization
-```{r tar-marginal-urbanization}
+```{r 12-tar-marginal-urbanization}
 # First, just look at the effect of season, doing a 1-way pairwise comparison
 em_urban_tar = emmeans(fit_pois_date, pairwise ~ season, type = "response")
 em_urban_tar
@@ -278,9 +283,11 @@ ggplot(data = cl2, aes(x = urbanization, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 
 ```
+# Load all data fresh:
+
 # Culex pipiens
   
-```{r pipiens}
+```{r 13-pipiens}
 ## pipiens datasets from SLCMAD:
 pipiens <- read.csv("../data/pipiens_2025.csv")
 
@@ -312,14 +319,14 @@ head(pipiens, 5)
 
 Start by binning into discrete seasons: early, mid, late
 
-```{r pip-seasons-bins}
+```{r 14-pip-seasons-bins}
 table(pipiens$season, pipiens$disease_week)
 
 table(pipiens$season, pipiens$urbanization)
 ```
   
 First, look at the response distribution
-```{r pip-response}
+```{r 15-pip-response}
 # sub in pipiens dataset here instead of salamander 
 hist(pipiens$count) 
 hist(log(pipiens$count))
@@ -330,7 +337,7 @@ hist(log(pipiens$count))
 
 Fit the model with poisson(link="log"), using random effects (1 | site_name/disease_week)
 
-```{r pip-poisson-log-link-week}
+```{r 16-pip-poisson-log-link-week}
 # pipiens count data, starting with poisson model:
 fit_pois <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/disease_week),
                     family = poisson(link = "log"),
@@ -339,14 +346,14 @@ summary(fit_pois)
 ```
 
 Look at the residuals:
-```{r pip-resids-poisson-log-link-week}
+```{r 17-pip-resids-poisson-log-link-week}
 simulateResiduals(fit_pois, plot = T)
 ```
 ## Random effects (1 | site_name/collection_date)
 
 Fit the model with poisson(link="log"), using random effects (1 | site_name/collection_date)
 
-```{r pip-poisson-log-link-date}
+```{r 18-pip-poisson-log-link-date}
 # pipiens count data, starting with poisson model:
 fit_pois_date <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
                     family = poisson(link = "log"),
@@ -359,7 +366,7 @@ simulateResiduals(fit_pois_date, plot = T)
 
 I think it still doesn't look great... KS test shows significant deviation, dispersion test shows significant deviation, and there is a funnel shape. Maybe the negative binomial distribution can help with this as it helped with the salamanders? But this is all beyond me... give it a shot!
 
-```{r pip-nbinom-log-link-date}
+```{r 19-pip-nbinom-log-link-date}
 fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date),
                     family = nbinom1(link = "log"),
                     data = pipiens)
@@ -377,7 +384,7 @@ glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/collection_date
                     family = nbinom1(link = "log"),
                     data = pipiens)
 
-```{r pip-marginal}
+```{r 20-pip-marginal}
 # First, just look at the effect of season, doing a 1-way pairwise comparison
 em_season_pip = emmeans(fit_pois_date, pairwise ~ season, type = "response")
 em_season_pip
@@ -418,7 +425,7 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
   
 
 ## Marginal effects across urbanization
-```{r pip-marginal-urbanization}
+```{r 21-pip-marginal-urbanization}
 # First, just look at the effect of season, doing a 1-way pairwise comparison
 em_urban_pip = emmeans(fit_pois_date, pairwise ~ season, type = "response")
 em_urban_pip
@@ -456,3 +463,284 @@ ggplot(data = cl2, aes(x = urbanization, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 
 ```
+
+
+Load libraries
+```{22-r}
+library(tidyverse) # for data wrangling
+library(glmmTMB)   # for model fitting
+library(DHARMa)    # for residual plots
+library(emmeans)   # for estimating marginal effects
+library(multcomp)  # for statistical comparisons on fitted models
+library(dplyr)     # for mutating dataframe to change labels in dataset
+
+```
+  
+# Prepare Data
+
+## Culex tarsalis data
+  
+```{r 23-tarsalis}
+## tarsalis datasets from SLCMAD:
+tarsalis <- read.csv("../data/tarsalis_2025.csv")
+
+tarsalis <- tarsalis %>%
+  mutate(
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban"),
+      labels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late"),
+      labels = c("early", "mid", "late")
+    )
+  )
+
+head(tarsalis, 5)
+```
+
+## Culex pipiens data
+  
+```{r 24-pipiens}
+## pipiens datasets from SLCMAD:
+pipiens <- read.csv("../data/pipiens_2025.csv")
+
+head(pipiens, 5)
+table(pipiens$season, pipiens$urban_cat)
+
+library(dplyr)
+
+pipiens <- pipiens %>%
+  mutate(
+    urban_cat = trimws(tolower(urban_cat)),
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban"),
+      labels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late"),
+      labels = c("early", "mid", "late")
+    )
+  )
+
+head(pipiens, 5)
+```
+
+## Combined data 
+```{r 25-combo}
+## tarsalis datasets from SLCMAD:
+tarsalis <- read.csv("../data/tarsalis_2025.csv")
+## pipiens datasets from SLCMAD:
+pipiens <- read.csv("../data/pipiens_2025.csv")
+## combine
+library(dplyr)
+combined <- bind_rows(tarsalis, pipiens)
+
+## Set factor levels
+combined <- combined %>%
+  mutate(
+    species = factor(
+      species,
+      levels = c("Culex pipiens", "Culex tarsalis")
+    ),
+    urban_cat = trimws(tolower(urban_cat)),
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late")
+    )
+  )
+
+#check
+table(combined$species)
+table(combined$season, combined$species)
+```
+# GLMM by species * season (and species * season * urbanization) for visualization
+
+## GLMM with species * season, including trap type:
+```{r 26-simple}
+fit_combined <- glmmTMB(
+  count ~ species * season + trap_type + (1 | site_name/collection_date),
+  family = nbinom1(link = "log"),
+  data = combined
+)
+```
+
+Marginal Means:
+```{r 27-marginal-means}
+library(emmeans)
+
+em <- emmeans(fit_combined, ~ species * season, type = "response")
+em_df <- as.data.frame(em)
+
+library(ggplot2)
+
+ggplot(em_df, aes(x = season, y = response, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  labs(
+    title = "Seasonal abundance",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+    theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+## GLMM with species * season * urbanization, including trap type:
+```{r 28-season-urbanization}
+library(glmmTMB)
+library(dplyr)
+
+fit_combined <- glmmTMB(
+  count ~ species * season * urbanization + trap_type +
+    (1 | site_name/collection_date),
+  family = nbinom1(link = "log"),
+  data = combined
+)
+```
+### Plot marginal means by species and season within each urbanization class
+```{r 29-marg-with-urbanization, warning=FALSE}
+library(emmeans)
+
+em <- emmeans(
+  fit_combined,
+  ~ species * season | urbanization,
+  type = "response"
+)
+
+em_df <- as.data.frame(em)
+
+library(ggplot2)
+
+ggplot(em_df, aes(x = season, y = response, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+    scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  
+  facet_wrap(~ urbanization) +
+  labs(
+    title = "Seasonal abundance of Culex pipiens and Culex tarsalis across urbanization classes",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+
+```
+
+### Plot marginal means by species and season within each trap type
+```{r 30-mm-by-trap, warning=FALSE}
+em <- emmeans(
+  fit_combined,
+  ~ species * season | trap_type,
+  type = "response"
+)
+
+em_df <- as.data.frame(em)
+
+# Handle column name
+if ("response" %in% names(em_df)) {
+  em_df <- em_df %>% rename(rate = response)
+}
+
+# Plot by trap type:
+ggplot(em_df, aes(x = season, y = rate, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  facet_wrap(~ trap_type) +
+  labs(
+    title = "Seasonal abundance by species and trap type",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r 31-mm-trap-urbanization}
+#facet by both urbanization and trap type
+
+em <- emmeans(
+  fit_combined,
+  ~ species * season | urbanization * trap_type,
+  type = "response"
+)
+
+em_df <- as.data.frame(em)
+
+if ("response" %in% names(em_df)) {
+  em_df <- em_df %>% rename(rate = response)
+}
+
+#plot
+ggplot(em_df, aes(x = season, y = rate, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  facet_grid(urbanization ~ trap_type, scales = "free_y") +
+  labs(
+    title = "Seasonal abundance by species, urbanization, and trap type",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+

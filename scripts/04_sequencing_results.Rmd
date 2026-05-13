@@ -7,9 +7,13 @@ output:
     toc: true
 ---
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Setup
+```{r 1-setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  # Saves PNGs to the root /figures folder
+  fig.path = "../figures/" 
+)
 ```
 
 ```{r}
@@ -37,7 +41,7 @@ ct_plot <- ct %>%
     restuans   = rest_its2,
     unassigned = ITS2 - pip_its2 - rest_its2
   ) %>%
-  select(Code, ITS2, pipiens, restuans, unassigned) %>%
+  dplyr::select(Code, ITS2, pipiens, restuans, unassigned) %>%
   pivot_longer(cols = c(pipiens, restuans, unassigned),
                names_to = "species", values_to = "count") %>%
   mutate(prop = count / ITS2,
@@ -108,7 +112,7 @@ ut_plot <- ut %>%
     other      = other_ace2,
     unassigned = ace2 - pip_ace2 - hyb_ace2 - other_ace2
   ) %>%
-  select(Code, ace2, pipiens, hybrid, other, unassigned) %>%
+  dplyr::select(Code, ace2, pipiens, hybrid, other, unassigned) %>%
   pivot_longer(cols = c(pipiens, hybrid, other, unassigned),
                names_to = "species", values_to = "count") %>%
   mutate(prop = count / ace2,
@@ -266,80 +270,6 @@ Predicted response is:
  - 1 - P(species_bin = 1) = predicted relative abundance of restuans  
 
 To get the overall effect of urbanization, you want to exclude the random site effect, so use re.form = NA. 
-```{r}
-library(dplyr)
-library(ggplot2)
-
-# prediction data
-newdat <- data.frame(
-  urbanization = factor(levels(ct_long$urbanization),
-                        levels = levels(ct_long$urbanization))
-)
-
-# predict overall effect, excluding random Code effect
-pred_link <- predict(
-  glm_fit,
-  newdata = newdat,
-  type = "link",
-  se.fit = TRUE,
-  re.form = NA
-)
-
-# add predicted probabilities and CIs
-newdat <- newdat %>%
-  mutate(
-    fit_link = pred_link$fit,
-    se_link  = pred_link$se.fit,
-    pred_pipiens   = plogis(fit_link),
-    lower_pipiens  = plogis(fit_link - 1.96 * se_link),
-    upper_pipiens  = plogis(fit_link + 1.96 * se_link),
-    pred_restuans  = 1 - pred_pipiens,
-    lower_restuans = 1 - upper_pipiens,
-    upper_restuans = 1 - lower_pipiens
-  )
-
-# build plotting dataframe manually
-plotdat <- bind_rows(
-  newdat %>%
-    transmute(
-      urbanization,
-      species = "Culex pipiens",
-      pred = pred_pipiens,
-      lower = lower_pipiens,
-      upper = upper_pipiens
-    ),
-  newdat %>%
-    transmute(
-      urbanization,
-      species = "Culex restuans",
-      pred = pred_restuans,
-      lower = lower_restuans,
-      upper = upper_restuans
-    )
-)
-
-# check exact labels
-print(unique(plotdat$species))
-
-cols <- c(
-  "Culex pipiens"  = "#1bc8ea",
-  "Culex restuans" = "#FF2DA0"
-)
-
-ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species)) +
-  geom_point(size = 4) +
-  geom_line(linewidth = 1) +
-  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.08) +
-  scale_color_manual(values = cols) +
-  scale_y_continuous(limits = c(0, 1)) +
-  labs(
-    x = "Urbanization",
-    y = "Predicted relative abundance",
-    color = NULL
-  ) +
-  theme_classic() +
-  theme(legend.position = "right")
-```
 ```{r plot-pred}
 library(dplyr)
 library(tidyr)
@@ -378,7 +308,7 @@ newdat <- newdat %>%
 
 # reshape ONLY the prediction columns
 plotdat <- newdat %>%
-  select(
+  dplyr::select(
     urbanization,
     pred_pipiens, lower_pipiens, upper_pipiens,
     pred_restuans, lower_restuans, upper_restuans
@@ -556,39 +486,49 @@ ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species
 
 unique(ct_long$species)
 ```
+
+
 ```{r plot-predicted}
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 
 # prediction grid
-newdat <- expand.grid(
-  urbanization = levels(ct_long$urbanization)
+newdat <- data.frame(
+  urbanization = factor(
+    c("Rural", "Urban"),
+    levels = c("Rural", "Urban")
+  )
 )
 
-# make sure factor levels match the model data
-newdat$urbanization <- factor(newdat$urbanization, levels = levels(ct_long$urbanization))
+# predict from mixed model
+pred_link <- predict(
+  glm_fit,
+  newdata = newdat,
+  type = "link",
+  se.fit = TRUE,
+  re.form = NA
+)
 
-# predicted probability of pipiens from the binomial model
-newdat$pred_pipiens <- predict(glm_fit, newdata = newdat, type = "response")
-
-# get SE on link scale, then convert to CI on response scale
-pred_link <- predict(glm_fit, newdata = newdat, type = "link", se.fit = TRUE)
-
+# convert to probabilities + confidence intervals
 newdat <- newdat %>%
   mutate(
     fit_link = pred_link$fit,
     se_link  = pred_link$se.fit,
+
+    pred_pipiens  = plogis(fit_link),
     lower_pipiens = plogis(fit_link - 1.96 * se_link),
     upper_pipiens = plogis(fit_link + 1.96 * se_link),
-    pred_restuans = 1 - pred_pipiens,
+
+    pred_restuans  = 1 - pred_pipiens,
     lower_restuans = 1 - upper_pipiens,
     upper_restuans = 1 - lower_pipiens
   )
 
-# reshape for plotting both species
+# reshape for plotting
 plotdat <- newdat %>%
-  select(
+  dplyr::select(
     urbanization,
     pred_pipiens, lower_pipiens, upper_pipiens,
     pred_restuans, lower_restuans, upper_restuans
@@ -599,31 +539,54 @@ plotdat <- newdat %>%
     names_pattern = "(pred|lower|upper)_(pipiens|restuans)"
   ) %>%
   mutate(
-    species = recode(species,
+    species = recode(
+      species,
       pipiens = "Culex pipiens",
       restuans = "Culex restuans"
     )
   )
 
+# colors
 cols <- c(
   "Culex pipiens"  = "#1bc8ea",
   "Culex restuans" = "#FDAE61"
 )
 
-ggplot(plotdat, aes(x = urbanization, y = pred, color = species, group = species)) +
+# plot
+ggplot(plotdat,
+       aes(x = urbanization,
+           y = pred,
+           color = species,
+           group = species)) +
+
   geom_point(size = 4) +
   geom_line(linewidth = 1) +
-  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.08) +
+
+  geom_errorbar(
+    aes(ymin = lower, ymax = upper),
+    width = 0.08
+  ) +
+
   scale_color_manual(values = cols) +
-  scale_y_continuous(limits = c(0, 1)) +
+
+  scale_y_continuous(
+    limits = c(0, 1)
+  ) +
+
   labs(
     x = "Urbanization",
     y = "Predicted relative abundance",
     color = NULL
   ) +
+
   theme_classic() +
-  theme(legend.position = "right")
+  theme(
+    legend.position = "right"
+  )
+
 ```
+
+
 ```{r plot-odds}
 
 library(broom.mixed)
@@ -652,3 +615,171 @@ ggplot(coef_df, aes(x = term_clean, y = odds_ratio)) +
   ) +
   theme_classic()
 ```
+
+# Map for UT replicating the one for CT
+Figure 2.  Map of Utah 2025 collections. Red: urban, yellow: periurban, green: rural.
+
+```{r map}
+library(tidyverse)
+library(maps)
+library(ggrepel)
+
+# -------------------------
+# site data
+# -------------------------
+ut_sites <- tribble(
+  ~Code,  ~urbanization, ~lat,        ~lon,
+  "AUDU", "Rural",       40.8261295, -112.11365,
+  "AVOC", "Rural",       40.7948361, -112.12243,
+  "BIRD", "Rural",       40.8021326, -112.05023,
+  "BLUE", "Rural",       40.8299255, -111.98620,
+  "ELIS", "Rural",       40.8520373, -112.04947,
+  "JADE", "Rural",       40.8237778, -112.06829,
+  "LAKE", "Rural",       40.8699330, -112.02340,
+  "NEWS", "Rural",       40.8711671, -111.98135,
+  "POPO", "Rural",       40.8222004, -112.01486,
+  "SOSA", "Rural",       40.7843680, -112.10903,
+  "FAIR", "Peri",        40.7736869, -111.92002,
+  "FRCO", "Peri",        40.7689356, -112.08336,
+  "FS9A", "Peri",        40.7786825, -112.02853,
+  "GLEN", "Peri",        40.7276405, -111.93180,
+  "KETO", "Peri",        40.7480485, -111.96788,
+  "LEEK", "Peri",        40.7278171, -112.04577,
+  "OREI", "Peri",        40.7561468, -112.03857,
+  "SLCM", "Peri",        40.8160060, -111.95438,
+  "TRTR", "Peri",        40.7542365, -112.00355,
+  "WING", "Peri",        40.7715194, -111.97745,
+  "COND", "Urban",       40.7528000, -111.89830,
+  "DOWA", "Urban",       40.7308000, -111.85720,
+  "FS13", "Urban",       40.7236000, -111.82260,
+  "FS2W", "Urban",       40.7762000, -111.89890,
+  "FS4A", "Urban",       40.7815000, -111.86470,
+  "FS5H", "Urban",       40.7500000, -111.86130,
+  "FS6I", "Urban",       40.7523000, -111.91830,
+  "FS8B", "Urban",       40.7411000, -111.89160,
+  "GRAYS","Urban",       40.7108000, -111.85920,
+  "HOGL", "Urban",       40.7501000, -111.81610,
+  "NIBL", "Urban",       40.7103000, -111.87270
+) %>%
+  mutate(
+    urbanization = factor(urbanization, levels = c("Urban", "Peri", "Rural"))
+  )
+
+# -------------------------
+# Utah county map
+# -------------------------
+utah_map <- map_data("county") %>%
+  filter(region == "utah", subregion %in% c(
+    "salt lake", "utah", "davis", "weber", "tooele", "summit"
+  ))
+
+# -------------------------
+# plot
+# -------------------------
+ggplot() +
+  geom_polygon(
+    data = utah_map,
+    aes(x = long, y = lat, group = group),
+    fill = "grey80",
+    color = "white",
+    linewidth = 0.3
+  ) +
+  geom_point(
+    data = ut_sites,
+    aes(x = lon, y = lat, fill = urbanization),
+    shape = 21,
+    size = 4.5,
+    color = "grey25",
+    stroke = 0.7
+  ) +
+  geom_text_repel(
+    data = ut_sites,
+    aes(x = lon, y = lat, label = Code),
+    size = 7,
+    family = "",
+    box.padding = 0.25,
+    point.padding = 0.2,
+    segment.color = NA,
+    max.overlaps = Inf
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Urban" = "red",
+      "Peri"  = "#F4B400",
+      "Rural" = "green3"
+    )
+  ) +
+  coord_quickmap(
+    xlim = c(-112.16, -111.78),
+    ylim = c(40.69, 40.89),
+    expand = FALSE
+  ) +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
+
+```{r google-map}
+library(tidyverse)
+library(ggmap)
+library(ggrepel)
+
+
+# 1. Register your Google Maps API key
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
+
+# 2. Build a bounding box
+lon_min <- -112.8
+lon_max <- -111.2
+lat_min <- 40.6
+lat_max <- 41
+
+# 3. Download the satellite map using the bounding box
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "terrain",
+  zoom = 11
+)
+
+# -------------------------
+# Plot
+# -------------------------
+ggmap(bg) +
+  geom_point(
+    data = ut_sites,
+    aes(x = lon, y = lat, fill = urbanization),
+    shape = 21,
+    size = 2.5,
+    color = "black",
+    stroke = 0.7
+  ) +
+  geom_text_repel(
+    data = ut_sites,
+    aes(x = lon, y = lat, label = Code),
+    size = 1.5,
+    box.padding = 0.03,
+    point.padding = 0.02,
+    segment.color = NA,
+    max.overlaps = Inf
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Urban" = "red",
+      "Peri"  = "#F4B400",
+      "Rural" = "green3"
+    )
+  ) +
+  coord_quickmap(xlim = c(lon_min, lon_max), ylim = c(lat_min, lat_max)) +
+  theme_void() +
+  theme(legend.position = "none")
+
+
+```
+

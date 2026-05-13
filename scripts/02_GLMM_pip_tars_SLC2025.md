@@ -2,8 +2,9 @@ GLMM **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
 season
 ================
 Norah Saarman
-2026-03-19
+2026-05-13
 
+- [Setup](#setup)
 - [Salamander example](#salamander-example)
 - [Culex tarsalis](#culex-tarsalis)
 - [GLMM by season and urbanization, each mosquito species
@@ -15,6 +16,7 @@ Norah Saarman
   - [Marginal effects across seasons](#marginal-effects-across-seasons)
   - [Marginal effects across
     urbanization](#marginal-effects-across-urbanization)
+- [Culex pipiens](#culex-pipiens)
 - [GLMM by season and urbanization, each mosquito species
   separately](#glmm-by-season-and-urbanization-each-mosquito-species-separately-1)
   - [Random effects (1 \|
@@ -24,6 +26,19 @@ Norah Saarman
   - [Marginal effects](#marginal-effects)
   - [Marginal effects across
     urbanization](#marginal-effects-across-urbanization-1)
+  - [Culex pipiens data](#culex-pipiens-data)
+  - [Combined data](#combined-data)
+- [GLMM by species \* season (and species \* season \* urbanization) for
+  visualization](#glmm-by-species--season-and-species--season--urbanization-for-visualization)
+  - [GLMM with species \* season, including trap
+    type:](#glmm-with-species--season-including-trap-type)
+    - [Plot marginal means by species and season within each
+      urbanization
+      class](#plot-marginal-means-by-species-and-season-within-each-urbanization-class)
+    - [Plot marginal means by species and season within each trap
+      type](#plot-marginal-means-by-species-and-season-within-each-trap-type)
+
+# Setup
 
 **Research Topic:** testing whether habitat and seasonal partitioning
 between Culex pipiens s.l. and Culex tarsalis shapes West Nile Virus
@@ -139,13 +154,13 @@ head(Salamanders)
 hist(Salamanders$count)
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-1.png)<!-- -->
+![](../figures/3-salamander-1.png)<!-- -->
 
 ``` r
 hist(log(Salamanders$count))
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-2.png)<!-- -->
+![](../figures/3-salamander-2.png)<!-- -->
 
 ``` r
 # count data, so start with poisson model:
@@ -196,7 +211,7 @@ simulateResiduals(fit_pois, plot = T)
 
     ## DHARMa:testOutliers with type = binomial may have inflated Type I error rates for integer-valued distributions. To get a more exact result, it is recommended to re-run testOutliers with type = 'bootstrap'. See ?testOutliers for details
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-3.png)<!-- -->
+![](../figures/3-salamander-3.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -216,7 +231,7 @@ fit_nbinom <- glmmTMB(count ~ spp*mined + (1 | site),
 simulateResiduals(fit_nbinom, plot = T)
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-4.png)<!-- -->
+![](../figures/3-salamander-4.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -296,7 +311,7 @@ ggplot(data = cl, aes(x = spp, y = response)) +
     ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
     ## generated.
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-5.png)<!-- -->
+![](../figures/3-salamander-5.png)<!-- -->
 
 ``` r
 # Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
@@ -395,7 +410,7 @@ ggplot(data = cl2, aes(x = spp, y = response)) +
   ggeasy::easy_remove_axes("y", "title")
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/salamander-6.png)<!-- -->
+![](../figures/3-salamander-6.png)<!-- -->
 
 # Culex tarsalis
 
@@ -459,13 +474,13 @@ First, look at the response distribution
 hist(tarsalis$count) 
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/response-1.png)<!-- -->
+![](../figures/6-response-1.png)<!-- -->
 
 ``` r
 hist(log(tarsalis$count))
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/response-2.png)<!-- -->
+![](../figures/6-response-2.png)<!-- -->
 
 ## Random effects (1 \| site_name/disease_week)
 
@@ -519,7 +534,7 @@ simulateResiduals(fit_pois, plot = T)
 
     ## DHARMa:testOutliers with type = binomial may have inflated Type I error rates for integer-valued distributions. To get a more exact result, it is recommended to re-run testOutliers with type = 'bootstrap'. See ?testOutliers for details
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/resids-poisson-log-link-week-1.png)<!-- -->
+![](../figures/8-resids-poisson-log-link-week-1.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -576,7 +591,7 @@ simulateResiduals(fit_pois_date, plot = T)
 
     ## qu = 0.25, log(sigma) = -2.118268 : outer Newton did not converge fully.
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/poisson-log-link-date-1.png)<!-- -->
+![](../figures/9-poisson-log-link-date-1.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -596,7 +611,7 @@ fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/c
 simulateResiduals(fit_nbinom, plot = T)
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/nbinom-log-link-date-1.png)<!-- -->
+![](../figures/10-nbinom-log-link-date-1.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -660,7 +675,7 @@ ggplot(data = cl, aes(x = season, y = rate)) +
     ggeasy::easy_remove_axes("both", "title")
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-1.png)<!-- -->
+![](../figures/11-tar-marginal-1.png)<!-- -->
 
 ``` r
 # Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
@@ -733,7 +748,7 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-2.png)<!-- -->
+![](../figures/11-tar-marginal-2.png)<!-- -->
 
 ## Marginal effects across urbanization
 
@@ -781,7 +796,7 @@ ggplot(data = cl, aes(x = season, y = rate)) +
     ggeasy::easy_remove_axes("both", "title")
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-urbanization-1.png)<!-- -->
+![](../figures/12-tar-marginal-urbanization-1.png)<!-- -->
 
 ``` r
 # Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
@@ -854,8 +869,10 @@ ggplot(data = cl2, aes(x = urbanization, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/tar-marginal-urbanization-2.png)<!-- -->
-\# Culex pipiens
+![](../figures/12-tar-marginal-urbanization-2.png)<!-- --> \# Load all
+data fresh:
+
+# Culex pipiens
 
 ``` r
 ## pipiens datasets from SLCMAD:
@@ -957,13 +974,13 @@ First, look at the response distribution
 hist(pipiens$count) 
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-response-1.png)<!-- -->
+![](../figures/15-pip-response-1.png)<!-- -->
 
 ``` r
 hist(log(pipiens$count))
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-response-2.png)<!-- -->
+![](../figures/15-pip-response-2.png)<!-- -->
 
 ## Random effects (1 \| site_name/disease_week)
 
@@ -1015,7 +1032,10 @@ Look at the residuals:
 simulateResiduals(fit_pois, plot = T)
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-resids-poisson-log-link-week-1.png)<!-- -->
+    ## Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
+    ## : Fitting terminated with step failure - check results carefully
+
+![](../figures/17-pip-resids-poisson-log-link-week-1.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -1070,7 +1090,10 @@ summary(fit_pois_date)
 simulateResiduals(fit_pois_date, plot = T)
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-poisson-log-link-date-1.png)<!-- -->
+    ## Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
+    ## : Fitting terminated with step failure - check results carefully
+
+![](../figures/18-pip-poisson-log-link-date-1.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -1090,7 +1113,7 @@ fit_nbinom <- glmmTMB(count ~ season*urbanization + trap_type + (1 | site_name/c
 simulateResiduals(fit_nbinom, plot = T)
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-nbinom-log-link-date-1.png)<!-- -->
+![](../figures/19-pip-nbinom-log-link-date-1.png)<!-- -->
 
     ## Object of Class DHARMa with simulated residuals based on 250 simulations with refit = FALSE . See ?DHARMa::simulateResiduals for help. 
     ##  
@@ -1154,7 +1177,7 @@ ggplot(data = cl, aes(x = season, y = rate)) +
     ggeasy::easy_remove_axes("both", "title")
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-1.png)<!-- -->
+![](../figures/20-pip-marginal-1.png)<!-- -->
 
 ``` r
 # Next, let's see how the effects vary in a 2-way emmeans comparison
@@ -1227,7 +1250,7 @@ ggplot(data = cl2, aes(x = season, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-2.png)<!-- -->
+![](../figures/20-pip-marginal-2.png)<!-- -->
 
 ## Marginal effects across urbanization
 
@@ -1275,7 +1298,7 @@ ggplot(data = cl, aes(x = season, y = rate)) +
     ggeasy::easy_remove_axes("both", "title")
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-urbanization-1.png)<!-- -->
+![](../figures/21-pip-marginal-urbanization-1.png)<!-- -->
 
 ``` r
 # Next, let's see how the effects vary with different mined levels in a 2-way emmeans comparison
@@ -1348,4 +1371,363 @@ ggplot(data = cl2, aes(x = urbanization, y = rate)) +
     theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](02_GLMM_pip_tars_SLC2025_files/figure-gfm/pip-marginal-urbanization-2.png)<!-- -->
+![](../figures/21-pip-marginal-urbanization-2.png)<!-- -->
+
+Load libraries \`\`\`{22-r} library(tidyverse) \# for data wrangling
+library(glmmTMB) \# for model fitting library(DHARMa) \# for residual
+plots library(emmeans) \# for estimating marginal effects
+library(multcomp) \# for statistical comparisons on fitted models
+library(dplyr) \# for mutating dataframe to change labels in dataset
+
+      
+    # Prepare Data
+
+    ## Culex tarsalis data
+      
+
+    ``` r
+    ## tarsalis datasets from SLCMAD:
+    tarsalis <- read.csv("../data/tarsalis_2025.csv")
+
+    tarsalis <- tarsalis %>%
+      mutate(
+        urbanization = factor(
+          urban_cat,
+          levels = c("rural", "peri", "urban"),
+          labels = c("rural", "peri", "urban")
+        ),
+        season = factor(
+          season,
+          levels = c("early", "mid", "late"),
+          labels = c("early", "mid", "late")
+        )
+      )
+
+    head(tarsalis, 5)
+
+    ##   site_code     site_name longitude latitude trap_type collection_date
+    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-07-10
+    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-07-17
+    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-08-21
+    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-08-21
+    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-09-05
+    ##   disease_week        species count season urban_cat urbanization
+    ## 1           28 Culex tarsalis    NA    mid     urban        urban
+    ## 2           29 Culex tarsalis     1    mid     urban        urban
+    ## 3           34 Culex tarsalis    NA   late     urban        urban
+    ## 4           34 Culex tarsalis    NA   late     urban        urban
+    ## 5           36 Culex tarsalis    NA   late     urban        urban
+
+## Culex pipiens data
+
+``` r
+## pipiens datasets from SLCMAD:
+pipiens <- read.csv("../data/pipiens_2025.csv")
+
+head(pipiens, 5)
+```
+
+    ##   site_code     site_name longitude latitude trap_type collection_date
+    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-05-30
+    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-05
+    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-12
+    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-20
+    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-26
+    ##   disease_week       species count season urban_cat
+    ## 1           22 Culex pipiens     3  early    urban 
+    ## 2           23 Culex pipiens     9    mid    urban 
+    ## 3           24 Culex pipiens    10    mid    urban 
+    ## 4           25 Culex pipiens     5    mid    urban 
+    ## 5           26 Culex pipiens    30    mid    urban
+
+``` r
+table(pipiens$season, pipiens$urban_cat)
+```
+
+    ##        
+    ##         peri rural urban 
+    ##   early   68    75     50
+    ##   late   148   110    290
+    ##   mid    185   172    296
+
+``` r
+library(dplyr)
+
+pipiens <- pipiens %>%
+  mutate(
+    urban_cat = trimws(tolower(urban_cat)),
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban"),
+      labels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late"),
+      labels = c("early", "mid", "late")
+    )
+  )
+
+head(pipiens, 5)
+```
+
+    ##   site_code     site_name longitude latitude trap_type collection_date
+    ## 1       224 1700 E Church  -111.842 40.72952      GRVD      2025-05-30
+    ## 2       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-05
+    ## 3       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-12
+    ## 4       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-20
+    ## 5       224 1700 E Church  -111.842 40.72952      GRVD      2025-06-26
+    ##   disease_week       species count season urban_cat urbanization
+    ## 1           22 Culex pipiens     3  early     urban        urban
+    ## 2           23 Culex pipiens     9    mid     urban        urban
+    ## 3           24 Culex pipiens    10    mid     urban        urban
+    ## 4           25 Culex pipiens     5    mid     urban        urban
+    ## 5           26 Culex pipiens    30    mid     urban        urban
+
+## Combined data
+
+``` r
+## tarsalis datasets from SLCMAD:
+tarsalis <- read.csv("../data/tarsalis_2025.csv")
+## pipiens datasets from SLCMAD:
+pipiens <- read.csv("../data/pipiens_2025.csv")
+## combine
+library(dplyr)
+combined <- bind_rows(tarsalis, pipiens)
+
+## Set factor levels
+combined <- combined %>%
+  mutate(
+    species = factor(
+      species,
+      levels = c("Culex pipiens", "Culex tarsalis")
+    ),
+    urban_cat = trimws(tolower(urban_cat)),
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban")
+    ),
+    season = factor(
+      season,
+      levels = c("early", "mid", "late")
+    )
+  )
+
+#check
+table(combined$species)
+```
+
+    ## 
+    ##  Culex pipiens Culex tarsalis 
+    ##           1394           1774
+
+``` r
+table(combined$season, combined$species)
+```
+
+    ##        
+    ##         Culex pipiens Culex tarsalis
+    ##   early           193            336
+    ##   mid             653            751
+    ##   late            548            687
+
+# GLMM by species \* season (and species \* season \* urbanization) for visualization
+
+## GLMM with species \* season, including trap type:
+
+``` r
+fit_combined <- glmmTMB(
+  count ~ species * season + trap_type + (1 | site_name/collection_date),
+  family = nbinom1(link = "log"),
+  data = combined
+)
+```
+
+Marginal Means:
+
+``` r
+library(emmeans)
+
+em <- emmeans(fit_combined, ~ species * season, type = "response")
+em_df <- as.data.frame(em)
+
+library(ggplot2)
+
+ggplot(em_df, aes(x = season, y = response, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  labs(
+    title = "Seasonal abundance",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+    theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
+    ## Warning: No shared levels found between `names(values)` of the manual scale and the
+    ## data's fill values.
+
+![](../figures/27-marginal-means-1.png)<!-- --> \## GLMM with species \*
+season \* urbanization, including trap type:
+
+``` r
+library(glmmTMB)
+library(dplyr)
+
+fit_combined <- glmmTMB(
+  count ~ species * season * urbanization + trap_type +
+    (1 | site_name/collection_date),
+  family = nbinom1(link = "log"),
+  data = combined
+)
+```
+
+### Plot marginal means by species and season within each urbanization class
+
+``` r
+library(emmeans)
+
+em <- emmeans(
+  fit_combined,
+  ~ species * season | urbanization,
+  type = "response"
+)
+
+em_df <- as.data.frame(em)
+
+library(ggplot2)
+
+ggplot(em_df, aes(x = season, y = response, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+    scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  
+  facet_wrap(~ urbanization) +
+  labs(
+    title = "Seasonal abundance of Culex pipiens and Culex tarsalis across urbanization classes",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
+![](../figures/29-marg-with-urbanization-1.png)<!-- -->
+
+### Plot marginal means by species and season within each trap type
+
+``` r
+em <- emmeans(
+  fit_combined,
+  ~ species * season | trap_type,
+  type = "response"
+)
+
+em_df <- as.data.frame(em)
+
+# Handle column name
+if ("response" %in% names(em_df)) {
+  em_df <- em_df %>% rename(rate = response)
+}
+
+# Plot by trap type:
+ggplot(em_df, aes(x = season, y = rate, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  facet_wrap(~ trap_type) +
+  labs(
+    title = "Seasonal abundance by species and trap type",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+![](../figures/30-mm-by-trap-1.png)<!-- -->
+
+``` r
+#facet by both urbanization and trap type
+
+em <- emmeans(
+  fit_combined,
+  ~ species * season | urbanization * trap_type,
+  type = "response"
+)
+
+em_df <- as.data.frame(em)
+
+if ("response" %in% names(em_df)) {
+  em_df <- em_df %>% rename(rate = response)
+}
+
+#plot
+ggplot(em_df, aes(x = season, y = rate, color = species, group = species)) +
+  geom_point(size = 2.5) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), width = 0.15) +
+  scale_color_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  scale_fill_manual(values = c(
+    "Culex pipiens" = "#1bc8ea",
+    "Culex tarsalis" = "#FF2DA0"
+  )) +
+  facet_grid(urbanization ~ trap_type, scales = "free_y") +
+  labs(
+    title = "Seasonal abundance by species, urbanization, and trap type",
+    x = "Season",
+    y = "Predicted abundance",
+    color = "Species"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
+    ## Warning: No shared levels found between `names(values)` of the manual scale and the
+    ## data's fill values.
+
+![](../figures/31-mm-trap-urbanization-1.png)<!-- -->

@@ -2,7 +2,7 @@ Weekly Maps **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025
 field season
 ================
 Norah Saarman
-2026-03-19
+2026-05-13
 
 - [Setup](#setup)
 - [SQRT Weekly Maps (Square-Root
@@ -93,7 +93,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -251,7 +251,7 @@ for (w in weeks) {
 }
 ```
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-1.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-2.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-3.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-4.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-5.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-6.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-7.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-8.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-9.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-10.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-11.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-12.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-13.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-14.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-15.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-16.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-17.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-18.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-19.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-20.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-21.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-22.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-23.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-24.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-25.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom11-26.png)<!-- -->
+![](../figures/all-weeks-zoom11-1.png)<!-- -->![](../figures/all-weeks-zoom11-2.png)<!-- -->![](../figures/all-weeks-zoom11-3.png)<!-- -->![](../figures/all-weeks-zoom11-4.png)<!-- -->![](../figures/all-weeks-zoom11-5.png)<!-- -->![](../figures/all-weeks-zoom11-6.png)<!-- -->![](../figures/all-weeks-zoom11-7.png)<!-- -->![](../figures/all-weeks-zoom11-8.png)<!-- -->![](../figures/all-weeks-zoom11-9.png)<!-- -->![](../figures/all-weeks-zoom11-10.png)<!-- -->![](../figures/all-weeks-zoom11-11.png)<!-- -->![](../figures/all-weeks-zoom11-12.png)<!-- -->![](../figures/all-weeks-zoom11-13.png)<!-- -->![](../figures/all-weeks-zoom11-14.png)<!-- -->![](../figures/all-weeks-zoom11-15.png)<!-- -->![](../figures/all-weeks-zoom11-16.png)<!-- -->![](../figures/all-weeks-zoom11-17.png)<!-- -->![](../figures/all-weeks-zoom11-18.png)<!-- -->![](../figures/all-weeks-zoom11-19.png)<!-- -->![](../figures/all-weeks-zoom11-20.png)<!-- -->![](../figures/all-weeks-zoom11-21.png)<!-- -->![](../figures/all-weeks-zoom11-22.png)<!-- -->![](../figures/all-weeks-zoom11-23.png)<!-- -->![](../figures/all-weeks-zoom11-24.png)<!-- -->![](../figures/all-weeks-zoom11-25.png)<!-- -->![](../figures/all-weeks-zoom11-26.png)<!-- -->
 
 ### Zoom 12
 
@@ -266,7 +266,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -423,7 +423,7 @@ for (w in weeks) {
 }
 ```
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-1.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-2.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-3.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-4.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-5.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-6.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-7.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-8.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-9.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-10.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-11.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-12.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-13.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-14.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-15.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-16.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-17.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-18.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-19.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-20.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-21.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-22.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-23.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-24.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-25.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-weeks-zoom12-26.png)<!-- -->
+![](../figures/all-weeks-zoom12-1.png)<!-- -->![](../figures/all-weeks-zoom12-2.png)<!-- -->![](../figures/all-weeks-zoom12-3.png)<!-- -->![](../figures/all-weeks-zoom12-4.png)<!-- -->![](../figures/all-weeks-zoom12-5.png)<!-- -->![](../figures/all-weeks-zoom12-6.png)<!-- -->![](../figures/all-weeks-zoom12-7.png)<!-- -->![](../figures/all-weeks-zoom12-8.png)<!-- -->![](../figures/all-weeks-zoom12-9.png)<!-- -->![](../figures/all-weeks-zoom12-10.png)<!-- -->![](../figures/all-weeks-zoom12-11.png)<!-- -->![](../figures/all-weeks-zoom12-12.png)<!-- -->![](../figures/all-weeks-zoom12-13.png)<!-- -->![](../figures/all-weeks-zoom12-14.png)<!-- -->![](../figures/all-weeks-zoom12-15.png)<!-- -->![](../figures/all-weeks-zoom12-16.png)<!-- -->![](../figures/all-weeks-zoom12-17.png)<!-- -->![](../figures/all-weeks-zoom12-18.png)<!-- -->![](../figures/all-weeks-zoom12-19.png)<!-- -->![](../figures/all-weeks-zoom12-20.png)<!-- -->![](../figures/all-weeks-zoom12-21.png)<!-- -->![](../figures/all-weeks-zoom12-22.png)<!-- -->![](../figures/all-weeks-zoom12-23.png)<!-- -->![](../figures/all-weeks-zoom12-24.png)<!-- -->![](../figures/all-weeks-zoom12-25.png)<!-- -->![](../figures/all-weeks-zoom12-26.png)<!-- -->
 
 ### SQRT weekly GIFS for Zoom 11 and 12
 
@@ -546,7 +546,7 @@ all_data <- bind_rows(pipiens_2025, tarsalis_2025) %>%
   )
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -692,7 +692,7 @@ for (s in seasons) {
 }
 ```
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-seasons-zoom11-1.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-seasons-zoom11-2.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-seasons-zoom11-3.png)<!-- -->
+![](../figures/all-seasons-zoom11-1.png)<!-- -->![](../figures/all-seasons-zoom11-2.png)<!-- -->![](../figures/all-seasons-zoom11-3.png)<!-- -->
 
 ### Zoom 12
 
@@ -715,7 +715,7 @@ all_data <- bind_rows(pipiens_2025, tarsalis_2025) %>%
   )
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -860,7 +860,7 @@ for (s in seasons) {
 }
 ```
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-seasons-zoom12-1.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-seasons-zoom12-2.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/all-seasons-zoom12-3.png)<!-- -->
+![](../figures/all-seasons-zoom12-1.png)<!-- -->![](../figures/all-seasons-zoom12-2.png)<!-- -->![](../figures/all-seasons-zoom12-3.png)<!-- -->
 
 # Raw Weekly Maps (Raw Scaling)
 
@@ -889,7 +889,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -1038,7 +1038,7 @@ for (w in weeks) {
 }
 ```
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-1.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-2.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-3.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-4.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-5.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-6.png)<!-- -->
+![](../figures/z11-raw-1.png)<!-- -->![](../figures/z11-raw-2.png)<!-- -->![](../figures/z11-raw-3.png)<!-- -->![](../figures/z11-raw-4.png)<!-- -->![](../figures/z11-raw-5.png)<!-- -->![](../figures/z11-raw-6.png)<!-- -->
 
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1047,7 +1047,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-7.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-8.png)<!-- -->
+![](../figures/z11-raw-7.png)<!-- -->![](../figures/z11-raw-8.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1067,7 +1067,7 @@ for (w in weeks) {
     ## Warning: Removed 5 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-9.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-10.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-11.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-12.png)<!-- -->
+![](../figures/z11-raw-9.png)<!-- -->![](../figures/z11-raw-10.png)<!-- -->![](../figures/z11-raw-11.png)<!-- -->![](../figures/z11-raw-12.png)<!-- -->
 
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1077,7 +1077,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-13.png)<!-- -->
+![](../figures/z11-raw-13.png)<!-- -->
 
     ## Warning: Removed 3 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1087,7 +1087,7 @@ for (w in weeks) {
     ## Removed 3 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-14.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-15.png)<!-- -->
+![](../figures/z11-raw-14.png)<!-- -->![](../figures/z11-raw-15.png)<!-- -->
 
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1097,7 +1097,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-16.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-17.png)<!-- -->
+![](../figures/z11-raw-16.png)<!-- -->![](../figures/z11-raw-17.png)<!-- -->
 
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1106,7 +1106,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-18.png)<!-- -->
+![](../figures/z11-raw-18.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1116,7 +1116,7 @@ for (w in weeks) {
     ## Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-19.png)<!-- -->
+![](../figures/z11-raw-19.png)<!-- -->
 
     ## Warning: Removed 4 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1126,7 +1126,7 @@ for (w in weeks) {
     ## Removed 4 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-20.png)<!-- -->![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-21.png)<!-- -->
+![](../figures/z11-raw-20.png)<!-- -->![](../figures/z11-raw-21.png)<!-- -->
 
     ## Warning: Removed 3 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1136,7 +1136,7 @@ for (w in weeks) {
     ## Removed 3 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-22.png)<!-- -->
+![](../figures/z11-raw-22.png)<!-- -->
 
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1146,7 +1146,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-23.png)<!-- -->
+![](../figures/z11-raw-23.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1156,7 +1156,7 @@ for (w in weeks) {
     ## Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-24.png)<!-- -->
+![](../figures/z11-raw-24.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1165,7 +1165,7 @@ for (w in weeks) {
     ## Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-25.png)<!-- -->
+![](../figures/z11-raw-25.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1174,7 +1174,7 @@ for (w in weeks) {
     ## Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z11-raw-26.png)<!-- -->
+![](../figures/z11-raw-26.png)<!-- -->
 
 ### Zoom 12
 
@@ -1189,7 +1189,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -1344,7 +1344,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-1.png)<!-- -->
+![](../figures/z12-raw-1.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1354,7 +1354,7 @@ for (w in weeks) {
     ## Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-2.png)<!-- -->
+![](../figures/z12-raw-2.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1374,7 +1374,7 @@ for (w in weeks) {
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-3.png)<!-- -->
+![](../figures/z12-raw-3.png)<!-- -->
 
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1383,7 +1383,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-4.png)<!-- -->
+![](../figures/z12-raw-4.png)<!-- -->
 
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1402,7 +1402,7 @@ for (w in weeks) {
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-5.png)<!-- -->
+![](../figures/z12-raw-5.png)<!-- -->
 
     ## Warning: Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1417,7 +1417,7 @@ for (w in weeks) {
     ## Removed 1 row containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-6.png)<!-- -->
+![](../figures/z12-raw-6.png)<!-- -->
 
     ## Warning: Removed 6 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1437,7 +1437,7 @@ for (w in weeks) {
     ## Warning: Removed 5 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-7.png)<!-- -->
+![](../figures/z12-raw-7.png)<!-- -->
 
     ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1457,7 +1457,7 @@ for (w in weeks) {
     ## Warning: Removed 15 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-8.png)<!-- -->
+![](../figures/z12-raw-8.png)<!-- -->
 
     ## Warning: Removed 9 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1476,7 +1476,7 @@ for (w in weeks) {
     ## Warning: Removed 15 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-9.png)<!-- -->
+![](../figures/z12-raw-9.png)<!-- -->
 
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1496,7 +1496,7 @@ for (w in weeks) {
     ## Warning: Removed 17 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-10.png)<!-- -->
+![](../figures/z12-raw-10.png)<!-- -->
 
     ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1516,7 +1516,7 @@ for (w in weeks) {
     ## Warning: Removed 16 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-11.png)<!-- -->
+![](../figures/z12-raw-11.png)<!-- -->
 
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1536,7 +1536,7 @@ for (w in weeks) {
     ## Warning: Removed 17 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-12.png)<!-- -->
+![](../figures/z12-raw-12.png)<!-- -->
 
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1556,7 +1556,7 @@ for (w in weeks) {
     ## Warning: Removed 15 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-13.png)<!-- -->
+![](../figures/z12-raw-13.png)<!-- -->
 
     ## Warning: Removed 11 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1576,7 +1576,7 @@ for (w in weeks) {
     ## Warning: Removed 19 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-14.png)<!-- -->
+![](../figures/z12-raw-14.png)<!-- -->
 
     ## Warning: Removed 12 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1596,7 +1596,7 @@ for (w in weeks) {
     ## Warning: Removed 17 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-15.png)<!-- -->
+![](../figures/z12-raw-15.png)<!-- -->
 
     ## Warning: Removed 9 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1615,7 +1615,7 @@ for (w in weeks) {
     ## Warning: Removed 17 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-16.png)<!-- -->
+![](../figures/z12-raw-16.png)<!-- -->
 
     ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1635,7 +1635,7 @@ for (w in weeks) {
     ## Warning: Removed 18 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-17.png)<!-- -->
+![](../figures/z12-raw-17.png)<!-- -->
 
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1655,7 +1655,7 @@ for (w in weeks) {
     ## Warning: Removed 15 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-18.png)<!-- -->
+![](../figures/z12-raw-18.png)<!-- -->
 
     ## Warning: Removed 11 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1675,7 +1675,7 @@ for (w in weeks) {
     ## Warning: Removed 17 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-19.png)<!-- -->
+![](../figures/z12-raw-19.png)<!-- -->
 
     ## Warning: Removed 12 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1695,7 +1695,7 @@ for (w in weeks) {
     ## Warning: Removed 18 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-20.png)<!-- -->
+![](../figures/z12-raw-20.png)<!-- -->
 
     ## Warning: Removed 9 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1715,7 +1715,7 @@ for (w in weeks) {
     ## Warning: Removed 17 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-21.png)<!-- -->
+![](../figures/z12-raw-21.png)<!-- -->
 
     ## Warning: Removed 9 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1735,7 +1735,7 @@ for (w in weeks) {
     ## Warning: Removed 16 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-22.png)<!-- -->
+![](../figures/z12-raw-22.png)<!-- -->
 
     ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1755,7 +1755,7 @@ for (w in weeks) {
     ## Warning: Removed 18 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-23.png)<!-- -->
+![](../figures/z12-raw-23.png)<!-- -->
 
     ## Warning: Removed 12 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1775,7 +1775,7 @@ for (w in weeks) {
     ## Warning: Removed 19 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-24.png)<!-- -->
+![](../figures/z12-raw-24.png)<!-- -->
 
     ## Warning: Removed 13 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1795,7 +1795,7 @@ for (w in weeks) {
     ## Warning: Removed 17 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-25.png)<!-- -->
+![](../figures/z12-raw-25.png)<!-- -->
 
     ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
@@ -1811,7 +1811,7 @@ for (w in weeks) {
     ## Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](01_maps_and_gif_google_SLC2025_files/figure-gfm/z12-raw-26.png)<!-- -->
+![](../figures/z12-raw-26.png)<!-- -->
 
 ### Raw weekly GIFs for raw, zoom 11 and 12
 

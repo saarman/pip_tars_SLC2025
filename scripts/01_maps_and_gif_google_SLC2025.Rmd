@@ -9,7 +9,11 @@ output:
 
 # Setup
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  echo = TRUE,
+  # Saves PNGs to the root /figures folder
+  fig.path = "../figures/" 
+)
 ```
 
 Weekly maps of **Culex pipiens** and **Culex tarsalis** abundance across SLC for the 2025 field season, overlay onto Google satellite image.
@@ -50,7 +54,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -214,7 +218,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -462,7 +466,7 @@ all_data <- bind_rows(pipiens_2025, tarsalis_2025) %>%
   )
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -620,7 +624,7 @@ all_data <- bind_rows(pipiens_2025, tarsalis_2025) %>%
   )
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -780,7 +784,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
@@ -932,7 +936,7 @@ tarsalis_2025 <- read.csv("../data/tarsalis_2025.csv")
 all_data <- bind_rows(pipiens_2025, tarsalis_2025)
 
 # 1. Register your Google Maps API key
-register_google(key = "AIzaSyB6IptHVZgQeRsvUYtG2kTdHxYaGYOxPag")
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
 
 # 2. Build a bounding box
 lon_min <- -112.8
