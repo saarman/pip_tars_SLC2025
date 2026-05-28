@@ -1,0 +1,300 @@
+---
+title: "Urbanization index with PCA"
+author: "Norah Saarman"
+date: "`r Sys.Date()`"
+output:
+  github_document:
+    toc: true
+---
+
+# Setup
+```{r 1-setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  # Saves PNGs to the root /figures folder
+  fig.path = "../figures/" 
+)
+```
+
+# Data input to find unique GPS localities
+```{r 2-data, include = TRUE, eval = FALSE}
+
+library(dplyr)
+
+## tarsalis datasets from SLCMAD: 
+tarsalis <- read.csv("../data/tarsalis_2025.csv") 
+
+## pipiens datasets from SLCMAD: 
+pipiens <- read.csv("../data/pipiens_2025.csv") 
+
+## combine 
+combined <- bind_rows(tarsalis, pipiens)
+
+# Extract unique site locations
+sites <- combined %>%
+  distinct(site_code, latitude, longitude) %>%
+  mutate(site_code = sprintf("Site %03d", site_code))
+
+write.csv(
+  sites,
+  "../data/site_coordinates.csv",
+  row.names = FALSE
+)
+
+
+```
+
+## Read site coordinates
+
+```{r 3-sites}
+
+library(sf)
+
+# 1. Load sites
+sites <- read.csv("../data/site_coordinates.csv")
+
+# 2. Convert to sf points
+sites_sf <- st_as_sf(
+  sites,
+  coords = c("longitude", "latitude"),
+  crs = 4326
+)
+
+# 3. Project to UTM Zone 12N (meters)
+sites_utm <- st_transform(
+  sites_sf,
+  crs = 32612
+)
+
+# 4. Create 500 m buffers
+buffers_500 <- st_buffer(
+  sites_utm,
+  dist = 500
+)
+
+# Quick visualization
+plot(st_geometry(buffers_500))
+```
+
+## Extract NLCD raster covariates
+
+Download:
+NLCD 2021 Fractional Impervious Surface (CONUS)
+https://www.mrlc.gov/downloads/sciweb1/shared/mrlc/data-bundles/Annual_NLCD_FctImp_2021_CU_C1V1.zip
+
+NLCD 2021 Tree Canopy Cover
+https://data.fs.usda.gov/geodata/rastergateway/treecanopycover/docs/v2023-5/nlcd_tcc_CONUS_2021_v2023-5_wgs84.zip
+
+
+```{r 4-nlcd}
+# NLCD raster covariates
+library(terra)
+
+impervious <- rast("/uufs/chpc.utah.edu/common/home/saarman-group1/urbanindex/Annual_NLCD_FctImp_2021_CU_C1V1.tif")
+canopy <- rast("/uufs/chpc.utah.edu/common/home/saarman-group1/urbanindex/nlcd_tcc_conus_wgs84_v2023-5_20210101_20211231.tif")
+
+# Project buffers to raster CRS
+buffers_imp <- st_transform(buffers_500, crs(impervious))
+buffers_can <- st_transform(buffers_500, crs(canopy))
+
+imp <- terra::extract(
+  impervious,
+  vect(buffers_imp),
+  fun = mean,
+  na.rm = TRUE
+)
+
+can <- terra::extract(
+  canopy,
+  vect(buffers_can),
+  fun = mean,
+  na.rm = TRUE
+)
+
+# Attach to site table
+sites$impervious_500 <- imp[,2]
+sites$canopy_500 <- can[,2]
+
+# Check extracted value ranges
+summary(sites$impervious_500)
+summary(sites$canopy_500)
+
+# Quick diagnostic plot
+plot(
+  sites$impervious_500,
+  sites$canopy_500,
+  xlab = "Impervious surface within 500 m",
+  ylab = "Tree canopy within 500 m"
+)
+
+# Save working covariate table
+write.csv(
+  sites,
+  "../data/site_habitat_covariates_partial.csv",
+  row.names = FALSE
+)
+```
+
+
+## NWI: National wetlands inventory for Utah:
+https://documentst.ecosphere.fws.gov/wetlands/data/State-Downloads/UT_geodatabase_wetlands.zip
+
+```{r 5-wetlands}
+library(sf)
+library(dplyr)
+
+st_layers(
+  "/uufs/chpc.utah.edu/common/home/saarman-group1/urbanindex/UT_geodatabase_wetlands.gdb"
+)
+
+wetlands <- st_read(
+  "/uufs/chpc.utah.edu/common/home/saarman-group1/urbanindex/UT_geodatabase_wetlands.gdb",
+  layer = "UT_Wetlands"
+)
+
+# What CRS are the wetlands?
+st_crs(wetlands)
+
+# Transform sites/buffers to wetland CRS
+sites_albers <- st_transform(
+  sites_utm,
+  st_crs(wetlands)
+)
+
+buffers_albers <- st_transform(
+  buffers_500,
+  st_crs(wetlands)
+)
+
+# crop to study area + buffer to make distance faster
+study_area <- st_union(buffers_albers)
+
+wetlands_crop <- st_crop(
+  wetlands,
+  st_bbox(st_buffer(study_area, 5000))
+)
+
+# Distance from each site to nearest wetland
+dist_wetland <- st_distance(
+  sites_albers,
+  wetlands_crop
+)
+
+sites$dist_wetland_m <- apply(
+  dist_wetland,
+  1,
+  min,
+  na.rm = TRUE
+) %>%
+  as.numeric()
+
+summary(sites$dist_wetland_m)
+
+# Save working covariate table
+write.csv(
+  sites,
+  "../data/site_habitat_covariates_partial.csv",
+  row.names = FALSE
+)
+```
+
+## OpenStreetMaps roads and buildings
+```{r 6-osm}
+
+library(osmdata)
+library(sf)
+library(dplyr)
+
+# Make bounding box around sites/buffers in lon/lat
+sites_bbox <- st_bbox(st_transform(buffers_500, 4326))
+
+# Convert bbox to numeric vector for osmdata
+bbox_vec <- c(
+  sites_bbox["xmin"],
+  sites_bbox["ymin"],
+  sites_bbox["xmax"],
+  sites_bbox["ymax"]
+)
+
+# Download OSM roads
+osm_roads <- opq(
+  bbox = bbox_vec,
+  timeout = 180
+) %>%
+  add_osm_feature(key = "highway") %>%
+  osmdata_sf()
+
+roads <- osm_roads$osm_lines
+
+# Download OSM buildings
+osm_buildings <- opq(
+  bbox = bbox_vec,
+  timeout = 180
+) %>%
+  add_osm_feature(key = "building") %>%
+  osmdata_sf()
+
+buildings <- osm_buildings$osm_polygons
+
+# Project to UTM
+roads_utm <- st_transform(roads, 32612)
+buildings_utm <- st_transform(buildings, 32612)
+
+# Keep only site_code + geometry from buffers
+buffers_sites <- buffers_500 %>%
+  dplyr::select(site_code)
+
+# Intersect roads/buildings with buffers
+road_intersections <- st_intersection(
+  roads_utm,
+  buffers_sites
+)
+
+building_intersections <- st_intersection(
+  buildings_utm,
+  buffers_sites
+)
+
+# Buffer area in km2
+buffer_area_km2 <- as.numeric(st_area(buffers_500[1, ])) / 1e6
+
+# Road density: meters road per km2
+road_density <- road_intersections %>%
+  mutate(length_m = as.numeric(st_length(geometry))) %>%
+  st_drop_geometry() %>%
+  group_by(site_code) %>%
+  summarise(
+    road_length_m = sum(length_m, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    road_density_500 = road_length_m / buffer_area_km2
+  ) %>%
+  dplyr::select(site_code, road_density_500)
+
+# Building density: building footprint area per km2
+building_density <- building_intersections %>%
+  mutate(area_m2 = as.numeric(st_area(geometry))) %>%
+  st_drop_geometry() %>%
+  group_by(site_code) %>%
+  summarise(
+    building_area_m2 = sum(area_m2, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    building_density_500 = building_area_m2 / buffer_area_km2
+  ) %>%
+  dplyr::select(site_code, building_density_500)
+
+# Join back to sites
+sites <- sites %>%
+  left_join(road_density, by = "site_code") %>%
+  left_join(building_density, by = "site_code") %>%
+  mutate(
+    road_density_500 = ifelse(is.na(road_density_500), 0, road_density_500),
+    building_density_500 = ifelse(is.na(building_density_500), 0, building_density_500)
+  )
+
+summary(sites$road_density_500)
+summary(sites$building_density_500)
+```
