@@ -1,24 +1,29 @@
----
-title: "Urbanization index with PCA"
-author: "Norah Saarman"
-date: "`r Sys.Date()`"
-output:
-  github_document:
-    toc: true
----
+Urbanization index with PCA
+================
+Norah Saarman
+2026-05-29
+
+- [Setup](#setup)
+- [Data input to find unique GPS
+  localities](#data-input-to-find-unique-gps-localities)
+  - [Read site coordinates](#read-site-coordinates)
+- [Habitat covariates](#habitat-covariates)
+  - [Extract NLCD raster covariates](#extract-nlcd-raster-covariates)
+  - [NWI: National wetlands inventory for
+    Utah:](#nwi-national-wetlands-inventory-for-utah)
+  - [OpenStreetMaps roads and buildings, couldn’t get this
+    working…](#openstreetmaps-roads-and-buildings-couldnt-get-this-working)
+  - [NDVI from Google Earth Engine](#ndvi-from-google-earth-engine)
+    - [Earth Engine in browser:](#earth-engine-in-browser)
+    - [Download the file and load into R, add to sites
+      table](#download-the-file-and-load-into-r-add-to-sites-table)
+- [PCA](#pca)
 
 # Setup
-```{r 1-setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = TRUE,
-  # Saves PNGs to the root /figures folder
-  fig.path = "../figures/" 
-)
-```
 
 # Data input to find unique GPS localities
-```{r 2-data, include = TRUE, eval = FALSE}
 
+``` r
 library(dplyr)
 
 ## tarsalis datasets from SLCMAD: 
@@ -40,16 +45,17 @@ write.csv(
   "../data/site_coordinates.csv",
   row.names = FALSE
 )
-
-
 ```
 
 ## Read site coordinates
 
-```{r 3-sites}
-
+``` r
 library(sf)
+```
 
+    ## Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
+
+``` r
 # 1. Load sites
 sites <- read.csv("../data/site_coordinates.csv")
 
@@ -76,19 +82,19 @@ buffers_500 <- st_buffer(
 plot(st_geometry(buffers_500))
 ```
 
+![](../figures/3-sites-1.png)<!-- -->
+
 # Habitat covariates
 
 ## Extract NLCD raster covariates
 
-Download:
-NLCD 2021 Fractional Impervious Surface (CONUS)
-https://www.mrlc.gov/downloads/sciweb1/shared/mrlc/data-bundles/Annual_NLCD_FctImp_2021_CU_C1V1.zip
+Download: NLCD 2021 Fractional Impervious Surface (CONUS)
+<https://www.mrlc.gov/downloads/sciweb1/shared/mrlc/data-bundles/Annual_NLCD_FctImp_2021_CU_C1V1.zip>
 
 NLCD 2021 Tree Canopy Cover
-https://data.fs.usda.gov/geodata/rastergateway/treecanopycover/docs/v2023-5/nlcd_tcc_CONUS_2021_v2023-5_wgs84.zip
+<https://data.fs.usda.gov/geodata/rastergateway/treecanopycover/docs/v2023-5/nlcd_tcc_CONUS_2021_v2023-5_wgs84.zip>
 
-
-```{r 4-nlcd, eval = FALSE}
+``` r
 # NLCD raster covariates
 library(terra)
 
@@ -137,11 +143,11 @@ write.csv(
 )
 ```
 
-
 ## NWI: National wetlands inventory for Utah:
-https://documentst.ecosphere.fws.gov/wetlands/data/State-Downloads/UT_geodatabase_wetlands.zip
 
-```{r 5-wetlands, eval = FALSE}
+<https://documentst.ecosphere.fws.gov/wetlands/data/State-Downloads/UT_geodatabase_wetlands.zip>
+
+``` r
 library(sf)
 library(dplyr)
 
@@ -200,9 +206,9 @@ write.csv(
 )
 ```
 
-## OpenStreetMaps roads and buildings, couldn't get this working...
-```{r 6-osm, eval = FALSE}
+## OpenStreetMaps roads and buildings, couldn’t get this working…
 
+``` r
 library(osmdata)
 library(sf)
 library(dplyr)
@@ -308,15 +314,15 @@ write.csv(
   "../data/site_habitat_covariates_partial.csv",
   row.names = FALSE
 )
-```  
+```
 
 ## NDVI from Google Earth Engine
 
 ### Earth Engine in browser:
 
-https://code.earthengine.google.com
+<https://code.earthengine.google.com>
 
-```{java 6-gee, eval = FALSE}
+``` java
 
 var sites = ee.FeatureCollection(
     "projects/ee-nosaarman/assets/site_coordinates"
@@ -371,11 +377,26 @@ Export.table.toDrive({
   description: 'summer_ndvi_500',
   fileFormat: 'CSV'
 });
-```  
+```
+
 ### Download the file and load into R, add to sites table
 
-```{r 6-ndvi}
+``` r
 library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
 sites <- read.csv("../data/site_habitat_covariates_partial.csv")
 ndvi <- read.csv("../data/summer_ndvi_500.csv")
 
@@ -391,11 +412,11 @@ write.csv(
   "../data/site_habitat_covariates.csv",
   row.names = FALSE
 )
-
-```  
+```
 
 # PCA
-```{r 7-pca}
+
+``` r
 # Read in working covariate table
 sites <- read.csv("../data/site_habitat_covariates.csv") 
 # Remove blank site rows
@@ -415,7 +436,15 @@ cor(
     ),
   use = "complete.obs"
 )
+```
 
+    ##                 impervious_500 canopy_500 dist_wetland_m summer_ndvi_500
+    ## impervious_500      1.00000000  0.5586428     0.67550401      0.06657914
+    ## canopy_500          0.55864276  1.0000000     0.46902361      0.63168644
+    ## dist_wetland_m      0.67550401  0.4690236     1.00000000      0.03568969
+    ## summer_ndvi_500     0.06657914  0.6316864     0.03568969      1.00000000
+
+``` r
 # Select habitat variables for PCA
 habitat_vars <- sites %>%
   dplyr::select(
@@ -434,10 +463,26 @@ pca <- prcomp(
 
 # Variance explained
 summary(pca)
+```
 
+    ## Importance of components:
+    ##                           PC1    PC2     PC3     PC4
+    ## Standard deviation     1.5103 1.0951 0.57568 0.43402
+    ## Proportion of Variance 0.5702 0.2998 0.08285 0.04709
+    ## Cumulative Proportion  0.5702 0.8701 0.95291 1.00000
+
+``` r
 # Loadings
 pca$rotation
+```
 
+    ##                        PC1        PC2        PC3         PC4
+    ## impervious_500  -0.5398590  0.3797602 -0.6255278  0.41599209
+    ## canopy_500      -0.5843465 -0.3034377 -0.1678228 -0.73368948
+    ## dist_wetland_m  -0.5078749  0.4375559  0.7400433  0.05425706
+    ## summer_ndvi_500 -0.3303854 -0.7564738  0.1813461  0.53451520
+
+``` r
 # Add PC scores back to sites
 sites$habitat_PC1 <- pca$x[,1]
 sites$habitat_PC2 <- pca$x[,2]
@@ -521,12 +566,22 @@ sites <- sites %>%
   left_join(urban_class, by = "site_code")
 
 table(sites$urbanization)
+```
 
+    ## 
+    ##  Peri Rural Urban 
+    ##    15    21    23
+
+``` r
 ggplot(sites, aes(x = habitat_PC1, y = habitat_PC2)) +
   geom_point(size = 3) +
   geom_text(aes(label = site_code), vjust = -0.7, size = 2.5) +
   theme_classic()
+```
 
+![](../figures/7-pca-1.png)<!-- -->
+
+``` r
 loadings <- as.data.frame(pca$rotation) %>%
   tibble::rownames_to_column("variable")
 
@@ -534,39 +589,68 @@ ggplot(loadings, aes(x = PC1, y = PC2, label = variable)) +
   geom_point(size = 3) +
   geom_text(vjust = -0.7) +
   theme_classic()
+```
 
+![](../figures/7-pca-2.png)<!-- -->
 
+``` r
 library(factoextra)
+```
 
+    ## Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa
+
+``` r
 fviz_pca_var(
   pca,
   col.var = "contrib",
   gradient.cols = c("gray70", "steelblue", "darkblue"),
   repel = TRUE
 )
+```
 
+![](../figures/7-pca-3.png)<!-- -->
+
+``` r
 fviz_pca_ind(
   pca,
   geom.ind = "point",
   repel = TRUE
 )
+```
 
+![](../figures/7-pca-4.png)<!-- -->
+
+``` r
 fviz_pca_biplot(
   pca,
   repel = TRUE,
   col.var = "darkblue",
   col.ind = "gray40"
 )
+```
 
+![](../figures/7-pca-5.png)<!-- -->
+
+``` r
 round(pca$rotation, 3)
+```
 
+    ##                    PC1    PC2    PC3    PC4
+    ## impervious_500  -0.540  0.380 -0.626  0.416
+    ## canopy_500      -0.584 -0.303 -0.168 -0.734
+    ## dist_wetland_m  -0.508  0.438  0.740  0.054
+    ## summer_ndvi_500 -0.330 -0.756  0.181  0.535
+
+``` r
 fviz_eig(
   pca,
   addlabels = TRUE
 )
+```
 
+![](../figures/7-pca-6.png)<!-- -->
 
-
+``` r
 fviz_pca_ind(
   pca,
   geom.ind = "point",
@@ -579,6 +663,6 @@ fviz_pca_ind(
     Urban = "firebrick"
   )
 )
-
-
 ```
+
+![](../figures/7-pca-7.png)<!-- -->
