@@ -36,7 +36,7 @@ sites <- combined %>%
   mutate(site_code = sprintf("Site %03d", site_code))
 
 write.csv(
-  sites,
+  sites[,1:3],
   "../data/site_coordinates.csv",
   row.names = FALSE
 )
@@ -368,7 +368,7 @@ print(ndvi_sites);
 
 Export.table.toDrive({
   collection: ndvi_sites,
-  description: 'summer_ndvi_500',
+  description: 'summer_ndvi_69sites_500',
   fileFormat: 'CSV'
 });
 ```  
@@ -377,7 +377,7 @@ Export.table.toDrive({
 ```{r 6-ndvi}
 library(dplyr)
 sites <- read.csv("../data/site_habitat_covariates_partial.csv")
-ndvi <- read.csv("../data/summer_ndvi_500.csv")
+ndvi <- read.csv("../data/summer_ndvi_69sites_500.csv")
 
 ndvi_clean <- ndvi %>%
   dplyr::select(site_code, mean) %>%
@@ -452,7 +452,7 @@ write.csv(
 library(ggplot2)
 
 
-urban_class <- tribble(
+urbanization <- tribble(
   ~site_code, ~urbanization,
   "Site 001","Peri",
   "Site 003","Peri",
@@ -473,13 +473,19 @@ urban_class <- tribble(
   "Site 033","Peri",
   "Site 034","Peri",
   "Site 035","Rural",
+  "Site 036","Rural",
   "Site 037","Peri",
+  "Site 038","Peri",
+  "Site 039","Urban",
+  "Site 040","Urban",
+  "Site 041","Urban",
   "Site 049","Peri",
   "Site 050","Rural",
   "Site 051","Rural",
   "Site 052","Rural",
   "Site 053","Rural",
   "Site 054","Rural",
+  "Site 055","Rural",
   "Site 056","Rural",
   "Site 057","Rural",
   "Site 058","Peri",
@@ -500,6 +506,7 @@ urban_class <- tribble(
   "Site 214","Urban",
   "Site 215","Urban",
   "Site 216","Urban",
+  "Site 216z","Urban",
   "Site 218","Urban",
   "Site 219","Urban",
   "Site 220","Urban",
@@ -514,11 +521,12 @@ urban_class <- tribble(
   "Site 229","Urban",
   "Site 230","Urban",
   "Site 231","Urban",
-  "Site 232","Urban"
+  "Site 232","Urban",
+  "Site 307","Urban"
 )
 
 sites <- sites %>%
-  left_join(urban_class, by = "site_code")
+  left_join(urbanization, by = "site_code")
 
 table(sites$urbanization)
 
@@ -571,8 +579,9 @@ fviz_pca_ind(
   pca,
   geom.ind = "point",
   habillage = sites$urbanization,
-  addEllipses = TRUE,
+  addEllipses = FALSE,
   repel = TRUE,
+  mean.point = FALSE,
   palette = c(
     Rural = "forestgreen",
     Peri = "goldenrod",
