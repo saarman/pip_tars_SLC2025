@@ -579,7 +579,7 @@ fviz_pca_ind(
   pca,
   geom.ind = "point",
   habillage = sites$urbanization,
-  addEllipses = FALSE,
+  addEllipses = TRUE,
   repel = TRUE,
   mean.point = FALSE,
   palette = c(
