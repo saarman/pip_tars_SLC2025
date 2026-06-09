@@ -2,7 +2,7 @@ GAM **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
 season
 ================
 Norah Saarman
-2026-05-14
+2026-06-09
 
 - [Setup](#setup)
 - [Prepare Data](#prepare-data)
@@ -37,6 +37,13 @@ Norah Saarman
       models](#effect-size-forest-plot-from-separate-models)
     - [Seasonal Smooth](#seasonal-smooth-1)
     - [Relative abundance figure](#relative-abundance-figure)
+- [Urban paired traps - effect of
+  trap_type?](#urban-paired-traps---effect-of-trap_type)
+  - [Cx. tarsalis abundance by trap type
+    Urban](#cx-tarsalis-abundance-by-trap-type-urban)
+  - [Cx. pipiens abundance by trap type
+    Urban](#cx-pipiens-abundance-by-trap-type-urban)
+  - [Visualize the smooths](#visualize-the-smooths)
 
 # Setup
 
@@ -350,7 +357,7 @@ summary(msq_spp_gam_k15)
     ## Approximate significance of smooth terms:
     ##                                          edf Ref.df Chi.sq p-value    
     ## s(disease_week):speciesCulex pipiens   9.035  10.79 1161.1  <2e-16 ***
-    ## s(disease_week):speciesCulex tarsalis 13.057  13.83 3098.9  <2e-16 ***
+    ## s(disease_week):speciesCulex tarsalis 13.057  13.83 3086.6  <2e-16 ***
     ## s(site_name)                          50.802  56.00  752.7  <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -381,7 +388,7 @@ gam.check(msq_spp_gam_k15)
     ## 
     ## Method: REML   Optimizer: outer newton
     ## full convergence after 6 iterations.
-    ## Gradient range [-1.710598e-07,0.0001501772]
+    ## Gradient range [-1.111788e-08,9.734182e-06]
     ## (score 17345.26 & scale 1).
     ## Hessian positive definite, eigenvalue range [2.834221,1806.927].
     ## Model rank =  94 / 94 
@@ -982,9 +989,9 @@ gam.check(tar_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                     k'  edf k-index p-value
-    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.27
-    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.20
-    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.21
+    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.24
+    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.25
+    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.18
     ## s(site_name)                      56.0 43.6      NA      NA
 
 ``` r
@@ -1059,7 +1066,7 @@ gam.check(pip_gam)
     ## 
     ## Method: REML   Optimizer: outer newton
     ## full convergence after 7 iterations.
-    ## Gradient range [1.141959e-08,4.463494e-06]
+    ## Gradient range [1.141959e-08,4.463491e-06]
     ## (score 6257.707 & scale 1).
     ## Hessian positive definite, eigenvalue range [0.0816685,719.9479].
     ## Model rank =  90 / 90 
@@ -1068,9 +1075,9 @@ gam.check(pip_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                      k'   edf k-index p-value
-    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.60
-    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.62
-    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.53
+    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.62
+    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.58
+    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.60
     ## s(site_name)                      59.00 49.76      NA      NA
 
 ``` r
@@ -1216,7 +1223,7 @@ ggplot(tarsalis, aes(x = count)) +
 ![](../figures/dharma-tar-4.png)<!-- -->
 
 ``` r
-# Is underdispersion is trap-specific?
+# Is underdispersion trap-specific?
 tarsalis_data_res <- model.frame(tar_gam) %>%
   mutate(
     resid = residuals(tar_gam, type = "pearson"),
@@ -1320,6 +1327,11 @@ ggplot(pipiens_data_res,
 sim_pip <- simulateResiduals(pip_gam, n = 1000)
 plot(sim_pip)
 ```
+
+    ## Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
+    ## : Fitting terminated with step failure - check results carefully
+    ## Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
+    ## : Fitting terminated with step failure - check results carefully
 
 ![](../figures/dharma-pip-1.png)<!-- -->
 
@@ -1740,3 +1752,276 @@ ggplot(pred_rel, aes(x = urbanization, y = prop, color = species, group = specie
 ```
 
 ![](../figures/rel-abund-2-models-2.png)<!-- -->
+
+# Urban paired traps - effect of trap_type?
+
+Analyze urban sites only paired trap types:
+
+“Within Urban sites, does trap type affect abundance? fit the model on
+Urban observations only”
+
+``` r
+# --------------------------
+# Identify sites with BOTH trap types
+# --------------------------
+
+paired_sites <- combined %>%
+  group_by(site_name) %>%
+  summarize(
+    n_traps = n_distinct(trap_type),
+    .groups = "drop"
+  ) %>%
+  filter(n_traps == 2) %>%
+  pull(site_name)
+
+paired_sites
+```
+
+    ## [1] Downington Ave     Fire Station 13    Fire Station 2     Fire Station 4    
+    ## [5] Fire Station 5     Fire Station 6     Fire Station 8     Hogle Zoo         
+    ## [9] Nibley Golf Course
+    ## 59 Levels: 1700 E Church 300 E Church 700 S 200 W ... Wingpointe
+
+## Cx. tarsalis abundance by trap type Urban
+
+``` r
+urban_tar <- tarsalis %>%
+  filter(
+    urbanization == "urban",
+    site_name %in% paired_sites
+  )
+
+table(urban_tar$trap_type)
+```
+
+    ## 
+    ##  CO2 GRVD 
+    ##  153   51
+
+``` r
+length(unique(urban_tar$site_name))
+```
+
+    ## [1] 9
+
+``` r
+urban_tar_gam <- mgcv::gam(
+  count ~ trap_type +
+    s(disease_week, by = trap_type, k = 5) +
+    s(site_name, bs = "re"),
+  family = mgcv::nb(),
+  data = urban_tar,
+  method = "REML"
+)
+
+summary(urban_tar_gam)
+```
+
+    ## 
+    ## Family: Negative Binomial(1.233) 
+    ## Link function: log 
+    ## 
+    ## Formula:
+    ## count ~ trap_type + s(disease_week, by = trap_type, k = 5) + 
+    ##     s(site_name, bs = "re")
+    ## 
+    ## Parametric coefficients:
+    ##               Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)     3.0645     0.2247   13.64   <2e-16 ***
+    ## trap_typeGRVD  -2.6898     0.2395  -11.23   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                 edf Ref.df Chi.sq p-value    
+    ## s(disease_week):trap_typeCO2  3.790  3.973 86.051  <2e-16 ***
+    ## s(disease_week):trap_typeGRVD 1.001  1.002  0.029   0.867    
+    ## s(site_name)                  7.144  8.000 58.201  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.316   Deviance explained = 61.1%
+    ## -REML = 715.32  Scale est. = 1         n = 185
+
+## Cx. pipiens abundance by trap type Urban
+
+``` r
+urban_pip <- pipiens %>%
+  filter(
+    urbanization == "urban",
+    site_name %in% paired_sites
+  )
+
+table(urban_pip$trap_type)
+```
+
+    ## 
+    ##  CO2 GRVD 
+    ##  148  155
+
+``` r
+length(unique(urban_pip$site_name))
+```
+
+    ## [1] 9
+
+``` r
+urban_pip_gam <- mgcv::gam(
+  count ~ trap_type +
+    s(disease_week, by = trap_type, k = 5) +
+    s(site_name, bs = "re"),
+  family = mgcv::nb(),
+  data = urban_pip,
+  method = "REML"
+)
+
+summary(urban_pip_gam)
+```
+
+    ## 
+    ## Family: Negative Binomial(1.351) 
+    ## Link function: log 
+    ## 
+    ## Formula:
+    ## count ~ trap_type + s(disease_week, by = trap_type, k = 5) + 
+    ##     s(site_name, bs = "re")
+    ## 
+    ## Parametric coefficients:
+    ##               Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)     3.1189     0.1697  18.377  < 2e-16 ***
+    ## trap_typeGRVD  -0.7178     0.1062  -6.757 1.41e-11 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                 edf Ref.df Chi.sq p-value    
+    ## s(disease_week):trap_typeCO2  3.509  3.862  86.53  <2e-16 ***
+    ## s(disease_week):trap_typeGRVD 3.300  3.734  47.22  <2e-16 ***
+    ## s(site_name)                  7.145  8.000  70.16  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.303   Deviance explained = 47.1%
+    ## -REML = 1154.9  Scale est. = 1         n = 298
+
+## Visualize the smooths
+
+``` r
+# Colors by species, same as before
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex tarsalis" = "#FF2DA0"
+)
+
+# Helper function for urban trap-type GAMs
+predict_urban_trap_gam <- function(model, data, species_label) {
+  
+  newdata <- expand.grid(
+    disease_week = seq(
+      min(data$disease_week, na.rm = TRUE),
+      max(data$disease_week, na.rm = TRUE),
+      by = 1
+    ),
+    trap_type = levels(data$trap_type),
+    site_name = levels(data$site_name)[1]
+  )
+  
+  newdata$trap_type <- factor(newdata$trap_type, levels = levels(data$trap_type))
+  newdata$site_name <- factor(newdata$site_name, levels = levels(data$site_name))
+  
+  pred <- predict(
+    model,
+    newdata = newdata,
+    type = "link",
+    se.fit = TRUE,
+    exclude = "s(site_name)"
+  )
+  
+  newdata %>%
+    mutate(
+      species = species_label,
+      fit_link = pred$fit,
+      se_link = pred$se.fit,
+      fit = exp(fit_link),
+      lower = exp(fit_link - 1.96 * se_link),
+      upper = exp(fit_link + 1.96 * se_link)
+    )
+}
+
+# Predictions from both urban models
+pred_urban_trap <- bind_rows(
+  predict_urban_trap_gam(
+    urban_pip_gam,
+    urban_pip,
+    "Culex pipiens"
+  ),
+  predict_urban_trap_gam(
+    urban_tar_gam,
+    urban_tar,
+    "Culex tarsalis"
+  )
+)
+```
+
+    ## Warning in predict.gam(model, newdata = newdata, type = "link", se.fit = TRUE,
+    ## : factor levels 1700 E Church not in original fit
+    ## Warning in predict.gam(model, newdata = newdata, type = "link", se.fit = TRUE,
+    ## : factor levels 1700 E Church not in original fit
+
+``` r
+# Plot: one panel per species, one line per trap type
+ggplot(
+  pred_urban_trap,
+  aes(
+    x = disease_week,
+    y = fit,
+    color = species,
+    fill = species,
+    linetype = trap_type
+  )
+) +
+  geom_ribbon(
+    aes(ymin = lower, ymax = upper, group = interaction(species, trap_type)),
+    alpha = 0.18,
+    color = NA
+  ) +
+  geom_line(
+    aes(group = interaction(species, trap_type)),
+    linewidth = 1.2
+  ) +
+  geom_vline(
+    xintercept = 33,
+    linetype = "dashed",
+    color = "black",
+    linewidth = 0.5
+  ) +
+  annotate(
+    "text",
+    x = 33,
+    y = Inf,
+    label = "1st WNV cases",
+    vjust = 1,
+    hjust = -0.07,
+    size = 3
+  ) +
+  facet_wrap(~ species, scales = "free_y", ncol = 1) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  scale_y_log10() +
+  labs(
+    title = "Urban predicted abundance by trap type",
+    x = "Disease week",
+    y = "Predicted count (log10)",
+    color = "Species",
+    fill = "Species",
+    linetype = "Trap type"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
+![](../figures/smooths-1.png)<!-- -->

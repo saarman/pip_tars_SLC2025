@@ -760,7 +760,7 @@ ggplot(tarsalis, aes(x = count)) +
   scale_x_log10() +
   theme_bw()
 
-# Is underdispersion is trap-specific?
+# Is underdispersion trap-specific?
 tarsalis_data_res <- model.frame(tar_gam) %>%
   mutate(
     resid = residuals(tar_gam, type = "pearson"),
@@ -1216,5 +1216,193 @@ ggplot(pred_rel, aes(x = urbanization, y = prop, color = species, group = specie
     plot.title = element_text(hjust = 0.5)
   )
 ```
+   
+# Urban paired traps - effect of trap_type?  
+
+Analyze urban sites only paired trap types:
+
+"Within Urban sites, does trap type affect abundance? fit the model on Urban observations only"
   
+```{r identify-pairs}
+# --------------------------
+# Identify sites with BOTH trap types
+# --------------------------
+
+paired_sites <- combined %>%
+  group_by(site_name) %>%
+  summarize(
+    n_traps = n_distinct(trap_type),
+    .groups = "drop"
+  ) %>%
+  filter(n_traps == 2) %>%
+  pull(site_name)
+
+paired_sites
+
+```
   
+## Cx. tarsalis abundance by trap type Urban
+
+```{r paired-urban-tar}
+
+urban_tar <- tarsalis %>%
+  filter(
+    urbanization == "urban",
+    site_name %in% paired_sites
+  )
+
+table(urban_tar$trap_type)
+length(unique(urban_tar$site_name))
+
+urban_tar_gam <- mgcv::gam(
+  count ~ trap_type +
+    s(disease_week, by = trap_type, k = 5) +
+    s(site_name, bs = "re"),
+  family = mgcv::nb(),
+  data = urban_tar,
+  method = "REML"
+)
+
+summary(urban_tar_gam)
+```
+  
+## Cx. pipiens abundance by trap type Urban
+
+```{r paired-urban-pip}
+
+urban_pip <- pipiens %>%
+  filter(
+    urbanization == "urban",
+    site_name %in% paired_sites
+  )
+
+table(urban_pip$trap_type)
+length(unique(urban_pip$site_name))
+
+
+urban_pip_gam <- mgcv::gam(
+  count ~ trap_type +
+    s(disease_week, by = trap_type, k = 5) +
+    s(site_name, bs = "re"),
+  family = mgcv::nb(),
+  data = urban_pip,
+  method = "REML"
+)
+
+summary(urban_pip_gam)
+```
+
+  
+## Visualize the smooths
+
+```{r smooths}
+# Colors by species, same as before
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex tarsalis" = "#FF2DA0"
+)
+
+# Helper function for urban trap-type GAMs
+predict_urban_trap_gam <- function(model, data, species_label) {
+  
+  newdata <- expand.grid(
+    disease_week = seq(
+      min(data$disease_week, na.rm = TRUE),
+      max(data$disease_week, na.rm = TRUE),
+      by = 1
+    ),
+    trap_type = levels(data$trap_type),
+    site_name = levels(data$site_name)[1]
+  )
+  
+  newdata$trap_type <- factor(newdata$trap_type, levels = levels(data$trap_type))
+  newdata$site_name <- factor(newdata$site_name, levels = levels(data$site_name))
+  
+  pred <- predict(
+    model,
+    newdata = newdata,
+    type = "link",
+    se.fit = TRUE,
+    exclude = "s(site_name)"
+  )
+  
+  newdata %>%
+    mutate(
+      species = species_label,
+      fit_link = pred$fit,
+      se_link = pred$se.fit,
+      fit = exp(fit_link),
+      lower = exp(fit_link - 1.96 * se_link),
+      upper = exp(fit_link + 1.96 * se_link)
+    )
+}
+
+# Predictions from both urban models
+pred_urban_trap <- bind_rows(
+  predict_urban_trap_gam(
+    urban_pip_gam,
+    urban_pip,
+    "Culex pipiens"
+  ),
+  predict_urban_trap_gam(
+    urban_tar_gam,
+    urban_tar,
+    "Culex tarsalis"
+  )
+)
+
+# Plot: one panel per species, one line per trap type
+ggplot(
+  pred_urban_trap,
+  aes(
+    x = disease_week,
+    y = fit,
+    color = species,
+    fill = species,
+    linetype = trap_type
+  )
+) +
+  geom_ribbon(
+    aes(ymin = lower, ymax = upper, group = interaction(species, trap_type)),
+    alpha = 0.18,
+    color = NA
+  ) +
+  geom_line(
+    aes(group = interaction(species, trap_type)),
+    linewidth = 1.2
+  ) +
+  geom_vline(
+    xintercept = 33,
+    linetype = "dashed",
+    color = "black",
+    linewidth = 0.5
+  ) +
+  annotate(
+    "text",
+    x = 33,
+    y = Inf,
+    label = "1st WNV cases",
+    vjust = 1,
+    hjust = -0.07,
+    size = 3
+  ) +
+  facet_wrap(~ species, scales = "free_y", ncol = 1) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  scale_y_log10() +
+  labs(
+    title = "Urban predicted abundance by trap type",
+    x = "Disease week",
+    y = "Predicted count (log10)",
+    color = "Species",
+    fill = "Species",
+    linetype = "Trap type"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+  
+```

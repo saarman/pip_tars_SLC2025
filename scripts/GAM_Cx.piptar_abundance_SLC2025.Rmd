@@ -228,22 +228,24 @@ anova(m1, m2, test = "Chisq")
 
 ```
 
-#Compare Cx.tarsalis abundance by trap type Urban
+# Compare Cx.tarsalis abundance by trap type Urban
+
+Analyze urban sites only paired trap types:
+
+"Within Urban sites, does trap type affect abundance? fit the model on Urban observations only"
+
 ```{r}
-#Analyze Urban sites only:If your question is simply:
 
-"Within Urban sites, does trap type affect abundance?fit the model on Urban observations only"
-
-urban_dat <- subset(tarsalis, urbanization == "urban")
-nrow(urban_dat)
-summary(urban_dat)
+urban_tar <- subset(tarsalis, urbanization == "urban")
+nrow(urban_tar)
+summary(urban_tar)
 
 urban_gam <- mgcv::gam(
   count ~ trap_type +
     s(disease_week, k = 5) +
     s(site_name, bs = "re"),
   family = mgcv::nb(),
-  data = urban_dat,
+  data = urban_tar,
   method = "REML"
 )
 
@@ -253,19 +255,22 @@ summary(urban_gam)
 
 #drop1(urban_gam, test = "Chisq")
 ```
-#Compare Cx.tarsalis abundance by trap type Urban
+# Compare Cx. pipiens abundance by trap type Urban
+
+Analyze urban sites only paired trap types:
+
+"Within Urban sites, does trap type affect abundance? fit the model on Urban observations only"
+
 ```{r}
-#Analyze Urban sites only:If your question is simply:
-"Within Urban sites, does trap type affect abundance?fit the model on Urban observations only"
-urban_dat <- subset(tarsalis, urbanization == "urban")
-nrow(urban_dat)
-summary(urban_dat)
+urban_pip <- subset(pipiens, urbanization == "urban")
+nrow(urban_pip)
+summary(urban_pip)
 urban_gam <- mgcv::gam(
   count ~ trap_type +
     s(disease_week, k = 5) +
     s(site_name, bs = "re"),
   family = mgcv::nb(),
-  data = urban_dat,
+  data = urban_pip,
   method = "REML"
 )
 summary(urban_gam)
