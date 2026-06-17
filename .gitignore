@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 *.Rproj
+
+/scripts/*.pdf
+/results/*
+/figures/*.pdf
