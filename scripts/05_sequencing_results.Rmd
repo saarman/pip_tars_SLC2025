@@ -1,5 +1,5 @@
 ---
-title: "Oxford nanopore results for CT and UT"
+title: "Oxford nanopore sequencing results for CT and UT"
 author: "Norah Saarman"
 date: "`r Sys.Date()`"
 output:

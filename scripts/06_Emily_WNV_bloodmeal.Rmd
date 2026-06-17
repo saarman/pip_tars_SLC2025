@@ -1,0 +1,294 @@
+---
+title: "Bloodmeal + WNV positive GAM: SLC"
+author: "Norah Saarman"
+date: "`r Sys.Date()`"
+output:
+  github_document:
+    toc: true
+---
+
+# Setup
+```{r 1-setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  # Saves PNGs to the root /figures folder
+  fig.path = "../figures/" 
+)
+```
+
+```{r packages}
+library(dplyr)
+library(brms)
+library(mgcv)
+library(bayesplot)
+library(ggplot2)
+library(sf)
+library(spdep)
+library(tidyr)
+library(maptiles)
+library(ggspatial)
+library(prettymapr)
+```
+
+# Data 
+```{r data}
+wnv <- read.csv("/uufs/chpc.utah.edu/common/home/saarman-group1/urbanindex/wnv_master_FINAL.csv")
+habitat <- read.csv("/uufs/chpc.utah.edu/common/home/saarman-group1/urbanindex/pip_tars_urbanindex.csv")
+bloodmeal <- read.csv("/uufs/chpc.utah.edu/common/home/saarman-group1/urbanindex/bloodmeal_master_FINAL.csv")
+```
+  
+# PCA of habitat/urbanization gradient  
+```{r PCA}
+library(dplyr)
+
+# Prepare habitat covariates
+habitat_sites <- habitat %>%
+  mutate(site_code = as.character(site_code)) %>%
+  distinct(site_code, .keep_all = TRUE) %>%
+  dplyr::select(
+    site_code,
+    impervious_500,
+    canopy_500,
+    dist_wetland_m,
+    summer_ndvi_500
+  )
+
+# Join habitat covariates to WNV
+wnv <- wnv %>%
+  mutate(site_code = as.character(site_code)) %>%
+  left_join(habitat_sites, by = "site_code")
+
+# Use only sites represented in the WNV dataset to define the PCA
+wnv_habitat_sites <- wnv %>%
+  filter(site_code != "0") %>%
+  distinct(
+    site_code,
+    impervious_500,
+    canopy_500,
+    dist_wetland_m,
+    summer_ndvi_500
+  ) %>%
+  filter(complete.cases(
+    impervious_500,
+    canopy_500,
+    dist_wetland_m,
+    summer_ndvi_500
+  ))
+
+# Run PCA
+wnv_pca_vars <- wnv_habitat_sites %>%
+  dplyr::select(
+    impervious_500,
+    canopy_500,
+    dist_wetland_m,
+    summer_ndvi_500
+  )
+
+wnv_pca <- prcomp(
+  wnv_pca_vars,
+  center = TRUE,
+  scale. = TRUE
+)
+
+summary(wnv_pca)
+round(wnv_pca$rotation, 3)
+
+# Add PCA scores to site-level table
+wnv_habitat_sites <- wnv_habitat_sites %>%
+  mutate(
+    habitat_PC1 = wnv_pca$x[,1],
+    habitat_PC2 = wnv_pca$x[,2]
+  )
+
+# Join PCA scores back to full WNV table
+wnv <- wnv %>%
+  dplyr::select(-any_of(c("habitat_PC1", "habitat_PC2"))) %>%
+  left_join(
+    wnv_habitat_sites %>%
+      dplyr::select(site_code, habitat_PC1, habitat_PC2),
+    by = "site_code"
+  )
+
+```  
+
+### Plot PCA by urbanization and trap_type
+```{r plot-pca}
+
+library(dplyr)
+library(ggplot2)
+library(tibble)
+
+urb_colors <- c(
+  "Urban" = "#B22222",
+  "Peri"  = "#DAA520",
+  "Rural" = "#228B22"
+)
+
+# Site/trap-level PCA scores from WNV object
+pca_scores_df <- wnv %>%
+  distinct(
+    site_code,
+    trap_type,
+    urbanization,
+    habitat_PC1,
+    habitat_PC2
+  ) %>%
+  filter(
+    !is.na(habitat_PC1),
+    !is.na(habitat_PC2),
+    !is.na(trap_type)
+  ) %>%
+  mutate(
+    Urbanization = factor(
+      urbanization,
+      levels = c("Urban", "Peri", "Rural")
+    ),
+    PC1 = habitat_PC1,
+    PC2 = habitat_PC2
+  )
+
+# PCA variable loadings
+loadings_df <- as.data.frame(wnv_pca$rotation) %>%
+  rownames_to_column("variable") %>%
+  mutate(
+    variable = recode(
+      variable,
+      "impervious_500"  = "Impervious surface",
+      "canopy_500"      = "Tree canopy",
+      "dist_wetland_m"  = "Wetland distance",
+      "summer_ndvi_500" = "NDVI"
+    )
+  )
+
+arrow_scale <- 3.5
+
+p1_biplot <- ggplot() +
+  stat_ellipse(
+    data = pca_scores_df,
+    aes(x = PC1, y = PC2, color = Urbanization),
+    level = 0.75,
+    linewidth = 0.8,
+    linetype = "dashed"
+  ) +
+  geom_point(
+    data = pca_scores_df,
+    aes(
+      x = PC1,
+      y = PC2,
+      color = Urbanization,
+      fill = Urbanization,
+      shape = trap_type
+    ),
+    size = 3,
+    alpha = 0.85,
+    stroke = 0.8
+  ) +
+  geom_segment(
+    data = loadings_df,
+    aes(
+      x = 0,
+      y = 0,
+      xend = PC1 * arrow_scale,
+      yend = PC2 * arrow_scale
+    ),
+    arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+    color = "gray30",
+    linewidth = 0.7
+  ) +
+  geom_text(
+    data = loadings_df,
+    aes(
+      x = PC1 * arrow_scale * 1.15,
+      y = PC2 * arrow_scale * 1.15,
+      label = variable
+    ),
+    size = 3.5,
+    color = "gray20",
+    fontface = "italic"
+  ) +
+  geom_hline(yintercept = 0, linetype = "dotted", color = "gray70") +
+  geom_vline(xintercept = 0, linetype = "dotted", color = "gray70") +
+  scale_color_manual(values = urb_colors, name = "Urbanization") +
+  scale_fill_manual(values = urb_colors, name = "Urbanization") +
+  scale_shape_manual(
+    values = c(
+      "CO2" = 10,
+      "GRVD" = 24
+    ),
+    name = "Trap type"
+  ) +
+  labs(
+    title = "PCA of Habitat Covariates",
+       x = "PC1 - Urbanization (57.6% variance)",
+    y = "PC2 - Vegetation (29.7% variance)"
+  ) +
+  scale_x_reverse() +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "gray40"),
+    legend.position = "right"
+  )
+
+print(p1_biplot)
+
+```  
+  
+# RQ1: Bloodmeal  
+```{r tables}
+# Join PC1 and PC2 to bloodmeal dataframe
+bloodmeal$site_code <- as.character(bloodmeal$site_code)
+  
+bloodmeal <- bloodmeal %>%
+  dplyr::select(-any_of(c("habitat_PC1", "habitat_PC2"))) %>%
+  left_join(
+    wnv_habitat_sites %>%
+      dplyr::select(site_code, habitat_PC1, habitat_PC2),
+    by = "site_code"
+  )
+
+# Check mosq_species breakdown
+table(bloodmeal$mosq_species)
+table(bloodmeal$mosq_species,bloodmeal$urbanization,bloodmeal$trap_type)
+```
+
+```{r model1}
+# MODEL 1: Bloodmeal host ~ mosquito species + urbanization
+# Make sure it's a factor
+bloodmeal <- bloodmeal %>%
+mutate(host_3_categories = factor(host_3_categories))
+# Check levels — brm will use the fir
+levels(bloodmeal$host_3_categories)
+
+# make "Other bird" reference category
+bloodmeal <- bloodmeal %>%
+mutate(host_3_categories = relevel(host_3_categories,
+ref = "Other bird"))
+levels(bloodmeal$host_3_categories)
+
+# fit model
+model_1 <- brm(
+host_3_categories ~ mosq_species + habitat_PC1 + (1|site_code) + (1|year),
+family = categorical(),
+data = bloodmeal,
+cores = 4,
+chains = 4,
+iter = 4000,
+warmup = 2000,
+control = list(adapt_delta = 0.99),
+file = "../results/bloodmeal_host3_habitatPC1",
+seed = 908275
+)
+
+summary(model_1)
+pp_check(model_1, ndraws = 100) 
+mcmc_trace(model_1, pars = vars(contains("habitat_PC1")))
+mcmc_trace(model_1, pars = vars(contains("mosq_species")))
+```
+# RQ2: WNV probability
+
+# RQ3: Bloodmeal and WNV probability
+
+
+
+

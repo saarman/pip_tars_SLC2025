@@ -2,7 +2,7 @@ GAM **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
 season
 ================
 Norah Saarman
-2026-06-12
+2026-06-17
 
 - [Setup](#setup)
 - [Prepare Data](#prepare-data)
@@ -1331,9 +1331,9 @@ gam.check(pip_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                      k'   edf k-index p-value
-    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.62
-    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.58
-    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.58
+    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.64
+    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.56
+    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.62
     ## s(site_name)                      59.00 49.76      NA      NA
 
 ``` r
@@ -1369,8 +1369,11 @@ pipiens_data_res <- model.frame(pip_gam) %>%
   mutate(resid = residuals(pip_gam, type = "pearson")) %>%
   left_join(site_coords_pip, by = "site_name")
 
+# Transform to make it easier to see spatial patterns
+pipiens_data_res$resid_log <- log10(pipiens_data_res$resid + 2)
+
 # plot by lat/long
-ggplot(pipiens_data_res, aes(x = longitude, y = latitude, color = resid)) +
+ggplot(pipiens_data_res, aes(x = longitude, y = latitude, color = resid_log)) +
   geom_point(size = 3) +
   coord_fixed() +
   scale_color_viridis_c() +
@@ -1558,9 +1561,9 @@ gam.check(tar_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                     k'  edf k-index p-value
-    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.22
-    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.20
-    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.20
+    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.28
+    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.21
+    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.23
     ## s(site_name)                      56.0 43.6      NA      NA
 
 ``` r
@@ -1596,8 +1599,11 @@ tarsalis_data_res <- model.frame(tar_gam) %>%
   mutate(resid = residuals(tar_gam, type = "pearson")) %>%
   left_join(site_coords_tar, by = "site_name")
 
+# Transform to make it easier to see spatial patterns
+tarsalis_data_res$resid_log <- log10(tarsalis_data_res$resid + 2)
+
 # plot by lat/long
-ggplot(tarsalis_data_res, aes(x = longitude, y = latitude, color = resid)) +
+ggplot(tarsalis_data_res, aes(x = longitude, y = latitude, color = resid_log)) +
   geom_point(size = 3) +
   coord_fixed() +
   scale_color_viridis_c() +
@@ -1858,50 +1864,7 @@ ggplot(pred_season, aes(x = disease_week, y = fit, color = species, fill = speci
 
 ``` r
 # ----------------------
-# 2. Predicted abundance by urbanization: GRVD traps
-# ----------------------
-
-newdat_site_GRVD <- expand.grid(
-  disease_week = seq(min(combined$disease_week), max(combined$disease_week), by = 1),
-  urbanization = levels(combined$urbanization),
-  trap_type = "GRVD",
-  site_name = levels(combined$site_name)[1]
-)
-
-pred_site_GRVD <- bind_rows(
-  predict_species_gam(pip_gam, newdat_site_GRVD, "Culex pipiens"),
-  predict_species_gam(tar_gam, newdat_site_GRVD, "Culex tarsalis")
-)
-
-ggplot(pred_site_GRVD, aes(x = disease_week, y = fit, color = species, group = species)) +
-  geom_line(linewidth = 1.2) +
-  geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
-  geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
-  annotate("text", x = 33, y = Inf, label = "1st WNV cases",
-           vjust = 1, hjust = -0.07, size = 3) +
-  facet_wrap(~ urbanization, scales = "free_y", ncol = 1) +
-  scale_color_manual(values = cols) +
-  scale_fill_manual(values = cols) +
-  labs(
-    title = "Predicted abundance from species-specific GAMs (GRVD traps)",
-    x = "Disease week",
-    y = "Predicted abundance",
-    color = "Species",
-    fill = "Species"
-  ) +
-  theme_classic() +
-  theme(
-    plot.title = element_text(hjust = 0.5),
-    strip.background = element_blank(),
-    strip.text = element_text(size = 12)
-  )
-```
-
-![](../figures/viz-2-gams-2.png)<!-- -->
-
-``` r
-# ----------------------
-# 3. Predicted abundance by urbanization: CO2 traps
+# 2. Predicted abundance by urbanization: CO2 traps
 # ----------------------
 
 newdat_site_CO2 <- expand.grid(
@@ -1940,13 +1903,71 @@ ggplot(pred_site_CO2, aes(x = disease_week, y = fit, color = species, group = sp
   )
 ```
 
+![](../figures/viz-2-gams-2.png)<!-- -->
+
+``` r
+# ----------------------
+# 3. Plot predicted for pipiens/tarsalis on their own to allow pipiens to be visible
+# ----------------------
+# pipiens only:
+ggplot(pred_site_CO2[pred_site_CO2$species=="Culex pipiens",], aes(x = disease_week, y = fit, color = species, group = species)) +
+  geom_line(linewidth = 1.2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
+  geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
+  annotate("text", x = 33, y = Inf, label = "1st WNV",
+           vjust = 1, hjust = -0.07, size = 3) +
+  facet_wrap(~ urbanization, scales = "free_y", ncol = 1) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  labs(
+    title = "Predicted abundance from species-specific GAMs (CO2 traps)",
+    x = "Disease week",
+    y = "Predicted abundance",
+    color = "Species",
+    fill = "Species"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
 ![](../figures/viz-2-gams-3.png)<!-- -->
+
+``` r
+# tarsalis only
+ggplot(pred_site_CO2[pred_site_CO2$species=="Culex tarsalis",], aes(x = disease_week, y = fit, color = species, group = species)) +
+  geom_line(linewidth = 1.2) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
+  geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
+  annotate("text", x = 33, y = Inf, label = "1st WNV",
+           vjust = 1, hjust = -0.07, size = 3) +
+  facet_wrap(~ urbanization, scales = "free_y", ncol = 1) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  labs(
+    title = "Predicted abundance from species-specific GAMs (CO2 traps)",
+    x = "Disease week",
+    y = "Predicted abundance",
+    color = "Species",
+    fill = "Species"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 12)
+  )
+```
+
+![](../figures/viz-2-gams-4.png)<!-- -->
 
 ``` r
 # ----------------------
 # 4. Urbanization effect figure
 # ----------------------
-
 newdata_urban <- expand.grid(
   urbanization = levels(combined$urbanization),
   trap_type = "GRVD",
@@ -1978,7 +1999,7 @@ ggplot(pred_urban, aes(x = urbanization, y = fit, color = species, group = speci
   theme_minimal()
 ```
 
-![](../figures/viz-2-gams-4.png)<!-- -->
+![](../figures/viz-2-gams-5.png)<!-- -->
 
 ``` r
 # ----------------------
@@ -2017,7 +2038,7 @@ ggplot(pred_trap, aes(x = trap_type, y = fit, color = species, group = species))
   theme_minimal()
 ```
 
-![](../figures/viz-2-gams-5.png)<!-- -->
+![](../figures/viz-2-gams-6.png)<!-- -->
 
 ### Plot relative abundance figure
 

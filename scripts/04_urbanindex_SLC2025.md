@@ -1,7 +1,7 @@
 Urbanization index with PCA
 ================
 Norah Saarman
-2026-05-29
+2026-06-17
 
 - [Setup](#setup)
 - [Data input to find unique GPS
@@ -41,7 +41,7 @@ sites <- combined %>%
   mutate(site_code = sprintf("Site %03d", site_code))
 
 write.csv(
-  sites,
+  sites[,1:3],
   "../data/site_coordinates.csv",
   row.names = FALSE
 )
@@ -374,7 +374,7 @@ print(ndvi_sites);
 
 Export.table.toDrive({
   collection: ndvi_sites,
-  description: 'summer_ndvi_500',
+  description: 'summer_ndvi_69sites_500',
   fileFormat: 'CSV'
 });
 ```
@@ -398,7 +398,7 @@ library(dplyr)
 
 ``` r
 sites <- read.csv("../data/site_habitat_covariates_partial.csv")
-ndvi <- read.csv("../data/summer_ndvi_500.csv")
+ndvi <- read.csv("../data/summer_ndvi_69sites_500.csv")
 
 ndvi_clean <- ndvi %>%
   dplyr::select(site_code, mean) %>%
@@ -439,10 +439,10 @@ cor(
 ```
 
     ##                 impervious_500 canopy_500 dist_wetland_m summer_ndvi_500
-    ## impervious_500      1.00000000  0.5586428     0.67550401      0.06657914
-    ## canopy_500          0.55864276  1.0000000     0.46902361      0.63168644
-    ## dist_wetland_m      0.67550401  0.4690236     1.00000000      0.03568969
-    ## summer_ndvi_500     0.06657914  0.6316864     0.03568969      1.00000000
+    ## impervious_500      1.00000000  0.5814834     0.69198916      0.08678966
+    ## canopy_500          0.58148340  1.0000000     0.46532863      0.61817836
+    ## dist_wetland_m      0.69198916  0.4653286     1.00000000      0.01803707
+    ## summer_ndvi_500     0.08678966  0.6181784     0.01803707      1.00000000
 
 ``` r
 # Select habitat variables for PCA
@@ -467,9 +467,9 @@ summary(pca)
 
     ## Importance of components:
     ##                           PC1    PC2     PC3     PC4
-    ## Standard deviation     1.5103 1.0951 0.57568 0.43402
-    ## Proportion of Variance 0.5702 0.2998 0.08285 0.04709
-    ## Cumulative Proportion  0.5702 0.8701 0.95291 1.00000
+    ## Standard deviation     1.5161 1.0932 0.55941 0.43980
+    ## Proportion of Variance 0.5746 0.2988 0.07824 0.04836
+    ## Cumulative Proportion  0.5746 0.8734 0.95164 1.00000
 
 ``` r
 # Loadings
@@ -477,10 +477,10 @@ pca$rotation
 ```
 
     ##                        PC1        PC2        PC3         PC4
-    ## impervious_500  -0.5398590  0.3797602 -0.6255278  0.41599209
-    ## canopy_500      -0.5843465 -0.3034377 -0.1678228 -0.73368948
-    ## dist_wetland_m  -0.5078749  0.4375559  0.7400433  0.05425706
-    ## summer_ndvi_500 -0.3303854 -0.7564738  0.1813461  0.53451520
+    ## impervious_500  -0.5512229  0.3505077 -0.6058703  0.45411317
+    ## canopy_500      -0.5807219 -0.3032687 -0.1943214 -0.73008855
+    ## dist_wetland_m  -0.5062732  0.4494118  0.7357369  0.02019206
+    ## summer_ndvi_500 -0.3203166 -0.7636763  0.2320593  0.51023938
 
 ``` r
 # Add PC scores back to sites
@@ -497,7 +497,7 @@ write.csv(
 library(ggplot2)
 
 
-urban_class <- tribble(
+urbanization <- tribble(
   ~site_code, ~urbanization,
   "Site 001","Peri",
   "Site 003","Peri",
@@ -518,13 +518,19 @@ urban_class <- tribble(
   "Site 033","Peri",
   "Site 034","Peri",
   "Site 035","Rural",
+  "Site 036","Rural",
   "Site 037","Peri",
+  "Site 038","Peri",
+  "Site 039","Urban",
+  "Site 040","Urban",
+  "Site 041","Urban",
   "Site 049","Peri",
   "Site 050","Rural",
   "Site 051","Rural",
   "Site 052","Rural",
   "Site 053","Rural",
   "Site 054","Rural",
+  "Site 055","Rural",
   "Site 056","Rural",
   "Site 057","Rural",
   "Site 058","Peri",
@@ -545,6 +551,7 @@ urban_class <- tribble(
   "Site 214","Urban",
   "Site 215","Urban",
   "Site 216","Urban",
+  "Site 216z","Urban",
   "Site 218","Urban",
   "Site 219","Urban",
   "Site 220","Urban",
@@ -559,18 +566,19 @@ urban_class <- tribble(
   "Site 229","Urban",
   "Site 230","Urban",
   "Site 231","Urban",
-  "Site 232","Urban"
+  "Site 232","Urban",
+  "Site 307","Urban"
 )
 
 sites <- sites %>%
-  left_join(urban_class, by = "site_code")
+  left_join(urbanization, by = "site_code")
 
 table(sites$urbanization)
 ```
 
     ## 
     ##  Peri Rural Urban 
-    ##    15    21    23
+    ##    16    23    30
 
 ``` r
 ggplot(sites, aes(x = habitat_PC1, y = habitat_PC2)) +
@@ -636,10 +644,10 @@ round(pca$rotation, 3)
 ```
 
     ##                    PC1    PC2    PC3    PC4
-    ## impervious_500  -0.540  0.380 -0.626  0.416
-    ## canopy_500      -0.584 -0.303 -0.168 -0.734
-    ## dist_wetland_m  -0.508  0.438  0.740  0.054
-    ## summer_ndvi_500 -0.330 -0.756  0.181  0.535
+    ## impervious_500  -0.551  0.351 -0.606  0.454
+    ## canopy_500      -0.581 -0.303 -0.194 -0.730
+    ## dist_wetland_m  -0.506  0.449  0.736  0.020
+    ## summer_ndvi_500 -0.320 -0.764  0.232  0.510
 
 ``` r
 fviz_eig(
@@ -657,6 +665,7 @@ fviz_pca_ind(
   habillage = sites$urbanization,
   addEllipses = TRUE,
   repel = TRUE,
+  mean.point = FALSE,
   palette = c(
     Rural = "forestgreen",
     Peri = "goldenrod",

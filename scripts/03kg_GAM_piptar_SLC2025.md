@@ -1,7 +1,7 @@
-04_GAM_piptar_SLC2025
+03kg_GAM_piptar_SLC2025
 ================
 Katie Graybeal
-2026-06-12
+2026-06-17
 
 - [Setup](#setup)
 - [Prepare Data](#prepare-data)
@@ -278,9 +278,9 @@ gam.check(tar_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                     k'  edf k-index p-value
-    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.18
-    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.21
-    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.23
+    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.23
+    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.23
+    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.26
     ## s(site_name)                      56.0 43.6      NA      NA
 
 ``` r
@@ -364,9 +364,9 @@ gam.check(pip_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                      k'   edf k-index p-value
-    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.58
-    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.57
-    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.60
+    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.60
+    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.60
+    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.58
     ## s(site_name)                      59.00 49.76      NA      NA
 
 ``` r
