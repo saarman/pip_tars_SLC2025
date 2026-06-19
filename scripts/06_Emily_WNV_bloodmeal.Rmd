@@ -234,7 +234,7 @@ p1_biplot <- ggplot() +
     name = "Trap type"
   ) +
   labs(
-    title = "Habitat PCA (Bloodmeal Sites)",
+    title = "Habitat PCA (Bloodmeal Sites by Trap Type)",
        x = "PC1 - Urbanization (57.6% variance)",
     y = "PC2 - Vegetation (29.7% variance)"
   ) +
@@ -246,6 +246,107 @@ p1_biplot <- ggplot() +
   )
 
 print(p1_biplot)
+ 
+# Plot by mosquito species
+
+
+
+# Site/species-level PCA scores from bloodmeal object
+pca_scores_df <- bloodmeal %>%
+  distinct(
+    site_code,
+    mosq_species,
+    urbanization,
+    habitat_PC1,
+    habitat_PC2
+  ) %>%
+  filter(
+    !is.na(habitat_PC1),
+    !is.na(habitat_PC2),
+    !is.na(mosq_species)
+  ) %>%
+  mutate(
+    urbanization = factor(
+      urbanization,
+      levels = c("Urban", "Peri", "Rural")
+    ),
+    mosq_species = recode(
+      mosq_species,
+      "Cx_pipiens_sl" = "Cx. pipiens s.l.",
+      "Cx_tarsalis" = "Cx. tarsalis"
+    ),
+    PC1 = habitat_PC1,
+    PC2 = habitat_PC2
+  )
+
+p1_biplot_spp <- ggplot() +
+  stat_ellipse(
+    data = pca_scores_df,
+    aes(x = PC1, y = PC2, color = urbanization),
+    level = 0.75,
+    linewidth = 0.8,
+    linetype = "dashed"
+  ) +
+  geom_point(
+    data = pca_scores_df,
+    aes(
+      x = PC1,
+      y = PC2,
+      color = urbanization,
+      fill = urbanization,
+      shape = mosq_species
+    ),
+    size = 3,
+    alpha = 0.5,
+    stroke = 0.8
+  ) +
+  geom_segment(
+    data = loadings_df,
+    aes(
+      x = 0,
+      y = 0,
+      xend = PC1 * arrow_scale,
+      yend = PC2 * arrow_scale
+    ),
+    arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+    color = "gray30",
+    linewidth = 0.7
+  ) +
+  geom_text(
+    data = loadings_df,
+    aes(
+      x = PC1 * arrow_scale * 1.15,
+      y = PC2 * arrow_scale * 1.15,
+      label = variable
+    ),
+    size = 3.5,
+    color = "gray20",
+    fontface = "italic"
+  ) +
+  geom_hline(yintercept = 0, linetype = "dotted", color = "gray70") +
+  geom_vline(xintercept = 0, linetype = "dotted", color = "gray70") +
+  scale_color_manual(values = urb_colors, name = "Urbanization") +
+  scale_fill_manual(values = urb_colors, name = "Urbanization") +
+  scale_shape_manual(
+    values = c(
+      "Cx. pipiens s.l." = 10,
+      "Cx. tarsalis" = 24
+    ),
+    name = "Species"
+  ) +
+  labs(
+    title = "Habitat PCA (Bloodmeal Sites by Mosquito)",
+    x = "PC1 - Urbanization (57.6% variance)",
+    y = "PC2 - Vegetation (29.7% variance)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "gray40"),
+    legend.position = "right"
+  )
+
+print(p1_biplot_spp)
 
 
 ```  
@@ -463,6 +564,7 @@ print(p2_biplot)
   
 # RQ1: Bloodmeal  
 
+
 ```{r model1}
 # MODEL 1: Bloodmeal host ~ mosquito species + urbanization
 # Make sure it's a factor
@@ -496,418 +598,8 @@ pp_check(model_1, ndraws = 100)
 mcmc_trace(model_1, pars = vars(contains("habitat_PC1")))
 mcmc_trace(model_1, pars = vars(contains("mosq_species")))
 ```
+  
 # RQ2: WNV probability
-
-## Pipiens
-
-### Pip model 2v1
-```{r model2v1-pip}
-# Pip MODEL 2v1: WNV infection ~ urbanization + GAM smooths
-
-# Make sure all random effect variables are factors
-wnv <- wnv %>%
-mutate(
-site_code = factor(site_code),
-trap_type2 = factor(trap_type2),
-year_f = factor(year)
-)
-
-pipiens_data <- wnv %>% filter(mosq_species == "Cx_pipiens_sl")
-
-gam_pipiens <- gam(
-infected ~ habitat_PC1 +
-  s(disease_week, bs = "tp", k = 8) +
-s(disease_week, by = year_f, bs = "fs", k = 15) +
-s(year_f, bs = "re") +
-s(site_code, bs = "re") +
-s(trap_type2, bs = "re") + #trap_type2 is random effect
-offset(log(num_count)),
-family = binomial(link = "cloglog"),
-data = pipiens_data,
-method = "REML"
-)
-summary(gam_pipiens)
-
-#allow smooth to vary across urbanization gradient (non-linear)
-gam_pipiens2 <- gam(
-  infected ~
-    s(habitat_PC1, k = 4) +
-    s(disease_week, bs = "tp", k = 8) +
-    s(disease_week, by = year_f, bs = "fs", k = 15) +
-    s(year_f, bs = "re") +
-    s(site_code, bs = "re") +
-    s(trap_type2, bs = "re") +   #trap_type2 is random effect
-    offset(log(num_count)),
-  family = binomial(link = "cloglog"),
-  data = pipiens_data,
-  method = "REML"
-)
-summary(gam_pipiens2)
-
-AIC(gam_pipiens, gam_pipiens2)
-
-plot(
-  gam_pipiens2,
-  select = 1,
-  shade = TRUE,
-  residuals = TRUE,
-  rug = TRUE
-)
-
-# Pipiens diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_pipiens)
-par(mfrow = c(1, 1))
-plot(gam_pipiens, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-
-# Concurvity
-concurvity(gam_pipiens, full = FALSE)
-
-# Pipiens diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_pipiens2)
-par(mfrow = c(1, 1))
-plot(gam_pipiens2, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-
-# Concurvity
-concurvity(gam_pipiens2, full = FALSE)
-
-```
-Interpretation:
-
-Formula:
-infected ~ habitat_PC1 + s(disease_week, bs = "tp", k = 8) + 
-    s(disease_week, by = year_f, bs = "fs", k = 15) + s(year_f, 
-    bs = "re") + s(site_code, bs = "re") + s(trap_type2, bs = "re") + 
-    offset(log(num_count))    
-            Estimate Std. Error z value Pr(>|z|)      
-habitat_PC1 -0.26895    0.08602  -3.127  0.00177 **   
-s(disease_week) 4.36446  5.106 54.269  < 2e-16 ***  
- - Smooth term for disease week is significant.  
- - habitat_PC1 is statistically significant. 
- 
-Formula:
-infected ~ s(habitat_PC1, k = 4) + s(disease_week, bs = "tp", 
-    k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) + 
-    s(year_f, bs = "re") + s(site_code, bs = "re") + s(trap_type2, 
-    bs = "re") + offset(log(num_count))  
-                      edf Ref.df  Chi.sq  p-value    
-s(disease_week) 4.3730549  5.113  54.954  < 2e-16 ***  
-s(habitat_PC1)  1.8748501  2.259  11.168  0.00643 **   
- - Smooth term for disease week is significant.  
- - The smooth term for habitat_PC1 is statistically significant.  
-      - EDF ≈ 1 would be essentially linear.  
-      - EDF ≈ 1.8 suggests modest nonlinearity.  
- - The AIC improvement with including a smooth term for habitat_PC1 is tiny (less than 1).  
-
-I think this means there is evidence that habitat_PC1 matters for pipiens, and there may be some curvature, but the curvature is fairly weak. In other words, probability of infection in pipiens varies significantly across the urbanization gradient, even when we force a linear effect. So, for now I'll let habitat_PC1 have a linear relationship. 
-
-
-### Pip model 2v2
-```{r model2v2-pip}
-# Pip MODEL 2v2: WNV infection ~ urbanization + trap_type2 + GAM smooths
-
-gam_pipiens_trapfixed <- gam(
-infected ~ habitat_PC1 + trap_type2 +
-  s(disease_week, bs = "tp", k = 8) +
-s(disease_week, by = year_f, bs = "fs", k = 15) +
-s(year_f, bs = "re") +
-s(site_code, bs = "re") +
-offset(log(num_count)),
-family = binomial(link = "cloglog"),
-data = pipiens_data,
-method = "REML"
-)
-summary(gam_pipiens_trapfixed)
-
-#allow smooth to vary across urbanization gradient (non-linear)
-gam_pipiens2_trapfixed <- gam(
-  infected ~ trap_type2 +
-    s(habitat_PC1, k = 4) +
-    s(disease_week, bs = "tp", k = 8) +
-    s(disease_week, by = year_f, bs = "fs", k = 15) +
-    s(year_f, bs = "re") +
-    s(site_code, bs = "re") +
-    offset(log(num_count)),
-  family = binomial(link = "cloglog"),
-  data = pipiens_data,
-  method = "REML"
-)
-summary(gam_pipiens2_trapfixed)
-
-AIC(gam_pipiens, gam_pipiens2, gam_pipiens_trapfixed, gam_pipiens2_trapfixed)
-
-plot(
-  gam_pipiens2_trapfixed,
-  select = 1,
-  shade = TRUE,
-  residuals = TRUE,
-  rug = TRUE
-)
-
-# Pipiens diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_pipiens_trapfixed)
-par(mfrow = c(1, 1))
-plot(gam_pipiens_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-
-# Concurvity
-concurvity(gam_pipiens, full = FALSE)
-
-# Pipiens diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_pipiens2_trapfixed)
-par(mfrow = c(1, 1))
-plot(gam_pipiens2_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-
-# Concurvity
-concurvity(gam_pipiens2_trapfixed, full = FALSE)
-
-```
-Interpretation:  
-
-Formula:
-infected ~ habitat_PC1 + trap_type2 + s(disease_week, bs = "tp", 
-    k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) + 
-    s(year_f, bs = "re") + s(site_code, bs = "re") + offset(log(num_count))  
-                Estimate Std. Error z value Pr(>|z|)      
-habitat_PC1     -0.25376    0.08757  -2.898  0.00376 **   
-trap_type2GRVD+  1.11828    0.23886   4.682 2.85e-06 ***  
-s(disease_week)  4.365484  5.107  54.819  <2e-16 ***  
-
-
-Formula:
-infected ~ trap_type2 + s(habitat_PC1, k = 4) + s(disease_week, 
-    bs = "tp", k = 8) + s(disease_week, by = year_f, bs = "fs", 
-    k = 15) + s(year_f, bs = "re") + s(site_code, bs = "re") + 
-    offset(log(num_count))  
-                Estimate Std. Error z value Pr(>|z|)      
-trap_type2GRVD+   1.0689     0.2488   4.297 1.73e-05 ***  
-                                 edf Ref.df Chi.sq p-value    
-s(habitat_PC1)             1.8668036  2.252  9.572  0.0135 *  
-s(disease_week)            4.3739313  5.114 55.484  <2e-16 ***
-
-                             df      AIC  
-gam_pipiens            27.64861 1231.843  
-gam_pipiens2           28.99880 1231.156  
-gam_pipiens_trapfixed  27.65630 1231.729  
-gam_pipiens2_trapfixed 29.02111 1231.057  
-
-Trap_type2 is significant as well. AIC is very similar with/without smooth term, and with trap_type as a fixed_effect or a random effect.  Do we need to allow an interaction term, or let the smooth vary by trap type?  
-  
-
-
-
-### Pip Moran's I for Cx. pipiens residuals
-```{r moran-pip}
-pipiens_resids <- pipiens_data %>%
-  mutate(resid = residuals(gam_pipiens, type = "deviance")) %>%
-  group_by(site_code) %>%
-  summarise(
-    mean_resid = mean(resid, na.rm = TRUE),
-    latitude = first(latitude),
-    longitude = first(longitude),
-    .groups = "drop"
-  ) %>%
-  filter(!is.na(mean_resid), !is.na(latitude), !is.na(longitude))
-
-coords_pipiens <- cbind(pipiens_resids$longitude, pipiens_resids$latitude)
-
-lw5_pipiens <- coords_pipiens %>%
-  knearneigh(k = 5) %>%
-  knn2nb() %>%
-  nb2listw(style = "W")
-
-moran.test(pipiens_resids$mean_resid, lw5_pipiens)
-
-```
-Moran's I shows no spatial autocorrelation in residuals for pipiens.
-
-## Tarsalis   
-### Tar model 2v1
-```{r gam-tar}
-tarsalis_data <- wnv %>% filter(mosq_species == "Cx_tarsalis")
-
-gam_tarsalis <- gam(
-infected ~ habitat_PC1 +
-  s(disease_week, bs = "tp", k = 8) +
-s(disease_week, by = year_f, bs = "fs", k = 15) +
-s(year_f, bs = "re") +
-s(site_code, bs = "re") +
-s(trap_type2, bs = "re") +
-offset(log(num_count)),
-family = binomial(link = "cloglog"),
-data = tarsalis_data,
-method = "REML"
-)
-summary(gam_tarsalis)
-AIC(gam_tarsalis)
-
-#allow smooth to vary across urbanization gradient (non-linear)
-gam_tarsalis2 <- gam(
-  infected ~
-    s(habitat_PC1, k = 4) +
-    s(disease_week, bs = "tp", k = 8) +
-    s(disease_week, by = year_f, bs = "fs", k = 15) +
-    s(year_f, bs = "re") +
-    s(site_code, bs = "re") +
-    s(trap_type2, bs = "re") +   #trap_type2 is random effect
-    offset(log(num_count)),
-  family = binomial(link = "cloglog"),
-  data = tarsalis_data,
-  method = "REML"
-)
-summary(gam_tarsalis2)
-
-AIC(gam_tarsalis, gam_tarsalis2)
-
-plot(
-  gam_tarsalis2,
-  select = 1,
-  shade = TRUE,
-  residuals = TRUE,
-  rug = TRUE
-)
-
-
-# Tarsalis diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_tarsalis)
-par(mfrow = c(1, 1))
-plot(gam_tarsalis, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-concurvity(gam_tarsalis, full = FALSE)
-
-par(mfrow = c(2, 2))
-gam.check(gam_tarsalis2)
-par(mfrow = c(1, 1))
-plot(gam_tarsalis2, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-concurvity(gam_tarsalis2, full = FALSE)
-
-
-
-```
-
-Interpretation:
-habitat_PC1 and the smooth term for habitat_PC1 are NOT statistically significant.
-The AIC improvement with including a smooth term for habitat_PC1 is tiny (less than 1).
-
-I think this means there is no evidence that habitat_PC1 matters for tarsalis. In other words, probability of infection in tarsalis does not vary across the urbanization gradient.
-  
-### Tar model 2v2
-```{r model2v2-tar}
-# Tar MODEL 2v2: WNV infection ~ urbanization + trap_type2 + GAM smooths
-
-gam_tarsalis_trapfixed <- gam(
-infected ~ habitat_PC1 + trap_type2 +
-  s(disease_week, bs = "tp", k = 8) +
-s(disease_week, by = year_f, bs = "fs", k = 15) +
-s(year_f, bs = "re") +
-s(site_code, bs = "re") +
-offset(log(num_count)),
-family = binomial(link = "cloglog"),
-data = tarsalis_data,
-method = "REML"
-)
-summary(gam_tarsalis_trapfixed)
-
-#allow smooth to vary across urbanization gradient (non-linear)
-gam_tarsalis2_trapfixed <- gam(
-  infected ~ trap_type2 +
-    s(habitat_PC1, k = 4) +
-    s(disease_week, bs = "tp", k = 8) +
-    s(disease_week, by = year_f, bs = "fs", k = 15) +
-    s(year_f, bs = "re") +
-    s(site_code, bs = "re") +
-    offset(log(num_count)),
-  family = binomial(link = "cloglog"),
-  data = tarsalis_data,
-  method = "REML"
-)
-summary(gam_tarsalis2_trapfixed)
-
-AIC(gam_tarsalis, gam_tarsalis2, gam_tarsalis_trapfixed, gam_tarsalis2_trapfixed)
-
-plot(
-  gam_tarsalis2_trapfixed,
-  select = 1,
-  shade = TRUE,
-  residuals = TRUE,
-  rug = TRUE
-)
-
-# tarsalis diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_tarsalis_trapfixed)
-par(mfrow = c(1, 1))
-plot(gam_tarsalis_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-
-# Concurvity
-concurvity(gam_tarsalis, full = FALSE)
-
-# tarsalis diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_tarsalis2_trapfixed)
-par(mfrow = c(1, 1))
-plot(gam_tarsalis2_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-
-# Concurvity
-concurvity(gam_tarsalis2_trapfixed, full = FALSE)
-
-```
-Interpretation:
-
-Formula:
-infected ~ habitat_PC1 + s(disease_week, bs = "tp", k = 8) + 
-    s(disease_week, by = year_f, bs = "fs", k = 15) + s(year_f, 
-    bs = "re") + s(site_code, bs = "re") + s(trap_type2, bs = "re") + 
-    offset(log(num_count))  
-            Estimate Std. Error z value Pr(>|z|)      
-(Intercept)  -9.0764     0.3880 -23.392   <2e-16 ***  
-habitat_PC1  -0.1224     0.1405  -0.871    0.384      
-                                 edf    Ref.df Chi.sq  p-value      
-s(disease_week)            2.484e+00 3.070e+00 24.425 2.66e-05 ***  
-
-Formula:  
-infected ~ habitat_PC1 + trap_type2 + s(disease_week, bs = "tp",   
-    k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) +   
-    s(year_f, bs = "re") + s(site_code, bs = "re") + offset(log(num_count))  
-                  Estimate Std. Error z value Pr(>|z|)    
-(Intercept)     -9.087e+00  3.844e-01 -23.638   <2e-16 ***
-habitat_PC1     -1.434e-01  1.422e-01  -1.009    0.313    
-trap_type2GRVD+ -1.144e+02  7.698e+06   0.000    1.000    
-  
-                              df      AIC  
-gam_tarsalis            18.53465 781.5625  
-gam_tarsalis2           19.03913 782.0304  
-gam_tarsalis_trapfixed  18.84940 779.8560  
-
-Trap_type is not significant in any of the analysis. Neither is habitat_PC1. Disease week is significant in the simplest model, gam_tarsalis.
-
-### Tar Moran's I for Cx. tarsalis residuals
-```{r moran-tar}
-tarsalis_resids <- tarsalis_data %>%
-  mutate(resid = residuals(gam_tarsalis, type = "deviance")) %>%
-  group_by(site_code) %>%
-  summarise(
-    mean_resid = mean(resid, na.rm = TRUE),
-    latitude = first(latitude),
-    longitude = first(longitude),
-    .groups = "drop"
-  ) %>%
-  filter(!is.na(mean_resid), !is.na(latitude), !is.na(longitude))
-
-coords_tarsalis <- cbind(tarsalis_resids$longitude, tarsalis_resids$latitude)
-
-lw5_tarsalis <- coords_tarsalis %>%
-  knearneigh(k = 5) %>%
-  knn2nb() %>%
-  nb2listw(style = "W")
-
-moran.test(tarsalis_resids$mean_resid, lw5_tarsalis)
-```
-
-**Interpretation:**
-No evidence of spatial autocorrelation in tarsalis.
 
 ## Plot raw by urbanization:
 ```{r}
@@ -988,7 +680,7 @@ ggplot(
   ) +
   labs(
     title = NULL,
-    x = "PC1 — Urbanization gradient",
+    x = "Urbanization PC1 (Rural --> Urban)",
     y = "% infected pools per site"
   ) +
   theme_classic(base_size = 13) +
@@ -998,142 +690,205 @@ ggplot(
 ```
 
   
-## Plot predicted  
+## Pipiens
 
-For Cx. pipiens:   
- - habitat_PC1 is significant   
- - trap_type2 is significant   
- - allowing habitat_PC1 to be smooth provides a slight improvement   
- - the smooth is only mildly nonlinear (edf ≈ 1.9)    
+### Pip ~ habitat_PC1
+```{r pip}
+# Pip MODEL 2v1: WNV infection ~ habitat_PC1 + GAM smooths
 
-For Cx. tarsalis:   
- - habitat_PC1 is not significant  
- - trap_type2 is not significant  
- - there is no evidence for a nonlinear habitat effect  - the fitted relationship is essentially flat
-
-So, I think it's best to fit and plot both species using the same model structure that I landed on for pipiens.  
-
-infected ~ habitat_PC1 + trap_type2 +  
-  s(disease_week, bs = "tp", k = 8) +  
-  s(disease_week, by = year_f, bs = "fs", k = 15) +  
-  s(year_f, bs = "re") +  
-  s(site_code, bs = "re") +  
-  offset(log(num_count))  
-  
-gam_pipiens_trapfixed  
-gam_tarsalis_trapfixed   
-  
-###Urbanization gradient
-```{r plot-pred}
-pc1_seq <- seq(
-  min(wnv$habitat_PC1, na.rm = TRUE),
-  max(wnv$habitat_PC1, na.rm = TRUE),
-  length.out = 200
+# Make sure all random effect variables are factors
+wnv <- wnv %>%
+mutate(
+site_code = factor(site_code),
+trap_type2 = factor(trap_type2),
+year_f = factor(year)
 )
 
-pred_pip <- expand.grid(
-  habitat_PC1 = pc1_seq,
-  trap_type2 = levels(pipiens_data$trap_type2)
+pipiens_data <- wnv %>% filter(mosq_species == "Cx_pipiens_sl")
+
+gam_pipiens <- gam(
+infected ~ habitat_PC1 +
+  s(disease_week, bs = "tp", k = 8) +
+s(disease_week, by = year_f, bs = "fs", k = 15) +
+s(year_f, bs = "re") +
+s(site_code, bs = "re") +
+s(trap_type2, bs = "re") + #trap_type2 is random effect
+offset(log(num_count)),
+family = binomial(link = "cloglog"),
+data = pipiens_data,
+method = "REML"
 )
-
-pred_tar <- expand.grid(
-  habitat_PC1 = pc1_seq,
-  trap_type2 = levels(tarsalis_data$trap_type2)
-)
-
-pred_pip$disease_week <- median(pipiens_data$disease_week)
-pred_pip$year_f <- levels(pipiens_data$year_f)[1]
-pred_pip$site_code <- levels(pipiens_data$site_code)[1]
-pred_pip$num_count <- 1
-
-pred_tar$disease_week <- median(tarsalis_data$disease_week)
-pred_tar$year_f <- levels(tarsalis_data$year_f)[1]
-pred_tar$site_code <- levels(tarsalis_data$site_code)[1]
-pred_tar$num_count <- 1
-
-
-pip_pred <- predict(
-  gam_pipiens_trapfixed,
-  newdata = pred_pip,
-  type = "link",
-  se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
-)
-
-pred_pip <- pred_pip %>%
-  mutate(
-    fit = 1 - exp(-exp(pip_pred$fit)),
-    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
-    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
-    species = "Cx. pipiens s.l."
-  )
-
-tar_pred <- predict(
-  gam_tarsalis_trapfixed,
-  newdata = pred_tar,
-  type = "link",
-  se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
-)
-
-pred_tar <- pred_tar %>%
-  mutate(
-    fit = 1 - exp(-exp(tar_pred$fit)),
-    lower = 1 - exp(-exp(tar_pred$fit - 1.96 * tar_pred$se.fit)),
-    upper = 1 - exp(-exp(tar_pred$fit + 1.96 * tar_pred$se.fit)),
-    species = "Cx. tarsalis"
-  )
-
-pred_wnv <- bind_rows(pred_pip, pred_tar)
-cols <- c(
-  "Cx. pipiens s.l." = "#1bc8ea",
-  "Cx. tarsalis" = "#FF2DA0"
-)
-
-ggplot( pred_wnv, aes( x = habitat_PC1, y = fit * 100, color = species, fill = species, linetype = trap_type2 ) ) + 
-  geom_ribbon( aes( ymin = lower * 100, ymax = upper * 100, group = interaction(species, trap_type2) ), alpha = 0.15, color = NA ) + 
-  geom_line(linewidth = 1.2) + 
-  scale_x_reverse() + 
-  scale_color_manual(values = cols) + 
-  scale_fill_manual(values = cols) + 
-  labs( 
-    x = "PC1 — Urbanization gradient", 
-    y = "Predicted WNV positivity (%)", 
-    color = "Species", 
-    fill = "Species", 
-    linetype = "Trap type" 
-  ) + 
-  theme_classic(base_size = 13) +
-  # 1. Zoom into the y-axis without clipping data points outside the window
-  coord_cartesian(ylim = c(0, 1.2)) +
-  # 2. Place the legend on right
-  theme(
-    legend.position = "right",
-    legend.background = element_rect(fill = "transparent")
-  )
+summary(gam_pipiens)
 ```  
-### Disease week
 
-```{r pred-plot}
-# Predicted WNV positivity through time
+### Pip ~ s(habitat_PC1)
 
-cols <- c(
-  "Cx. pipiens s.l." = "#1bc8ea",
-  "Cx. tarsalis" = "#FF2DA0"
+```{r pip-s} 
+
+# Pip MODEL 2v1: WNV infection ~ s(habitat_PC1) + GAM smooths
+
+#allow smooth to vary across urbanization gradient (non-linear)
+gam_pipiens2 <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    s(trap_type2, bs = "re") +   #trap_type2 is random effect
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data,
+  method = "REML"
+)
+summary(gam_pipiens2)
+
+AIC(gam_pipiens, gam_pipiens2)
+
+plot(
+  gam_pipiens2,
+  select = 1,
+  shade = TRUE,
+  residuals = TRUE,
+  rug = TRUE
 )
 
-pc1_values <- wnv %>%
-  filter(!is.na(habitat_PC1)) %>%
-  summarise(
-    Urban = quantile(habitat_PC1, 0.1, na.rm = TRUE),
-    Peri = median(habitat_PC1, na.rm = TRUE),
-    Rural = quantile(habitat_PC1, 0.9, na.rm = TRUE)
-  ) %>%
-  tidyr::pivot_longer(
-    everything(),
-    names_to = "habitat_level",
-    values_to = "habitat_PC1"
-  )
+# Pipiens diagnostics
+par(mfrow = c(2, 2))
+gam.check(gam_pipiens)
+par(mfrow = c(1, 1))
+plot(gam_pipiens, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
+
+# Concurvity
+concurvity(gam_pipiens, full = FALSE)
+
+# Pipiens diagnostics
+par(mfrow = c(2, 2))
+gam.check(gam_pipiens2)
+par(mfrow = c(1, 1))
+plot(gam_pipiens2, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
+
+# Concurvity
+concurvity(gam_pipiens2, full = FALSE)
+
+```
+Interpretation:
+
+Formula:
+infected ~ habitat_PC1 + s(disease_week, bs = "tp", k = 8) + 
+    s(disease_week, by = year_f, bs = "fs", k = 15) + s(year_f, 
+    bs = "re") + s(site_code, bs = "re") + s(trap_type2, bs = "re") + 
+    offset(log(num_count))    
+            Estimate Std. Error z value Pr(>|z|)      
+habitat_PC1 -0.26895    0.08602  -3.127  0.00177 **   
+s(disease_week) 4.36446  5.106 54.269  < 2e-16 ***  
+ - Smooth term for disease week is significant.  
+ - habitat_PC1 is statistically significant. 
+ 
+Formula:
+infected ~ s(habitat_PC1, k = 4) + s(disease_week, bs = "tp", 
+    k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) + 
+    s(year_f, bs = "re") + s(site_code, bs = "re") + s(trap_type2, 
+    bs = "re") + offset(log(num_count))  
+                      edf Ref.df  Chi.sq  p-value    
+s(disease_week) 4.3730549  5.113  54.954  < 2e-16 ***  
+s(habitat_PC1)  1.8748501  2.259  11.168  0.00643 **   
+ - Smooth term for disease week is significant.  
+ - The smooth term for habitat_PC1 is statistically significant.  
+      - EDF ≈ 1 would be essentially linear.  
+      - EDF ≈ 1.8 suggests modest nonlinearity.  
+ - The AIC improvement with including a smooth term for habitat_PC1 is tiny (less than 1).  
+
+I think this means there is evidence that habitat_PC1 matters for pipiens, and there may be some curvature, but the curvature is fairly weak. In other words, probability of infection in pipiens varies significantly across the urbanization gradient, even when we force a linear effect... but especially when we allow for some curvature in the relationship. 
+
+### Pip ~ habitat_PC1 + trap_type2
+```{r pip-trap}
+# Pip MODEL 2v2: WNV infection ~ habitat_PC1 + trap_type2 + GAM smooths
+
+gam_pipiens_trapfixed <- gam(
+infected ~ habitat_PC1 + trap_type2 +
+  s(disease_week, bs = "tp", k = 8) +
+s(disease_week, by = year_f, bs = "fs", k = 15) +
+s(year_f, bs = "re") +
+s(site_code, bs = "re") +
+offset(log(num_count)),
+family = binomial(link = "cloglog"),
+data = pipiens_data,
+method = "REML"
+)
+summary(gam_pipiens_trapfixed)
+
+```
+
+### Pip ~ s(habitat_PC1) + trap_type2
+
+Allow smooth to vary across urbanization gradient (non-linear), and include trap_type2 as a fixed effect.
+
+```{r pip-s-trap}
+#
+gam_pipiens2_trapfixed <- gam(
+  infected ~ trap_type2 +
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data,
+  method = "REML"
+)
+summary(gam_pipiens2_trapfixed)
+
+AIC(gam_pipiens, gam_pipiens2, gam_pipiens_trapfixed, gam_pipiens2_trapfixed)
+```
+### Pip ~ s(habitat_PC1) + s(trap_type2)
+
+Split data set into 2 trap types and allow smooth to vary across trap types... check that the curves look the same, check that the effect sizes match what we found before. 
+
+```{r pip-by-trap}
+# CO2+ only, allow smooth to vary across urbanization gradient (non-linear)
+
+pipiens_data_CO2 <- pipiens_data %>%
+  filter(trap_type2 == "CO2+")
+
+gam_pipiens2_trapfixed_CO2 <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data_CO2,
+  method = "REML"
+)
+summary(gam_pipiens2_trapfixed_CO2)
+
+# GRVD+ only, allow smooth to vary across urbanization gradient (non-linear)
+gam_pipiens2_trapfixed_GRVD <- gam(
+  infected ~ s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data[pipiens_data$trap_type2 == "GRVD+",],
+  method = "REML"
+)
+summary(gam_pipiens2_trapfixed_GRVD)
+
+
+# Predicted WNV positivity through time from separate CO2+ and GRVD+ models
+
+pc1_values <- tibble::tribble(
+  ~habitat_level, ~habitat_PC1,
+  "Rural", quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+  "Peri",  median(wnv$habitat_PC1, na.rm = TRUE),
+  "Urban", quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+)
 
 week_seq <- seq(
   min(wnv$disease_week, na.rm = TRUE),
@@ -1141,30 +896,762 @@ week_seq <- seq(
   by = 1
 )
 
-pred_pip <- expand.grid(
+pred_co2 <- expand.grid(
   disease_week = week_seq,
-  trap_type2 = levels(pipiens_data$trap_type2),
   year_f = "2021",
   site_code = levels(pipiens_data$site_code)[1],
   num_count = median(pipiens_data$num_count, na.rm = TRUE)
 ) %>%
   left_join(pc1_values, by = character())
 
-pred_tar <- expand.grid(
+pred_grvd <- pred_co2
+
+co2_pred <- predict(
+  gam_pipiens2_trapfixed_CO2,
+  newdata = pred_co2,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+grvd_pred <- predict(
+  gam_pipiens2_trapfixed_GRVD,
+  newdata = pred_grvd,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+pred_co2 <- pred_co2 %>%
+  mutate(
+    fit = 1 - exp(-exp(co2_pred$fit)),
+    lower = 1 - exp(-exp(co2_pred$fit - 1.96 * co2_pred$se.fit)),
+    upper = 1 - exp(-exp(co2_pred$fit + 1.96 * co2_pred$se.fit)),
+    trap_type2 = "CO2+"
+  )
+
+pred_grvd <- pred_grvd %>%
+  mutate(
+    fit = 1 - exp(-exp(grvd_pred$fit)),
+    lower = 1 - exp(-exp(grvd_pred$fit - 1.96 * grvd_pred$se.fit)),
+    upper = 1 - exp(-exp(grvd_pred$fit + 1.96 * grvd_pred$se.fit)),
+    trap_type2 = "GRVD+"
+  )
+
+pred_pip_week <- bind_rows(pred_co2, pred_grvd) %>%
+  mutate(
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban")),
+    trap_type2 = factor(trap_type2, levels = c("CO2+", "GRVD+"))
+  )
+
+urb_colors <- c(
+  "Urban" = "#B22222",
+  "Peri"  = "#DAA520",
+  "Rural" = "#228B22"
+)
+
+p_co2 <- pred_pip_week %>%
+  filter(trap_type2 == "CO2+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. pipiens CO2+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_grvd <- pred_pip_week %>%
+  filter(trap_type2 == "GRVD+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. pipiens GRVD+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_co2
+p_grvd
+```
+
+Interpretation:  
+
+Trap_type2 is significant as well. AIC is very similar with/without smooth term, and with trap_type as a fixed_effect or a random effect. When we split by trap type, CO2 remains signficant for habitat type, GRVD does not. So, I think its safe to proceed with CO2 traps only. This is the same trap type we used for Katie's analysis as well.  
+
+Also, interestingly, in the final models for CO2 only, even though s(year_f)  p < 2e-16, year-specific seasonal smooths were not significant:
+s(disease_week):year_f2018  p = 0.50
+s(disease_week):year_f2019  p = 0.45
+s(disease_week):year_f2020  p = 0.39
+s(disease_week):year_f2021  p = 0.63
+s(disease_week):year_f2022  p = 0.47
+s(disease_week):year_f2023  p = 0.53
+
+Maybe patterns are broadly similar among years and differ mainly in overall magnitude... so I'll try running it with year as a random effect.
+  
+### Pip try (fail) simplified s(year_f, bs = "re")
+
+Trying to include year as random effect instead of year-specific smooths.
+
+```{r pip-yr-random}
+
+gam_pipiens_co2_simple <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data %>% filter(trap_type2 == "CO2+"),
+  method = "REML"
+)
+
+summary(gam_pipiens_co2_simple)
+
+AIC(gam_pipiens2_trapfixed_CO2, gam_pipiens_co2_simple)
+```
+
+Models including year-specific seasonal variation were better supported than models with a single seasonal smooth (ΔAIC = 7.6), so year-specific smooths are better.
+
+### Pip interpretation  
+
+For Cx. pipiens s.l., both urbanization and trap type influenced predicted WNV positivity. However, trap type substantially affected infection estimates, indicating that comparisons across the urbanization gradient should be made within a single trapping method. When analyses were restricted to CO2 collections, WNV positivity was highest at urban sites and declined toward more rural habitats. In contrast, the urbanization effect was weak and not supported in GRVD collections. Because CO2 traps provided broad coverage across the urbanization gradient and yielded a consistent urbanization signal, subsequent interpretation focused on CO2 collections.  
+
+### Pip Moran's I for Cx. pipiens residuals
+```{r moran-pip}
+# for CO2 model
+pipiens_data_CO2 <- pipiens_data[pipiens_data$trap_type2 == "CO2+",]
+
+pipiens_resids <- pipiens_data_CO2 %>%
+  mutate(resid = residuals(gam_pipiens2_trapfixed_CO2, type = "deviance")) %>%
+  group_by(site_code) %>%
+  summarise(
+    mean_resid = mean(resid, na.rm = TRUE),
+    latitude = first(latitude),
+    longitude = first(longitude),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(mean_resid), !is.na(latitude), !is.na(longitude))
+
+coords_pipiens <- cbind(pipiens_resids$longitude, pipiens_resids$latitude)
+
+lw5_pipiens <- coords_pipiens %>%
+  knearneigh(k = 5) %>%
+  knn2nb() %>%
+  nb2listw(style = "W")
+
+moran.test(pipiens_resids$mean_resid, lw5_pipiens)
+
+```
+Moran's I shows no spatial autocorrelation in residuals for pipiens.
+
+## Tarsalis   
+### Tar ~ habitat_PC1
+```{r tar}
+tarsalis_data <- wnv %>% filter(mosq_species == "Cx_tarsalis")
+
+gam_tarsalis <- gam(
+infected ~ habitat_PC1 +
+  s(disease_week, bs = "tp", k = 8) +
+s(disease_week, by = year_f, bs = "fs", k = 15) +
+s(year_f, bs = "re") +
+s(site_code, bs = "re") +
+s(trap_type2, bs = "re") +
+offset(log(num_count)),
+family = binomial(link = "cloglog"),
+data = tarsalis_data,
+method = "REML"
+)
+summary(gam_tarsalis)
+AIC(gam_tarsalis)
+```
+
+### Tar ~ s(habitat_PC1)
+
+```{r tar-s} 
+#allow smooth to vary across urbanization gradient (non-linear)
+gam_tarsalis2 <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    s(trap_type2, bs = "re") +   #trap_type2 is random effect
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = tarsalis_data,
+  method = "REML"
+)
+summary(gam_tarsalis2)
+
+AIC(gam_tarsalis, gam_tarsalis2)
+
+plot(
+  gam_tarsalis2,
+  select = 1,
+  shade = TRUE,
+  residuals = TRUE,
+  rug = TRUE
+)
+
+
+# Tarsalis diagnostics
+par(mfrow = c(2, 2))
+gam.check(gam_tarsalis)
+par(mfrow = c(1, 1))
+plot(gam_tarsalis, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
+concurvity(gam_tarsalis, full = FALSE)
+
+par(mfrow = c(2, 2))
+gam.check(gam_tarsalis2)
+par(mfrow = c(1, 1))
+plot(gam_tarsalis2, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
+concurvity(gam_tarsalis2, full = FALSE)
+
+
+
+```
+
+Interpretation:
+habitat_PC1 and the smooth term for habitat_PC1 are NOT statistically significant.
+The AIC improvement with including a smooth term for habitat_PC1 is tiny (less than 1).
+
+I think this means there is no evidence that habitat_PC1 matters for tarsalis. In other words, probability of infection in tarsalis does not vary across the urbanization gradient.
+  
+### Tar ~ habitat_PC1 + trap_type2
+```{r tar-trap}
+# Tar MODEL 2v2: WNV infection ~ habitat_PC1 + trap_type2 + GAM smooths
+
+gam_tarsalis_trapfixed <- gam(
+infected ~ habitat_PC1 + trap_type2 +
+  s(disease_week, bs = "tp", k = 8) +
+s(disease_week, by = year_f, bs = "fs", k = 15) +
+s(year_f, bs = "re") +
+s(site_code, bs = "re") +
+offset(log(num_count)),
+family = binomial(link = "cloglog"),
+data = tarsalis_data,
+method = "REML"
+)
+summary(gam_tarsalis_trapfixed)
+```
+
+### Tar ~ s(habitat_PC1) + trap_type2
+
+Allow smooth to vary across urbanization gradient (non-linear), and include trap_type2 as a fixed effect.
+
+```{r tar-s-trap}
+#allow smooth to vary across urbanization gradient (non-linear)
+gam_tarsalis2_trapfixed <- gam(
+  infected ~ trap_type2 +
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = tarsalis_data,
+  method = "REML"
+)
+summary(gam_tarsalis2_trapfixed)
+
+AIC(gam_tarsalis, gam_tarsalis2, gam_tarsalis_trapfixed, gam_tarsalis2_trapfixed)
+
+plot(
+  gam_tarsalis2_trapfixed,
+  select = 1,
+  shade = TRUE,
+  residuals = TRUE,
+  rug = TRUE
+)
+
+# tarsalis diagnostics
+par(mfrow = c(2, 2))
+gam.check(gam_tarsalis_trapfixed)
+par(mfrow = c(1, 1))
+plot(gam_tarsalis_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
+
+# Concurvity
+concurvity(gam_tarsalis, full = FALSE)
+
+# tarsalis diagnostics
+par(mfrow = c(2, 2))
+gam.check(gam_tarsalis2_trapfixed)
+par(mfrow = c(1, 1))
+plot(gam_tarsalis2_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
+
+# Concurvity
+concurvity(gam_tarsalis2_trapfixed, full = FALSE)
+
+```
+
+### Tar ~ s(habitat_PC1) + s(trap_type2)
+
+Split data set into 2 trap types and allow smooth to vary across trap types... check that the curves look the same, check that the effect sizes match what we found before. 
+
+```{r tar-by-trap}
+# CO2+ only, allow smooth to vary across urbanization gradient (non-linear)
+tarsalis_data_CO2 <- tarsalis_data %>%
+  filter(trap_type2 == "CO2+")
+
+gam_tarsalis2_trapfixed_CO2 <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = tarsalis_data_CO2,
+  method = "REML"
+)
+
+summary(gam_tarsalis2_trapfixed_CO2)
+
+# GRVD+ only, allow smooth to vary across urbanization gradient (non-linear)
+gam_tarsalis2_trapfixed_GRVD <- gam(
+  infected ~ s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = tarsalis_data[tarsalis_data$trap_type2 == "GRVD+",],
+  method = "REML"
+)
+summary(gam_tarsalis2_trapfixed_GRVD)
+
+
+# Predicted WNV positivity through time from separate CO2+ and GRVD+ models
+
+pc1_values <- tibble::tribble(
+  ~habitat_level, ~habitat_PC1,
+  "Rural", quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+  "Peri",  median(wnv$habitat_PC1, na.rm = TRUE),
+  "Urban", quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+)
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_co2 <- expand.grid(
   disease_week = week_seq,
-  trap_type2 = levels(tarsalis_data$trap_type2),
   year_f = "2021",
   site_code = levels(tarsalis_data$site_code)[1],
   num_count = median(tarsalis_data$num_count, na.rm = TRUE)
 ) %>%
   left_join(pc1_values, by = character())
 
+pred_grvd <- pred_co2
+
+co2_pred <- predict(
+  gam_tarsalis2_trapfixed_CO2,
+  newdata = pred_co2,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+grvd_pred <- predict(
+  gam_tarsalis2_trapfixed_GRVD,
+  newdata = pred_grvd,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+pred_co2 <- pred_co2 %>%
+  mutate(
+    fit = 1 - exp(-exp(co2_pred$fit)),
+    lower = 1 - exp(-exp(co2_pred$fit - 1.96 * co2_pred$se.fit)),
+    upper = 1 - exp(-exp(co2_pred$fit + 1.96 * co2_pred$se.fit)),
+    trap_type2 = "CO2+"
+  )
+
+pred_grvd <- pred_grvd %>%
+  mutate(
+    fit = 1 - exp(-exp(grvd_pred$fit)),
+    lower = 1 - exp(-exp(grvd_pred$fit - 1.96 * grvd_pred$se.fit)),
+    upper = 1 - exp(-exp(grvd_pred$fit + 1.96 * grvd_pred$se.fit)),
+    trap_type2 = "GRVD+"
+  )
+
+pred_pip_week <- bind_rows(pred_co2, pred_grvd) %>%
+  mutate(
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban")),
+    trap_type2 = factor(trap_type2, levels = c("CO2+", "GRVD+"))
+  )
+
+urb_colors <- c(
+  "Urban" = "#B22222",
+  "Peri"  = "#DAA520",
+  "Rural" = "#228B22"
+)
+
+p_co2 <- pred_pip_week %>%
+  filter(trap_type2 == "CO2+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. tarsalis CO2+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_grvd <- pred_pip_week %>%
+  filter(trap_type2 == "GRVD+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. tarsalis GRVD+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_co2
+p_grvd
+```
+
+Interpretation:
+
+Trap_type is not significant in any of the analysis. Neither is habitat_PC1. Disease week is significant in the simplest model, gam_tarsalis.  
+
+
+### Tar interpretation  
+
+For Cx. tarsalis, neither urbanization nor trap type explained variation in WNV positivity. In addition, GRVD collections contained relatively few Cx. tarsalis compared with CO2 collections, limiting inference from GRVD-based analyses. To maximize comparability between species while focusing on the most data-rich component of the dataset, subsequent analyses emphasized CO2 collections. This approach is also consistent with the primary ecological signal observed in Cx. pipiens, where urban CO2 collections exhibited the highest predicted WNV positivity.  
+
+### Tar Moran's I for Cx. tarsalis residuals
+```{r moran-tar}
+# for CO2 model
+tarsalis_data_CO2 <- tarsalis_data[tarsalis_data$trap_type2 == "CO2+",]
+
+tarsalis_resids <- tarsalis_data_CO2 %>%
+  mutate(resid = residuals(gam_tarsalis2_trapfixed_CO2, type = "deviance")) %>%
+  group_by(site_code) %>%
+  summarise(
+    mean_resid = mean(resid, na.rm = TRUE),
+    latitude = first(latitude),
+    longitude = first(longitude),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(mean_resid), !is.na(latitude), !is.na(longitude))
+
+coords_tarsalis <- cbind(tarsalis_resids$longitude, tarsalis_resids$latitude)
+
+lw5_tarsalis <- coords_tarsalis %>%
+  knearneigh(k = 5) %>%
+  knn2nb() %>%
+  nb2listw(style = "W")
+
+moran.test(tarsalis_resids$mean_resid, lw5_tarsalis)
+```
+
+**Interpretation:**
+No evidence of spatial autocorrelation in tarsalis. 
+
+## Plot predicted  
+
+
+
+SUMMARY TABLE:
+Effect	| Cx. pipiens |	Cx. tarsalis
+Urbanization (habitat_PC1)	| Significant	| Not significant
+Trap type (CO2 vs GRVD) |	Significant	| Not significant
+Seasonal effect (disease week)	| Significant	| Significant
+Year effect	| Significant	| Significant
+Year-specific seasonal smooths |	Not significant |	Not significant
+
+STRONGEST RESULTS:
+Urbanization matters for Cx. pipiens
+Urbanization does not matter for Cx. tarsalis
+Both species show seasonal dynamics
+Pipiens peaks earlier; tarsalis peaks later
+Urban sites have the highest predicted WNV positivity
+
+INTERPRETATION:  
+ - Cx. pipiens WNV positivity varies with urbanization, trap type, season, and year.  
+ - Cx. tarsalis WNV positivity varies with season and year, but shows no detectable urbanization or trap-type effect.  
+  - The strongest ecological signal is therefore in Cx. pipiens, where predicted positivity is highest in urban habitats and differs between trap types.  
+ - Because trap type influences pipiens but not tarsalis, comparisons between species should be standardized to a single trap type (CO2).  
+ - Because urbanization influences pipiens but not tarsalis, the urbanization figure is most informative when focused on pipiens, with tarsalis reported as a non-significant result in the text.  
+ - The year-specific smooths contribute little, suggesting that seasonal timing is broadly consistent among years even though overall infection intensity differs among years.
+ 
+
+### Pipiens by urbanization for CO2
+
+Figure 1: Cx. pipiens CO2-only predicted WNV positivity across Urban / Peri / Rural.
+
+Visualize predicted urbanization effects using CO2+ collections for pipiens only, where those effects are significant.  
+
+```{r pred-week}
+### Figure Cx. pipiens CO2-only predicted WNV positivity by disease week
+
+cols <- c(
+  "Cx. pipiens s.l." = "#1bc8ea"
+)
+
+pc1_values <- tibble::tribble(
+  ~habitat_level, ~habitat_PC1,
+  "Rural", quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+  "Peri",  median(wnv$habitat_PC1, na.rm = TRUE),
+  "Urban", quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+)
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_pip_co2_week <- expand.grid(
+  disease_week = week_seq,
+  habitat_PC1 = pc1_values$habitat_PC1,
+  year_f = factor("2021", levels = levels(pipiens_data_CO2$year_f)),
+  site_code = factor(
+    levels(pipiens_data_CO2$site_code)[1],
+    levels = levels(pipiens_data_CO2$site_code)
+  ),
+  num_count = median(pipiens_data_CO2$num_count, na.rm = TRUE)
+) %>%
+  left_join(pc1_values, by = "habitat_PC1")
+
+pip_pred <- predict(
+  gam_pipiens2_trapfixed_CO2,
+  newdata = pred_pip_co2_week,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+pred_wnv_pip_week <- pred_pip_co2_week %>%
+  mutate(
+    fit = 1 - exp(-exp(pip_pred$fit)),
+    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
+    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
+    species = "Cx. pipiens s.l.",
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+ggplot(
+  pred_wnv_pip_week,
+  aes(
+    x = disease_week,
+    y = fit * 100,
+    color = species,
+    fill = species
+  )
+) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100,
+      group = species
+    ),
+    alpha = 0.25,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.4) +
+  geom_vline(
+    xintercept = 33,
+    linetype = "dashed",
+    linewidth = 0.8
+  ) +
+  geom_text(
+    data = data.frame(
+      habitat_level = factor(c("Rural", "Peri", "Urban"),
+                             levels = c("Rural", "Peri", "Urban")),
+      disease_week = 33.3,
+      y = Inf
+    ),
+    aes(
+      x = disease_week,
+      y = y,
+      label = "1st WNV cases"
+    ),
+    inherit.aes = FALSE,
+    hjust = 0,
+    vjust = 1.3,
+    size = 4
+  ) +
+  facet_wrap(
+    ~ habitat_level,
+    ncol = 1,
+    scales = "free_y"
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  scale_fill_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV positivity in Cx. pipiens s.l. across the urbanization gradient",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 14),
+    legend.position = "none"
+  )
+```
+Not very informative because the shape for 2021. looks pretty identical, magnitude is different...
+
+### Seasonal dynamics
+
+Figure 2. Seasonal dynamics of WNV positivity in Cx. pipiens and Cx. tarsalis.
+
+```{r season-species}
+### Figure 2: Seasonal dynamics of WNV positivity by species
+### CO2 traps, habitat_PC1 held at median, one panel per year
+
+cols <- c(
+  "Cx. pipiens s.l." = "#1bc8ea",
+  "Cx. tarsalis" = "#FF2DA0"
+)
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_season_base <- expand.grid(
+  disease_week = week_seq,
+  habitat_PC1 = median(wnv$habitat_PC1, na.rm = TRUE),
+  trap_type2 = "CO2+",
+  year_f = levels(wnv$year_f),
+  num_count = 1
+)
+
+pred_pip <- pred_season_base %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(
+      levels(pipiens_data$site_code)[1],
+      levels = levels(pipiens_data$site_code)
+    )
+  )
+
+pred_tar <- pred_season_base %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(
+      levels(tarsalis_data$site_code)[1],
+      levels = levels(tarsalis_data$site_code)
+    )
+  )
+
 pip_pred <- predict(
   gam_pipiens_trapfixed,
   newdata = pred_pip,
   type = "link",
   se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
+  exclude = "s(site_code)"
 )
 
 tar_pred <- predict(
@@ -1172,70 +1659,612 @@ tar_pred <- predict(
   newdata = pred_tar,
   type = "link",
   se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
+  exclude = "s(site_code)"
 )
 
-pred_pip <- pred_pip %>%
-  mutate(
-    fit = 1 - exp(-exp(pip_pred$fit)),
-    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
-    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
-    species = "Cx. pipiens s.l."
-  )
+pred_season <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip_pred$fit)),
+      lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
+      upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar_pred$fit)),
+      lower = 1 - exp(-exp(tar_pred$fit - 1.96 * tar_pred$se.fit)),
+      upper = 1 - exp(-exp(tar_pred$fit + 1.96 * tar_pred$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
 
-pred_tar <- pred_tar %>%
-  mutate(
-    fit = 1 - exp(-exp(tar_pred$fit)),
-    lower = 1 - exp(-exp(tar_pred$fit - 1.96 * tar_pred$se.fit)),
-    upper = 1 - exp(-exp(tar_pred$fit + 1.96 * tar_pred$se.fit)),
-    species = "Cx. tarsalis"
-  )
-
-pred_wnv_week <- bind_rows(pred_pip, pred_tar) %>%
-  mutate(
-    habitat_level = factor(habitat_level, levels = c("Rural", "Peri","Urban" ))
-  )
 ggplot(
-  pred_wnv_week,
+  pred_season,
   aes(
     x = disease_week,
     y = fit * 100,
     color = species,
-    fill = species,
-    linetype = trap_type2
+    fill = species
+  )
+) +
+  geom_ribbon(
+    aes(ymin = lower * 100, ymax = upper * 100, group = species),
+    alpha = 0.22,
+    color = NA
+  ) +
+  geom_line(aes(group = species), linewidth = 1.3) +
+  geom_vline(xintercept = 33, linetype = "dashed", linewidth = 0.7) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  coord_cartesian(ylim = c(0, 1.5)) +
+  scale_color_manual(values = cols, name = "Species") +
+  scale_fill_manual(values = cols, guide = "none") +
+  labs(
+    title = "Seasonal dynamics of predicted WNV positivity",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+```  
+### Pip by trap
+Seasonal dynamics of WNV positivity in Cx. pipiens by trap type
+habitat_PC1 held at median, one panel per year
+
+```{r pip-season-traps}
+
+
+pip_col <- "#1bc8ea"
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_pip_trap <- expand.grid(
+  disease_week = week_seq,
+  habitat_PC1 = median(wnv$habitat_PC1, na.rm = TRUE),
+  trap_type2 = levels(pipiens_data$trap_type2),
+  year_f = levels(wnv$year_f),
+  num_count = 1
+) %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(
+      levels(pipiens_data$site_code)[1],
+      levels = levels(pipiens_data$site_code)
+    )
+  )
+
+pip_pred <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip_trap,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_pip_trap <- pred_pip_trap %>%
+  mutate(
+    fit = 1 - exp(-exp(pip_pred$fit)),
+    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
+    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit))
+  )
+
+ggplot(
+  pred_pip_trap,
+  aes(
+    x = disease_week,
+    y = fit * 100,
+    linetype = trap_type2,
+    group = trap_type2
   )
 ) +
   geom_ribbon(
     aes(
       ymin = lower * 100,
       ymax = upper * 100,
-      group = interaction(species, trap_type2, habitat_level)
+      group = trap_type2
     ),
-    alpha = 0.12,
+    fill = pip_col,
+    alpha = 0.16,
     color = NA
   ) +
   geom_line(
-    aes(group = interaction(species, trap_type2, habitat_level)),
-    linewidth = 1.1
+    color = pip_col,
+    linewidth = 1.3
   ) +
-  facet_grid(species ~ habitat_level, scales = "free_y") +
-  scale_color_manual(values = cols, name = "Species") +
-  scale_fill_manual(values = cols, guide = "none") +
-  scale_y_continuous(limits = c(0, 50)) +
+  geom_vline(xintercept = 33, linetype = "dashed", linewidth = 0.7) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  coord_cartesian(ylim = c(0, 2.5)) +
+  scale_linetype_manual(
+    values = c(
+      "CO2+" = "solid",
+      "GRVD+" = "dashed"
+    ),
+    name = "Trap type"
+  ) +
   labs(
+    title = "Seasonal dynamics of predicted WNV positivity in Cx. pipiens s.l.",
     x = "Disease week",
-    y = "Predicted WNV positivity (%)",
-    linetype = "Trap type"
+    y = "Predicted WNV positivity (%)"
   ) +
   theme_classic(base_size = 13) +
   theme(
+    plot.title = element_text(hjust = 0.5),
     strip.background = element_blank(),
-    strip.text.y = element_blank(),
-    strip.text.x = element_text(),
     legend.position = "right"
   )
 ```
-# RQ3: Bloodmeal and WNV probability
+
+
+### Week 32:
+```{r}
+pred_compare <- expand.grid(
+  habitat_level = c("Rural", "Peri", "Urban"),
+  year_f = levels(wnv$year_f)
+) %>%
+  mutate(
+    habitat_PC1 = case_when(
+      habitat_level == "Rural" ~ quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+      habitat_level == "Peri"  ~ median(wnv$habitat_PC1, na.rm = TRUE),
+      habitat_level == "Urban" ~ quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+    ),
+    disease_week = 32,
+    trap_type2 = "CO2+",
+    num_count = 1,
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+pred_pip <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(levels(pipiens_data$site_code)[1],
+                       levels = levels(pipiens_data$site_code))
+  )
+
+pred_tar <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(levels(tarsalis_data$site_code)[1],
+                       levels = levels(tarsalis_data$site_code))
+  )
+
+pip <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+tar <- predict(
+  gam_tarsalis_trapfixed,
+  newdata = pred_tar,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_species <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip$fit)),
+      lower = 1 - exp(-exp(pip$fit - 1.96 * pip$se.fit)),
+      upper = 1 - exp(-exp(pip$fit + 1.96 * pip$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar$fit)),
+      lower = 1 - exp(-exp(tar$fit - 1.96 * tar$se.fit)),
+      upper = 1 - exp(-exp(tar$fit + 1.96 * tar$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
+
+#six panel plot by year
+ggplot(
+  pred_species,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.7
+  ) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV by urbanization and year (Week32 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+ggplot(
+  pred_species_avg,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 4) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.8
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Average predicted WNV across years (Week32 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+
+```
+**NOTE:** Averaging lower and upper is for visualization only, represents mean model-predicted intervals across years, not formal confidence intervals for the averaged prediction.
+
+Also, the urbanization effect is not significant for tarsalis, so I'm including it here only for comparison with pipiens.
+
+### Week 35:
+```{r}
+pred_compare <- expand.grid(
+  habitat_level = c("Rural", "Peri", "Urban"),
+  year_f = levels(wnv$year_f)
+) %>%
+  mutate(
+    habitat_PC1 = case_when(
+      habitat_level == "Rural" ~ quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+      habitat_level == "Peri"  ~ median(wnv$habitat_PC1, na.rm = TRUE),
+      habitat_level == "Urban" ~ quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+    ),
+    disease_week = 35,
+    trap_type2 = "CO2+",
+    num_count = 1,
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+pred_pip <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(levels(pipiens_data$site_code)[1],
+                       levels = levels(pipiens_data$site_code))
+  )
+
+pred_tar <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(levels(tarsalis_data$site_code)[1],
+                       levels = levels(tarsalis_data$site_code))
+  )
+
+pip <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+tar <- predict(
+  gam_tarsalis_trapfixed,
+  newdata = pred_tar,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_species <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip$fit)),
+      lower = 1 - exp(-exp(pip$fit - 1.96 * pip$se.fit)),
+      upper = 1 - exp(-exp(pip$fit + 1.96 * pip$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar$fit)),
+      lower = 1 - exp(-exp(tar$fit - 1.96 * tar$se.fit)),
+      upper = 1 - exp(-exp(tar$fit + 1.96 * tar$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
+
+#six panel plot by year
+ggplot(
+  pred_species,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.7
+  ) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV by urbanization and year (Week35 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+ggplot(
+  pred_species_avg,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 4) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.8
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Average predicted WNV across years (Week35 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+
+```
+  
+### Week 38:
+```{r}
+pred_compare <- expand.grid(
+  habitat_level = c("Rural", "Peri", "Urban"),
+  year_f = levels(wnv$year_f)
+) %>%
+  mutate(
+    habitat_PC1 = case_when(
+      habitat_level == "Rural" ~ quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+      habitat_level == "Peri"  ~ median(wnv$habitat_PC1, na.rm = TRUE),
+      habitat_level == "Urban" ~ quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+    ),
+    disease_week = 38,
+    trap_type2 = "CO2+",
+    num_count = 1,
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+pred_pip <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(levels(pipiens_data$site_code)[1],
+                       levels = levels(pipiens_data$site_code))
+  )
+
+pred_tar <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(levels(tarsalis_data$site_code)[1],
+                       levels = levels(tarsalis_data$site_code))
+  )
+
+pip <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+tar <- predict(
+  gam_tarsalis_trapfixed,
+  newdata = pred_tar,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_species <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip$fit)),
+      lower = 1 - exp(-exp(pip$fit - 1.96 * pip$se.fit)),
+      upper = 1 - exp(-exp(pip$fit + 1.96 * pip$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar$fit)),
+      lower = 1 - exp(-exp(tar$fit - 1.96 * tar$se.fit)),
+      upper = 1 - exp(-exp(tar$fit + 1.96 * tar$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
+
+#six panel plot by year
+ggplot(
+  pred_species,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.7
+  ) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV by urbanization and year (Week38 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+ggplot(
+  pred_species_avg,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 4) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.8
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Average predicted WNV across years (Week38 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+
+```
+
+# RQ3: Bloodmeal and WNV probability  
+
+Maybe this is just a question of interpretation, and showing how these aspects line up:
+
+1. Cx. pipiens blood feeding on passerine is correlated with urbanization
+
+2. Cx. pipiens WNV positiveity is correlated with urbanization
+
+3. Cx. pipeins WNV positivity is higher than for Cx. tarsalis in peri and urban areas at week 33, time of first WNV cases every year. Also Cx. tarsalis has no significant effect of urbanization, or trap effect. Also consider abundance in traps in interpretation.
+
+
 
 
 

@@ -1,7 +1,7 @@
 Bloodmeal + WNV positive GAM: SLC
 ================
 Norah Saarman
-2026-06-18
+2026-06-19
 
 - [Setup](#setup)
 - [Data](#data)
@@ -10,18 +10,41 @@ Norah Saarman
   - [PCA - bloodmeal GPS points](#pca---bloodmeal-gps-points)
   - [PCA - WNV dataset](#pca---wnv-dataset)
 - [RQ1: Bloodmeal](#rq1-bloodmeal)
+- [RQ2: WNV probability](#rq2-wnv-probability)
+  - [Plot raw by urbanization:](#plot-raw-by-urbanization)
   - [Pipiens](#pipiens)
-    - [Pip model 2v1](#pip-model-2v1)
-    - [Pip model 2v2](#pip-model-2v2)
+    - [Pip ~ habitat_PC1](#pip--habitat_pc1)
+    - [Pip ~ s(habitat_PC1)](#pip--shabitat_pc1)
+    - [Pip ~ habitat_PC1 + trap_type2](#pip--habitat_pc1--trap_type2)
+    - [Pip ~ s(habitat_PC1) +
+      trap_type2](#pip--shabitat_pc1--trap_type2)
+    - [Pip ~ s(habitat_PC1) +
+      s(trap_type2)](#pip--shabitat_pc1--strap_type2)
+    - [Pip try (fail) simplified s(year_f, bs =
+      “re”)](#pip-try-fail-simplified-syear_f-bs--re)
+    - [Pip interpretation](#pip-interpretation)
     - [Pip Moran’s I for Cx. pipiens
       residuals](#pip-morans-i-for-cx-pipiens-residuals)
   - [Tarsalis](#tarsalis)
-    - [Tar model 2v1](#tar-model-2v1)
-    - [Tar model 2v2](#tar-model-2v2)
+    - [Tar ~ habitat_PC1](#tar--habitat_pc1)
+    - [Tar ~ s(habitat_PC1)](#tar--shabitat_pc1)
+    - [Tar ~ habitat_PC1 + trap_type2](#tar--habitat_pc1--trap_type2)
+    - [Tar ~ s(habitat_PC1) +
+      trap_type2](#tar--shabitat_pc1--trap_type2)
+    - [Tar ~ s(habitat_PC1) +
+      s(trap_type2)](#tar--shabitat_pc1--strap_type2)
+    - [Tar interpretation](#tar-interpretation)
     - [Tar Moran’s I for Cx. tarsalis
       residuals](#tar-morans-i-for-cx-tarsalis-residuals)
-  - [Plot raw by urbanization:](#plot-raw-by-urbanization)
   - [Plot predicted](#plot-predicted)
+    - [Pipiens by urbanization for
+      CO2](#pipiens-by-urbanization-for-co2)
+    - [Seasonal dynamics](#seasonal-dynamics)
+    - [Week 32:](#week-32)
+    - [Week 35:](#week-35)
+    - [Week 38:](#week-38)
+- [RQ3: Bloodmeal and WNV
+  probability](#rq3-bloodmeal-and-wnv-probability)
 
 # Setup
 
@@ -367,7 +390,7 @@ p1_biplot <- ggplot() +
     name = "Trap type"
   ) +
   labs(
-    title = "Habitat PCA (Bloodmeal Sites)",
+    title = "Habitat PCA (Bloodmeal Sites by Trap Type)",
        x = "PC1 - Urbanization (57.6% variance)",
     y = "PC2 - Vegetation (29.7% variance)"
   ) +
@@ -382,6 +405,111 @@ print(p1_biplot)
 ```
 
 ![](../figures/PCA-bloodmeal-1.png)<!-- -->
+
+``` r
+# Plot by mosquito species
+
+
+
+# Site/species-level PCA scores from bloodmeal object
+pca_scores_df <- bloodmeal %>%
+  distinct(
+    site_code,
+    mosq_species,
+    urbanization,
+    habitat_PC1,
+    habitat_PC2
+  ) %>%
+  filter(
+    !is.na(habitat_PC1),
+    !is.na(habitat_PC2),
+    !is.na(mosq_species)
+  ) %>%
+  mutate(
+    urbanization = factor(
+      urbanization,
+      levels = c("Urban", "Peri", "Rural")
+    ),
+    mosq_species = recode(
+      mosq_species,
+      "Cx_pipiens_sl" = "Cx. pipiens s.l.",
+      "Cx_tarsalis" = "Cx. tarsalis"
+    ),
+    PC1 = habitat_PC1,
+    PC2 = habitat_PC2
+  )
+
+p1_biplot_spp <- ggplot() +
+  stat_ellipse(
+    data = pca_scores_df,
+    aes(x = PC1, y = PC2, color = urbanization),
+    level = 0.75,
+    linewidth = 0.8,
+    linetype = "dashed"
+  ) +
+  geom_point(
+    data = pca_scores_df,
+    aes(
+      x = PC1,
+      y = PC2,
+      color = urbanization,
+      fill = urbanization,
+      shape = mosq_species
+    ),
+    size = 3,
+    alpha = 0.5,
+    stroke = 0.8
+  ) +
+  geom_segment(
+    data = loadings_df,
+    aes(
+      x = 0,
+      y = 0,
+      xend = PC1 * arrow_scale,
+      yend = PC2 * arrow_scale
+    ),
+    arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+    color = "gray30",
+    linewidth = 0.7
+  ) +
+  geom_text(
+    data = loadings_df,
+    aes(
+      x = PC1 * arrow_scale * 1.15,
+      y = PC2 * arrow_scale * 1.15,
+      label = variable
+    ),
+    size = 3.5,
+    color = "gray20",
+    fontface = "italic"
+  ) +
+  geom_hline(yintercept = 0, linetype = "dotted", color = "gray70") +
+  geom_vline(xintercept = 0, linetype = "dotted", color = "gray70") +
+  scale_color_manual(values = urb_colors, name = "Urbanization") +
+  scale_fill_manual(values = urb_colors, name = "Urbanization") +
+  scale_shape_manual(
+    values = c(
+      "Cx. pipiens s.l." = 10,
+      "Cx. tarsalis" = 24
+    ),
+    name = "Species"
+  ) +
+  labs(
+    title = "Habitat PCA (Bloodmeal Sites by Mosquito)",
+    x = "PC1 - Urbanization (57.6% variance)",
+    y = "PC2 - Vegetation (29.7% variance)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "gray40"),
+    legend.position = "right"
+  )
+
+print(p1_biplot_spp)
+```
+
+![](../figures/PCA-bloodmeal-2.png)<!-- -->
 
 ### PCA - WNV dataset
 
@@ -777,14 +905,115 @@ mcmc_trace(model_1, pars = vars(contains("habitat_PC1")))
 mcmc_trace(model_1, pars = vars(contains("mosq_species")))
 ```
 
-![](../figures/model1-3.png)<!-- --> \# RQ2: WNV probability
+![](../figures/model1-3.png)<!-- -->
+
+# RQ2: WNV probability
+
+## Plot raw by urbanization:
+
+``` r
+wnv_site <- wnv %>%
+  group_by(site_code, mosq_species) %>%
+  summarise(
+    pct_infected = mean(infected, na.rm = TRUE) * 100,
+    n_pools = n(),
+    habitat_PC1 = first(habitat_PC1),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(habitat_PC1)) %>%
+  mutate(
+    mosq_species = recode(
+      mosq_species,
+      "Cx_pipiens_sl" = "Cx. pipiens s.l.",
+      "Cx_tarsalis" = "Cx. tarsalis"
+    )
+  )
+
+ggplot(wnv_site, aes(x = habitat_PC1, y = pct_infected)) +
+  geom_point(aes(size = n_pools), alpha = 0.6, color = "steelblue") +
+  geom_smooth(method = "lm", se = TRUE, color = "firebrick", linewidth = 1) +
+  facet_wrap(~ mosq_species, scales = "free_y") +
+  scale_x_reverse() +
+  scale_size_continuous(name = "Pools tested", range = c(2, 8)) +
+  labs(
+    title = "Urbanization Gradient vs WNV Infection Rate",
+    x = "PC1 — Urbanization gradient",
+    y = "% infected pools per site"
+  ) +
+  theme_classic(base_size = 13)
+```
+
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+![](../figures/unnamed-chunk-1-1.png)<!-- -->
+
+``` r
+cols <- c(
+  "Cx. pipiens s.l." = "#1bc8ea",
+  "Cx. tarsalis" = "#FF2DA0"
+)
+
+wnv_site <- wnv %>%
+  group_by(site_code, mosq_species) %>%
+  summarise(
+    pct_infected = mean(infected, na.rm = TRUE) * 100,
+    n_pools = n(),
+    habitat_PC1 = first(habitat_PC1),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(habitat_PC1)) %>%
+  mutate(
+    mosq_species = recode(
+      mosq_species,
+      "Cx_pipiens_sl" = "Cx. pipiens s.l.",
+      "Cx_tarsalis" = "Cx. tarsalis"
+    )
+  )
+
+ggplot(
+  wnv_site,
+  aes(
+    x = habitat_PC1,
+    y = pct_infected,
+    color = mosq_species
+  )
+) +
+  geom_point(
+    aes(size = n_pools),
+    alpha = 0.7
+  ) +
+  geom_smooth(
+    method = "lm",
+    se = TRUE,
+    linewidth = 1
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  scale_x_reverse() +
+  scale_size_continuous(
+    name = "Pools tested",
+    range = c(2, 8)
+  ) +
+  labs(
+    title = NULL,
+    x = "Urbanization PC1 (Rural --> Urban)",
+    y = "% infected pools per site"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+```
+
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+![](../figures/unnamed-chunk-1-2.png)<!-- -->
 
 ## Pipiens
 
-### Pip model 2v1
+### Pip ~ habitat_PC1
 
 ``` r
-# Pip MODEL 2v1: WNV infection ~ urbanization + GAM smooths
+# Pip MODEL 2v1: WNV infection ~ habitat_PC1 + GAM smooths
 
 # Make sure all random effect variables are factors
 wnv <- wnv %>%
@@ -847,7 +1076,11 @@ summary(gam_pipiens)
     ## R-sq.(adj) =  0.353   Deviance explained = 38.2%
     ## -REML = 624.01  Scale est. = 1         n = 2832
 
+### Pip ~ s(habitat_PC1)
+
 ``` r
+# Pip MODEL 2v1: WNV infection ~ s(habitat_PC1) + GAM smooths
+
 #allow smooth to vary across urbanization gradient (non-linear)
 gam_pipiens2 <- gam(
   infected ~
@@ -919,7 +1152,7 @@ plot(
 )
 ```
 
-![](../figures/model2v1-pip-1.png)<!-- -->
+![](../figures/pip-s-1.png)<!-- -->
 
 ``` r
 # Pipiens diagnostics
@@ -927,7 +1160,7 @@ par(mfrow = c(2, 2))
 gam.check(gam_pipiens)
 ```
 
-![](../figures/model2v1-pip-2.png)<!-- -->
+![](../figures/pip-s-2.png)<!-- -->
 
     ## 
     ## Method: REML   Optimizer: outer newton
@@ -959,7 +1192,7 @@ par(mfrow = c(1, 1))
 plot(gam_pipiens, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
 ```
 
-![](../figures/model2v1-pip-3.png)<!-- -->
+![](../figures/pip-s-3.png)<!-- -->
 
 ``` r
 # Concurvity
@@ -1266,7 +1499,7 @@ par(mfrow = c(2, 2))
 gam.check(gam_pipiens2)
 ```
 
-![](../figures/model2v1-pip-4.png)<!-- -->
+![](../figures/pip-s-4.png)<!-- -->
 
     ## 
     ## Method: REML   Optimizer: outer newton
@@ -1299,7 +1532,7 @@ par(mfrow = c(1, 1))
 plot(gam_pipiens2, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
 ```
 
-![](../figures/model2v1-pip-5.png)<!-- -->
+![](../figures/pip-s-5.png)<!-- -->
 
 ``` r
 # Concurvity
@@ -1654,13 +1887,13 @@ I think this means there is evidence that habitat_PC1 matters for
 pipiens, and there may be some curvature, but the curvature is fairly
 weak. In other words, probability of infection in pipiens varies
 significantly across the urbanization gradient, even when we force a
-linear effect. So, for now I’ll let habitat_PC1 have a linear
+linear effect… but especially when we allow for some curvature in the
 relationship.
 
-### Pip model 2v2
+### Pip ~ habitat_PC1 + trap_type2
 
 ``` r
-# Pip MODEL 2v2: WNV infection ~ urbanization + trap_type2 + GAM smooths
+# Pip MODEL 2v2: WNV infection ~ habitat_PC1 + trap_type2 + GAM smooths
 
 gam_pipiens_trapfixed <- gam(
 infected ~ habitat_PC1 + trap_type2 +
@@ -1711,8 +1944,13 @@ summary(gam_pipiens_trapfixed)
     ## R-sq.(adj) =  0.353   Deviance explained = 38.2%
     ## -REML = 622.47  Scale est. = 1         n = 2832
 
+### Pip ~ s(habitat_PC1) + trap_type2
+
+Allow smooth to vary across urbanization gradient (non-linear), and
+include trap_type2 as a fixed effect.
+
 ``` r
-#allow smooth to vary across urbanization gradient (non-linear)
+#
 gam_pipiens2_trapfixed <- gam(
   infected ~ trap_type2 +
     s(habitat_PC1, k = 4) +
@@ -1774,697 +2012,378 @@ AIC(gam_pipiens, gam_pipiens2, gam_pipiens_trapfixed, gam_pipiens2_trapfixed)
     ## gam_pipiens_trapfixed  27.65630 1231.729
     ## gam_pipiens2_trapfixed 29.02111 1231.057
 
+### Pip ~ s(habitat_PC1) + s(trap_type2)
+
+Split data set into 2 trap types and allow smooth to vary across trap
+types… check that the curves look the same, check that the effect sizes
+match what we found before.
+
 ``` r
-plot(
-  gam_pipiens2_trapfixed,
-  select = 1,
-  shade = TRUE,
-  residuals = TRUE,
-  rug = TRUE
+# CO2+ only, allow smooth to vary across urbanization gradient (non-linear)
+
+pipiens_data_CO2 <- pipiens_data %>%
+  filter(trap_type2 == "CO2+")
+
+gam_pipiens2_trapfixed_CO2 <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data_CO2,
+  method = "REML"
+)
+summary(gam_pipiens2_trapfixed_CO2)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: cloglog 
+    ## 
+    ## Formula:
+    ## infected ~ s(habitat_PC1, k = 4) + s(disease_week, bs = "tp", 
+    ##     k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) + 
+    ##     s(year_f, bs = "re") + s(site_code, bs = "re") + offset(log(num_count))
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -7.7154     0.5573  -13.85   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                 edf Ref.df Chi.sq p-value    
+    ## s(habitat_PC1)             1.418493  1.691  8.359 0.00760 ** 
+    ## s(disease_week)            3.290523  4.044 18.067 0.00123 ** 
+    ## s(disease_week):year_f2018 1.000002  1.000  0.463 0.49611    
+    ## s(disease_week):year_f2019 1.000389  1.001  0.574 0.44906    
+    ## s(disease_week):year_f2020 1.916607  2.611  2.795 0.38535    
+    ## s(disease_week):year_f2021 1.000175  1.000  0.227 0.63388    
+    ## s(disease_week):year_f2022 1.000003  1.000  0.531 0.46607    
+    ## s(disease_week):year_f2023 1.000064  1.000  0.403 0.52545    
+    ## s(year_f)                  3.910736  5.000 48.816 < 2e-16 ***
+    ## s(site_code)               0.001078 55.000  0.001 0.42455    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Rank: 157/158
+    ## R-sq.(adj) =  0.156   Deviance explained = 19.8%
+    ## -REML = 261.47  Scale est. = 1         n = 1386
+
+``` r
+# GRVD+ only, allow smooth to vary across urbanization gradient (non-linear)
+gam_pipiens2_trapfixed_GRVD <- gam(
+  infected ~ s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data[pipiens_data$trap_type2 == "GRVD+",],
+  method = "REML"
+)
+summary(gam_pipiens2_trapfixed_GRVD)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: cloglog 
+    ## 
+    ## Formula:
+    ## infected ~ s(habitat_PC1, k = 4) + s(disease_week, bs = "tp", 
+    ##     k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) + 
+    ##     s(year_f, bs = "re") + s(site_code, bs = "re") + offset(log(num_count))
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -7.0062     0.8543  -8.201 2.39e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                  edf    Ref.df Chi.sq p-value    
+    ## s(habitat_PC1)             1.000e+00 1.000e+00  1.548   0.213    
+    ## s(disease_week)            4.328e+00 5.059e+00 46.156  <2e-16 ***
+    ## s(disease_week):year_f2018 1.462e+00 1.786e+00  0.919   0.653    
+    ## s(disease_week):year_f2019 1.858e+00 2.308e+00  2.035   0.531    
+    ## s(disease_week):year_f2020 2.319e-05 3.969e-05  0.000   0.999    
+    ## s(disease_week):year_f2021 1.000e+00 1.000e+00  0.136   0.713    
+    ## s(disease_week):year_f2022 1.000e+00 1.000e+00  0.402   0.526    
+    ## s(disease_week):year_f2023 1.591e+00 1.979e+00  1.245   0.502    
+    ## s(year_f)                  4.517e+00 5.000e+00 93.949  <2e-16 ***
+    ## s(site_code)               2.599e-04 2.300e+01  0.000   0.773    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Rank: 125/126
+    ## R-sq.(adj) =  0.436   Deviance explained = 41.5%
+    ## -REML = 355.54  Scale est. = 1         n = 1446
+
+``` r
+# Predicted WNV positivity through time from separate CO2+ and GRVD+ models
+
+pc1_values <- tibble::tribble(
+  ~habitat_level, ~habitat_PC1,
+  "Rural", quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+  "Peri",  median(wnv$habitat_PC1, na.rm = TRUE),
+  "Urban", quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+)
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_co2 <- expand.grid(
+  disease_week = week_seq,
+  year_f = "2021",
+  site_code = levels(pipiens_data$site_code)[1],
+  num_count = median(pipiens_data$num_count, na.rm = TRUE)
+) %>%
+  left_join(pc1_values, by = character())
+```
+
+    ## Warning: Using `by = character()` to perform a cross join was deprecated in dplyr 1.1.0.
+    ## ℹ Please use `cross_join()` instead.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
+``` r
+pred_grvd <- pred_co2
+
+co2_pred <- predict(
+  gam_pipiens2_trapfixed_CO2,
+  newdata = pred_co2,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+grvd_pred <- predict(
+  gam_pipiens2_trapfixed_GRVD,
+  newdata = pred_grvd,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
 )
 ```
 
-![](../figures/model2v2-pip-1.png)<!-- -->
+    ## Warning in predict.gam(gam_pipiens2_trapfixed_GRVD, newdata = pred_grvd, :
+    ## factor levels 1 not in original fit
 
 ``` r
-# Pipiens diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_pipiens_trapfixed)
+pred_co2 <- pred_co2 %>%
+  mutate(
+    fit = 1 - exp(-exp(co2_pred$fit)),
+    lower = 1 - exp(-exp(co2_pred$fit - 1.96 * co2_pred$se.fit)),
+    upper = 1 - exp(-exp(co2_pred$fit + 1.96 * co2_pred$se.fit)),
+    trap_type2 = "CO2+"
+  )
+
+pred_grvd <- pred_grvd %>%
+  mutate(
+    fit = 1 - exp(-exp(grvd_pred$fit)),
+    lower = 1 - exp(-exp(grvd_pred$fit - 1.96 * grvd_pred$se.fit)),
+    upper = 1 - exp(-exp(grvd_pred$fit + 1.96 * grvd_pred$se.fit)),
+    trap_type2 = "GRVD+"
+  )
+
+pred_pip_week <- bind_rows(pred_co2, pred_grvd) %>%
+  mutate(
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban")),
+    trap_type2 = factor(trap_type2, levels = c("CO2+", "GRVD+"))
+  )
+
+urb_colors <- c(
+  "Urban" = "#B22222",
+  "Peri"  = "#DAA520",
+  "Rural" = "#228B22"
+)
+
+p_co2 <- pred_pip_week %>%
+  filter(trap_type2 == "CO2+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. pipiens CO2+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_grvd <- pred_pip_week %>%
+  filter(trap_type2 == "GRVD+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. pipiens GRVD+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_co2
 ```
 
-![](../figures/model2v2-pip-2.png)<!-- -->
-
-    ## 
-    ## Method: REML   Optimizer: outer newton
-    ## full convergence after 16 iterations.
-    ## Gradient range [-0.0001737319,3.688102e-05]
-    ## (score 622.4686 & scale 1).
-    ## Hessian positive definite, eigenvalue range [1.607794e-05,1.364595].
-    ## Model rank =  163 / 164 
-    ## 
-    ## Basis dimension (k) checking results. Low p-value (k-index<1) may
-    ## indicate that k is too low, especially if edf is close to k'.
-    ## 
-    ##                                  k'      edf k-index p-value    
-    ## s(disease_week)             7.00000  4.36548    0.86  <2e-16 ***
-    ## s(disease_week):year_f2018 14.00000  5.14963    0.86  <2e-16 ***
-    ## s(disease_week):year_f2019 14.00000  1.18402    0.86  <2e-16 ***
-    ## s(disease_week):year_f2020 14.00000  3.06590    0.86  <2e-16 ***
-    ## s(disease_week):year_f2021 14.00000  1.00059    0.86  <2e-16 ***
-    ## s(disease_week):year_f2022 14.00000  1.00026    0.86  <2e-16 ***
-    ## s(disease_week):year_f2023 14.00000  1.03852    0.86  <2e-16 ***
-    ## s(year_f)                   6.00000  4.19689      NA      NA    
-    ## s(site_code)               64.00000  0.00699      NA      NA    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+![](../figures/pip-by-trap-1.png)<!-- -->
 
 ``` r
-par(mfrow = c(1, 1))
-plot(gam_pipiens_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
+p_grvd
 ```
 
-![](../figures/model2v2-pip-3.png)<!-- -->
-
-``` r
-# Concurvity
-concurvity(gam_pipiens, full = FALSE)
-```
-
-    ## $worst
-    ##                                    para s(disease_week)
-    ## para                       1.000000e+00    1.941442e-23
-    ## s(disease_week)            1.940983e-23    1.000000e+00
-    ## s(disease_week):year_f2018 5.071383e-03    4.681923e-01
-    ## s(disease_week):year_f2019 5.433696e-02    2.215608e-01
-    ## s(disease_week):year_f2020 1.061408e-01    4.546177e-01
-    ## s(disease_week):year_f2021 7.879919e-02    3.348028e-01
-    ## s(disease_week):year_f2022 1.180812e-01    1.568721e-01
-    ## s(disease_week):year_f2023 1.797436e-01    2.303840e-01
-    ## s(year_f)                  1.000000e+00    4.112721e-02
-    ## s(site_code)               1.000000e+00    9.544583e-02
-    ## s(trap_type2)              1.000000e+00    2.788658e-02
-    ##                            s(disease_week):year_f2018
-    ## para                                     5.071383e-03
-    ## s(disease_week)                          4.681923e-01
-    ## s(disease_week):year_f2018               1.000000e+00
-    ## s(disease_week):year_f2019               5.050968e-28
-    ## s(disease_week):year_f2020               7.567960e-02
-    ## s(disease_week):year_f2021               2.784376e-27
-    ## s(disease_week):year_f2022               2.846839e-27
-    ## s(disease_week):year_f2023               3.519355e-27
-    ## s(year_f)                                2.233617e-02
-    ## s(site_code)                             3.665372e-01
-    ## s(trap_type2)                            6.399520e-03
-    ##                            s(disease_week):year_f2019
-    ## para                                     5.433696e-02
-    ## s(disease_week)                          2.215608e-01
-    ## s(disease_week):year_f2018               8.646972e-28
-    ## s(disease_week):year_f2019               1.000000e+00
-    ## s(disease_week):year_f2020               4.484206e-02
-    ## s(disease_week):year_f2021               3.137011e-27
-    ## s(disease_week):year_f2022               3.585877e-27
-    ## s(disease_week):year_f2023               2.766401e-27
-    ## s(year_f)                                3.029178e-01
-    ## s(site_code)                             6.769118e-02
-    ## s(trap_type2)                            5.478231e-02
-    ##                            s(disease_week):year_f2020
-    ## para                                       0.11083656
-    ## s(disease_week)                            0.43000310
-    ## s(disease_week):year_f2018                 0.05858684
-    ## s(disease_week):year_f2019                 0.07942127
-    ## s(disease_week):year_f2020                 1.00000000
-    ## s(disease_week):year_f2021                 0.11305143
-    ## s(disease_week):year_f2022                 0.08957624
-    ## s(disease_week):year_f2023                 0.10603216
-    ## s(year_f)                                  1.00005416
-    ## s(site_code)                               0.20795946
-    ## s(trap_type2)                              0.10849624
-    ##                            s(disease_week):year_f2021
-    ## para                                     7.879919e-02
-    ## s(disease_week)                          3.348028e-01
-    ## s(disease_week):year_f2018               3.254442e-27
-    ## s(disease_week):year_f2019               3.973570e-27
-    ## s(disease_week):year_f2020               7.357952e-02
-    ## s(disease_week):year_f2021               1.000000e+00
-    ## s(disease_week):year_f2022               4.396972e-27
-    ## s(disease_week):year_f2023               6.250204e-27
-    ## s(year_f)                                4.155667e-01
-    ## s(site_code)                             8.673882e-02
-    ## s(trap_type2)                            7.982927e-02
-    ##                            s(disease_week):year_f2022
-    ## para                                     1.180812e-01
-    ## s(disease_week)                          1.568721e-01
-    ## s(disease_week):year_f2018               5.617883e-27
-    ## s(disease_week):year_f2019               3.057779e-27
-    ## s(disease_week):year_f2020               5.689069e-02
-    ## s(disease_week):year_f2021               6.230572e-27
-    ## s(disease_week):year_f2022               1.000000e+00
-    ## s(disease_week):year_f2023               7.435515e-27
-    ## s(year_f)                                9.982268e-01
-    ## s(site_code)                             1.495823e-01
-    ## s(trap_type2)                            1.341744e-01
-    ##                            s(disease_week):year_f2023  s(year_f) s(site_code)
-    ## para                                     1.797436e-01 1.00000000   1.00000000
-    ## s(disease_week)                          2.303840e-01 0.04112721   0.09544583
-    ## s(disease_week):year_f2018               2.244281e-27 0.02233617   0.36653721
-    ## s(disease_week):year_f2019               3.614184e-27 0.30291783   0.06769118
-    ## s(disease_week):year_f2020               3.223185e-02 1.00000000   0.13752848
-    ## s(disease_week):year_f2021               3.697352e-27 0.41556667   0.08673882
-    ## s(disease_week):year_f2022               1.268117e-26 0.99822678   0.14958233
-    ## s(disease_week):year_f2023               1.000000e+00 0.99615267   0.22154850
-    ## s(year_f)                                9.961527e-01 1.00000000   1.00000000
-    ## s(site_code)                             2.215485e-01 1.00000000   1.00000000
-    ## s(trap_type2)                            1.875997e-01 1.00000000   1.00000000
-    ##                            s(trap_type2)
-    ## para                          1.00000000
-    ## s(disease_week)               0.02788658
-    ## s(disease_week):year_f2018    0.00639952
-    ## s(disease_week):year_f2019    0.05478231
-    ## s(disease_week):year_f2020    0.10885476
-    ## s(disease_week):year_f2021    0.07982927
-    ## s(disease_week):year_f2022    0.13417444
-    ## s(disease_week):year_f2023    0.18759971
-    ## s(year_f)                     1.00000000
-    ## s(site_code)                  1.00000000
-    ## s(trap_type2)                 1.00000000
-    ## 
-    ## $observed
-    ##                                    para s(disease_week)
-    ## para                       1.000000e+00    1.059331e-28
-    ## s(disease_week)            1.940983e-23    1.000000e+00
-    ## s(disease_week):year_f2018 5.071383e-03    2.334313e-01
-    ## s(disease_week):year_f2019 5.433696e-02    1.747308e-01
-    ## s(disease_week):year_f2020 1.061408e-01    2.710051e-01
-    ## s(disease_week):year_f2021 7.879919e-02    1.893407e-01
-    ## s(disease_week):year_f2022 1.180812e-01    1.205941e-01
-    ## s(disease_week):year_f2023 1.797436e-01    1.355414e-01
-    ## s(year_f)                  1.000000e+00    1.453969e-02
-    ## s(site_code)               1.000000e+00    3.409202e-02
-    ## s(trap_type2)              1.000000e+00    8.804224e-03
-    ##                            s(disease_week):year_f2018
-    ## para                                     7.644684e-04
-    ## s(disease_week)                          2.634436e-01
-    ## s(disease_week):year_f2018               1.000000e+00
-    ## s(disease_week):year_f2019               1.074622e-28
-    ## s(disease_week):year_f2020               1.258660e-02
-    ## s(disease_week):year_f2021               1.023457e-27
-    ## s(disease_week):year_f2022               9.522988e-28
-    ## s(disease_week):year_f2023               1.522771e-27
-    ## s(year_f)                                3.366990e-03
-    ## s(site_code)                             5.758839e-02
-    ## s(trap_type2)                            9.820718e-04
-    ##                            s(disease_week):year_f2019
-    ## para                                     2.050739e-03
-    ## s(disease_week)                          1.798297e-01
-    ## s(disease_week):year_f2018               4.288753e-29
-    ## s(disease_week):year_f2019               1.000000e+00
-    ## s(disease_week):year_f2020               5.361904e-03
-    ## s(disease_week):year_f2021               1.161951e-27
-    ## s(disease_week):year_f2022               9.306786e-28
-    ## s(disease_week):year_f2023               6.094502e-28
-    ## s(year_f)                                1.143247e-02
-    ## s(site_code)                             1.897623e-02
-    ## s(trap_type2)                            2.710158e-03
-    ##                            s(disease_week):year_f2020
-    ## para                                     7.986741e-03
-    ## s(disease_week)                          1.571275e-01
-    ## s(disease_week):year_f2018               2.432137e-29
-    ## s(disease_week):year_f2019               1.871254e-29
-    ## s(disease_week):year_f2020               1.000000e+00
-    ## s(disease_week):year_f2021               1.145870e-27
-    ## s(disease_week):year_f2022               8.620914e-28
-    ## s(disease_week):year_f2023               1.771522e-28
-    ## s(year_f)                                7.590084e-02
-    ## s(site_code)                             2.703400e-02
-    ## s(trap_type2)                            8.329014e-03
-    ##                            s(disease_week):year_f2021
-    ## para                                     1.431630e-03
-    ## s(disease_week)                          2.224367e-01
-    ## s(disease_week):year_f2018               3.519121e-29
-    ## s(disease_week):year_f2019               1.295488e-28
-    ## s(disease_week):year_f2020               3.859448e-02
-    ## s(disease_week):year_f2021               1.000000e+00
-    ## s(disease_week):year_f2022               1.173726e-28
-    ## s(disease_week):year_f2023               1.585896e-27
-    ## s(year_f)                                7.550048e-03
-    ## s(site_code)                             1.385173e-02
-    ## s(trap_type2)                            2.348505e-03
-    ##                            s(disease_week):year_f2022
-    ## para                                     3.185660e-07
-    ## s(disease_week)                          1.376531e-01
-    ## s(disease_week):year_f2018               2.949421e-29
-    ## s(disease_week):year_f2019               1.479767e-28
-    ## s(disease_week):year_f2020               2.520543e-02
-    ## s(disease_week):year_f2021               5.049935e-28
-    ## s(disease_week):year_f2022               1.000000e+00
-    ## s(disease_week):year_f2023               3.691907e-27
-    ## s(year_f)                                2.693072e-06
-    ## s(site_code)                             1.142256e-02
-    ## s(trap_type2)                            3.810619e-03
-    ##                            s(disease_week):year_f2023   s(year_f) s(site_code)
-    ## para                                     4.520567e-03 0.004305631 0.0071285375
-    ## s(disease_week)                          1.766008e-01 0.012525289 0.0009114112
-    ## s(disease_week):year_f2018               2.851826e-29 0.001842006 0.0022395584
-    ## s(disease_week):year_f2019               4.233669e-28 0.017661122 0.0028695109
-    ## s(disease_week):year_f2020               2.139931e-02 0.126731007 0.0025753854
-    ## s(disease_week):year_f2021               3.414730e-28 0.300781210 0.0016331126
-    ## s(disease_week):year_f2022               1.521796e-27 0.001659827 0.0041805396
-    ## s(disease_week):year_f2023               1.000000e+00 0.007037456 0.0027263474
-    ## s(year_f)                                2.505332e-02 1.000000000 0.0074491562
-    ## s(site_code)                             4.165931e-02 0.027588118 1.0000000000
-    ## s(trap_type2)                            4.686073e-03 0.006552881 0.0094156300
-    ##                            s(trap_type2)
-    ## para                        0.0004488653
-    ## s(disease_week)             0.0278740675
-    ## s(disease_week):year_f2018  0.0043918711
-    ## s(disease_week):year_f2019  0.0063093760
-    ## s(disease_week):year_f2020  0.0222764377
-    ## s(disease_week):year_f2021  0.0111210014
-    ## s(disease_week):year_f2022  0.0357674237
-    ## s(disease_week):year_f2023  0.0117645171
-    ## s(year_f)                   0.0269841346
-    ## s(site_code)                0.8793244330
-    ## s(trap_type2)               1.0000000000
-    ## 
-    ## $estimate
-    ##                                    para s(disease_week)
-    ## para                       1.000000e+00    1.222128e-25
-    ## s(disease_week)            1.940983e-23    1.000000e+00
-    ## s(disease_week):year_f2018 5.071383e-03    2.531781e-01
-    ## s(disease_week):year_f2019 5.433696e-02    1.612299e-01
-    ## s(disease_week):year_f2020 1.061408e-01    1.773309e-01
-    ## s(disease_week):year_f2021 7.879919e-02    2.102456e-01
-    ## s(disease_week):year_f2022 1.180812e-01    1.253974e-01
-    ## s(disease_week):year_f2023 1.797436e-01    1.540088e-01
-    ## s(year_f)                  1.000000e+00    1.957651e-02
-    ## s(site_code)               1.000000e+00    3.243903e-02
-    ## s(trap_type2)              1.000000e+00    3.506564e-03
-    ##                            s(disease_week):year_f2018
-    ## para                                     9.893237e-04
-    ## s(disease_week)                          2.707873e-01
-    ## s(disease_week):year_f2018               1.000000e+00
-    ## s(disease_week):year_f2019               1.134861e-28
-    ## s(disease_week):year_f2020               1.450892e-02
-    ## s(disease_week):year_f2021               9.664091e-28
-    ## s(disease_week):year_f2022               7.362351e-28
-    ## s(disease_week):year_f2023               1.347195e-27
-    ## s(year_f)                                4.357333e-03
-    ## s(site_code)                             5.780702e-02
-    ## s(trap_type2)                            1.408233e-03
-    ##                            s(disease_week):year_f2019
-    ## para                                     2.023344e-03
-    ## s(disease_week)                          1.719342e-01
-    ## s(disease_week):year_f2018               3.689118e-29
-    ## s(disease_week):year_f2019               1.000000e+00
-    ## s(disease_week):year_f2020               8.358359e-03
-    ## s(disease_week):year_f2021               1.092366e-27
-    ## s(disease_week):year_f2022               7.764891e-28
-    ## s(disease_week):year_f2023               5.383117e-28
-    ## s(year_f)                                1.127975e-02
-    ## s(site_code)                             1.835425e-02
-    ## s(trap_type2)                            2.681105e-03
-    ##                            s(disease_week):year_f2020
-    ## para                                     1.395392e-02
-    ## s(disease_week)                          2.022136e-01
-    ## s(disease_week):year_f2018               1.579745e-29
-    ## s(disease_week):year_f2019               2.781195e-29
-    ## s(disease_week):year_f2020               1.000000e+00
-    ## s(disease_week):year_f2021               1.007171e-27
-    ## s(disease_week):year_f2022               7.187735e-28
-    ## s(disease_week):year_f2023               2.426434e-28
-    ## s(year_f)                                1.326091e-01
-    ## s(site_code)                             2.936554e-02
-    ## s(trap_type2)                            1.530231e-02
-    ##                            s(disease_week):year_f2021
-    ## para                                     1.550270e-03
-    ## s(disease_week)                          2.309533e-01
-    ## s(disease_week):year_f2018               2.767260e-29
-    ## s(disease_week):year_f2019               1.445643e-28
-    ## s(disease_week):year_f2020               3.098115e-02
-    ## s(disease_week):year_f2021               1.000000e+00
-    ## s(disease_week):year_f2022               2.003906e-28
-    ## s(disease_week):year_f2023               1.512340e-27
-    ## s(year_f)                                8.175724e-03
-    ## s(site_code)                             1.333753e-02
-    ## s(trap_type2)                            2.676868e-03
-    ##                            s(disease_week):year_f2022
-    ## para                                     7.847869e-05
-    ## s(disease_week)                          1.340986e-01
-    ## s(disease_week):year_f2018               2.417891e-29
-    ## s(disease_week):year_f2019               1.410376e-28
-    ## s(disease_week):year_f2020               2.282157e-02
-    ## s(disease_week):year_f2021               4.995219e-28
-    ## s(disease_week):year_f2022               1.000000e+00
-    ## s(disease_week):year_f2023               3.676528e-27
-    ## s(year_f)                                6.634378e-04
-    ## s(site_code)                             1.111708e-02
-    ## s(trap_type2)                            3.804237e-03
-    ##                            s(disease_week):year_f2023   s(year_f) s(site_code)
-    ## para                                     3.730075e-03 0.177305771  0.023785371
-    ## s(disease_week)                          1.750796e-01 0.010246549  0.002054811
-    ## s(disease_week):year_f2018               2.283991e-29 0.005071383  0.002727109
-    ## s(disease_week):year_f2019               4.267336e-28 0.054336955  0.003630511
-    ## s(disease_week):year_f2020               1.709365e-02 0.105945448  0.005813635
-    ## s(disease_week):year_f2021               4.118264e-28 0.078799188  0.003754146
-    ## s(disease_week):year_f2022               1.223852e-27 0.118081205  0.006076829
-    ## s(disease_week):year_f2023               1.000000e+00 0.179743649  0.006914720
-    ## s(year_f)                                2.067235e-02 1.000000000  0.026031722
-    ## s(site_code)                             3.691392e-02 0.206328264  1.000000000
-    ## s(trap_type2)                            3.981089e-03 0.181119853  0.043830949
-    ##                            s(trap_type2)
-    ## para                         0.500224433
-    ## s(disease_week)              0.013937034
-    ## s(disease_week):year_f2018   0.004731627
-    ## s(disease_week):year_f2019   0.030323166
-    ## s(disease_week):year_f2020   0.064208610
-    ## s(disease_week):year_f2021   0.044960095
-    ## s(disease_week):year_f2022   0.076924314
-    ## s(disease_week):year_f2023   0.095754083
-    ## s(year_f)                    0.513492067
-    ## s(site_code)                 0.939662217
-    ## s(trap_type2)                1.000000000
-
-``` r
-# Pipiens diagnostics
-par(mfrow = c(2, 2))
-gam.check(gam_pipiens2_trapfixed)
-```
-
-![](../figures/model2v2-pip-4.png)<!-- -->
-
-    ## 
-    ## Method: REML   Optimizer: outer newton
-    ## full convergence after 16 iterations.
-    ## Gradient range [-0.0001521396,3.2438e-05]
-    ## (score 621.7134 & scale 1).
-    ## Hessian positive definite, eigenvalue range [1.038683e-05,1.356718].
-    ## Model rank =  165 / 166 
-    ## 
-    ## Basis dimension (k) checking results. Low p-value (k-index<1) may
-    ## indicate that k is too low, especially if edf is close to k'.
-    ## 
-    ##                                  k'      edf k-index p-value    
-    ## s(habitat_PC1)             3.00e+00 1.87e+00    0.31  <2e-16 ***
-    ## s(disease_week)            7.00e+00 4.37e+00    0.86  <2e-16 ***
-    ## s(disease_week):year_f2018 1.40e+01 5.23e+00    0.86  <2e-16 ***
-    ## s(disease_week):year_f2019 1.40e+01 1.16e+00    0.86  <2e-16 ***
-    ## s(disease_week):year_f2020 1.40e+01 3.08e+00    0.86  <2e-16 ***
-    ## s(disease_week):year_f2021 1.40e+01 1.00e+00    0.86  <2e-16 ***
-    ## s(disease_week):year_f2022 1.40e+01 1.00e+00    0.86  <2e-16 ***
-    ## s(disease_week):year_f2023 1.40e+01 1.06e+00    0.86  <2e-16 ***
-    ## s(year_f)                  6.00e+00 4.19e+00      NA      NA    
-    ## s(site_code)               6.40e+01 3.93e-04      NA      NA    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-``` r
-par(mfrow = c(1, 1))
-plot(gam_pipiens2_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
-```
-
-![](../figures/model2v2-pip-5.png)<!-- -->
-
-``` r
-# Concurvity
-concurvity(gam_pipiens2_trapfixed, full = FALSE)
-```
-
-    ## $worst
-    ##                                    para s(habitat_PC1) s(disease_week)
-    ## para                       1.000000e+00   2.824771e-29    1.941442e-23
-    ## s(habitat_PC1)             3.620539e-29   1.000000e+00    2.270948e-02
-    ## s(disease_week)            1.939634e-23   2.270948e-02    1.000000e+00
-    ## s(disease_week):year_f2018 5.071383e-03   1.158146e-02    4.681923e-01
-    ## s(disease_week):year_f2019 5.433696e-02   7.140769e-03    2.215608e-01
-    ## s(disease_week):year_f2020 1.531251e-01   1.997466e-02    4.661022e-01
-    ## s(disease_week):year_f2021 7.879919e-02   9.838742e-03    3.348028e-01
-    ## s(disease_week):year_f2022 1.180812e-01   2.317992e-02    1.568721e-01
-    ## s(disease_week):year_f2023 1.797436e-01   7.879069e-03    2.303840e-01
-    ## s(year_f)                  1.000000e+00   2.401894e-02    4.112721e-02
-    ## s(site_code)               1.000000e+00   1.000000e+00    9.544583e-02
-    ##                            s(disease_week):year_f2018
-    ## para                                     5.071383e-03
-    ## s(habitat_PC1)                           1.158146e-02
-    ## s(disease_week)                          4.681923e-01
-    ## s(disease_week):year_f2018               1.000000e+00
-    ## s(disease_week):year_f2019               4.054411e-28
-    ## s(disease_week):year_f2020               1.254061e-01
-    ## s(disease_week):year_f2021               9.134936e-28
-    ## s(disease_week):year_f2022               1.837131e-27
-    ## s(disease_week):year_f2023               9.284105e-28
-    ## s(year_f)                                2.233617e-02
-    ## s(site_code)                             3.665372e-01
-    ##                            s(disease_week):year_f2019
-    ## para                                     5.433696e-02
-    ## s(habitat_PC1)                           7.140769e-03
-    ## s(disease_week)                          2.215608e-01
-    ## s(disease_week):year_f2018               7.850288e-28
-    ## s(disease_week):year_f2019               1.000000e+00
-    ## s(disease_week):year_f2020               5.564406e-02
-    ## s(disease_week):year_f2021               4.356714e-27
-    ## s(disease_week):year_f2022               1.997893e-27
-    ## s(disease_week):year_f2023               1.680318e-27
-    ## s(year_f)                                3.029178e-01
-    ## s(site_code)                             6.769118e-02
-    ##                            s(disease_week):year_f2020
-    ## para                                       0.11568864
-    ## s(habitat_PC1)                             0.05844092
-    ## s(disease_week)                            0.43627620
-    ## s(disease_week):year_f2018                 0.11601600
-    ## s(disease_week):year_f2019                 0.06658661
-    ## s(disease_week):year_f2020                 1.00000000
-    ## s(disease_week):year_f2021                 0.04597465
-    ## s(disease_week):year_f2022                 0.03843355
-    ## s(disease_week):year_f2023                 0.06170780
-    ## s(year_f)                                  1.00150347
-    ## s(site_code)                               0.15971697
-    ##                            s(disease_week):year_f2021
-    ## para                                     7.879919e-02
-    ## s(habitat_PC1)                           9.838742e-03
-    ## s(disease_week)                          3.348028e-01
-    ## s(disease_week):year_f2018               1.290708e-27
-    ## s(disease_week):year_f2019               4.017337e-27
-    ## s(disease_week):year_f2020               4.531219e-02
-    ## s(disease_week):year_f2021               1.000000e+00
-    ## s(disease_week):year_f2022               3.991185e-27
-    ## s(disease_week):year_f2023               3.010218e-27
-    ## s(year_f)                                4.155667e-01
-    ## s(site_code)                             8.673882e-02
-    ##                            s(disease_week):year_f2022
-    ## para                                     1.180812e-01
-    ## s(habitat_PC1)                           2.317992e-02
-    ## s(disease_week)                          1.568721e-01
-    ## s(disease_week):year_f2018               2.603224e-27
-    ## s(disease_week):year_f2019               2.985104e-27
-    ## s(disease_week):year_f2020               1.378699e-02
-    ## s(disease_week):year_f2021               1.347044e-27
-    ## s(disease_week):year_f2022               1.000000e+00
-    ## s(disease_week):year_f2023               5.565488e-27
-    ## s(year_f)                                9.982268e-01
-    ## s(site_code)                             1.495823e-01
-    ##                            s(disease_week):year_f2023  s(year_f) s(site_code)
-    ## para                                     1.797436e-01 1.00000000   1.00000000
-    ## s(habitat_PC1)                           7.879069e-03 0.02401894   1.00000000
-    ## s(disease_week)                          2.303840e-01 0.04112721   0.09544583
-    ## s(disease_week):year_f2018               1.448433e-27 0.02233617   0.36653721
-    ## s(disease_week):year_f2019               1.735767e-27 0.30291783   0.06769118
-    ## s(disease_week):year_f2020               1.933943e-02 1.00000000   0.19241712
-    ## s(disease_week):year_f2021               1.925476e-27 0.41556667   0.08673882
-    ## s(disease_week):year_f2022               2.851433e-27 0.99822678   0.14958233
-    ## s(disease_week):year_f2023               1.000000e+00 0.99615267   0.22154850
-    ## s(year_f)                                9.961527e-01 1.00000000   1.00000000
-    ## s(site_code)                             2.215485e-01 1.00000000   1.00000000
-    ## 
-    ## $observed
-    ##                                    para s(habitat_PC1) s(disease_week)
-    ## para                       1.000000e+00   7.801128e-32    7.708000e-29
-    ## s(habitat_PC1)             3.620539e-29   1.000000e+00    1.960377e-03
-    ## s(disease_week)            1.939634e-23   2.195700e-02    1.000000e+00
-    ## s(disease_week):year_f2018 5.071383e-03   8.488693e-03    2.751298e-01
-    ## s(disease_week):year_f2019 5.433696e-02   6.706168e-03    1.470246e-01
-    ## s(disease_week):year_f2020 1.531251e-01   1.354350e-02    5.798183e-02
-    ## s(disease_week):year_f2021 7.879919e-02   9.826664e-03    2.311895e-01
-    ## s(disease_week):year_f2022 1.180812e-01   2.168595e-02    1.233463e-01
-    ## s(disease_week):year_f2023 1.797436e-01   7.876445e-03    1.697134e-01
-    ## s(year_f)                  1.000000e+00   2.379326e-02    2.458035e-02
-    ## s(site_code)               1.000000e+00   1.000000e+00    3.647074e-02
-    ##                            s(disease_week):year_f2018
-    ## para                                     1.253716e-03
-    ## s(habitat_PC1)                           1.623737e-03
-    ## s(disease_week)                          1.535578e-01
-    ## s(disease_week):year_f2018               1.000000e+00
-    ## s(disease_week):year_f2019               1.730637e-28
-    ## s(disease_week):year_f2020               5.046505e-04
-    ## s(disease_week):year_f2021               2.400338e-28
-    ## s(disease_week):year_f2022               2.807474e-28
-    ## s(disease_week):year_f2023               7.615664e-31
-    ## s(year_f)                                5.521811e-03
-    ## s(site_code)                             1.850811e-02
-    ##                            s(disease_week):year_f2019
-    ## para                                     2.589528e-03
-    ## s(habitat_PC1)                           2.948876e-03
-    ## s(disease_week)                          1.567754e-01
-    ## s(disease_week):year_f2018               1.779856e-30
-    ## s(disease_week):year_f2019               1.000000e+00
-    ## s(disease_week):year_f2020               6.547667e-03
-    ## s(disease_week):year_f2021               3.661511e-28
-    ## s(disease_week):year_f2022               3.160020e-28
-    ## s(disease_week):year_f2023               3.497433e-29
-    ## s(year_f)                                1.443611e-02
-    ## s(site_code)                             1.786047e-02
-    ##                            s(disease_week):year_f2020
-    ## para                                     2.262610e-02
-    ## s(habitat_PC1)                           1.128351e-03
-    ## s(disease_week)                          2.320347e-01
-    ## s(disease_week):year_f2018               2.155031e-29
-    ## s(disease_week):year_f2019               3.612619e-31
-    ## s(disease_week):year_f2020               1.000000e+00
-    ## s(disease_week):year_f2021               2.462451e-28
-    ## s(disease_week):year_f2022               1.321214e-28
-    ## s(disease_week):year_f2023               5.490327e-28
-    ## s(year_f)                                2.150239e-01
-    ## s(site_code)                             3.878691e-02
-    ##                            s(disease_week):year_f2021
-    ## para                                     1.431374e-03
-    ## s(habitat_PC1)                           2.035990e-04
-    ## s(disease_week)                          2.224294e-01
-    ## s(disease_week):year_f2018               1.098051e-29
-    ## s(disease_week):year_f2019               2.422444e-28
-    ## s(disease_week):year_f2020               9.930858e-04
-    ## s(disease_week):year_f2021               1.000000e+00
-    ## s(disease_week):year_f2022               4.421720e-28
-    ## s(disease_week):year_f2023               5.832305e-29
-    ## s(year_f)                                7.548698e-03
-    ## s(site_code)                             1.385217e-02
-    ##                            s(disease_week):year_f2022
-    ## para                                     3.181014e-07
-    ## s(habitat_PC1)                           1.814523e-03
-    ## s(disease_week)                          1.376528e-01
-    ## s(disease_week):year_f2018               1.168794e-29
-    ## s(disease_week):year_f2019               2.618934e-28
-    ## s(disease_week):year_f2020               7.958001e-04
-    ## s(disease_week):year_f2021               3.829394e-28
-    ## s(disease_week):year_f2022               1.000000e+00
-    ## s(disease_week):year_f2023               1.141220e-29
-    ## s(year_f)                                2.689144e-06
-    ## s(site_code)                             1.142266e-02
-    ##                            s(disease_week):year_f2023   s(year_f) s(site_code)
-    ## para                                     4.021604e-03 0.004344839 0.0040801072
-    ## s(habitat_PC1)                           7.210706e-04 0.003151323 0.0343589891
-    ## s(disease_week)                          1.804315e-01 0.012550634 0.0006209687
-    ## s(disease_week):year_f2018               2.433650e-30 0.001855823 0.0017852359
-    ## s(disease_week):year_f2019               2.909559e-28 0.017188871 0.0025695313
-    ## s(disease_week):year_f2020               3.146910e-03 0.129381372 0.0026458178
-    ## s(disease_week):year_f2021               1.017762e-27 0.300840307 0.0014611862
-    ## s(disease_week):year_f2022               2.000748e-27 0.001599388 0.0034508813
-    ## s(disease_week):year_f2023               1.000000e+00 0.007052742 0.0021256445
-    ## s(year_f)                                2.228803e-02 1.000000000 0.0044983817
-    ## s(site_code)                             4.019545e-02 0.027658457 1.0000000000
-    ## 
-    ## $estimate
-    ##                                    para s(habitat_PC1) s(disease_week)
-    ## para                       1.000000e+00   4.424711e-31    1.222128e-25
-    ## s(habitat_PC1)             3.620539e-29   1.000000e+00    3.036894e-03
-    ## s(disease_week)            1.939634e-23   1.913499e-02    1.000000e+00
-    ## s(disease_week):year_f2018 5.071383e-03   6.420292e-03    2.531781e-01
-    ## s(disease_week):year_f2019 5.433696e-02   6.022155e-03    1.612299e-01
-    ## s(disease_week):year_f2020 1.531251e-01   1.296944e-02    9.976036e-02
-    ## s(disease_week):year_f2021 7.879919e-02   9.170885e-03    2.102456e-01
-    ## s(disease_week):year_f2022 1.180812e-01   2.147606e-02    1.253974e-01
-    ## s(disease_week):year_f2023 1.797436e-01   7.550275e-03    1.540088e-01
-    ## s(year_f)                  1.000000e+00   2.165619e-02    1.957651e-02
-    ## s(site_code)               1.000000e+00   1.000000e+00    3.243903e-02
-    ##                            s(disease_week):year_f2018
-    ## para                                     9.893237e-04
-    ## s(habitat_PC1)                           3.227713e-03
-    ## s(disease_week)                          2.707873e-01
-    ## s(disease_week):year_f2018               1.000000e+00
-    ## s(disease_week):year_f2019               2.480166e-29
-    ## s(disease_week):year_f2020               2.391233e-03
-    ## s(disease_week):year_f2021               3.204190e-28
-    ## s(disease_week):year_f2022               1.771115e-28
-    ## s(disease_week):year_f2023               9.414085e-29
-    ## s(year_f)                                4.357333e-03
-    ## s(site_code)                             5.780702e-02
-    ##                            s(disease_week):year_f2019
-    ## para                                     2.023344e-03
-    ## s(habitat_PC1)                           2.401457e-03
-    ## s(disease_week)                          1.719342e-01
-    ## s(disease_week):year_f2018               1.068359e-29
-    ## s(disease_week):year_f2019               1.000000e+00
-    ## s(disease_week):year_f2020               1.356765e-03
-    ## s(disease_week):year_f2021               2.149999e-28
-    ## s(disease_week):year_f2022               3.016760e-28
-    ## s(disease_week):year_f2023               2.334991e-28
-    ## s(year_f)                                1.127975e-02
-    ## s(site_code)                             1.835425e-02
-    ##                            s(disease_week):year_f2020
-    ## para                                     1.395392e-02
-    ## s(habitat_PC1)                           1.067457e-03
-    ## s(disease_week)                          2.022136e-01
-    ## s(disease_week):year_f2018               2.513771e-29
-    ## s(disease_week):year_f2019               2.660009e-29
-    ## s(disease_week):year_f2020               1.000000e+00
-    ## s(disease_week):year_f2021               3.935673e-28
-    ## s(disease_week):year_f2022               1.149987e-28
-    ## s(disease_week):year_f2023               9.339477e-28
-    ## s(year_f)                                1.326091e-01
-    ## s(site_code)                             2.936554e-02
-    ##                            s(disease_week):year_f2021
-    ## para                                     1.550270e-03
-    ## s(habitat_PC1)                           8.363334e-04
-    ## s(disease_week)                          2.309533e-01
-    ## s(disease_week):year_f2018               1.260972e-29
-    ## s(disease_week):year_f2019               2.003790e-28
-    ## s(disease_week):year_f2020               1.920225e-03
-    ## s(disease_week):year_f2021               1.000000e+00
-    ## s(disease_week):year_f2022               3.940534e-28
-    ## s(disease_week):year_f2023               4.300983e-29
-    ## s(year_f)                                8.175724e-03
-    ## s(site_code)                             1.333753e-02
-    ##                            s(disease_week):year_f2022
-    ## para                                     7.847869e-05
-    ## s(habitat_PC1)                           1.946919e-03
-    ## s(disease_week)                          1.340986e-01
-    ## s(disease_week):year_f2018               1.097087e-29
-    ## s(disease_week):year_f2019               2.111192e-28
-    ## s(disease_week):year_f2020               1.127666e-03
-    ## s(disease_week):year_f2021               3.472941e-28
-    ## s(disease_week):year_f2022               1.000000e+00
-    ## s(disease_week):year_f2023               3.478732e-29
-    ## s(year_f)                                6.634378e-04
-    ## s(site_code)                             1.111708e-02
-    ##                            s(disease_week):year_f2023   s(year_f) s(site_code)
-    ## para                                     3.730075e-03 0.177305771  0.023785371
-    ## s(habitat_PC1)                           6.934703e-04 0.004121450  0.064580381
-    ## s(disease_week)                          1.750796e-01 0.010246549  0.002054811
-    ## s(disease_week):year_f2018               2.992112e-30 0.005071383  0.002727109
-    ## s(disease_week):year_f2019               2.308721e-28 0.054336955  0.003630511
-    ## s(disease_week):year_f2020               2.940355e-03 0.115472246  0.007692368
-    ## s(disease_week):year_f2021               8.502965e-28 0.078799188  0.003754146
-    ## s(disease_week):year_f2022               1.581903e-27 0.118081205  0.006076829
-    ## s(disease_week):year_f2023               1.000000e+00 0.179743649  0.006914720
-    ## s(year_f)                                2.067235e-02 1.000000000  0.026031722
-    ## s(site_code)                             3.691392e-02 0.206328264  1.000000000
+![](../figures/pip-by-trap-2.png)<!-- -->
 
 Interpretation:
 
-Formula: infected ~ habitat_PC1 + trap_type2 + s(disease_week, bs =
-“tp”, k = 8) + s(disease_week, by = year_f, bs = “fs”, k = 15) +
-s(year_f, bs = “re”) + s(site_code, bs = “re”) +
-offset(log(num_count))  
-Estimate Std. Error z value Pr(\>\|z\|)  
-habitat_PC1 -0.25376 0.08757 -2.898 0.00376 \*\*  
-trap_type2GRVD+ 1.11828 0.23886 4.682 2.85e-06 \*\*\*  
-s(disease_week) 4.365484 5.107 54.819 \<2e-16 \*\*\*
-
-Formula: infected ~ trap_type2 + s(habitat_PC1, k = 4) + s(disease_week,
-bs = “tp”, k = 8) + s(disease_week, by = year_f, bs = “fs”, k = 15) +
-s(year_f, bs = “re”) + s(site_code, bs = “re”) +
-offset(log(num_count))  
-Estimate Std. Error z value Pr(\>\|z\|)  
-trap_type2GRVD+ 1.0689 0.2488 4.297 1.73e-05 \*\*\*  
-edf Ref.df Chi.sq p-value  
-s(habitat_PC1) 1.8668036 2.252 9.572 0.0135 \*  
-s(disease_week) 4.3739313 5.114 55.484 \<2e-16 \*\*\*
-
-                             df      AIC  
-
-gam_pipiens 27.64861 1231.843  
-gam_pipiens2 28.99880 1231.156  
-gam_pipiens_trapfixed 27.65630 1231.729  
-gam_pipiens2_trapfixed 29.02111 1231.057
-
 Trap_type2 is significant as well. AIC is very similar with/without
-smooth term, and with trap_type as a fixed_effect or a random effect. Do
-we need to allow an interaction term, or let the smooth vary by trap
-type?
+smooth term, and with trap_type as a fixed_effect or a random effect.
+When we split by trap type, CO2 remains signficant for habitat type,
+GRVD does not. So, I think its safe to proceed with CO2 traps only. This
+is the same trap type we used for Katie’s analysis as well.
+
+Also, interestingly, in the final models for CO2 only, even though
+s(year_f) p \< 2e-16, year-specific seasonal smooths were not
+significant: s(disease_week):year_f2018 p = 0.50
+s(disease_week):year_f2019 p = 0.45 s(disease_week):year_f2020 p = 0.39
+s(disease_week):year_f2021 p = 0.63 s(disease_week):year_f2022 p = 0.47
+s(disease_week):year_f2023 p = 0.53
+
+Maybe patterns are broadly similar among years and differ mainly in
+overall magnitude… so I’ll try running it with year as a random effect.
+
+### Pip try (fail) simplified s(year_f, bs = “re”)
+
+Trying to include year as random effect instead of year-specific
+smooths.
+
+``` r
+gam_pipiens_co2_simple <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data %>% filter(trap_type2 == "CO2+"),
+  method = "REML"
+)
+
+summary(gam_pipiens_co2_simple)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: cloglog 
+    ## 
+    ## Formula:
+    ## infected ~ s(habitat_PC1, k = 4) + s(disease_week, bs = "tp", 
+    ##     k = 8) + s(year_f, bs = "re") + s(site_code, bs = "re") + 
+    ##     offset(log(num_count))
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -7.2784     0.3642  -19.98   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                     edf Ref.df Chi.sq  p-value    
+    ## s(habitat_PC1)  1.20167  1.368  7.379  0.00935 ** 
+    ## s(disease_week) 2.87765  3.572 30.257 6.44e-06 ***
+    ## s(year_f)       4.24872  5.000 51.120  < 2e-16 ***
+    ## s(site_code)    0.01326 55.000  0.013  0.45800    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.134   Deviance explained = 15.9%
+    ## -REML = 271.68  Scale est. = 1         n = 1386
+
+``` r
+AIC(gam_pipiens2_trapfixed_CO2, gam_pipiens_co2_simple)
+```
+
+    ##                                  df      AIC
+    ## gam_pipiens2_trapfixed_CO2 18.89460 530.6091
+    ## gam_pipiens_co2_simple     10.83196 538.1639
+
+Models including year-specific seasonal variation were better supported
+than models with a single seasonal smooth (ΔAIC = 7.6), so year-specific
+smooths are better.
+
+### Pip interpretation
+
+For Cx. pipiens s.l., both urbanization and trap type influenced
+predicted WNV positivity. However, trap type substantially affected
+infection estimates, indicating that comparisons across the urbanization
+gradient should be made within a single trapping method. When analyses
+were restricted to CO2 collections, WNV positivity was highest at urban
+sites and declined toward more rural habitats. In contrast, the
+urbanization effect was weak and not supported in GRVD collections.
+Because CO2 traps provided broad coverage across the urbanization
+gradient and yielded a consistent urbanization signal, subsequent
+interpretation focused on CO2 collections.
 
 ### Pip Moran’s I for Cx. pipiens residuals
 
 ``` r
-pipiens_resids <- pipiens_data %>%
-  mutate(resid = residuals(gam_pipiens, type = "deviance")) %>%
+# for CO2 model
+pipiens_data_CO2 <- pipiens_data[pipiens_data$trap_type2 == "CO2+",]
+
+pipiens_resids <- pipiens_data_CO2 %>%
+  mutate(resid = residuals(gam_pipiens2_trapfixed_CO2, type = "deviance")) %>%
   group_by(site_code) %>%
   summarise(
     mean_resid = mean(resid, na.rm = TRUE),
@@ -2490,17 +2409,17 @@ moran.test(pipiens_resids$mean_resid, lw5_pipiens)
     ## data:  pipiens_resids$mean_resid  
     ## weights: lw5_pipiens    
     ## 
-    ## Moran I statistic standard deviate = 0.19041, p-value = 0.4245
+    ## Moran I statistic standard deviate = 0.23724, p-value = 0.4062
     ## alternative hypothesis: greater
     ## sample estimates:
     ## Moran I statistic       Expectation          Variance 
-    ##      -0.002320218      -0.015873016       0.005066196
+    ##      -0.009739371      -0.017857143       0.001170793
 
 Moran’s I shows no spatial autocorrelation in residuals for pipiens.
 
 ## Tarsalis
 
-### Tar model 2v1
+### Tar ~ habitat_PC1
 
 ``` r
 tarsalis_data <- wnv %>% filter(mosq_species == "Cx_tarsalis")
@@ -2561,6 +2480,8 @@ AIC(gam_tarsalis)
 ```
 
     ## [1] 781.5625
+
+### Tar ~ s(habitat_PC1)
 
 ``` r
 #allow smooth to vary across urbanization gradient (non-linear)
@@ -2634,7 +2555,7 @@ plot(
 )
 ```
 
-![](../figures/gam-tar-1.png)<!-- -->
+![](../figures/tar-s-1.png)<!-- -->
 
 ``` r
 # Tarsalis diagnostics
@@ -2642,7 +2563,7 @@ par(mfrow = c(2, 2))
 gam.check(gam_tarsalis)
 ```
 
-![](../figures/gam-tar-2.png)<!-- -->
+![](../figures/tar-s-2.png)<!-- -->
 
     ## 
     ## Method: REML   Optimizer: outer newton
@@ -2674,7 +2595,7 @@ par(mfrow = c(1, 1))
 plot(gam_tarsalis, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
 ```
 
-![](../figures/gam-tar-3.png)<!-- -->
+![](../figures/tar-s-3.png)<!-- -->
 
 ``` r
 concurvity(gam_tarsalis, full = FALSE)
@@ -2979,7 +2900,7 @@ par(mfrow = c(2, 2))
 gam.check(gam_tarsalis2)
 ```
 
-![](../figures/gam-tar-4.png)<!-- -->
+![](../figures/tar-s-4.png)<!-- -->
 
     ## 
     ## Method: REML   Optimizer: outer newton
@@ -3012,7 +2933,7 @@ par(mfrow = c(1, 1))
 plot(gam_tarsalis2, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
 ```
 
-![](../figures/gam-tar-5.png)<!-- -->
+![](../figures/tar-s-5.png)<!-- -->
 
 ``` r
 concurvity(gam_tarsalis2, full = FALSE)
@@ -3344,10 +3265,10 @@ I think this means there is no evidence that habitat_PC1 matters for
 tarsalis. In other words, probability of infection in tarsalis does not
 vary across the urbanization gradient.
 
-### Tar model 2v2
+### Tar ~ habitat_PC1 + trap_type2
 
 ``` r
-# Tar MODEL 2v2: WNV infection ~ urbanization + trap_type2 + GAM smooths
+# Tar MODEL 2v2: WNV infection ~ habitat_PC1 + trap_type2 + GAM smooths
 
 gam_tarsalis_trapfixed <- gam(
 infected ~ habitat_PC1 + trap_type2 +
@@ -3397,6 +3318,11 @@ summary(gam_tarsalis_trapfixed)
     ## Rank: 159/160
     ## R-sq.(adj) =  0.0746   Deviance explained = 21.5%
     ## -REML = 370.71  Scale est. = 1         n = 3584
+
+### Tar ~ s(habitat_PC1) + trap_type2
+
+Allow smooth to vary across urbanization gradient (non-linear), and
+include trap_type2 as a fixed effect.
 
 ``` r
 #allow smooth to vary across urbanization gradient (non-linear)
@@ -3471,7 +3397,7 @@ plot(
 )
 ```
 
-![](../figures/model2v2-tar-1.png)<!-- -->
+![](../figures/tar-s-trap-1.png)<!-- -->
 
 ``` r
 # tarsalis diagnostics
@@ -3479,7 +3405,7 @@ par(mfrow = c(2, 2))
 gam.check(gam_tarsalis_trapfixed)
 ```
 
-![](../figures/model2v2-tar-2.png)<!-- -->
+![](../figures/tar-s-trap-2.png)<!-- -->
 
     ## 
     ## Method: REML   Optimizer: outer newton
@@ -3510,7 +3436,7 @@ par(mfrow = c(1, 1))
 plot(gam_tarsalis_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
 ```
 
-![](../figures/model2v2-tar-3.png)<!-- -->
+![](../figures/tar-s-trap-3.png)<!-- -->
 
 ``` r
 # Concurvity
@@ -3817,7 +3743,7 @@ par(mfrow = c(2, 2))
 gam.check(gam_tarsalis2_trapfixed)
 ```
 
-![](../figures/model2v2-tar-4.png)<!-- -->
+![](../figures/tar-s-trap-4.png)<!-- -->
 
     ## 
     ## Method: REML   Optimizer: outer newton
@@ -3849,7 +3775,7 @@ par(mfrow = c(1, 1))
 plot(gam_tarsalis2_trapfixed, pages = 1, residuals = TRUE, shade = TRUE, seWithMean = TRUE)
 ```
 
-![](../figures/model2v2-tar-5.png)<!-- -->
+![](../figures/tar-s-trap-5.png)<!-- -->
 
 ``` r
 # Concurvity
@@ -4114,43 +4040,297 @@ concurvity(gam_tarsalis2_trapfixed, full = FALSE)
     ## s(year_f)                                5.336869e-03 1.000000000  0.030053935
     ## s(site_code)                             1.517794e-02 0.199215273  1.000000000
 
+### Tar ~ s(habitat_PC1) + s(trap_type2)
+
+Split data set into 2 trap types and allow smooth to vary across trap
+types… check that the curves look the same, check that the effect sizes
+match what we found before.
+
+``` r
+# CO2+ only, allow smooth to vary across urbanization gradient (non-linear)
+tarsalis_data_CO2 <- tarsalis_data %>%
+  filter(trap_type2 == "CO2+")
+
+gam_tarsalis2_trapfixed_CO2 <- gam(
+  infected ~
+    s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = tarsalis_data_CO2,
+  method = "REML"
+)
+
+summary(gam_tarsalis2_trapfixed_CO2)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: cloglog 
+    ## 
+    ## Formula:
+    ## infected ~ s(habitat_PC1, k = 4) + s(disease_week, bs = "tp", 
+    ##     k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) + 
+    ##     s(year_f, bs = "re") + s(site_code, bs = "re") + offset(log(num_count))
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)  -9.2441     0.3632  -25.45   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                edf  Ref.df Chi.sq p-value    
+    ## s(habitat_PC1)             1.00025  1.0005  1.017   0.313    
+    ## s(disease_week)            2.50034  3.0961  8.352   0.050 .  
+    ## s(disease_week):year_f2018 1.00011  1.0002  0.689   0.407    
+    ## s(disease_week):year_f2019 1.00020  1.0004  0.110   0.740    
+    ## s(disease_week):year_f2020 1.00001  1.0000  0.961   0.327    
+    ## s(disease_week):year_f2021 5.84460  7.0070 46.787  <2e-16 ***
+    ## s(disease_week):year_f2022 0.55475  0.8735  0.052   0.819    
+    ## s(disease_week):year_f2023 1.00008  1.0001  0.038   0.846    
+    ## s(year_f)                  0.84015  5.0000  1.060   0.224    
+    ## s(site_code)               0.00128 53.0000  0.001   0.549    
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Rank: 155/156
+    ## R-sq.(adj) =  0.074   Deviance explained = 21.3%
+    ## -REML =  388.1  Scale est. = 1         n = 3508
+
+``` r
+# GRVD+ only, allow smooth to vary across urbanization gradient (non-linear)
+gam_tarsalis2_trapfixed_GRVD <- gam(
+  infected ~ s(habitat_PC1, k = 4) +
+    s(disease_week, bs = "tp", k = 8) +
+    s(disease_week, by = year_f, bs = "fs", k = 15) +
+    s(year_f, bs = "re") +
+    s(site_code, bs = "re") +
+    offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = tarsalis_data[tarsalis_data$trap_type2 == "GRVD+",],
+  method = "REML"
+)
+```
+
+    ## Warning: glm.fit: algorithm did not converge
+
+``` r
+summary(gam_tarsalis2_trapfixed_GRVD)
+```
+
+    ## 
+    ## Family: binomial 
+    ## Link function: cloglog 
+    ## 
+    ## Formula:
+    ## infected ~ s(habitat_PC1, k = 4) + s(disease_week, bs = "tp", 
+    ##     k = 8) + s(disease_week, by = year_f, bs = "fs", k = 15) + 
+    ##     s(year_f, bs = "re") + s(site_code, bs = "re") + offset(log(num_count))
+    ## 
+    ## Parametric coefficients:
+    ##              Estimate Std. Error z value Pr(>|z|)
+    ## (Intercept)     -45.6  8546620.8       0        1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                  edf    Ref.df Chi.sq p-value
+    ## s(habitat_PC1)             1.000e+00 1.000e+00      0       1
+    ## s(disease_week)            1.000e+00 1.000e+00      0       1
+    ## s(disease_week):year_f2018 1.000e+00 1.000e+00      0       1
+    ## s(disease_week):year_f2019 1.000e+00 1.000e+00      0       1
+    ## s(disease_week):year_f2020 1.000e+00 1.000e+00      0       1
+    ## s(disease_week):year_f2021 1.000e+00 1.000e+00      0       1
+    ## s(disease_week):year_f2022 6.437e-15 1.287e-14      0       1
+    ## s(disease_week):year_f2023 1.000e+00 1.000e+00      0       1
+    ## s(year_f)                  2.296e-15 6.000e+00      0       1
+    ## s(site_code)               1.536e-14 2.400e+01      0       1
+    ## 
+    ## Rank: 124/125
+    ## R-sq.(adj) =    NaN   Deviance explained =  100%
+    ## -REML = -141.84  Scale est. = 1         n = 76
+
+``` r
+# Predicted WNV positivity through time from separate CO2+ and GRVD+ models
+
+pc1_values <- tibble::tribble(
+  ~habitat_level, ~habitat_PC1,
+  "Rural", quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+  "Peri",  median(wnv$habitat_PC1, na.rm = TRUE),
+  "Urban", quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+)
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_co2 <- expand.grid(
+  disease_week = week_seq,
+  year_f = "2021",
+  site_code = levels(tarsalis_data$site_code)[1],
+  num_count = median(tarsalis_data$num_count, na.rm = TRUE)
+) %>%
+  left_join(pc1_values, by = character())
+
+pred_grvd <- pred_co2
+
+co2_pred <- predict(
+  gam_tarsalis2_trapfixed_CO2,
+  newdata = pred_co2,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+grvd_pred <- predict(
+  gam_tarsalis2_trapfixed_GRVD,
+  newdata = pred_grvd,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+```
+
+    ## Warning in predict.gam(gam_tarsalis2_trapfixed_GRVD, newdata = pred_grvd, :
+    ## factor levels 1 not in original fit
+
+``` r
+pred_co2 <- pred_co2 %>%
+  mutate(
+    fit = 1 - exp(-exp(co2_pred$fit)),
+    lower = 1 - exp(-exp(co2_pred$fit - 1.96 * co2_pred$se.fit)),
+    upper = 1 - exp(-exp(co2_pred$fit + 1.96 * co2_pred$se.fit)),
+    trap_type2 = "CO2+"
+  )
+
+pred_grvd <- pred_grvd %>%
+  mutate(
+    fit = 1 - exp(-exp(grvd_pred$fit)),
+    lower = 1 - exp(-exp(grvd_pred$fit - 1.96 * grvd_pred$se.fit)),
+    upper = 1 - exp(-exp(grvd_pred$fit + 1.96 * grvd_pred$se.fit)),
+    trap_type2 = "GRVD+"
+  )
+
+pred_pip_week <- bind_rows(pred_co2, pred_grvd) %>%
+  mutate(
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban")),
+    trap_type2 = factor(trap_type2, levels = c("CO2+", "GRVD+"))
+  )
+
+urb_colors <- c(
+  "Urban" = "#B22222",
+  "Peri"  = "#DAA520",
+  "Rural" = "#228B22"
+)
+
+p_co2 <- pred_pip_week %>%
+  filter(trap_type2 == "CO2+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. tarsalis CO2+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_grvd <- pred_pip_week %>%
+  filter(trap_type2 == "GRVD+") %>%
+  ggplot(
+    aes(
+      x = disease_week,
+      y = fit * 100,
+      color = habitat_level,
+      fill = habitat_level
+    )
+  ) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    alpha = 0.15,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.2) +
+  facet_wrap(~ habitat_level, ncol = 1, scales = "free_y") +
+  scale_color_manual(values = urb_colors, name = "Habitat") +
+  scale_fill_manual(values = urb_colors, guide = "none") +
+  labs(
+    title = "Cx. tarsalis GRVD+ traps",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+p_co2
+```
+
+![](../figures/tar-by-trap-1.png)<!-- -->
+
+``` r
+p_grvd
+```
+
+![](../figures/tar-by-trap-2.png)<!-- -->
+
 Interpretation:
-
-Formula: infected ~ habitat_PC1 + s(disease_week, bs = “tp”, k = 8) +
-s(disease_week, by = year_f, bs = “fs”, k = 15) + s(year_f, bs = “re”) +
-s(site_code, bs = “re”) + s(trap_type2, bs = “re”) +
-offset(log(num_count))  
-Estimate Std. Error z value Pr(\>\|z\|)  
-(Intercept) -9.0764 0.3880 -23.392 \<2e-16 \*\*\*  
-habitat_PC1 -0.1224 0.1405 -0.871 0.384  
-edf Ref.df Chi.sq p-value  
-s(disease_week) 2.484e+00 3.070e+00 24.425 2.66e-05 \*\*\*
-
-Formula:  
-infected ~ habitat_PC1 + trap_type2 + s(disease_week, bs = “tp”,  
-k = 8) + s(disease_week, by = year_f, bs = “fs”, k = 15) +  
-s(year_f, bs = “re”) + s(site_code, bs = “re”) +
-offset(log(num_count))  
-Estimate Std. Error z value Pr(\>\|z\|)  
-(Intercept) -9.087e+00 3.844e-01 -23.638 \<2e-16 \*\*\* habitat_PC1
--1.434e-01 1.422e-01 -1.009 0.313  
-trap_type2GRVD+ -1.144e+02 7.698e+06 0.000 1.000
-
-                              df      AIC  
-
-gam_tarsalis 18.53465 781.5625  
-gam_tarsalis2 19.03913 782.0304  
-gam_tarsalis_trapfixed 18.84940 779.8560
 
 Trap_type is not significant in any of the analysis. Neither is
 habitat_PC1. Disease week is significant in the simplest model,
 gam_tarsalis.
 
+### Tar interpretation
+
+For Cx. tarsalis, neither urbanization nor trap type explained variation
+in WNV positivity. In addition, GRVD collections contained relatively
+few Cx. tarsalis compared with CO2 collections, limiting inference from
+GRVD-based analyses. To maximize comparability between species while
+focusing on the most data-rich component of the dataset, subsequent
+analyses emphasized CO2 collections. This approach is also consistent
+with the primary ecological signal observed in Cx. pipiens, where urban
+CO2 collections exhibited the highest predicted WNV positivity.
+
 ### Tar Moran’s I for Cx. tarsalis residuals
 
 ``` r
-tarsalis_resids <- tarsalis_data %>%
-  mutate(resid = residuals(gam_tarsalis, type = "deviance")) %>%
+# for CO2 model
+tarsalis_data_CO2 <- tarsalis_data[tarsalis_data$trap_type2 == "CO2+",]
+
+tarsalis_resids <- tarsalis_data_CO2 %>%
+  mutate(resid = residuals(gam_tarsalis2_trapfixed_CO2, type = "deviance")) %>%
   group_by(site_code) %>%
   summarise(
     mean_resid = mean(resid, na.rm = TRUE),
@@ -4176,253 +4356,65 @@ moran.test(tarsalis_resids$mean_resid, lw5_tarsalis)
     ## data:  tarsalis_resids$mean_resid  
     ## weights: lw5_tarsalis    
     ## 
-    ## Moran I statistic standard deviate = 0.64943, p-value = 0.258
+    ## Moran I statistic standard deviate = 0.37254, p-value = 0.3547
     ## alternative hypothesis: greater
     ## sample estimates:
     ## Moran I statistic       Expectation          Variance 
-    ##       0.029219755      -0.016949153       0.005053949
+    ##       0.008768819      -0.018518519       0.005365225
 
 **Interpretation:** No evidence of spatial autocorrelation in tarsalis.
 
-## Plot raw by urbanization:
-
-``` r
-wnv_site <- wnv %>%
-  group_by(site_code, mosq_species) %>%
-  summarise(
-    pct_infected = mean(infected, na.rm = TRUE) * 100,
-    n_pools = n(),
-    habitat_PC1 = first(habitat_PC1),
-    .groups = "drop"
-  ) %>%
-  filter(!is.na(habitat_PC1)) %>%
-  mutate(
-    mosq_species = recode(
-      mosq_species,
-      "Cx_pipiens_sl" = "Cx. pipiens s.l.",
-      "Cx_tarsalis" = "Cx. tarsalis"
-    )
-  )
-
-ggplot(wnv_site, aes(x = habitat_PC1, y = pct_infected)) +
-  geom_point(aes(size = n_pools), alpha = 0.6, color = "steelblue") +
-  geom_smooth(method = "lm", se = TRUE, color = "firebrick", linewidth = 1) +
-  facet_wrap(~ mosq_species, scales = "free_y") +
-  scale_x_reverse() +
-  scale_size_continuous(name = "Pools tested", range = c(2, 8)) +
-  labs(
-    title = "Urbanization Gradient vs WNV Infection Rate",
-    x = "PC1 — Urbanization gradient",
-    y = "% infected pools per site"
-  ) +
-  theme_classic(base_size = 13)
-```
-
-    ## `geom_smooth()` using formula = 'y ~ x'
-
-![](../figures/unnamed-chunk-1-1.png)<!-- -->
-
-``` r
-cols <- c(
-  "Cx. pipiens s.l." = "#1bc8ea",
-  "Cx. tarsalis" = "#FF2DA0"
-)
-
-wnv_site <- wnv %>%
-  group_by(site_code, mosq_species) %>%
-  summarise(
-    pct_infected = mean(infected, na.rm = TRUE) * 100,
-    n_pools = n(),
-    habitat_PC1 = first(habitat_PC1),
-    .groups = "drop"
-  ) %>%
-  filter(!is.na(habitat_PC1)) %>%
-  mutate(
-    mosq_species = recode(
-      mosq_species,
-      "Cx_pipiens_sl" = "Cx. pipiens s.l.",
-      "Cx_tarsalis" = "Cx. tarsalis"
-    )
-  )
-
-ggplot(
-  wnv_site,
-  aes(
-    x = habitat_PC1,
-    y = pct_infected,
-    color = mosq_species
-  )
-) +
-  geom_point(
-    aes(size = n_pools),
-    alpha = 0.7
-  ) +
-  geom_smooth(
-    method = "lm",
-    se = TRUE,
-    linewidth = 1
-  ) +
-  scale_color_manual(values = cols, name = "Species") +
-  scale_x_reverse() +
-  scale_size_continuous(
-    name = "Pools tested",
-    range = c(2, 8)
-  ) +
-  labs(
-    title = NULL,
-    x = "PC1 — Urbanization gradient",
-    y = "% infected pools per site"
-  ) +
-  theme_classic(base_size = 13) +
-  theme(
-    plot.title = element_text(face = "bold", hjust = 0.5)
-  )
-```
-
-    ## `geom_smooth()` using formula = 'y ~ x'
-
-![](../figures/unnamed-chunk-1-2.png)<!-- -->
-
 ## Plot predicted
 
-For Cx. pipiens:  
-- habitat_PC1 is significant  
-- trap_type2 is significant  
-- allowing habitat_PC1 to be smooth provides a slight improvement  
-- the smooth is only mildly nonlinear (edf ≈ 1.9)
+SUMMARY TABLE: Effect \| Cx. pipiens \| Cx. tarsalis Urbanization
+(habitat_PC1) \| Significant \| Not significant Trap type (CO2 vs GRVD)
+\| Significant \| Not significant Seasonal effect (disease week) \|
+Significant \| Significant Year effect \| Significant \| Significant
+Year-specific seasonal smooths \| Not significant \| Not significant
 
-For Cx. tarsalis:  
-- habitat_PC1 is not significant  
-- trap_type2 is not significant  
-- there is no evidence for a nonlinear habitat effect - the fitted
-relationship is essentially flat
+STRONGEST RESULTS: Urbanization matters for Cx. pipiens Urbanization
+does not matter for Cx. tarsalis Both species show seasonal dynamics
+Pipiens peaks earlier; tarsalis peaks later Urban sites have the highest
+predicted WNV positivity
 
-So, I think it’s best to fit and plot both species using the same model
-structure that I landed on for pipiens.
+INTERPRETATION:  
+- Cx. pipiens WNV positivity varies with urbanization, trap type,
+season, and year.  
+- Cx. tarsalis WNV positivity varies with season and year, but shows no
+detectable urbanization or trap-type effect.  
+- The strongest ecological signal is therefore in Cx. pipiens, where
+predicted positivity is highest in urban habitats and differs between
+trap types.  
+- Because trap type influences pipiens but not tarsalis, comparisons
+between species should be standardized to a single trap type (CO2).  
+- Because urbanization influences pipiens but not tarsalis, the
+urbanization figure is most informative when focused on pipiens, with
+tarsalis reported as a non-significant result in the text.  
+- The year-specific smooths contribute little, suggesting that seasonal
+timing is broadly consistent among years even though overall infection
+intensity differs among years.
 
-infected ~ habitat_PC1 + trap_type2 +  
-s(disease_week, bs = “tp”, k = 8) +  
-s(disease_week, by = year_f, bs = “fs”, k = 15) +  
-s(year_f, bs = “re”) +  
-s(site_code, bs = “re”) +  
-offset(log(num_count))
+### Pipiens by urbanization for CO2
 
-gam_pipiens_trapfixed  
-gam_tarsalis_trapfixed
+Figure 1: Cx. pipiens CO2-only predicted WNV positivity across Urban /
+Peri / Rural.
 
-\###Urbanization gradient
-
-``` r
-pc1_seq <- seq(
-  min(wnv$habitat_PC1, na.rm = TRUE),
-  max(wnv$habitat_PC1, na.rm = TRUE),
-  length.out = 200
-)
-
-pred_pip <- expand.grid(
-  habitat_PC1 = pc1_seq,
-  trap_type2 = levels(pipiens_data$trap_type2)
-)
-
-pred_tar <- expand.grid(
-  habitat_PC1 = pc1_seq,
-  trap_type2 = levels(tarsalis_data$trap_type2)
-)
-
-pred_pip$disease_week <- median(pipiens_data$disease_week)
-pred_pip$year_f <- levels(pipiens_data$year_f)[1]
-pred_pip$site_code <- levels(pipiens_data$site_code)[1]
-pred_pip$num_count <- 1
-
-pred_tar$disease_week <- median(tarsalis_data$disease_week)
-pred_tar$year_f <- levels(tarsalis_data$year_f)[1]
-pred_tar$site_code <- levels(tarsalis_data$site_code)[1]
-pred_tar$num_count <- 1
-
-
-pip_pred <- predict(
-  gam_pipiens_trapfixed,
-  newdata = pred_pip,
-  type = "link",
-  se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
-)
-
-pred_pip <- pred_pip %>%
-  mutate(
-    fit = 1 - exp(-exp(pip_pred$fit)),
-    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
-    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
-    species = "Cx. pipiens s.l."
-  )
-
-tar_pred <- predict(
-  gam_tarsalis_trapfixed,
-  newdata = pred_tar,
-  type = "link",
-  se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
-)
-
-pred_tar <- pred_tar %>%
-  mutate(
-    fit = 1 - exp(-exp(tar_pred$fit)),
-    lower = 1 - exp(-exp(tar_pred$fit - 1.96 * tar_pred$se.fit)),
-    upper = 1 - exp(-exp(tar_pred$fit + 1.96 * tar_pred$se.fit)),
-    species = "Cx. tarsalis"
-  )
-
-pred_wnv <- bind_rows(pred_pip, pred_tar)
-cols <- c(
-  "Cx. pipiens s.l." = "#1bc8ea",
-  "Cx. tarsalis" = "#FF2DA0"
-)
-
-ggplot( pred_wnv, aes( x = habitat_PC1, y = fit * 100, color = species, fill = species, linetype = trap_type2 ) ) + 
-  geom_ribbon( aes( ymin = lower * 100, ymax = upper * 100, group = interaction(species, trap_type2) ), alpha = 0.15, color = NA ) + 
-  geom_line(linewidth = 1.2) + 
-  scale_x_reverse() + 
-  scale_color_manual(values = cols) + 
-  scale_fill_manual(values = cols) + 
-  labs( 
-    x = "PC1 — Urbanization gradient", 
-    y = "Predicted WNV positivity (%)", 
-    color = "Species", 
-    fill = "Species", 
-    linetype = "Trap type" 
-  ) + 
-  theme_classic(base_size = 13) +
-  # 1. Zoom into the y-axis without clipping data points outside the window
-  coord_cartesian(ylim = c(0, 1.2)) +
-  # 2. Place the legend on right
-  theme(
-    legend.position = "right",
-    legend.background = element_rect(fill = "transparent")
-  )
-```
-
-![](../figures/plot-pred-1.png)<!-- --> \### Disease week
+Visualize predicted urbanization effects using CO2+ collections for
+pipiens only, where those effects are significant.
 
 ``` r
-# Predicted WNV positivity through time
+### Figure Cx. pipiens CO2-only predicted WNV positivity by disease week
 
 cols <- c(
-  "Cx. pipiens s.l." = "#1bc8ea",
-  "Cx. tarsalis" = "#FF2DA0"
+  "Cx. pipiens s.l." = "#1bc8ea"
 )
 
-pc1_values <- wnv %>%
-  filter(!is.na(habitat_PC1)) %>%
-  summarise(
-    Urban = quantile(habitat_PC1, 0.1, na.rm = TRUE),
-    Peri = median(habitat_PC1, na.rm = TRUE),
-    Rural = quantile(habitat_PC1, 0.9, na.rm = TRUE)
-  ) %>%
-  tidyr::pivot_longer(
-    everything(),
-    names_to = "habitat_level",
-    values_to = "habitat_PC1"
-  )
+pc1_values <- tibble::tribble(
+  ~habitat_level, ~habitat_PC1,
+  "Rural", quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+  "Peri",  median(wnv$habitat_PC1, na.rm = TRUE),
+  "Urban", quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+)
 
 week_seq <- seq(
   min(wnv$disease_week, na.rm = TRUE),
@@ -4430,38 +4422,154 @@ week_seq <- seq(
   by = 1
 )
 
-pred_pip <- expand.grid(
+pred_pip_co2_week <- expand.grid(
   disease_week = week_seq,
-  trap_type2 = levels(pipiens_data$trap_type2),
-  year_f = "2021",
-  site_code = levels(pipiens_data$site_code)[1],
-  num_count = median(pipiens_data$num_count, na.rm = TRUE)
+  habitat_PC1 = pc1_values$habitat_PC1,
+  year_f = factor("2021", levels = levels(pipiens_data_CO2$year_f)),
+  site_code = factor(
+    levels(pipiens_data_CO2$site_code)[1],
+    levels = levels(pipiens_data_CO2$site_code)
+  ),
+  num_count = median(pipiens_data_CO2$num_count, na.rm = TRUE)
 ) %>%
-  left_join(pc1_values, by = character())
+  left_join(pc1_values, by = "habitat_PC1")
+
+pip_pred <- predict(
+  gam_pipiens2_trapfixed_CO2,
+  newdata = pred_pip_co2_week,
+  type = "link",
+  se.fit = TRUE,
+  exclude = c("s(site_code)", "s(year_f)")
+)
+
+pred_wnv_pip_week <- pred_pip_co2_week %>%
+  mutate(
+    fit = 1 - exp(-exp(pip_pred$fit)),
+    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
+    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
+    species = "Cx. pipiens s.l.",
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+ggplot(
+  pred_wnv_pip_week,
+  aes(
+    x = disease_week,
+    y = fit * 100,
+    color = species,
+    fill = species
+  )
+) +
+  geom_ribbon(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100,
+      group = species
+    ),
+    alpha = 0.25,
+    color = NA
+  ) +
+  geom_line(linewidth = 1.4) +
+  geom_vline(
+    xintercept = 33,
+    linetype = "dashed",
+    linewidth = 0.8
+  ) +
+  geom_text(
+    data = data.frame(
+      habitat_level = factor(c("Rural", "Peri", "Urban"),
+                             levels = c("Rural", "Peri", "Urban")),
+      disease_week = 33.3,
+      y = Inf
+    ),
+    aes(
+      x = disease_week,
+      y = y,
+      label = "1st WNV cases"
+    ),
+    inherit.aes = FALSE,
+    hjust = 0,
+    vjust = 1.3,
+    size = 4
+  ) +
+  facet_wrap(
+    ~ habitat_level,
+    ncol = 1,
+    scales = "free_y"
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  scale_fill_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV positivity in Cx. pipiens s.l. across the urbanization gradient",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    strip.text = element_text(size = 14),
+    legend.position = "none"
+  )
 ```
 
-    ## Warning: Using `by = character()` to perform a cross join was deprecated in dplyr 1.1.0.
-    ## ℹ Please use `cross_join()` instead.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-    ## generated.
+![](../figures/pred-week-1.png)<!-- --> Not very informative because the
+shape for 2021. looks pretty identical, magnitude is different…
+
+### Seasonal dynamics
+
+Figure 2. Seasonal dynamics of WNV positivity in Cx. pipiens and Cx.
+tarsalis.
 
 ``` r
-pred_tar <- expand.grid(
+### Figure 2: Seasonal dynamics of WNV positivity by species
+### CO2 traps, habitat_PC1 held at median, one panel per year
+
+cols <- c(
+  "Cx. pipiens s.l." = "#1bc8ea",
+  "Cx. tarsalis" = "#FF2DA0"
+)
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_season_base <- expand.grid(
   disease_week = week_seq,
-  trap_type2 = levels(tarsalis_data$trap_type2),
-  year_f = "2021",
-  site_code = levels(tarsalis_data$site_code)[1],
-  num_count = median(tarsalis_data$num_count, na.rm = TRUE)
-) %>%
-  left_join(pc1_values, by = character())
+  habitat_PC1 = median(wnv$habitat_PC1, na.rm = TRUE),
+  trap_type2 = "CO2+",
+  year_f = levels(wnv$year_f),
+  num_count = 1
+)
+
+pred_pip <- pred_season_base %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(
+      levels(pipiens_data$site_code)[1],
+      levels = levels(pipiens_data$site_code)
+    )
+  )
+
+pred_tar <- pred_season_base %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(
+      levels(tarsalis_data$site_code)[1],
+      levels = levels(tarsalis_data$site_code)
+    )
+  )
 
 pip_pred <- predict(
   gam_pipiens_trapfixed,
   newdata = pred_pip,
   type = "link",
   se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
+  exclude = "s(site_code)"
 )
 
 tar_pred <- predict(
@@ -4469,77 +4577,636 @@ tar_pred <- predict(
   newdata = pred_tar,
   type = "link",
   se.fit = TRUE,
-  exclude = c("s(site_code)", "s(year_f)")
+  exclude = "s(site_code)"
 )
 
-pred_pip <- pred_pip %>%
-  mutate(
-    fit = 1 - exp(-exp(pip_pred$fit)),
-    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
-    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
-    species = "Cx. pipiens s.l."
-  )
+pred_season <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip_pred$fit)),
+      lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
+      upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar_pred$fit)),
+      lower = 1 - exp(-exp(tar_pred$fit - 1.96 * tar_pred$se.fit)),
+      upper = 1 - exp(-exp(tar_pred$fit + 1.96 * tar_pred$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
 
-pred_tar <- pred_tar %>%
-  mutate(
-    fit = 1 - exp(-exp(tar_pred$fit)),
-    lower = 1 - exp(-exp(tar_pred$fit - 1.96 * tar_pred$se.fit)),
-    upper = 1 - exp(-exp(tar_pred$fit + 1.96 * tar_pred$se.fit)),
-    species = "Cx. tarsalis"
-  )
-
-pred_wnv_week <- bind_rows(pred_pip, pred_tar) %>%
-  mutate(
-    habitat_level = factor(habitat_level, levels = c("Rural", "Peri","Urban" ))
-  )
 ggplot(
-  pred_wnv_week,
+  pred_season,
   aes(
     x = disease_week,
     y = fit * 100,
     color = species,
-    fill = species,
-    linetype = trap_type2
+    fill = species
+  )
+) +
+  geom_ribbon(
+    aes(ymin = lower * 100, ymax = upper * 100, group = species),
+    alpha = 0.22,
+    color = NA
+  ) +
+  geom_line(aes(group = species), linewidth = 1.3) +
+  geom_vline(xintercept = 33, linetype = "dashed", linewidth = 0.7) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  coord_cartesian(ylim = c(0, 1.5)) +
+  scale_color_manual(values = cols, name = "Species") +
+  scale_fill_manual(values = cols, guide = "none") +
+  labs(
+    title = "Seasonal dynamics of predicted WNV positivity",
+    x = "Disease week",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+```
+
+![](../figures/season-species-1.png)<!-- --> \### Pip by trap Seasonal
+dynamics of WNV positivity in Cx. pipiens by trap type habitat_PC1 held
+at median, one panel per year
+
+``` r
+pip_col <- "#1bc8ea"
+
+week_seq <- seq(
+  min(wnv$disease_week, na.rm = TRUE),
+  max(wnv$disease_week, na.rm = TRUE),
+  by = 1
+)
+
+pred_pip_trap <- expand.grid(
+  disease_week = week_seq,
+  habitat_PC1 = median(wnv$habitat_PC1, na.rm = TRUE),
+  trap_type2 = levels(pipiens_data$trap_type2),
+  year_f = levels(wnv$year_f),
+  num_count = 1
+) %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(
+      levels(pipiens_data$site_code)[1],
+      levels = levels(pipiens_data$site_code)
+    )
+  )
+
+pip_pred <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip_trap,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_pip_trap <- pred_pip_trap %>%
+  mutate(
+    fit = 1 - exp(-exp(pip_pred$fit)),
+    lower = 1 - exp(-exp(pip_pred$fit - 1.96 * pip_pred$se.fit)),
+    upper = 1 - exp(-exp(pip_pred$fit + 1.96 * pip_pred$se.fit))
+  )
+
+ggplot(
+  pred_pip_trap,
+  aes(
+    x = disease_week,
+    y = fit * 100,
+    linetype = trap_type2,
+    group = trap_type2
   )
 ) +
   geom_ribbon(
     aes(
       ymin = lower * 100,
       ymax = upper * 100,
-      group = interaction(species, trap_type2, habitat_level)
+      group = trap_type2
     ),
-    alpha = 0.12,
+    fill = pip_col,
+    alpha = 0.16,
     color = NA
   ) +
   geom_line(
-    aes(group = interaction(species, trap_type2, habitat_level)),
-    linewidth = 1.1
+    color = pip_col,
+    linewidth = 1.3
   ) +
-  facet_grid(species ~ habitat_level, scales = "free_y") +
-  scale_color_manual(values = cols, name = "Species") +
-  scale_fill_manual(values = cols, guide = "none") +
-  scale_y_continuous(limits = c(0, 75)) +
+  geom_vline(xintercept = 33, linetype = "dashed", linewidth = 0.7) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  coord_cartesian(ylim = c(0, 2.5)) +
+  scale_linetype_manual(
+    values = c(
+      "CO2+" = "solid",
+      "GRVD+" = "dashed"
+    ),
+    name = "Trap type"
+  ) +
   labs(
+    title = "Seasonal dynamics of predicted WNV positivity in Cx. pipiens s.l.",
     x = "Disease week",
-    y = "Predicted WNV positivity (%)",
-    linetype = "Trap type"
+    y = "Predicted WNV positivity (%)"
   ) +
   theme_classic(base_size = 13) +
   theme(
+    plot.title = element_text(hjust = 0.5),
     strip.background = element_blank(),
-    strip.text.y = element_blank(),
-    strip.text.x = element_text(),
     legend.position = "right"
   )
 ```
 
-    ## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
-    ## -Inf
+![](../figures/pip-season-traps-1.png)<!-- -->
 
-    ## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
-    ## -Inf
-    ## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
-    ## -Inf
+### Week 32:
 
-![](../figures/pred-plot-1.png)<!-- --> \# RQ3: Bloodmeal and WNV
-probability
+``` r
+pred_compare <- expand.grid(
+  habitat_level = c("Rural", "Peri", "Urban"),
+  year_f = levels(wnv$year_f)
+) %>%
+  mutate(
+    habitat_PC1 = case_when(
+      habitat_level == "Rural" ~ quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+      habitat_level == "Peri"  ~ median(wnv$habitat_PC1, na.rm = TRUE),
+      habitat_level == "Urban" ~ quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+    ),
+    disease_week = 32,
+    trap_type2 = "CO2+",
+    num_count = 1,
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+pred_pip <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(levels(pipiens_data$site_code)[1],
+                       levels = levels(pipiens_data$site_code))
+  )
+
+pred_tar <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(levels(tarsalis_data$site_code)[1],
+                       levels = levels(tarsalis_data$site_code))
+  )
+
+pip <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+tar <- predict(
+  gam_tarsalis_trapfixed,
+  newdata = pred_tar,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_species <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip$fit)),
+      lower = 1 - exp(-exp(pip$fit - 1.96 * pip$se.fit)),
+      upper = 1 - exp(-exp(pip$fit + 1.96 * pip$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar$fit)),
+      lower = 1 - exp(-exp(tar$fit - 1.96 * tar$se.fit)),
+      upper = 1 - exp(-exp(tar$fit + 1.96 * tar$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
+
+#six panel plot by year
+ggplot(
+  pred_species,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.7
+  ) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV by urbanization and year (Week32 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+```
+
+![](../figures/unnamed-chunk-2-1.png)<!-- -->
+
+``` r
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+ggplot(
+  pred_species_avg,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 4) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.8
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Average predicted WNV across years (Week32 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+```
+
+![](../figures/unnamed-chunk-2-2.png)<!-- --> **NOTE:** Averaging lower
+and upper is for visualization only, represents mean model-predicted
+intervals across years, not formal confidence intervals for the averaged
+prediction.
+
+Also, the urbanization effect is not significant for tarsalis, so I’m
+including it here only for comparison with pipiens.
+
+### Week 35:
+
+``` r
+pred_compare <- expand.grid(
+  habitat_level = c("Rural", "Peri", "Urban"),
+  year_f = levels(wnv$year_f)
+) %>%
+  mutate(
+    habitat_PC1 = case_when(
+      habitat_level == "Rural" ~ quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+      habitat_level == "Peri"  ~ median(wnv$habitat_PC1, na.rm = TRUE),
+      habitat_level == "Urban" ~ quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+    ),
+    disease_week = 35,
+    trap_type2 = "CO2+",
+    num_count = 1,
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+pred_pip <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(levels(pipiens_data$site_code)[1],
+                       levels = levels(pipiens_data$site_code))
+  )
+
+pred_tar <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(levels(tarsalis_data$site_code)[1],
+                       levels = levels(tarsalis_data$site_code))
+  )
+
+pip <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+tar <- predict(
+  gam_tarsalis_trapfixed,
+  newdata = pred_tar,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_species <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip$fit)),
+      lower = 1 - exp(-exp(pip$fit - 1.96 * pip$se.fit)),
+      upper = 1 - exp(-exp(pip$fit + 1.96 * pip$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar$fit)),
+      lower = 1 - exp(-exp(tar$fit - 1.96 * tar$se.fit)),
+      upper = 1 - exp(-exp(tar$fit + 1.96 * tar$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
+
+#six panel plot by year
+ggplot(
+  pred_species,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.7
+  ) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV by urbanization and year (Week35 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+```
+
+![](../figures/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+ggplot(
+  pred_species_avg,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 4) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.8
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Average predicted WNV across years (Week35 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+```
+
+![](../figures/unnamed-chunk-3-2.png)<!-- -->
+
+### Week 38:
+
+``` r
+pred_compare <- expand.grid(
+  habitat_level = c("Rural", "Peri", "Urban"),
+  year_f = levels(wnv$year_f)
+) %>%
+  mutate(
+    habitat_PC1 = case_when(
+      habitat_level == "Rural" ~ quantile(wnv$habitat_PC1, 0.9, na.rm = TRUE),
+      habitat_level == "Peri"  ~ median(wnv$habitat_PC1, na.rm = TRUE),
+      habitat_level == "Urban" ~ quantile(wnv$habitat_PC1, 0.1, na.rm = TRUE)
+    ),
+    disease_week = 38,
+    trap_type2 = "CO2+",
+    num_count = 1,
+    habitat_level = factor(habitat_level, levels = c("Rural", "Peri", "Urban"))
+  )
+
+pred_pip <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(pipiens_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(pipiens_data$trap_type2)),
+    site_code = factor(levels(pipiens_data$site_code)[1],
+                       levels = levels(pipiens_data$site_code))
+  )
+
+pred_tar <- pred_compare %>%
+  mutate(
+    year_f = factor(year_f, levels = levels(tarsalis_data$year_f)),
+    trap_type2 = factor(trap_type2, levels = levels(tarsalis_data$trap_type2)),
+    site_code = factor(levels(tarsalis_data$site_code)[1],
+                       levels = levels(tarsalis_data$site_code))
+  )
+
+pip <- predict(
+  gam_pipiens_trapfixed,
+  newdata = pred_pip,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+tar <- predict(
+  gam_tarsalis_trapfixed,
+  newdata = pred_tar,
+  type = "link",
+  se.fit = TRUE,
+  exclude = "s(site_code)"
+)
+
+pred_species <- bind_rows(
+  pred_pip %>%
+    mutate(
+      fit = 1 - exp(-exp(pip$fit)),
+      lower = 1 - exp(-exp(pip$fit - 1.96 * pip$se.fit)),
+      upper = 1 - exp(-exp(pip$fit + 1.96 * pip$se.fit)),
+      species = "Cx. pipiens s.l."
+    ),
+  pred_tar %>%
+    mutate(
+      fit = 1 - exp(-exp(tar$fit)),
+      lower = 1 - exp(-exp(tar$fit - 1.96 * tar$se.fit)),
+      upper = 1 - exp(-exp(tar$fit + 1.96 * tar$se.fit)),
+      species = "Cx. tarsalis"
+    )
+)
+
+#six panel plot by year
+ggplot(
+  pred_species,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.7
+  ) +
+  facet_wrap(~ year_f, ncol = 3, scales = "free_y") +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Predicted WNV by urbanization and year (Week38 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.background = element_blank(),
+    legend.position = "right"
+  )
+```
+
+![](../figures/unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+pred_species_avg <- pred_species %>%
+  group_by(species, habitat_level) %>%
+  summarise(
+    fit = mean(fit, na.rm = TRUE),
+    lower = mean(lower, na.rm = TRUE),
+    upper = mean(upper, na.rm = TRUE),
+    .groups = "drop"
+  )
+ggplot(
+  pred_species_avg,
+  aes(
+    x = habitat_level,
+    y = fit * 100,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 4) +
+  geom_errorbar(
+    aes(
+      ymin = lower * 100,
+      ymax = upper * 100
+    ),
+    width = 0.1,
+    linewidth = 0.8
+  ) +
+  scale_color_manual(values = cols, name = "Species") +
+  labs(
+    title = "Average predicted WNV across years (Week38 & CO2+)",
+    x = "Urbanization",
+    y = "Predicted WNV positivity (%)"
+  ) +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+```
+
+![](../figures/unnamed-chunk-4-2.png)<!-- -->
+
+# RQ3: Bloodmeal and WNV probability
+
+Maybe this is just a question of interpretation, and showing how these
+aspects line up:
+
+1.  Cx. pipiens blood feeding on passerine is correlated with
+    urbanization
+
+2.  Cx. pipiens WNV positiveity is correlated with urbanization
+
+3.  Cx. pipeins WNV positivity is higher than for Cx. tarsalis in peri
+    and urban areas at week 33, time of first WNV cases every year. Also
+    Cx. tarsalis has no significant effect of urbanization, or trap
+    effect. Also consider abundance in traps in interpretation.
