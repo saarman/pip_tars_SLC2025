@@ -1,8 +1,7 @@
-GAM **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025 field
-season
+GAM **Cx. pipiens** and **Cx. tarsalis**: SLC 2025 field season
 ================
 Norah Saarman
-2026-06-17
+2026-06-19
 
 - [Setup](#setup)
 - [Prepare Data](#prepare-data)
@@ -282,62 +281,32 @@ fully capture species-specific trap effects.
 # Fit GAM model with site_name only
 msq_spp_gam_k10 <- gam(
   count ~ species * urbanization + trap_type +
-    s(disease_week, by = species, bs = "fs", k=10, m=2) +
+    s(disease_week, species, bs = "fs", k = 10, m = 2) +
     s(site_name, bs = "re"),
   family = nb(),
   data = combined,
   method = "REML"
 )
-
-# Fit GAM model with site_name only
-msq_spp_gam_k15 <- gam(
-  count ~ species * urbanization + trap_type +
-    s(disease_week, by = species, bs = "fs", k=15, m=2) +
-
-    s(site_name, bs = "re"),
-  family = nb(),
-  data = combined,
-  method = "REML"
-)
-```
-
-## Check Fit and Plot Smooths
-
-``` r
-#AIC for k10 and K15
-cat("GAM model k10 AIC: ", AIC(msq_spp_gam_k10), "\n")
-```
-
-    ## GAM model k10 AIC:  34570.08
-
-``` r
-cat("GAM model k15 AIC: ", AIC(msq_spp_gam_k15), "\n")
-```
-
-    ## GAM model k15 AIC:  34527.95
-
-``` r
-#Summary of GAM fit
-summary(msq_spp_gam_k15)
+summary(msq_spp_gam_k10)
 ```
 
     ## 
-    ## Family: Negative Binomial(0.893) 
+    ## Family: Negative Binomial(0.882) 
     ## Link function: log 
     ## 
     ## Formula:
     ## count ~ species * urbanization + trap_type + s(disease_week, 
-    ##     by = species, bs = "fs", k = 15, m = 2) + s(site_name, bs = "re")
+    ##     species, bs = "fs", k = 10, m = 2) + s(site_name, bs = "re")
     ## 
     ## Parametric coefficients:
     ##                                         Estimate Std. Error z value Pr(>|z|)
-    ## (Intercept)                              3.87456    0.12878  30.088  < 2e-16
-    ## speciesCulex tarsalis                    2.21867    0.06873  32.283  < 2e-16
-    ## urbanizationperi                         0.34898    0.20213   1.727   0.0843
-    ## urbanizationurban                       -0.78011    0.18676  -4.177 2.95e-05
-    ## trap_typeGRVD                           -0.85968    0.10257  -8.382  < 2e-16
-    ## speciesCulex tarsalis:urbanizationperi  -0.87393    0.09901  -8.826  < 2e-16
-    ## speciesCulex tarsalis:urbanizationurban -2.04937    0.10744 -19.074  < 2e-16
+    ## (Intercept)                              4.11104    0.14168  29.016  < 2e-16
+    ## speciesCulex tarsalis                    2.21006    0.10618  20.814  < 2e-16
+    ## urbanizationperi                         0.34748    0.20329   1.709   0.0874
+    ## urbanizationurban                       -0.78684    0.18782  -4.189  2.8e-05
+    ## trap_typeGRVD                           -0.85345    0.10306  -8.281  < 2e-16
+    ## speciesCulex tarsalis:urbanizationperi  -0.87372    0.09964  -8.769  < 2e-16
+    ## speciesCulex tarsalis:urbanizationurban -2.06875    0.10800 -19.156  < 2e-16
     ##                                            
     ## (Intercept)                             ***
     ## speciesCulex tarsalis                   ***
@@ -350,28 +319,136 @@ summary(msq_spp_gam_k15)
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Approximate significance of smooth terms:
-    ##                                          edf Ref.df Chi.sq p-value    
-    ## s(disease_week):speciesCulex pipiens   9.035  10.79 1161.1  <2e-16 ***
-    ## s(disease_week):speciesCulex tarsalis 13.057  13.83 3086.6  <2e-16 ***
-    ## s(site_name)                          50.802  56.00  752.7  <2e-16 ***
+    ##                           edf Ref.df Chi.sq p-value    
+    ## s(disease_week,species) 16.97     18 4696.7  <2e-16 ***
+    ## s(site_name)            50.80     56  752.2  <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## R-sq.(adj) =  0.558   Deviance explained = 70.2%
-    ## -REML =  17345  Scale est. = 1         n = 3116
+    ## R-sq.(adj) =  0.542   Deviance explained = 69.7%
+    ## -REML =  17364  Scale est. = 1         n = 3116
+
+``` r
+# Fit GAM model with site_name only
+msq_spp_gam_k15 <- gam(
+  count ~ species * urbanization + trap_type +
+    s(disease_week, species, bs = "fs", k = 15, m = 2) +
+    s(site_name, bs = "re"),
+  family = nb(),
+  data = combined,
+  method = "REML"
+)
+summary(msq_spp_gam_k15)
+```
+
+    ## 
+    ## Family: Negative Binomial(0.892) 
+    ## Link function: log 
+    ## 
+    ## Formula:
+    ## count ~ species * urbanization + trap_type + s(disease_week, 
+    ##     species, bs = "fs", k = 15, m = 2) + s(site_name, bs = "re")
+    ## 
+    ## Parametric coefficients:
+    ##                                         Estimate Std. Error z value Pr(>|z|)
+    ## (Intercept)                              4.00278    0.13296  30.105  < 2e-16
+    ## speciesCulex tarsalis                    2.20438    0.08232  26.778  < 2e-16
+    ## urbanizationperi                         0.34528    0.20244   1.706   0.0881
+    ## urbanizationurban                       -0.78654    0.18702  -4.206  2.6e-05
+    ## trap_typeGRVD                           -0.85686    0.10262  -8.350  < 2e-16
+    ## speciesCulex tarsalis:urbanizationperi  -0.87146    0.09912  -8.792  < 2e-16
+    ## speciesCulex tarsalis:urbanizationurban -2.04643    0.10753 -19.032  < 2e-16
+    ##                                            
+    ## (Intercept)                             ***
+    ## speciesCulex tarsalis                   ***
+    ## urbanizationperi                        .  
+    ## urbanizationurban                       ***
+    ## trap_typeGRVD                           ***
+    ## speciesCulex tarsalis:urbanizationperi  ***
+    ## speciesCulex tarsalis:urbanizationurban ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                           edf Ref.df Chi.sq p-value    
+    ## s(disease_week,species) 24.00     28   4818  <2e-16 ***
+    ## s(site_name)            50.81     56    754  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.556   Deviance explained = 70.2%
+    ## -REML =  17352  Scale est. = 1         n = 3116
+
+## Check Fit and Plot Smooths
 
 ``` r
 #AIC for k10 and K15
 cat("GAM model k10 AIC: ", AIC(msq_spp_gam_k10), "\n")
 ```
 
-    ## GAM model k10 AIC:  34570.08
+    ## GAM model k10 AIC:  34568.78
 
 ``` r
 cat("GAM model k15 AIC: ", AIC(msq_spp_gam_k15), "\n")
 ```
 
-    ## GAM model k15 AIC:  34527.95
+    ## GAM model k15 AIC:  34533.34
+
+``` r
+#Summary of GAM fit
+summary(msq_spp_gam_k15)
+```
+
+    ## 
+    ## Family: Negative Binomial(0.892) 
+    ## Link function: log 
+    ## 
+    ## Formula:
+    ## count ~ species * urbanization + trap_type + s(disease_week, 
+    ##     species, bs = "fs", k = 15, m = 2) + s(site_name, bs = "re")
+    ## 
+    ## Parametric coefficients:
+    ##                                         Estimate Std. Error z value Pr(>|z|)
+    ## (Intercept)                              4.00278    0.13296  30.105  < 2e-16
+    ## speciesCulex tarsalis                    2.20438    0.08232  26.778  < 2e-16
+    ## urbanizationperi                         0.34528    0.20244   1.706   0.0881
+    ## urbanizationurban                       -0.78654    0.18702  -4.206  2.6e-05
+    ## trap_typeGRVD                           -0.85686    0.10262  -8.350  < 2e-16
+    ## speciesCulex tarsalis:urbanizationperi  -0.87146    0.09912  -8.792  < 2e-16
+    ## speciesCulex tarsalis:urbanizationurban -2.04643    0.10753 -19.032  < 2e-16
+    ##                                            
+    ## (Intercept)                             ***
+    ## speciesCulex tarsalis                   ***
+    ## urbanizationperi                        .  
+    ## urbanizationurban                       ***
+    ## trap_typeGRVD                           ***
+    ## speciesCulex tarsalis:urbanizationperi  ***
+    ## speciesCulex tarsalis:urbanizationurban ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                           edf Ref.df Chi.sq p-value    
+    ## s(disease_week,species) 24.00     28   4818  <2e-16 ***
+    ## s(site_name)            50.81     56    754  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.556   Deviance explained = 70.2%
+    ## -REML =  17352  Scale est. = 1         n = 3116
+
+``` r
+#AIC for k10 and K15
+cat("GAM model k10 AIC: ", AIC(msq_spp_gam_k10), "\n")
+```
+
+    ## GAM model k10 AIC:  34568.78
+
+``` r
+cat("GAM model k15 AIC: ", AIC(msq_spp_gam_k15), "\n")
+```
+
+    ## GAM model k15 AIC:  34533.34
 
 ``` r
 #Check if smooths are hitting their basis limits
@@ -383,18 +460,17 @@ gam.check(msq_spp_gam_k15)
     ## 
     ## Method: REML   Optimizer: outer newton
     ## full convergence after 6 iterations.
-    ## Gradient range [-1.111788e-08,9.734182e-06]
-    ## (score 17345.26 & scale 1).
-    ## Hessian positive definite, eigenvalue range [2.834221,1806.927].
-    ## Model rank =  94 / 94 
+    ## Gradient range [-2.498231e-06,0.0004650869]
+    ## (score 17352.36 & scale 1).
+    ## eigenvalue range [-3.600594e-08,1805.844].
+    ## Model rank =  96 / 96 
     ## 
     ## Basis dimension (k) checking results. Low p-value (k-index<1) may
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
-    ##                                          k'   edf k-index p-value    
-    ## s(disease_week):speciesCulex pipiens  14.00  9.04    0.82  <2e-16 ***
-    ## s(disease_week):speciesCulex tarsalis 14.00 13.06    0.82  <2e-16 ***
-    ## s(site_name)                          59.00 50.80      NA      NA    
+    ##                           k'  edf k-index p-value    
+    ## s(disease_week,species) 30.0 24.0    0.82  <2e-16 ***
+    ## s(site_name)            59.0 50.8      NA      NA    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -713,15 +789,11 @@ sustained seasonal pattern.
 
 # Trap_type effects smooth? Include by = trap_type in the smooth
 
-Analyze urban sites only paired trap types:
-
-“Within Urban sites, does trap type affect abundance? fit the model on
-Urban observations only”
+Analyze only sites with both trap types present to avoid confounding
+trap effects with site effects.
 
 ``` r
-# --------------------------
 # Identify sites with BOTH trap types
-# --------------------------
 
 paired_sites <- combined %>%
   group_by(site_name) %>%
@@ -773,11 +845,13 @@ length(unique(urban_pip$site_name))
     ## [1] 9
 
 ``` r
-urban_pip_gam <- mgcv::gam(
+# Model 1: common seasonal pattern
+# Trap type affects abundance magnitude but not seasonal shape.
+urban_pip_gam <- gam(
   count ~ trap_type +
-    s(disease_week, by = trap_type, k = 5) +
+    s(disease_week, k = 5) +
     s(site_name, bs = "re"),
-  family = mgcv::nb(),
+  family = nb(),
   data = urban_pip,
   method = "REML"
 )
@@ -786,30 +860,93 @@ summary(urban_pip_gam)
 ```
 
     ## 
-    ## Family: Negative Binomial(1.351) 
+    ## Family: Negative Binomial(1.359) 
     ## Link function: log 
     ## 
     ## Formula:
-    ## count ~ trap_type + s(disease_week, by = trap_type, k = 5) + 
-    ##     s(site_name, bs = "re")
+    ## count ~ trap_type + s(disease_week, k = 5) + s(site_name, bs = "re")
     ## 
     ## Parametric coefficients:
     ##               Estimate Std. Error z value Pr(>|z|)    
-    ## (Intercept)     3.1189     0.1697  18.377  < 2e-16 ***
-    ## trap_typeGRVD  -0.7178     0.1062  -6.757 1.41e-11 ***
+    ## (Intercept)     3.1181     0.1699  18.351  < 2e-16 ***
+    ## trap_typeGRVD  -0.7290     0.1058  -6.891 5.54e-12 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Approximate significance of smooth terms:
-    ##                                 edf Ref.df Chi.sq p-value    
-    ## s(disease_week):trap_typeCO2  3.509  3.862  86.53  <2e-16 ***
-    ## s(disease_week):trap_typeGRVD 3.300  3.734  47.22  <2e-16 ***
-    ## s(site_name)                  7.145  8.000  70.16  <2e-16 ***
+    ##                   edf Ref.df Chi.sq p-value    
+    ## s(disease_week) 3.656  3.929 133.22  <2e-16 ***
+    ## s(site_name)    7.154  8.000  71.12  <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## R-sq.(adj) =  0.303   Deviance explained = 47.1%
-    ## -REML = 1154.9  Scale est. = 1         n = 298
+    ## R-sq.(adj) =   0.31   Deviance explained = 46.9%
+    ## -REML = 1150.8  Scale est. = 1         n = 298
+
+``` r
+# Model 2: trap-specific deviations
+# Trap type affects abundance magnitude and may alter the seasonal trajectory.
+
+urban_pip_variable_shape <- gam(
+  count ~ trap_type +
+    s(disease_week, k = 5) +
+    s(disease_week, trap_type, bs = "fs", k = 5) +
+    s(site_name, bs = "re"),
+  family = nb(),
+  data = urban_pip,
+  method = "REML"
+)
+```
+
+    ## Warning in gam.side(sm, X, tol = .Machine$double.eps^0.5): model has repeated
+    ## 1-d smooths of same variable.
+
+``` r
+summary(urban_pip_variable_shape)
+```
+
+    ## 
+    ## Family: Negative Binomial(1.359) 
+    ## Link function: log 
+    ## 
+    ## Formula:
+    ## count ~ trap_type + s(disease_week, k = 5) + s(disease_week, 
+    ##     trap_type, bs = "fs", k = 5) + s(site_name, bs = "re")
+    ## 
+    ## Parametric coefficients:
+    ##               Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)     3.1181     0.1699  18.350  < 2e-16 ***
+    ## trap_typeGRVD  -0.7290     0.1058  -6.889 5.63e-12 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                                edf Ref.df  Chi.sq p-value    
+    ## s(disease_week)           3.655536  3.929 132.950  <2e-16 ***
+    ## s(disease_week,trap_type) 0.002601  7.000   0.002   0.458    
+    ## s(site_name)              7.153566  8.000  71.122  <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =   0.31   Deviance explained = 46.9%
+    ## -REML = 1150.8  Scale est. = 1         n = 298
+
+``` r
+AIC(
+  urban_pip_gam,
+  urban_pip_variable_shape
+)
+```
+
+    ##                                df      AIC
+    ## urban_pip_gam            14.17988 2283.471
+    ## urban_pip_variable_shape 14.19574 2283.499
+
+There is no evidence that allowing trap-specific seasonal deviations
+improves model fit. Seasonal abundance patterns were effectively
+identical between trap types, and trap type primarily influenced the
+magnitude of observed abundance rather than the shape of seasonal
+dynamics.
 
 ## Cx. tarsalis abundance by trap type Urban
 
@@ -844,11 +981,12 @@ length(unique(urban_tar$site_name))
     ## [1] 9
 
 ``` r
-urban_tar_gam <- mgcv::gam(
+# Model 1: common seasonal pattern
+urban_tar_gam <- gam(
   count ~ trap_type +
-    s(disease_week, by = trap_type, k = 5) +
+    s(disease_week, k = 5) +
     s(site_name, bs = "re"),
-  family = mgcv::nb(),
+  family = nb(),
   data = urban_tar,
   method = "REML"
 )
@@ -857,32 +995,96 @@ summary(urban_tar_gam)
 ```
 
     ## 
-    ## Family: Negative Binomial(1.233) 
+    ## Family: Negative Binomial(1.189) 
     ## Link function: log 
     ## 
     ## Formula:
-    ## count ~ trap_type + s(disease_week, by = trap_type, k = 5) + 
-    ##     s(site_name, bs = "re")
+    ## count ~ trap_type + s(disease_week, k = 5) + s(site_name, bs = "re")
     ## 
     ## Parametric coefficients:
     ##               Estimate Std. Error z value Pr(>|z|)    
-    ## (Intercept)     3.0645     0.2247   13.64   <2e-16 ***
-    ## trap_typeGRVD  -2.6898     0.2395  -11.23   <2e-16 ***
+    ## (Intercept)     3.0801     0.2339   13.17   <2e-16 ***
+    ## trap_typeGRVD  -2.6704     0.2300  -11.61   <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Approximate significance of smooth terms:
-    ##                                 edf Ref.df Chi.sq p-value    
-    ## s(disease_week):trap_typeCO2  3.790  3.973 86.051  <2e-16 ***
-    ## s(disease_week):trap_typeGRVD 1.001  1.002  0.029   0.867    
-    ## s(site_name)                  7.144  8.000 58.201  <2e-16 ***
+    ##                   edf Ref.df Chi.sq p-value    
+    ## s(disease_week) 3.718  3.951  67.45  <2e-16 ***
+    ## s(site_name)    7.190  8.000  63.09  <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## R-sq.(adj) =  0.316   Deviance explained = 61.1%
-    ## -REML = 715.32  Scale est. = 1         n = 185
+    ## R-sq.(adj) =  0.307   Deviance explained = 58.9%
+    ## -REML = 719.66  Scale est. = 1         n = 185
+
+``` r
+#Model 2: trap-specific deviations
+urban_tar_variable_shape <- gam(
+  count ~ trap_type +
+    s(disease_week, k = 5) +
+    s(disease_week, trap_type, bs = "fs", k = 5) +
+    s(site_name, bs = "re"),
+  family = nb(),
+  data = urban_tar,
+  method = "REML"
+)
+```
+
+    ## Warning in gam.side(sm, X, tol = .Machine$double.eps^0.5): model has repeated
+    ## 1-d smooths of same variable.
+
+``` r
+summary(urban_tar_variable_shape)
+```
+
+    ## 
+    ## Family: Negative Binomial(1.227) 
+    ## Link function: log 
+    ## 
+    ## Formula:
+    ## count ~ trap_type + s(disease_week, k = 5) + s(disease_week, 
+    ##     trap_type, bs = "fs", k = 5) + s(site_name, bs = "re")
+    ## 
+    ## Parametric coefficients:
+    ##               Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)     3.0683     0.2246   13.66   <2e-16 ***
+    ## trap_typeGRVD  -2.7008     0.2348  -11.50   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Approximate significance of smooth terms:
+    ##                             edf Ref.df Chi.sq p-value    
+    ## s(disease_week)           2.768   2.98  1.839 0.59802    
+    ## s(disease_week,trap_type) 2.431   7.00 12.245 0.00065 ***
+    ## s(site_name)              7.137   8.00 57.601 < 2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## R-sq.(adj) =  0.313   Deviance explained =   61%
+    ## -REML = 716.68  Scale est. = 1         n = 185
+
+``` r
+AIC(
+  urban_tar_gam,
+  urban_tar_variable_shape
+)
+```
+
+    ##                                df      AIC
+    ## urban_tar_gam            14.79175 1424.154
+    ## urban_tar_variable_shape 16.84544 1418.624
+
+There is essentially no single common seasonal curve that explains both
+trap types, but there are significant trap-specific seasonal deviations.
+Combined with ΔAIC = 5.5 indicates that CO2 and GRVD are not simply
+scaled versions of one another for tarsalis (as they are for pipiens).
 
 ## Smooths different between trap_types?
+
+Plot with a secondary y-axis with a scaling factor between trap types.
+This is easiest if you rescale only the GRVD predictions for plotting,
+but label the right axis back in GRVD units.
 
 ``` r
 # Colors by species, same as before
@@ -929,12 +1131,12 @@ predict_urban_trap_gam <- function(model, data, species_label) {
 # Predictions from both urban models
 pred_urban_trap <- bind_rows(
   predict_urban_trap_gam(
-    urban_pip_gam,
+    urban_pip_variable_shape,
     urban_pip,
     "Culex pipiens"
   ),
   predict_urban_trap_gam(
-    urban_tar_gam,
+    urban_tar_variable_shape,
     urban_tar,
     "Culex tarsalis"
   )
@@ -945,68 +1147,6 @@ pred_urban_trap <- bind_rows(
     ## : factor levels 1700 E Church not in original fit
     ## Warning in predict.gam(model, newdata = newdata, type = "link", se.fit = TRUE,
     ## : factor levels 1700 E Church not in original fit
-
-``` r
-# Plot: one panel per species, one line per trap type
-ggplot(
-  pred_urban_trap,
-  aes(
-    x = disease_week,
-    y = fit,
-    color = species,
-    fill = species,
-    linetype = trap_type
-  )
-) +
-  geom_ribbon(
-    aes(ymin = lower, ymax = upper, group = interaction(species, trap_type)),
-    alpha = 0.18,
-    color = NA
-  ) +
-  geom_line(
-    aes(group = interaction(species, trap_type)),
-    linewidth = 1.2
-  ) +
-  geom_vline(
-    xintercept = 33,
-    linetype = "dashed",
-    color = "black",
-    linewidth = 0.5
-  ) +
-  annotate(
-    "text",
-    x = 33,
-    y = Inf,
-    label = "1st WNV cases",
-    vjust = 1,
-    hjust = -0.07,
-    size = 3
-  ) +
-  facet_wrap(~ species, scales = "free_y", ncol = 1) +
-  scale_color_manual(values = cols) +
-  scale_fill_manual(values = cols) +
-  scale_y_log10() +
-  labs(
-    title = "Urban predicted count by trap type",
-    x = "Disease week",
-    y = "Predicted count (log10)",
-    color = "Species",
-    fill = "Species",
-    linetype = "Trap type"
-  ) +
-  theme_classic() +
-  theme(
-    plot.title = element_text(hjust = 0.5),
-    strip.background = element_blank(),
-    strip.text = element_text(size = 12)
-  )
-```
-
-![](../figures/smooths-1.png)<!-- -->
-
-Plot with a secondary y-axis with a scaling factor between trap types.
-This is easiest if you rescale only the GRVD predictions for plotting,
-but label the right axis back in GRVD units.
 
 ``` r
 # Split predictions by trap type to calculate scale factor
@@ -1091,9 +1231,18 @@ plot_species_panel <- function(pred_df, species_name, show_legend = TRUE) {
       color = NA
     ) +
     geom_line(
-      aes(group = interaction(species, trap_type)),
-      linewidth = 1.2
-    ) +
+  aes(
+    group = interaction(species, trap_type),
+    linewidth = trap_type
+  )
+) +
+scale_linewidth_manual(
+  values = c(
+    "CO2" = 0.8,
+    "GRVD" = 1.5
+  ),
+  guide = "none"
+) +
     geom_vline(
       xintercept = 33,
       linetype = "dashed",
@@ -1132,7 +1281,7 @@ plot_species_panel <- function(pred_df, species_name, show_legend = TRUE) {
         override.aes = list(
           linetype = "solid",
           linewidth = 1.2,
-          alpha = 1
+          alpha = .75
         )
       ),
       fill = "none",
@@ -1189,7 +1338,7 @@ combined_plot <- wrap_plots(
 combined_plot
 ```
 
-![](../figures/secondary-axis-1.png)<!-- -->
+![](../figures/smooths-1.png)<!-- -->
 
 ## Interpretation
 
@@ -1255,13 +1404,11 @@ head(pipiens$site_name)
 
 ``` r
 # Fit GAM model with site_name random effect
+# Factor smooth: urbanization-specific seasonal 
+# pooled/shrunk toward a common level of smoothness
 pip_gam <- gam(
-  count ~ urbanization + trap_type + 
-    s(disease_week, 
-      by = urbanization, 
-      bs = "fs",  # bs = "fs" for independent smooths
-      k=10, 
-      m=3) +  # m = 3 restricts wigglyness
+  count ~ urbanization + trap_type +
+    s(disease_week, urbanization, bs = "fs", k = 10, m = 3) +
     s(site_name, bs = "re"),
   family = nb(),
   data = pipiens,
@@ -1281,36 +1428,34 @@ summary(pip_gam)
     ## Link function: log 
     ## 
     ## Formula:
-    ## count ~ urbanization + trap_type + s(disease_week, by = urbanization, 
+    ## count ~ urbanization + trap_type + s(disease_week, urbanization, 
     ##     bs = "fs", k = 10, m = 3) + s(site_name, bs = "re")
     ## 
     ## Parametric coefficients:
     ##                   Estimate Std. Error z value Pr(>|z|)    
-    ## (Intercept)         3.8960     0.1487  26.198  < 2e-16 ***
-    ## urbanizationperi    0.2516     0.2359   1.067 0.286109    
-    ## urbanizationurban  -0.8232     0.2150  -3.829 0.000128 ***
-    ## trap_typeGRVD      -0.6723     0.1125  -5.975 2.31e-09 ***
+    ## (Intercept)         4.3015     0.1586  27.113  < 2e-16 ***
+    ## urbanizationperi    0.6405     0.2475   2.588 0.009657 ** 
+    ## urbanizationurban  -0.7573     0.2264  -3.346 0.000821 ***
+    ## trap_typeGRVD      -0.6728     0.1126  -5.977 2.27e-09 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Approximate significance of smooth terms:
-    ##                                      edf Ref.df Chi.sq p-value    
-    ## s(disease_week):urbanizationrural  5.580  6.383  394.0  <2e-16 ***
-    ## s(disease_week):urbanizationperi   7.396  8.180  687.4  <2e-16 ***
-    ## s(disease_week):urbanizationurban  6.067  6.886  280.5  <2e-16 ***
-    ## s(site_name)                      49.765 56.000  533.1  <2e-16 ***
+    ##                                edf Ref.df Chi.sq p-value    
+    ## s(disease_week,urbanization) 19.50     27 1760.0  <2e-16 ***
+    ## s(site_name)                 49.79     56  536.6  <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## R-sq.(adj) =  0.473   Deviance explained = 67.5%
-    ## -REML = 6257.7  Scale est. = 1         n = 1383
+    ## R-sq.(adj) =  0.468   Deviance explained = 67.5%
+    ## -REML = 6264.6  Scale est. = 1         n = 1383
 
 ``` r
 #AIC for 
 cat("GAM model pip AIC: ", AIC(pip_gam), "\n")
 ```
 
-    ## GAM model pip AIC:  12408.89
+    ## GAM model pip AIC:  12396.08
 
 ``` r
 #Check if smooths are hitting their basis limits
@@ -1321,20 +1466,18 @@ gam.check(pip_gam)
 
     ## 
     ## Method: REML   Optimizer: outer newton
-    ## full convergence after 7 iterations.
-    ## Gradient range [1.141959e-08,4.463491e-06]
-    ## (score 6257.707 & scale 1).
-    ## Hessian positive definite, eigenvalue range [0.0816685,719.9479].
-    ## Model rank =  90 / 90 
+    ## full convergence after 8 iterations.
+    ## Gradient range [-0.0001379677,9.067912e-05]
+    ## (score 6264.555 & scale 1).
+    ## Hessian positive definite, eigenvalue range [0.0001379508,719.5925].
+    ## Model rank =  93 / 93 
     ## 
     ## Basis dimension (k) checking results. Low p-value (k-index<1) may
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
-    ##                                      k'   edf k-index p-value
-    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.64
-    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.56
-    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.62
-    ## s(site_name)                      59.00 49.76      NA      NA
+    ##                                k'  edf k-index p-value
+    ## s(disease_week,urbanization) 30.0 19.5    0.92    0.54
+    ## s(site_name)                 59.0 49.8      NA      NA
 
 ``` r
 # plot the smooths for pip
@@ -1352,8 +1495,6 @@ plot(pip_gam, select = 2, shade = TRUE, main = "GAM Smooth for pip x peri")
 ``` r
 plot(pip_gam, select = 3, shade = TRUE, main = "GAM Smooth for pip x urban")
 ```
-
-![](../figures/check-gam-pip-4.png)<!-- -->
 
 ### Map residuals: pipiens
 
@@ -1423,8 +1564,6 @@ plot(sim_pip)
 
     ## Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
     ## : Fitting terminated with step failure - check results carefully
-    ## Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L = G$L,
-    ## : Fitting terminated with step failure - check results carefully
 
 ![](../figures/dharma-pip-1.png)<!-- -->
 
@@ -1439,7 +1578,7 @@ testDispersion(sim_pip)
     ##  simulated
     ## 
     ## data:  simulationOutput
-    ## dispersion = 1.6968, p-value = 0.104
+    ## dispersion = 1.6968, p-value = 0.124
     ## alternative hypothesis: two.sided
 
 ``` r
@@ -1467,8 +1606,8 @@ testSpatialAutocorrelation(
     ##  DHARMa Moran's I test for distance-based autocorrelation
     ## 
     ## data:  sim_pip_site
-    ## observed = -0.028411, expected = -0.017241, sd = 0.021932, p-value =
-    ## 0.6105
+    ## observed = -0.031495, expected = -0.017241, sd = 0.021928, p-value =
+    ## 0.5157
     ## alternative hypothesis: Distance-based autocorrelation
 
 ## Cx. tarsalis GAM
@@ -1484,14 +1623,12 @@ head(tarsalis$site_name)
     ## 59 Levels: 1700 E Church 300 E Church 700 S 200 W ... Wingpointe
 
 ``` r
-# Fit GAM model with site_name only
+# Fit GAM model with site_name random effect
+# Factor smooth: urbanization-specific seasonal patterns,
+# pooled/shrunk toward a common level of smoothness
 tar_gam <- gam(
-  count ~ urbanization + trap_type + 
-    s(disease_week, 
-      by = urbanization, 
-      bs = "fs",  # bs = "fs" for independent smooths
-      k=20, 
-      m=3) +
+  count ~ urbanization + trap_type +
+    s(disease_week, urbanization, bs = "fs", k = 20, m = 3) +
     s(site_name, bs = "re"),
   family = nb(),
   data = tarsalis,
@@ -1507,40 +1644,38 @@ summary(tar_gam)
 ```
 
     ## 
-    ## Family: Negative Binomial(1.071) 
+    ## Family: Negative Binomial(1.081) 
     ## Link function: log 
     ## 
     ## Formula:
-    ## count ~ urbanization + trap_type + s(disease_week, by = urbanization, 
+    ## count ~ urbanization + trap_type + s(disease_week, urbanization, 
     ##     bs = "fs", k = 20, m = 3) + s(site_name, bs = "re")
     ## 
     ## Parametric coefficients:
     ##                   Estimate Std. Error z value Pr(>|z|)    
-    ## (Intercept)         5.9067     0.1300  45.446   <2e-16 ***
-    ## urbanizationperi   -0.4765     0.2102  -2.267   0.0234 *  
-    ## urbanizationurban  -2.7377     0.2110 -12.976   <2e-16 ***
-    ## trap_typeGRVD      -2.6947     0.2005 -13.440   <2e-16 ***
+    ## (Intercept)         6.1858     0.1323  46.771  < 2e-16 ***
+    ## urbanizationperi   -0.5659     0.2133  -2.652  0.00799 ** 
+    ## urbanizationurban  -3.0375     0.2141 -14.190  < 2e-16 ***
+    ## trap_typeGRVD      -2.7311     0.2031 -13.447  < 2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Approximate significance of smooth terms:
-    ##                                      edf Ref.df Chi.sq p-value    
-    ## s(disease_week):urbanizationrural 18.145  18.86 2885.3  <2e-16 ***
-    ## s(disease_week):urbanizationperi  13.083  14.91 1163.0  <2e-16 ***
-    ## s(disease_week):urbanizationurban  6.802   7.86  148.2  <2e-16 ***
-    ## s(site_name)                      43.600  53.00  546.7  <2e-16 ***
+    ##                                edf Ref.df Chi.sq p-value    
+    ## s(disease_week,urbanization) 47.15     57 4755.5  <2e-16 ***
+    ## s(site_name)                 43.62     53  551.9  <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## R-sq.(adj) =  0.545   Deviance explained = 72.4%
-    ## -REML =  10865  Scale est. = 1         n = 1733
+    ## R-sq.(adj) =  0.549   Deviance explained = 72.8%
+    ## -REML =  10885  Scale est. = 1         n = 1733
 
 ``` r
 #AIC for 
 cat("GAM model tar AIC: ", AIC(tar_gam), "\n")
 ```
 
-    ## GAM model tar AIC:  21521.3
+    ## GAM model tar AIC:  21512.95
 
 ``` r
 #Check if smooths are hitting their basis limits
@@ -1551,20 +1686,18 @@ gam.check(tar_gam)
 
     ## 
     ## Method: REML   Optimizer: outer newton
-    ## full convergence after 6 iterations.
-    ## Gradient range [-0.0009720401,0.002523532]
-    ## (score 10864.65 & scale 1).
-    ## Hessian positive definite, eigenvalue range [1.201395,957.9721].
-    ## Model rank =  117 / 117 
+    ## full convergence after 7 iterations.
+    ## Gradient range [-0.0001323644,0.0001300403]
+    ## (score 10884.93 & scale 1).
+    ## Hessian positive definite, eigenvalue range [0.000132347,944.3716].
+    ## Model rank =  120 / 120 
     ## 
     ## Basis dimension (k) checking results. Low p-value (k-index<1) may
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
-    ##                                     k'  edf k-index p-value
-    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.28
-    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.21
-    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.23
-    ## s(site_name)                      56.0 43.6      NA      NA
+    ##                                k'  edf k-index p-value
+    ## s(disease_week,urbanization) 60.0 47.1     0.9    0.23
+    ## s(site_name)                 56.0 43.6      NA      NA
 
 ``` r
 # plot the smooths for tar
@@ -1582,8 +1715,6 @@ plot(tar_gam, select = 2, shade = TRUE, main = "GAM Smooth for tar x peri")
 ``` r
 plot(tar_gam, select = 3, shade = TRUE, main = "GAM Smooth for tar x urban")
 ```
-
-![](../figures/check-gam-tar-4.png)<!-- -->
 
 ### Map residuals: tarsalis
 
@@ -1664,7 +1795,7 @@ testDispersion(sim_tar)
     ##  simulated
     ## 
     ## data:  simulationOutput
-    ## dispersion = 0.49884, p-value < 2.2e-16
+    ## dispersion = 0.50425, p-value < 2.2e-16
     ## alternative hypothesis: two.sided
 
 ``` r
@@ -1692,8 +1823,8 @@ testSpatialAutocorrelation(
     ##  DHARMa Moran's I test for distance-based autocorrelation
     ## 
     ## data:  sim_tar_site
-    ## observed = -0.016665, expected = -0.017544, sd = 0.021831, p-value =
-    ## 0.9679
+    ## observed = -0.014604, expected = -0.017544, sd = 0.021841, p-value =
+    ## 0.8929
     ## alternative hypothesis: Distance-based autocorrelation
 
 ``` r

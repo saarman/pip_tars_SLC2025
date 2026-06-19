@@ -125,23 +125,23 @@ Let's start with a simple comparison of including ONLY site_name.
 # Fit GAM model with site_name only
 msq_spp_gam_k10 <- gam(
   count ~ species * urbanization + trap_type +
-    s(disease_week, by = species, bs = "fs", k=10, m=2) +
+    s(disease_week, species, bs = "fs", k = 10, m = 2) +
     s(site_name, bs = "re"),
   family = nb(),
   data = combined,
   method = "REML"
 )
-
+summary(msq_spp_gam_k10)
 # Fit GAM model with site_name only
 msq_spp_gam_k15 <- gam(
   count ~ species * urbanization + trap_type +
-    s(disease_week, by = species, bs = "fs", k=15, m=2) +
-
+    s(disease_week, species, bs = "fs", k = 15, m = 2) +
     s(site_name, bs = "re"),
   family = nb(),
   data = combined,
   method = "REML"
 )
+summary(msq_spp_gam_k15)
 
 ```
   
@@ -454,14 +454,11 @@ p ≈ 0 → extremely significant
 
 # Trap_type effects smooth? Include by = trap_type in the smooth
 
-Analyze urban sites only paired trap types:
-
-"Within Urban sites, does trap type affect abundance? fit the model on Urban observations only"
+Analyze only sites with both trap types present to avoid confounding trap effects with site effects.
   
 ```{r identify-pairs}
-# --------------------------
+
 # Identify sites with BOTH trap types
-# --------------------------
 
 paired_sites <- combined %>%
   group_by(site_name) %>%
@@ -493,18 +490,43 @@ urban_pip <- pipiens %>%
 table(urban_pip$trap_type)
 length(unique(urban_pip$site_name))
 
-
-urban_pip_gam <- mgcv::gam(
+# Model 1: common seasonal pattern
+# Trap type affects abundance magnitude but not seasonal shape.
+urban_pip_gam <- gam(
   count ~ trap_type +
-    s(disease_week, by = trap_type, k = 5) +
+    s(disease_week, k = 5) +
     s(site_name, bs = "re"),
-  family = mgcv::nb(),
+  family = nb(),
   data = urban_pip,
   method = "REML"
 )
 
 summary(urban_pip_gam)
+
+# Model 2: trap-specific deviations
+# Trap type affects abundance magnitude and may alter the seasonal trajectory.
+
+urban_pip_variable_shape <- gam(
+  count ~ trap_type +
+    s(disease_week, k = 5) +
+    s(disease_week, trap_type, bs = "fs", k = 5) +
+    s(site_name, bs = "re"),
+  family = nb(),
+  data = urban_pip,
+  method = "REML"
+)
+
+summary(urban_pip_variable_shape)
+
+AIC(
+  urban_pip_gam,
+  urban_pip_variable_shape
+)
+
+
 ```
+
+There is no evidence that allowing trap-specific seasonal deviations improves model fit. Seasonal abundance patterns were effectively identical between trap types, and trap type primarily influenced the magnitude of observed abundance rather than the shape of seasonal dynamics.
 
 ## Cx. tarsalis abundance by trap type Urban
 
@@ -522,20 +544,42 @@ urban_tar <- tarsalis %>%
 table(urban_tar$trap_type)
 length(unique(urban_tar$site_name))
 
-urban_tar_gam <- mgcv::gam(
+# Model 1: common seasonal pattern
+urban_tar_gam <- gam(
   count ~ trap_type +
-    s(disease_week, by = trap_type, k = 5) +
+    s(disease_week, k = 5) +
     s(site_name, bs = "re"),
-  family = mgcv::nb(),
+  family = nb(),
   data = urban_tar,
   method = "REML"
 )
 
 summary(urban_tar_gam)
+
+#Model 2: trap-specific deviations
+urban_tar_variable_shape <- gam(
+  count ~ trap_type +
+    s(disease_week, k = 5) +
+    s(disease_week, trap_type, bs = "fs", k = 5) +
+    s(site_name, bs = "re"),
+  family = nb(),
+  data = urban_tar,
+  method = "REML"
+)
+
+summary(urban_tar_variable_shape)
+
+AIC(
+  urban_tar_gam,
+  urban_tar_variable_shape
+)
+
 ```
-    
-  
+There is essentially no single common seasonal curve that explains both trap types, but there are significant trap-specific seasonal deviations. Combined with ΔAIC = 5.5 indicates that CO2 and GRVD are not simply scaled versions of one another for tarsalis (as they are for pipiens).
+
 ## Smooths different between trap_types?
+
+Plot with a secondary y-axis with a scaling factor between trap types. This is easiest if you rescale only the GRVD predictions for plotting, but label the right axis back in GRVD units.
 
 ```{r smooths}
 # Colors by species, same as before
@@ -582,75 +626,18 @@ predict_urban_trap_gam <- function(model, data, species_label) {
 # Predictions from both urban models
 pred_urban_trap <- bind_rows(
   predict_urban_trap_gam(
-    urban_pip_gam,
+    urban_pip_variable_shape,
     urban_pip,
     "Culex pipiens"
   ),
   predict_urban_trap_gam(
-    urban_tar_gam,
+    urban_tar_variable_shape,
     urban_tar,
     "Culex tarsalis"
   )
 )
 
-# Plot: one panel per species, one line per trap type
-ggplot(
-  pred_urban_trap,
-  aes(
-    x = disease_week,
-    y = fit,
-    color = species,
-    fill = species,
-    linetype = trap_type
-  )
-) +
-  geom_ribbon(
-    aes(ymin = lower, ymax = upper, group = interaction(species, trap_type)),
-    alpha = 0.18,
-    color = NA
-  ) +
-  geom_line(
-    aes(group = interaction(species, trap_type)),
-    linewidth = 1.2
-  ) +
-  geom_vline(
-    xintercept = 33,
-    linetype = "dashed",
-    color = "black",
-    linewidth = 0.5
-  ) +
-  annotate(
-    "text",
-    x = 33,
-    y = Inf,
-    label = "1st WNV cases",
-    vjust = 1,
-    hjust = -0.07,
-    size = 3
-  ) +
-  facet_wrap(~ species, scales = "free_y", ncol = 1) +
-  scale_color_manual(values = cols) +
-  scale_fill_manual(values = cols) +
-  scale_y_log10() +
-  labs(
-    title = "Urban predicted count by trap type",
-    x = "Disease week",
-    y = "Predicted count (log10)",
-    color = "Species",
-    fill = "Species",
-    linetype = "Trap type"
-  ) +
-  theme_classic() +
-  theme(
-    plot.title = element_text(hjust = 0.5),
-    strip.background = element_blank(),
-    strip.text = element_text(size = 12)
-  )
-```
-  
-Plot with a secondary y-axis with a scaling factor between trap types. This is easiest if you rescale only the GRVD predictions for plotting, but label the right axis back in GRVD units.
 
-```{r secondary-axis}
 # Split predictions by trap type to calculate scale factor
 co2_range <- pred_urban_trap %>%
   filter(trap_type == "CO2") %>%
@@ -724,9 +711,18 @@ plot_species_panel <- function(pred_df, species_name, show_legend = TRUE) {
       color = NA
     ) +
     geom_line(
-      aes(group = interaction(species, trap_type)),
-      linewidth = 1.2
-    ) +
+  aes(
+    group = interaction(species, trap_type),
+    linewidth = trap_type
+  )
+) +
+scale_linewidth_manual(
+  values = c(
+    "CO2" = 0.8,
+    "GRVD" = 1.5
+  ),
+  guide = "none"
+) +
     geom_vline(
       xintercept = 33,
       linetype = "dashed",
@@ -765,7 +761,7 @@ plot_species_panel <- function(pred_df, species_name, show_legend = TRUE) {
         override.aes = list(
           linetype = "solid",
           linewidth = 1.2,
-          alpha = 1
+          alpha = .75
         )
       ),
       fill = "none",
@@ -856,13 +852,11 @@ pipiens <- combined[combined$species == "Culex pipiens",]
 head(pipiens$site_name)
 
 # Fit GAM model with site_name random effect
+# Factor smooth: urbanization-specific seasonal 
+# pooled/shrunk toward a common level of smoothness
 pip_gam <- gam(
-  count ~ urbanization + trap_type + 
-    s(disease_week, 
-      by = urbanization, 
-      bs = "fs",  # bs = "fs" for independent smooths
-      k=10, 
-      m=3) +  # m = 3 restricts wigglyness
+  count ~ urbanization + trap_type +
+    s(disease_week, urbanization, bs = "fs", k = 10, m = 3) +
     s(site_name, bs = "re"),
   family = nb(),
   data = pipiens,
@@ -975,20 +969,17 @@ testSpatialAutocorrelation(
 tarsalis <- combined[combined$species == "Culex tarsalis",]
 head(tarsalis$site_name)
 
-# Fit GAM model with site_name only
+# Fit GAM model with site_name random effect
+# Factor smooth: urbanization-specific seasonal patterns,
+# pooled/shrunk toward a common level of smoothness
 tar_gam <- gam(
-  count ~ urbanization + trap_type + 
-    s(disease_week, 
-      by = urbanization, 
-      bs = "fs",  # bs = "fs" for independent smooths
-      k=20, 
-      m=3) +
+  count ~ urbanization + trap_type +
+    s(disease_week, urbanization, bs = "fs", k = 20, m = 3) +
     s(site_name, bs = "re"),
   family = nb(),
   data = tarsalis,
   method = "REML"
 )
-
 
 ```
     
