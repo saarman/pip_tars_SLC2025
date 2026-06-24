@@ -2,7 +2,7 @@ Weekly Maps **Cx. pipiens** and **Cx. tarsalis** abundance: SLC 2025
 field season
 ================
 Norah Saarman
-2026-05-13
+2026-06-24
 
 - [Setup](#setup)
 - [SQRT Weekly Maps (Square-Root
@@ -20,6 +20,7 @@ Norah Saarman
   - [Zoom 12](#zoom-12-2)
   - [Raw weekly GIFs for raw, zoom 11 and
     12](#raw-weekly-gifs-for-raw-zoom-11-and-12)
+- [Uinta Basin map for Chapter 1](#uinta-basin-map-for-chapter-1)
 
 # Setup
 
@@ -1864,3 +1865,143 @@ gifski(
 ```
 
     ## [1] "/uufs/chpc.utah.edu/common/home/saarman-group1/pip_tars_SLC2025/figures/d_weeks_2025_maps/zoom12/mosquito_2025_zoom12_raw.gif"
+
+# Uinta Basin map for Chapter 1
+
+Google map
+
+``` r
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
+    ## ✔ purrr     1.0.2     ✔ tidyr     1.3.1
+    ## ✔ readr     2.1.5     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library(ggmap)
+library(ggrepel)
+
+# Register Google key 
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
+
+uinta_sites <- tribble(
+  ~Locality,        ~lat,        ~lon,        ~group,
+  "Ouray",          40.0837,    -109.6628,   "Not detected",
+  "Randlett",       40.2311,    -109.8216,   "Cx. pipiens morphotype",
+  "Sunshine",       40.2656,    -109.8509,   "Cx. pipiens confirmed",
+  "Fort Duchesne",  40.2757,    -109.8534,   "Not detected",
+  "Thunder Ridge",  40.3652,    -109.8219,   "Not detected",
+  "Whiterocks",     40.4583,    -109.9339,   "Not detected",
+  "Neola",          40.4473,    -110.0285,   "Not detected",
+  "Yellowstone",    40.3289,    -109.8911,   "Cx. pipiens confirmed",
+  "Hilltop",        40.2948,    -109.8977,   "Not detected",
+  "Arcadia",        40.2069,    -110.1855,   "Cx. pipiens morphotype",
+  "Myton",          40.2002,    -110.0612,   "Not detected",
+  "Wetlands",       40.1931,    -109.9128,   "Not detected",
+  "Library",        40 + 27/60 + 21.6/3600, -(109 + 31/60 + 30.9/3600), "Not detected",
+  "Boothill",       40 + 26/60 + 18.7/3600, -(109 + 35/60 + 11.8/3600), "Cx. pipiens confirmed",
+  "Fausett Ranch",  40 + 19/60 + 51.8/3600, -(109 + 50/60 + 54.4/3600), "Not detected"
+)
+
+lon_min <- -110.25
+lon_max <- -109.45
+lat_min <- 40.02
+lat_max <- 40.52
+
+bg <- get_map(
+  location = c(
+    left = lon_min,
+    bottom = lat_min,
+    right = lon_max,
+    top = lat_max
+  ),
+  maptype = "terrain",
+  zoom = 10
+)
+```
+
+    ## ! Bounding box given to Google - spatial extent only approximate.
+    ## ℹ <https://maps.googleapis.com/maps/api/staticmap?center=40.27,-109.85&zoom=10&size=640x640&scale=2&maptype=terrain&language=en-EN&key=xxx>
+
+``` r
+group_levels <- c(
+  "Cx. pipiens confirmed",
+  "Cx. pipiens morphotype",
+  "Not detected"
+)
+
+uinta_sites <- uinta_sites %>%
+  mutate(group = factor(group, levels = group_levels))
+
+ggmap(bg) +
+  geom_point(
+    data = uinta_sites,
+    aes(x = lon, y = lat, fill = group, shape = group),
+    size = 4,
+    color = "grey20",
+    stroke = 0.8
+  ) +
+  geom_text_repel(
+    data = uinta_sites,
+    aes(x = lon, y = lat, label = Locality),
+    size = 5,
+    fontface = "bold",
+    box.padding = 0.4,
+    point.padding = 0.3,
+    segment.color = "grey40",
+    max.overlaps = Inf
+  ) +
+  scale_fill_manual(
+  name = NULL,
+  breaks = group_levels,
+  values = c(
+    "Cx. pipiens confirmed" = "#FF2DA0",
+    "Cx. pipiens morphotype" = "purple",
+    "Not detected" = "#1bc8ea"
+  )
+) +
+scale_shape_manual(
+  name = NULL,
+  breaks = group_levels,
+  values = c(
+    "Cx. pipiens confirmed" = 24,
+    "Cx. pipiens morphotype" = 22,
+    "Not detected" = 21
+  )
+) +
+guides(
+  fill = guide_legend(
+    override.aes = list(
+      shape = c(24, 22, 21),
+      fill = c("#FF2DA0", "purple", "#1bc8ea"),
+      color = "grey20",
+      size = 5
+    )
+  ),
+  shape = "none"
+) +
+  coord_quickmap(
+    xlim = c(lon_min, lon_max),
+    ylim = c(lat_min, lat_max),
+    expand = FALSE
+  ) +
+  labs(fill = NULL) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.text = element_text(size = 12),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
+
+    ## Coordinate system already present. Adding new coordinate system, which will
+    ## replace the existing one.
+
+![](../figures/uinta-google-1.png)<!-- -->

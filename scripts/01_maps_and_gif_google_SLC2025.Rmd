@@ -1118,3 +1118,261 @@ gifski(
   delay     = 0.6
 )
 ```
+  
+# Uinta Basin map for Chapter 1
+
+Google map
+```{r uinta-google}
+library(tidyverse)
+library(ggmap)
+library(ggrepel)
+
+# Register Google key 
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
+
+uinta_sites <- tribble(
+  ~Locality,        ~lat,        ~lon,        ~group,
+  "Ouray",          40.0837,    -109.6628,   "Not detected",
+  "Randlett",       40.2311,    -109.8216,   "Cx. pipiens morphotype",
+  "Sunshine",       40.2656,    -109.8509,   "Cx. pipiens confirmed",
+  "Fort Duchesne",  40.2757,    -109.8534,   "Not detected",
+  "Thunder Ridge",  40.3652,    -109.8219,   "Not detected",
+  "Whiterocks",     40.4583,    -109.9339,   "Not detected",
+  "Neola",          40.4473,    -110.0285,   "Not detected",
+  "Yellowstone",    40.3289,    -109.8911,   "Cx. pipiens confirmed",
+  "Hilltop",        40.2948,    -109.8977,   "Not detected",
+  "Arcadia",        40.2069,    -110.1855,   "Cx. pipiens morphotype",
+  "Myton",          40.2002,    -110.0612,   "Not detected",
+  "Wetlands",       40.1931,    -109.9128,   "Not detected",
+  "Library",        40 + 27/60 + 21.6/3600, -(109 + 31/60 + 30.9/3600), "Not detected",
+  "Boothill",       40 + 26/60 + 18.7/3600, -(109 + 35/60 + 11.8/3600), "Cx. pipiens confirmed",
+  "Fausett Ranch",  40 + 19/60 + 51.8/3600, -(109 + 50/60 + 54.4/3600), "Not detected"
+)
+
+lon_min <- -110.25
+lon_max <- -109.45
+lat_min <- 40.02
+lat_max <- 40.52
+
+bg <- get_map(
+  location = c(
+    left = lon_min,
+    bottom = lat_min,
+    right = lon_max,
+    top = lat_max
+  ),
+  maptype = "terrain",
+  zoom = 10
+)
+
+group_levels <- c(
+  "Cx. pipiens confirmed",
+  "Cx. pipiens morphotype",
+  "Not detected"
+)
+
+uinta_sites <- uinta_sites %>%
+  mutate(group = factor(group, levels = group_levels))
+
+ggmap(bg) +
+  geom_point(
+    data = uinta_sites,
+    aes(x = lon, y = lat, fill = group, shape = group),
+    size = 4,
+    color = "grey20",
+    stroke = 0.8
+  ) +
+  geom_text_repel(
+    data = uinta_sites,
+    aes(x = lon, y = lat, label = Locality),
+    size = 5,
+    fontface = "bold",
+    box.padding = 0.4,
+    point.padding = 0.3,
+    segment.color = "grey40",
+    max.overlaps = Inf
+  ) +
+  scale_fill_manual(
+  name = NULL,
+  breaks = group_levels,
+  values = c(
+    "Cx. pipiens confirmed" = "#FF2DA0",
+    "Cx. pipiens morphotype" = "purple",
+    "Not detected" = "#1bc8ea"
+  )
+) +
+scale_shape_manual(
+  name = NULL,
+  breaks = group_levels,
+  values = c(
+    "Cx. pipiens confirmed" = 24,
+    "Cx. pipiens morphotype" = 22,
+    "Not detected" = 21
+  )
+) +
+guides(
+  fill = guide_legend(
+    override.aes = list(
+      shape = c(24, 22, 21),
+      fill = c("#FF2DA0", "purple", "#1bc8ea"),
+      color = "grey20",
+      size = 5
+    )
+  ),
+  shape = "none"
+) +
+  coord_quickmap(
+    xlim = c(lon_min, lon_max),
+    ylim = c(lat_min, lat_max),
+    expand = FALSE
+  ) +
+  labs(fill = NULL) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.text = element_text(size = 12),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
+
+
+
+```{r sdm}
+# ============================================================
+# Uinta Basin map with SDM suitability > 50%
+# ============================================================
+
+library(tidyverse)
+library(ggmap)
+library(terra)
+
+# Register Google key 
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
+
+# -------------------------
+# Map extent
+# -------------------------
+lon_min <- -110.25
+lon_max <- -109.45
+lat_min <- 40.02
+lat_max <- 40.52
+
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "terrain",
+  zoom = 10
+)
+
+
+# -------------------------
+# Load raw SDM raster from Gorris et al.
+# -------------------------
+
+sdm_pipiens <- terra::rast("../../ace2/gis/culex_pipiens_meansuitability.nc")
+
+# Crop to Uinta Basin
+uinta_ext <- ext(lon_min, lon_max, lat_min, lat_max)
+sdm_uinta <- crop(sdm_pipiens, uinta_ext)
+
+# Convert to dataframe
+sdm_df <- as.data.frame(sdm_uinta, xy = TRUE, na.rm = TRUE)
+
+# Rename suitability column
+names(sdm_df)[3] <- "suitability"
+
+# -------------------------
+# Plot continuous suitability
+# -------------------------
+ggmap(bg) +
+  geom_raster(
+    data = sdm_df,
+    aes(
+      x = x,
+      y = y,
+      fill = suitability
+    ),
+    alpha = 0.55,
+    interpolate = TRUE
+  ) +
+  scale_fill_gradient(
+    low = "transparent",
+    high = "#FF2DA0",
+    name = "Predicted\nsuitability",
+    limits = c(0.35, .61)
+  ) +
+  coord_quickmap(
+    xlim = c(lon_min, lon_max),
+    ylim = c(lat_min, lat_max),
+    expand = FALSE
+  ) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 11),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
+```{r}
+# Wider map extent
+lon_min <- -110.35
+lon_max <- -109.35
+lat_min <- 39.95
+lat_max <- 40.58
+
+bg <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "terrain",
+  zoom = 10
+)
+
+sdm_pipiens <- terra::rast(
+  "../../ace2/gis/culex_pipiens_meansuitability.nc"
+)
+
+uinta_ext <- terra::ext(lon_min, lon_max, lat_min, lat_max)
+
+sdm_uinta <- terra::crop(sdm_pipiens, uinta_ext)
+
+sdm_df <- as.data.frame(sdm_uinta, xy = TRUE, na.rm = TRUE)
+names(sdm_df)[3] <- "suitability"
+
+sdm_df_50 <- sdm_df %>%
+  filter(suitability > 0.3)
+
+ggmap(bg) +
+  geom_raster(
+    data = sdm_df_50,
+    aes(x = x, y = y, fill = suitability),
+    alpha = 0.75,
+    interpolate = TRUE
+  ) +
+  scale_fill_gradient(
+    low = "#FDBBD7",
+    high = "#FF2DA0",
+    limits = c(0.3, 0.61),
+    name = "Predicted\nsuitability"
+  ) +
+  coord_quickmap(
+    xlim = c(lon_min, lon_max),
+    ylim = c(lat_min, lat_max),
+    expand = FALSE
+  ) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.title = element_text(size = 12),
+    legend.text = element_text(size = 11),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
