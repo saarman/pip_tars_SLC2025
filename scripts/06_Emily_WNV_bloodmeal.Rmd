@@ -565,6 +565,14 @@ print(p2_biplot)
 ## PCA - pip only WNV
 ```{r pip-only-PCA}
 
+# Make sure all random effect variables are factors
+wnv <- wnv %>%
+mutate(
+site_code = factor(site_code),
+trap_type2 = factor(trap_type2),
+year_f = factor(year)
+)
+
 # Make pipiens-only dataset first
 pipiens_data <- wnv %>%
   filter(mosq_species == "Cx_pipiens_sl")

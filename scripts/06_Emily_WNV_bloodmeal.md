@@ -1,7 +1,7 @@
 Bloodmeal + WNV positive GAM: SLC
 ================
 Norah Saarman
-2026-06-19
+2026-06-24
 
 - [Setup](#setup)
 - [Data](#data)
@@ -9,7 +9,8 @@ Norah Saarman
   gradient](#pca-of-habitaturbanization-gradient)
   - [PCA - bloodmeal GPS points](#pca---bloodmeal-gps-points)
   - [PCA - WNV dataset](#pca---wnv-dataset)
-- [RQ1: Bloodmeal](#rq1-bloodmeal)
+  - [PCA - pip only WNV](#pca---pip-only-wnv)
+  - [PCA - pip only WNV paired-traps](#pca---pip-only-wnv-paired-traps)
 - [RQ2: WNV probability](#rq2-wnv-probability)
   - [Plot raw by urbanization:](#plot-raw-by-urbanization)
   - [Pipiens](#pipiens)
@@ -791,7 +792,334 @@ print(p2_biplot)
 
 ![](../figures/PCA-wnv-1.png)<!-- -->
 
-# RQ1: Bloodmeal
+## PCA - pip only WNV
+
+``` r
+# Make sure all random effect variables are factors
+wnv <- wnv %>%
+mutate(
+site_code = factor(site_code),
+trap_type2 = factor(trap_type2),
+year_f = factor(year)
+)
+
+# Make pipiens-only dataset first
+pipiens_data <- wnv %>%
+  filter(mosq_species == "Cx_pipiens_sl")
+
+# Use only pipiens sites to define PCA
+pip_habitat_sites <- pipiens_data %>%
+  filter(site_code != "0") %>%
+  distinct(
+    site_code,
+    impervious_500,
+    canopy_500,
+    dist_wetland_m,
+    summer_ndvi_500
+  ) %>%
+  filter(complete.cases(
+    impervious_500,
+    canopy_500,
+    dist_wetland_m,
+    summer_ndvi_500
+  ))
+
+# Run PCA
+pip_pca_vars <- pip_habitat_sites %>%
+  dplyr::select(
+    impervious_500,
+    canopy_500,
+    dist_wetland_m,
+    summer_ndvi_500
+  )
+
+pip_pca <- prcomp(
+  pip_pca_vars,
+  center = TRUE,
+  scale. = TRUE
+)
+
+summary(pip_pca)
+```
+
+    ## Importance of components:
+    ##                           PC1    PC2     PC3     PC4
+    ## Standard deviation     1.5251 1.0800 0.56545 0.43329
+    ## Proportion of Variance 0.5815 0.2916 0.07993 0.04693
+    ## Cumulative Proportion  0.5815 0.8731 0.95307 1.00000
+
+``` r
+round(pip_pca$rotation, 3)
+```
+
+    ##                    PC1    PC2    PC3    PC4
+    ## impervious_500  -0.538 -0.377 -0.642 -0.395
+    ## canopy_500      -0.582  0.296 -0.144  0.744
+    ## dist_wetland_m  -0.498 -0.465  0.729 -0.064
+    ## summer_ndvi_500 -0.352  0.744  0.187 -0.536
+
+``` r
+# Add PCA scores to pipiens site-level table
+pip_habitat_sites <- pip_habitat_sites %>%
+  mutate(
+    habitat_PC1 = pip_pca$x[, 1],
+    habitat_PC2 = pip_pca$x[, 2]
+  )
+
+# Join PCA scores back to pipiens-only data
+pipiens_data <- pipiens_data %>%
+  dplyr::select(-any_of(c("habitat_PC1", "habitat_PC2"))) %>%
+  left_join(
+    pip_habitat_sites %>%
+      dplyr::select(site_code, habitat_PC1, habitat_PC2),
+    by = "site_code"
+  )
+
+# Site/trap-level PCA scores from pipiens object
+pip_pca_scores_df <- pipiens_data %>%
+  distinct(
+    site_code,
+    trap_type2,
+    urbanization,
+    habitat_PC1,
+    habitat_PC2
+  ) %>%
+  filter(
+    !is.na(habitat_PC1),
+    !is.na(habitat_PC2),
+    !is.na(trap_type2)
+  ) %>%
+  mutate(
+    urbanization = factor(
+      urbanization,
+      levels = c("Urban", "Peri", "Rural")
+    ),
+    PC1 = habitat_PC1,
+    PC2 = habitat_PC2
+  )
+
+# PCA variable loadings
+pip_loadings_df <- as.data.frame(pip_pca$rotation) %>%
+  rownames_to_column("variable") %>%
+  mutate(
+    variable = recode(
+      variable,
+      "impervious_500"  = "Impervious surface",
+      "canopy_500"      = "Tree canopy",
+      "dist_wetland_m"  = "Wetland distance",
+      "summer_ndvi_500" = "NDVI"
+    )
+  )
+
+arrow_scale <- 3.5
+
+pip_biplot <- ggplot() +
+  stat_ellipse(
+    data = pip_pca_scores_df,
+    aes(x = PC1, y = PC2, color = urbanization),
+    level = 0.75,
+    linewidth = 0.8,
+    linetype = "dashed"
+  ) +
+  geom_point(
+    data = pip_pca_scores_df,
+    aes(
+      x = PC1,
+      y = PC2,
+      color = urbanization,
+      fill = urbanization,
+      shape = trap_type2
+    ),
+    size = 3,
+    alpha = 0.5,
+    stroke = 0.8
+  ) +
+  geom_segment(
+    data = pip_loadings_df,
+    aes(
+      x = 0,
+      y = 0,
+      xend = PC1 * arrow_scale,
+      yend = PC2 * arrow_scale
+    ),
+    arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+    color = "gray30",
+    linewidth = 0.7
+  ) +
+  geom_text(
+    data = pip_loadings_df,
+    aes(
+      x = PC1 * arrow_scale * 1.15,
+      y = PC2 * arrow_scale * 1.15,
+      label = variable
+    ),
+    size = 3.5,
+    color = "gray20",
+    fontface = "italic"
+  ) +
+  geom_hline(yintercept = 0, linetype = "dotted", color = "gray70") +
+  geom_vline(xintercept = 0, linetype = "dotted", color = "gray70") +
+  scale_color_manual(values = urb_colors, name = "Urbanization") +
+  scale_fill_manual(values = urb_colors, name = "Urbanization") +
+  scale_shape_manual(
+    values = c(
+      "CO2+" = 20,
+      "GRVD+" = 24
+    ),
+    name = "Trap type"
+  ) +
+  labs(
+    title = "Habitat PCA: Cx. pipiens s.l. WNV Sites",
+    x = "PC1 - Urbanization",
+    y = "PC2 - Vegetation"
+  ) +
+  scale_x_reverse() +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, color = "gray40"),
+    legend.position = "right"
+  )
+
+print(pip_biplot)
+```
+
+![](../figures/pip-only-PCA-1.png)<!-- -->
+
+``` r
+# Make sure random effect variables are factors
+pipiens_data <- pipiens_data %>%
+  mutate(
+    site_code = factor(site_code),
+    trap_type2 = factor(trap_type2),
+    year_f = factor(year)
+  )
+```
+
+## PCA - pip only WNV paired-traps
+
+``` r
+# Identify truly paired pipiens sites
+paired_pip_sites <- pipiens_data %>%
+  filter(!is.na(trap_type2)) %>%
+  distinct(site_code, trap_type2) %>%
+  group_by(site_code) %>%
+  summarize(
+    trap_types_present = paste(sort(unique(trap_type2)), collapse = ", "),
+    n_trap_types = n_distinct(trap_type2),
+    has_CO2 = any(trap_type2 == "CO2+"),
+    has_GRVD = any(trap_type2 == "GRVD+"),
+    .groups = "drop"
+  ) %>%
+  filter(has_CO2, has_GRVD)
+
+paired_pip_sites
+```
+
+    ## # A tibble: 18 × 5
+    ##    site_code trap_types_present n_trap_types has_CO2 has_GRVD
+    ##    <fct>     <chr>                     <int> <lgl>   <lgl>   
+    ##  1 32        CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  2 64        CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  3 207       CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  4 208       CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  5 209       CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  6 211       CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  7 213       CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  8 214       CO2+, GRVD+                   2 TRUE    TRUE    
+    ##  9 215       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 10 216       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 11 219       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 12 220       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 13 221       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 14 223       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 15 227       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 16 229       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 17 230       CO2+, GRVD+                   2 TRUE    TRUE    
+    ## 18 231       CO2+, GRVD+                   2 TRUE    TRUE
+
+``` r
+pip_pca_scores_paired_df <- pip_pca_scores_df %>%
+  semi_join(
+    paired_pip_sites,
+    by = "site_code"
+  )
+
+pip_biplot_paired <- ggplot() +
+  stat_ellipse(
+    data = pip_pca_scores_paired_df,
+    aes(x = PC1, y = PC2, color = urbanization),
+    level = 0.75,
+    linewidth = 0.8,
+    linetype = "dashed"
+  ) +
+  geom_point(
+    data = pip_pca_scores_paired_df,
+    aes(
+      x = PC1,
+      y = PC2,
+      color = urbanization,
+      fill = urbanization,
+      shape = trap_type2
+    ),
+    size = 3,
+    alpha = 0.6,
+    stroke = 0.8
+  ) +
+  geom_segment(
+    data = pip_loadings_df,
+    aes(
+      x = 0,
+      y = 0,
+      xend = PC1 * arrow_scale,
+      yend = PC2 * arrow_scale
+    ),
+    arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+    color = "gray30",
+    linewidth = 0.7
+  ) +
+  geom_text(
+    data = pip_loadings_df,
+    aes(
+      x = PC1 * arrow_scale * 1.15,
+      y = PC2 * arrow_scale * 1.15,
+      label = variable
+    ),
+    size = 3.5,
+    color = "gray20",
+    fontface = "italic"
+  ) +
+  geom_hline(yintercept = 0, linetype = "dotted", color = "gray70") +
+  geom_vline(xintercept = 0, linetype = "dotted", color = "gray70") +
+  scale_color_manual(values = urb_colors, name = "Urbanization") +
+  scale_fill_manual(values = urb_colors, name = "Urbanization") +
+  scale_shape_manual(
+    values = c(
+      "CO2+" = 20,
+      "GRVD+" = 24
+    ),
+    name = "Trap type"
+  ) +
+  labs(
+    title = "Habitat PCA: Paired Cx. pipiens s.l. WNV Sites",
+    x = "PC1 - Urbanization",
+    y = "PC2 - Vegetation"
+  ) +
+  scale_x_reverse() +
+  theme_classic(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    legend.position = "right"
+  )
+
+print(pip_biplot_paired)
+```
+
+    ## Warning: Computation failed in `stat_ellipse()`.
+    ## Caused by error in `svd()`:
+    ## ! infinite or missing values in 'x'
+
+![](../figures/paired-pip-1.png)<!-- --> \# RQ1: Bloodmeal
 
 ``` r
 # MODEL 1: Bloodmeal host ~ mosquito species + urbanization
@@ -1898,14 +2226,17 @@ relationship.
 gam_pipiens_trapfixed <- gam(
 infected ~ habitat_PC1 + trap_type2 +
   s(disease_week, bs = "tp", k = 8) +
-s(disease_week, by = year_f, bs = "fs", k = 15) +
-s(year_f, bs = "re") +
-s(site_code, bs = "re") +
-offset(log(num_count)),
-family = binomial(link = "cloglog"),
-data = pipiens_data,
-method = "REML"
+  s(disease_week, by = year_f, bs = "fs", k = 15) +           # bs = "fs" is likely ignored here, instead:
+    # s(disease_week, year_f, bs = "fs", k = 15) +           # Option 1
+    # s(disease_week, by = year_f, k = 15) +                 # Option 2
+  s(year_f, bs = "re") +
+  s(site_code, bs = "re") +
+  offset(log(num_count)),
+  family = binomial(link = "cloglog"),
+  data = pipiens_data,
+  method = "REML"
 )
+
 summary(gam_pipiens_trapfixed)
 ```
 
