@@ -5,14 +5,20 @@ date: "`r Sys.Date()`"
 output:
   github_document:
     toc: true
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "../scripts_knitted_md", 
+      envir = globalenv()
+    )
+  })
 ---
 
-# Setup
-```{r 1-setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
   # Saves PNGs to the root /figures folder
-  fig.path = "../figures/" 
+  fig.path = "../figures/knitted_mds_figs/" 
 )
 ```
 
@@ -232,10 +238,11 @@ paired_sites
 ## Cx. pipiens abundance by trap type Urban
 
 ```{r paired-urban-pip}
-# pull out pipiens
-pipiens <- combined[combined$species == "Culex pipiens",]
+# Pull out Cx. pipiens
+pipiens <- combined[combined$species == "Culex pipiens", ]
 head(pipiens$site_name)
 
+# Restrict to urban sites with paired trap types
 urban_pip <- pipiens %>%
   filter(
     urbanization == "urban",
@@ -246,8 +253,10 @@ table(urban_pip$trap_type)
 length(unique(urban_pip$site_name))
 
 
+# Compare alternative approaches for modeling seasonal patterns by trap type
+
 # Model 1: Single spline
-# Models a universal pattern in time and allows the magnitude to vary across traps.
+# Same seasonal pattern for both trap types; trap type affects overall abundance.
 urban_pip_gam_offset <- gam(
   count ~ trap_type + 
     s(disease_week, k = 15) + 
@@ -257,9 +266,8 @@ urban_pip_gam_offset <- gam(
   method = "REML"
 )
 
-# Model 2: factor spline (bs = "fs")
-# Fits variable patterns for each group pooled toward a universal pattern, and you don't include a "by =" argument
-# The second models a universal pattern plus trap-specific deviations from that pattern.
+# Model 2: Common spline + factor-smooth interaction
+# Common seasonal pattern plus trap-specific deviations from that pattern.
 urban_pip_gam_variable_shape <- gam(
   count ~ trap_type + 
     s(disease_week, k = 15) + 
@@ -270,34 +278,40 @@ urban_pip_gam_variable_shape <- gam(
   method = "REML"
 )
 
-# Model 3: Independent splines that are not pooled then you use the by = argument to specify the grouping and don't need to include the "bs =" part.
+# Model 3: Separate seasonal smooths by trap type
+# Each trap type has its own seasonal pattern.
 urban_pip_gam_by <- gam(
   count ~ trap_type +
-    s(disease_week, by = trap_type, k = 15) + # splines not pooled
+    s(disease_week, by = trap_type, k = 15) +
     s(site_name, bs = "re"),
   data = urban_pip,
   family = nb(link = "log"),
   method = "REML"
 )
 
+# Compare candidate models
 AIC(
   urban_pip_gam_offset,
   urban_pip_gam_variable_shape,
   urban_pip_gam_by
 )
 
-summary(urban_pip_gam_variable_shape)
 
+# FINAL MODEL USED IN MANUSCRIPT
+urban_pip_gam <- urban_pip_gam_by
+
+summary(urban_pip_gam)
 ```
 For Cx. pipiens, I think Model 1 with offset spline is best, but not too different from Model 2, so since it overlaps with Cx. tar's best, should we go with that?
 
 ## Cx. tarsalis abundance by trap type Urban
 
 ```{r paired-urban-tar}
-# pull out tarsalis
-tarsalis <- combined[combined$species == "Culex tarsalis",]
+# Pull out Cx. tarsalis
+tarsalis <- combined[combined$species == "Culex tarsalis", ]
 head(tarsalis$site_name)
 
+# Restrict to urban sites with paired trap types
 urban_tar <- tarsalis %>%
   filter(
     urbanization == "urban",
@@ -308,78 +322,93 @@ table(urban_tar$trap_type)
 length(unique(urban_tar$site_name))
 
 
+# Compare alternative approaches for modeling seasonal patterns by trap type
+
 # Model 1: Single spline
-# Models a universal pattern in time and allows the magnitude to vary across traps.
+# Same seasonal pattern for both trap types; trap type affects overall abundance.
 urban_tar_gam_offset <- gam(
   count ~ trap_type + 
     s(disease_week, k = 15) + 
     s(site_name, bs = "re"),
   data = urban_tar,
-  family = nb(link="log"),
+  family = nb(link = "log"),
   method = "REML"
 )
 
-# Model 2: factor spline (bs = "fs")
-# Fits variable patterns for each group pooled toward a universal pattern, and you don't include a "by =" argument
-# The second models a universal pattern plus trap-specific deviations from that pattern.
+# Model 2: Common spline + factor-smooth interaction
+# Common seasonal pattern plus trap-specific deviations from that pattern.
 urban_tar_gam_variable_shape <- gam(
   count ~ trap_type + 
     s(disease_week, k = 15) + 
     s(disease_week, trap_type, bs = "fs", k = 15) + 
     s(site_name, bs = "re"),
   data = urban_tar,
-  family = nb(link="log"),
+  family = nb(link = "log"),
   method = "REML"
 )
 
-# Model 3: Independent splines that are not pooled then you use the by = argument to specify the grouping and don't need to include the "bs =" part.
+# Model 3: Separate seasonal smooths by trap type
+# Each trap type has its own seasonal pattern.
 urban_tar_gam_by <- gam(
   count ~ trap_type +
-    s(disease_week, by = trap_type, k = 15) + # splines not pooled
+    s(disease_week, by = trap_type, k = 15) +
     s(site_name, bs = "re"),
   data = urban_tar,
-  family = nb(link="log"),
+  family = nb(link = "log"),
   method = "REML"
 )
 
+# Compare candidate models
 AIC(
   urban_tar_gam_offset,
   urban_tar_gam_variable_shape,
   urban_tar_gam_by
 )
 
-summary(urban_tar_gam_variable_shape)
+
+# FINAL MODEL USED IN MANUSCRIPT
+urban_tar_gam <- urban_tar_gam_by
+
+summary(urban_tar_gam)
 ```
 
-For Cx. tarsalis, Model 3 with independent splines is best, but not too different from Model 2, so since it matches Cx. pip's best, should we go with that?
+For Cx. tarsalis, Model 3 with independent splines similar to Model 2.
 
-## Smooths plots by trap type
+## Figure 3 - Paired Traps
 
-Plot with a secondary y-axis with a scaling factor between trap types. This is easiest if you rescale only the GRVD predictions for plotting, but label the right axis back in GRVD units.
+```{r figure-3}
+# Figure 3 using the paired urban models already fit above
 
-```{r smooths}
-# Colors by species, same as before
 cols <- c(
   "Culex pipiens"  = "#1bc8ea",
   "Culex tarsalis" = "#FF2DA0"
 )
 
-# Helper function for urban trap-type GAMs
-predict_urban_trap_gam <- function(model, data, species_label) {
-  
+# Generate predictions using factor levels from data actually used by each model
+predict_fig3 <- function(model, species_label) {
+
+  dat <- model$model
+
   newdata <- expand.grid(
     disease_week = seq(
-      min(data$disease_week, na.rm = TRUE),
-      max(data$disease_week, na.rm = TRUE),
+      min(dat$disease_week, na.rm = TRUE),
+      max(dat$disease_week, na.rm = TRUE),
       by = 1
     ),
-    trap_type = levels(data$trap_type),
-    site_name = levels(data$site_name)[1]
+    trap_type = levels(dat$trap_type),
+    site_name = levels(dat$site_name)[1]
   )
-  
-  newdata$trap_type <- factor(newdata$trap_type, levels = levels(data$trap_type))
-  newdata$site_name <- factor(newdata$site_name, levels = levels(data$site_name))
-  
+
+  newdata$trap_type <- factor(
+    newdata$trap_type,
+    levels = levels(dat$trap_type)
+  )
+
+  newdata$site_name <- factor(
+    newdata$site_name,
+    levels = levels(dat$site_name)
+  )
+
   pred <- predict(
     model,
     newdata = newdata,
@@ -387,87 +416,40 @@ predict_urban_trap_gam <- function(model, data, species_label) {
     se.fit = TRUE,
     exclude = "s(site_name)"
   )
-  
+
   newdata %>%
-    mutate(
+    dplyr::mutate(
       species = species_label,
-      fit_link = pred$fit,
-      se_link = pred$se.fit,
-      fit = exp(fit_link),
-      lower = exp(fit_link - 1.96 * se_link),
-      upper = exp(fit_link + 1.96 * se_link)
+      fit   = exp(pred$fit),
+      lower = exp(pred$fit - 1.96 * pred$se.fit),
+      upper = exp(pred$fit + 1.96 * pred$se.fit)
     )
 }
 
-# Predictions from both urban models
-pred_urban_trap <- bind_rows(
-  predict_urban_trap_gam(
-    urban_pip_gam_variable_shape,
-    urban_pip,
-    "Culex pipiens"
-  ),
-  predict_urban_trap_gam(
-    urban_tar_gam_variable_shape,
-    urban_tar,
-    "Culex tarsalis"
-  )
+pred_fig3 <- dplyr::bind_rows(
+  predict_fig3(urban_pip_gam, "Culex pipiens"),
+  predict_fig3(urban_tar_gam, "Culex tarsalis")
 )
 
 
-# Split predictions by trap type to calculate scale factor
-co2_range <- pred_urban_trap %>%
-  filter(trap_type == "CO2") %>%
-  summarize(max_fit = max(upper, na.rm = TRUE)) %>%
-  pull(max_fit)
+# Make one panel for each species
+plot_fig3_panel <- function(species_name, show_legend = TRUE) {
 
-grvd_range <- pred_urban_trap %>%
-  filter(trap_type == "GRVD") %>%
-  summarize(max_fit = max(upper, na.rm = TRUE)) %>%
-  pull(max_fit)
+  dat <- pred_fig3 %>%
+    dplyr::filter(species == species_name)
 
-scale_factor <- co2_range / grvd_range
+  # Rescale GRVD only for plotting so it has its own right-hand axis
+  scale_factor <-
+    max(dat$upper[dat$trap_type == "CO2"], na.rm = TRUE) /
+    max(dat$upper[dat$trap_type == "GRVD"], na.rm = TRUE)
 
-scale_by_species <- pred_urban_trap %>%
-  group_by(species) %>%
-  summarize(
-    co2_max = max(upper[trap_type == "CO2"], na.rm = TRUE),
-    grvd_max = max(upper[trap_type == "GRVD"], na.rm = TRUE),
-    scale_factor = co2_max / grvd_max,
-    .groups = "drop"
-  )
-
-pred_urban_trap_plot <- pred_urban_trap %>%
-  left_join(scale_by_species, by = "species") %>%
-  mutate(
-    fit_plot   = ifelse(trap_type == "GRVD", fit * scale_factor, fit),
-    lower_plot = ifelse(trap_type == "GRVD", lower * scale_factor, lower),
-    upper_plot = ifelse(trap_type == "GRVD", upper * scale_factor, upper)
-  )
-
-library(dplyr)
-library(ggplot2)
-library(patchwork)
-
-plot_species_panel <- function(pred_df, species_name, show_legend = TRUE) {
-  
-  dat <- pred_df %>%
-    filter(species == species_name)
-  
-  scale_factor <- dat %>%
-    summarize(
-      co2_max = max(upper[trap_type == "CO2"], na.rm = TRUE),
-      grvd_max = max(upper[trap_type == "GRVD"], na.rm = TRUE),
-      scale_factor = co2_max / grvd_max
-    ) %>%
-    pull(scale_factor)
-  
   dat <- dat %>%
-    mutate(
+    dplyr::mutate(
       fit_plot   = ifelse(trap_type == "GRVD", fit * scale_factor, fit),
       lower_plot = ifelse(trap_type == "GRVD", lower * scale_factor, lower),
       upper_plot = ifelse(trap_type == "GRVD", upper * scale_factor, upper)
     )
-  
+
   ggplot(
     dat,
     aes(
@@ -482,55 +464,38 @@ plot_species_panel <- function(pred_df, species_name, show_legend = TRUE) {
       aes(
         ymin = lower_plot,
         ymax = upper_plot,
-        group = interaction(species, trap_type)
+        group = trap_type
       ),
       alpha = 0.18,
       color = NA
     ) +
     geom_line(
-  aes(
-    group = interaction(species, trap_type),
-    linewidth = trap_type
-  )
-) +
-scale_linewidth_manual(
-  values = c(
-    "CO2" = 0.8,
-    "GRVD" = 1.5
-  ),
-  guide = "none"
-) +
-    geom_vline(
-      xintercept = 33,
-      linetype = "dashed",
-      color = "black",
-      linewidth = 0.5
+      aes(
+        group = trap_type,
+        linewidth = trap_type
+      )
     ) +
-    annotate(
-      "text",
-      x = 33,
-      y = Inf,
-      label = "1st WNV cases",
-      vjust = 1,
-      hjust = -0.07,
-      size = 3
+    scale_linewidth_manual(
+      values = c("CO2" = 0.8, "GRVD" = 1.5),
+      guide = "none"
     ) +
-    scale_color_manual(
-      values = cols,
-      limits = names(cols),
-      drop = FALSE
-    ) +
-    scale_fill_manual(
-      values = cols,
-      limits = names(cols),
-      drop = FALSE
+    scale_color_manual(values = cols) +
+    scale_fill_manual(values = cols) +
+    scale_linetype_manual(
+      values = c("CO2" = "solid", "GRVD" = "dashed")
     ) +
     scale_y_continuous(
       name = "Predicted: CO2",
       sec.axis = sec_axis(
-        trans = ~ . / scale_factor,
+        ~ . / scale_factor,
         name = "Predicted: GRVD"
       )
+    ) +
+    labs(
+      x = "Disease week",
+      color = "Species",
+      fill = "Species",
+      linetype = "Trap type"
     ) +
     guides(
       color = guide_legend(
@@ -538,55 +503,53 @@ scale_linewidth_manual(
         override.aes = list(
           linetype = "solid",
           linewidth = 1.2,
-          alpha = .75
+          alpha = 0.75
         )
       ),
       fill = "none",
       linetype = guide_legend(order = 2)
     ) +
-    labs(
-      title = NULL,
-      x = "Disease week",
-      color = "Species",
-      fill = "Species",
-      linetype = "Trap type"
-    ) +
     theme_classic() +
     theme(
-      legend.position = ifelse(show_legend, "right", "none"),
-      plot.title = element_blank(),
-      strip.background = element_blank(),
-      strip.text = element_text(size = 12)
+      legend.position = if (show_legend) "right" else "none"
     )
 }
 
-plot_pip <- plot_species_panel(
-  pred_urban_trap,
+
+plot_pip_fig3 <- plot_fig3_panel(
   "Culex pipiens",
   show_legend = TRUE
 )
 
-plot_tar <- plot_species_panel(
-  pred_urban_trap,
+plot_tar_fig3 <- plot_fig3_panel(
   "Culex tarsalis",
   show_legend = FALSE
 )
 
-combined_plot <- wrap_plots(
-  plot_pip,
-  plot_tar,
+fig3 <- patchwork::wrap_plots(
+  plot_pip_fig3,
+  plot_tar_fig3,
   ncol = 1
 ) +
-  plot_annotation(
+  patchwork::plot_annotation(
     title = "Urban predicted count by trap type"
   ) &
   theme(
     plot.title = element_text(hjust = 0.5)
   )
 
-combined_plot
+fig3
 ```
-
+  
+### Save Figure 3
+```{r save-fig3, eval=FALSE}
+ggsave(
+  "../figures/Fig3_seasonal_abund_paired-traps_urban.pdf",
+  fig3,
+  width = 6.5,
+  height = 3
+)
+```
   
 ## Interpretation
 
@@ -622,10 +585,10 @@ pipiens <- combined %>%
   droplevels()
 
 
-# Model 2: factor spline (bs = "fs")
+# Prelim: factor spline (bs = "fs")
 # Fits variable patterns for each group pooled toward a universal pattern, and you don't include a "by =" argument
 # The second models a universal pattern plus trap-specific deviations from that pattern.
-pip_gam <- gam(
+pip_gam_prelim <- gam(
   count ~ urbanization + trap_type + 
     # s(disease_week, k = 15) +   ## Remove in final?
     s(disease_week, urbanization, bs = "fs", k = 15, m = 3) + 
@@ -634,6 +597,22 @@ pip_gam <- gam(
   family = nb(link = "log"),
   method = "REML"
 )
+
+# Model 2: FINAL
+# Using by = group fits a separate seasonal smooth for each group, with smoothing parameters shared across groups.
+# Using group as the second argument with bs = "fs" fits an overall/group factor-smooth structure with partial pooling among groups.
+pip_gam <- gam(
+  count ~ urbanization + trap_type +
+    s(disease_week, by = urbanization, bs = "fs", k = 10, m = 3) +
+    s(site_name, bs = "re"),
+  family = nb(),
+  data = pipiens,
+  method = "REML"
+)
+
+summary(pip_gam)
+gam.check(pip_gam)
+
 
 ```
 ### Check smooths: pipiens
@@ -742,10 +721,10 @@ tarsalis <- combined %>%
   filter(species == "Culex tarsalis") %>%
   droplevels() 
 
-# Model 2: factor spline (bs = "fs")
+# Prelim: factor spline (bs = "fs")
 # Fits variable patterns for each group pooled toward a universal pattern, and you don't include a "by =" argument
 # The second models a universal pattern plus trap-specific deviations from that pattern.
-tar_gam <- gam(
+tar_gam_prelim <- gam(
   count ~ urbanization + trap_type + 
     # s(disease_week, k = 15) +   ## Remove in final?
     s(disease_week, urbanization, bs = "fs", k = 15, m = 3) + 
@@ -754,6 +733,21 @@ tar_gam <- gam(
   family = nb(link = "log"),
   method = "REML"
 )
+
+# Model 2: FINAL
+# Using by = group fits a separate seasonal smooth for each group, with smoothing parameters shared across groups.
+# Using group as the second argument with bs = "fs" fits an overall/group factor-smooth structure with partial pooling among groups.
+tar_gam <- gam(
+  count ~ urbanization + trap_type +
+    s(disease_week, by = urbanization, bs = "fs", k = 20, m = 3) +
+    s(site_name, bs = "re"),
+  family = nb(),
+  data = tarsalis,
+  method = "REML"
+)
+
+summary(tar_gam)
+gam.check(tar_gam)
 
 ```
     
@@ -890,7 +884,7 @@ repeated measures, high explanatory power?
 
 # Plot pip vs. tar from separate models 
   
-### Effect size (forest) plot from separate models
+### Figure 4 - Effect size (forest) plot from separate models
 
 ```{r effect-2-models}
 coef_pip <- tidy(pip_gam, parametric = TRUE) %>%
@@ -914,7 +908,7 @@ coef_df_sep <- bind_rows(coef_pip, coef_tar) %>%
     )
   )
 
-ggplot(coef_df_sep, aes(x = effect, y = term_clean, color = species)) +
+fig4 <- ggplot(coef_df_sep, aes(x = effect, y = term_clean, color = species)) +
   geom_point(position = position_dodge(width = 0.6), size = 3) +
   geom_errorbarh(
     aes(xmin = lower, xmax = upper),
@@ -931,9 +925,20 @@ ggplot(coef_df_sep, aes(x = effect, y = term_clean, color = species)) +
     title = "Effect sizes from species-specific GAMs"
   ) +
   theme_minimal()
+
+fig4
 ```
-   
-### Seasonal Smooth from all models
+### Save Figure 4
+```{r save-fig4, eval=FALSE}
+ggsave(
+  "../figures/Fig4_effect_size_final_GAMs.pdf",
+  fig4,
+  width = 6.5,
+  height = 2
+)
+```
+
+### Figure 5 - Seasonal Smooth from all models
 ```{r viz-2-gams}
 
 cols <- c(
@@ -969,10 +974,11 @@ predict_species_gam <- function(model, newdata, species_label) {
 # 1. Seasonal effects across habitats
 # ----------------------
 
+# CO2 + Urban
 newdata_season <- expand.grid(
   disease_week = seq(min(combined$disease_week), max(combined$disease_week), by = 1),
-  urbanization = "rural",
-  trap_type = "GRVD",
+  urbanization = "urban",
+  trap_type = "CO2",
   site_name = levels(combined$site_name)[1]
 )
 
@@ -981,24 +987,55 @@ pred_season <- bind_rows(
   predict_species_gam(tar_gam, newdata_season, "Culex tarsalis")
 )
 
-ggplot(pred_season, aes(x = disease_week, y = fit, color = species, fill = species)) +
+fig_urb_co2 <- ggplot(pred_season, aes(x = disease_week, y = fit, color = species, fill = species)) +
   geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
   geom_line(linewidth = 1.2) +
   scale_color_manual(values = cols) +
   scale_fill_manual(values = cols) +
   labs(
     x = "Disease week",
-    y = "Predicted abundance",
+    y = "Predicted abundance (CO2 traps)",
     color = "Species",
     fill = "Species",
-    title = "Predicted seasonal abundance from species-specific GAMs"
+    title = "Predicted seasonal abundance: Urban"
   ) +
   theme_minimal()
 
+fig_urb_co2 
+
+# CO2 + Rural
+newdata_season <- expand.grid(
+  disease_week = seq(min(combined$disease_week), max(combined$disease_week), by = 1),
+  urbanization = "rural",
+  trap_type = "CO2",
+  site_name = levels(combined$site_name)[1]
+)
+
+pred_season <- bind_rows(
+  predict_species_gam(pip_gam, newdata_season, "Culex pipiens"),
+  predict_species_gam(tar_gam, newdata_season, "Culex tarsalis")
+)
+
+fig_rural_co2 <- ggplot(pred_season, aes(x = disease_week, y = fit, color = species, fill = species)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  labs(
+    x = "Disease week",
+    y = "Predicted abundance (CO2 traps)",
+    color = "Species",
+    fill = "Species",
+    title = "Predicted seasonal abundance: Rural"
+  ) +
+  theme_minimal()
+fig_rural_co2 
+```
+
+```{r fig5}
 # ----------------------
 # 2. Predicted abundance by urbanization: CO2 traps
 # ----------------------
-
 newdat_site_CO2 <- expand.grid(
   disease_week = seq(min(combined$disease_week), max(combined$disease_week), by = 1),
   urbanization = levels(combined$urbanization),
@@ -1011,7 +1048,7 @@ pred_site_CO2 <- bind_rows(
   predict_species_gam(tar_gam, newdat_site_CO2, "Culex tarsalis")
 )
 
-ggplot(pred_site_CO2, aes(x = disease_week, y = fit, color = species, group = species)) +
+fig5 <- ggplot(pred_site_CO2, aes(x = disease_week, y = fit, color = species, group = species)) +
   geom_line(linewidth = 1.2) +
   geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
   geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
@@ -1033,58 +1070,403 @@ ggplot(pred_site_CO2, aes(x = disease_week, y = fit, color = species, group = sp
     strip.background = element_blank(),
     strip.text = element_text(size = 12)
   )
+fig5
+```
+### Save Figure 5 
+```{r save-fig5, eval=FALSE}
+ggsave(
+  "../figures/Fig5_seasonal_abund_CO2traps.pdf",
+  fig5,
+  width = 6.5,
+  height = 4
+)
+```
 
-# ----------------------
-# 3. Plot predicted for pipiens/tarsalis on their own to allow pipiens to be visible
-# ----------------------
-# pipiens only:
-ggplot(pred_site_CO2[pred_site_CO2$species=="Culex pipiens",], aes(x = disease_week, y = fit, color = species, group = species)) +
-  geom_line(linewidth = 1.2) +
-  geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
-  geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
-  annotate("text", x = 33, y = Inf, label = "1st WNV",
-           vjust = 1, hjust = -0.07, size = 3) +
-  facet_wrap(~ urbanization, scales = "free_y", ncol = 1) +
+### Figure S1 - Seasonal abundance with separate species axes by habitat
+```{r fig-s1}
+
+# Make one dual-axis panel for each habitat
+plot_s1_panel <- function(habitat, show_legend = TRUE, show_x = FALSE) {
+
+  dat <- pred_site_CO2 %>%
+    dplyr::filter(urbanization == habitat)
+
+  # Habitat-specific scaling:
+  # tarsalis stays on left axis; pipiens is rescaled for right axis
+  scale_factor <-
+    max(dat$upper[dat$species == "Culex tarsalis"], na.rm = TRUE) /
+    max(dat$upper[dat$species == "Culex pipiens"], na.rm = TRUE)
+
+  dat <- dat %>%
+    dplyr::mutate(
+      fit_plot = ifelse(
+        species == "Culex pipiens",
+        fit * scale_factor,
+        fit
+      ),
+      lower_plot = ifelse(
+        species == "Culex pipiens",
+        lower * scale_factor,
+        lower
+      ),
+      upper_plot = ifelse(
+        species == "Culex pipiens",
+        upper * scale_factor,
+        upper
+      )
+    )
+
+  ggplot(
+    dat,
+    aes(
+      x = disease_week,
+      y = fit_plot,
+      color = species,
+      fill = species,
+      group = species
+    )
+  ) +
+    geom_ribbon(
+      aes(
+        ymin = lower_plot,
+        ymax = upper_plot
+      ),
+      alpha = 0.20,
+      color = NA
+    ) +
+    geom_line(linewidth = 1.2) +
+    geom_vline(
+      xintercept = 33,
+      linetype = "dashed",
+      color = "black",
+      linewidth = 0.5
+    ) +
+    annotate(
+      "text",
+      x = 33,
+      y = Inf,
+      label = "1st WNV cases",
+      vjust = 1,
+      hjust = -0.07,
+      size = 3
+    ) +
+    scale_color_manual(values = cols) +
+    scale_fill_manual(values = cols) +
+    scale_y_continuous(
+      name = "Predicted abundance: Cx. tarsalis",
+      sec.axis = sec_axis(
+        ~ . / scale_factor,
+        name = "Predicted abundance: Cx. pipiens"
+      )
+    ) +
+    labs(
+      title = habitat,
+      x = if (show_x) "Disease week" else NULL,
+      color = "Species",
+      fill = "Species"
+    ) +
+    theme_classic() +
+    theme(
+      plot.title = element_text(hjust = 0.5),
+      legend.position = if (show_legend) "right" else "none",
+      axis.text.x = if (show_x) element_text() else element_blank(),
+      axis.ticks.x = if (show_x) element_line() else element_blank()
+    )
+}
+
+
+# Build the three habitat panels
+s1_rural <- plot_s1_panel(
+  "rural",
+  show_legend = TRUE,
+  show_x = FALSE
+)
+
+s1_peri <- plot_s1_panel(
+  "peri",
+  show_legend = FALSE,
+  show_x = FALSE
+)
+
+s1_urban <- plot_s1_panel(
+  "urban",
+  show_legend = FALSE,
+  show_x = TRUE
+)
+
+
+# Stack panels
+figS1 <- patchwork::wrap_plots(
+  s1_rural,
+  s1_peri,
+  s1_urban,
+  ncol = 1,
+  guides = "collect"
+) +
+  patchwork::plot_annotation(
+    title = "Predicted abundance from species-specific GAMs (CO2 traps)"
+  ) &
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+
+figS1
+
+```
+### Save Figure S1 
+```{r save-figs1, eval=FALSE}
+ggsave(
+  "../figures/FigS1_seasonal_abund_CO2traps_free_scaling.pdf",
+  figS1,
+  width = 6.5,
+  height = 4
+)
+```
+
+### Figure S2 - Relative abundance at week 29 (mid season, peak pipiens)
+```{r rel-abund-2-models}
+#THIS esmtimates relative abundance at week 29
+
+newdata_rel <- expand.grid(
+  urbanization = levels(combined$urbanization),
+  disease_week = 29,
+  trap_type = "CO2",
+  site_name = levels(combined$site_name)[1]
+)
+
+pred_rel <- bind_rows(
+  predict_species_gam(pip_gam, newdata_rel, "Culex pipiens"),
+  predict_species_gam(tar_gam, newdata_rel, "Culex tarsalis")
+) %>%
+  mutate(
+    species = factor(species, levels = c("Culex pipiens", "Culex tarsalis")),
+    urbanization = factor(urbanization, levels = c("rural", "peri", "urban"))
+  ) %>%
+  group_by(urbanization) %>%
+  mutate(
+    prop = fit / sum(fit),
+    prop_lower = lower / sum(upper),
+    prop_upper = upper / sum(lower),
+    prop_lower = pmax(0, prop_lower),
+    prop_upper = pmin(1, prop_upper)
+  ) %>%
+  ungroup()
+
+figS2 <- ggplot(pred_rel, aes(x = urbanization, y = prop, color = species, group = species)) +
+  geom_point(size = 4) +
+  geom_line(linewidth = 1) +
+  geom_errorbar(
+    aes(ymin = prop_lower, ymax = prop_upper),
+    width = 0.1
+  ) +
   scale_color_manual(values = cols) +
-  scale_fill_manual(values = cols) +
+  scale_y_continuous(limits = c(0, 1)) +
   labs(
-    title = "Predicted abundance from species-specific GAMs (CO2 traps)",
-    x = "Disease week",
-    y = "Predicted abundance",
-    color = "Species",
-    fill = "Species"
+    x = "Urbanization",
+    y = "Relative abundance",
+    color = NULL,
+    title = "Pred. relative abundance (CO2 traps, Week 29)") +
+  theme_classic() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5)
+  )
+figS2
+```
+### Figure S2 - relative abundance
+```{r save-figS2, eval=FALSE}
+ggsave(
+  "../figures/FigS2_rel_abundance_across_habitats_CO2.pdf",
+  figS2,
+  width = 6.5,
+  height = 3
+)
+```
+
+### Figure 6 - Abundance by habitat at peak weeks and across full season
+
+Predicted abundance at weeks 29 and 34 (global peak weeks for Cx. pipiens and Cx. tarsalis, respectively) and averaged across the full season.
+
+```{r peak-and-season-abund-2-models}
+
+# ------------------------------------------------------------
+# 1. Predictions at weeks 29 and 34
+# ------------------------------------------------------------
+
+newdata_peak <- expand.grid(
+  urbanization = levels(combined$urbanization),
+  disease_week = c(29, 34),
+  trap_type = "CO2",
+  site_name = levels(combined$site_name)[1]
+)
+
+pred_peak <- bind_rows(
+  predict_species_gam(pip_gam, newdata_peak, "Culex pipiens"),
+  predict_species_gam(tar_gam, newdata_peak, "Culex tarsalis")
+) %>%
+  mutate(
+    panel = case_when(
+      disease_week == 29 ~ "Week 29",
+      disease_week == 34 ~ "Week 34"
+    )
+  )
+
+
+# ------------------------------------------------------------
+# 2. Full-season average with simulation-based 95% CI
+# ------------------------------------------------------------
+
+newdata_season <- expand.grid(
+  urbanization = levels(combined$urbanization),
+  disease_week = seq(
+    min(combined$disease_week, na.rm = TRUE),
+    max(combined$disease_week, na.rm = TRUE),
+    by = 1
+  ),
+  trap_type = "CO2",
+  site_name = levels(combined$site_name)[1]
+)
+
+
+season_mean_ci <- function(model, newdata, species_name, nsim = 5000) {
+
+  # Prediction matrix, excluding site-specific random effect
+  X <- predict(
+    model,
+    newdata = newdata,
+    type = "lpmatrix",
+    exclude = "s(site_name)"
+  )
+
+  # Simulate coefficient estimates
+  beta_sim <- MASS::mvrnorm(
+    n = nsim,
+    mu = coef(model),
+    Sigma = vcov(model)
+  )
+
+  # Predicted abundance for every week in every simulation
+  eta_sim <- X %*% t(beta_sim)
+  fit_sim <- exp(eta_sim)
+
+  # Point estimates from fitted model
+  eta <- as.vector(X %*% coef(model))
+  newdata$fit <- exp(eta)
+
+  # Add row IDs so simulations can be grouped correctly
+  newdata$row_id <- seq_len(nrow(newdata))
+
+  results <- lapply(levels(newdata$urbanization), function(habitat) {
+
+    rows <- which(newdata$urbanization == habitat)
+
+    # Average across disease weeks within each simulation
+    sim_means <- colMeans(fit_sim[rows, , drop = FALSE])
+
+    data.frame(
+      species = species_name,
+      urbanization = habitat,
+      fit = mean(newdata$fit[rows]),
+      lower = quantile(sim_means, 0.025),
+      upper = quantile(sim_means, 0.975),
+      panel = "Full-season Mean"
+    )
+  })
+
+  bind_rows(results)
+}
+
+
+pred_season <- bind_rows(
+  season_mean_ci(
+    pip_gam,
+    newdata_season,
+    "Culex pipiens"
+  ),
+  season_mean_ci(
+    tar_gam,
+    newdata_season,
+    "Culex tarsalis"
+  )
+)
+
+
+# ------------------------------------------------------------
+# 3. Combine all three panels
+# ------------------------------------------------------------
+
+pred_abund <- bind_rows(
+  pred_peak,
+  pred_season
+) %>%
+  mutate(
+    species = factor(
+      species,
+      levels = c("Culex pipiens", "Culex tarsalis")
+    ),
+    urbanization = factor(
+      urbanization,
+      levels = c("rural", "peri", "urban")
+    ),
+    panel = factor(
+      panel,
+      levels = c(
+        "Week 29",
+        "Week 34",
+        "Full-season Mean"
+      )
+    )
+  )
+
+
+# ------------------------------------------------------------
+# 4. Plot
+# ------------------------------------------------------------
+
+fig6 <- ggplot(
+  pred_abund,
+  aes(
+    x = urbanization,
+    y = fit,
+    color = species,
+    group = species
+  )
+) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 4) +
+  geom_errorbar(
+    aes(ymin = lower, ymax = upper),
+    width = 0.1
+  ) +
+  facet_wrap(~ panel, nrow = 1) +
+  scale_color_manual(values = cols) +
+  scale_y_log10() +
+  labs(
+    x = "Urbanization",
+    y = "Pred. abundance (CO2)",
+    color = NULL
   ) +
   theme_classic() +
   theme(
-    plot.title = element_text(hjust = 0.5),
+    legend.position = "right",
     strip.background = element_blank(),
-    strip.text = element_text(size = 12)
+    strip.text = element_text(size = 11)
   )
 
-# tarsalis only
-ggplot(pred_site_CO2[pred_site_CO2$species=="Culex tarsalis",], aes(x = disease_week, y = fit, color = species, group = species)) +
-  geom_line(linewidth = 1.2) +
-  geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
-  geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
-  annotate("text", x = 33, y = Inf, label = "1st WNV",
-           vjust = 1, hjust = -0.07, size = 3) +
-  facet_wrap(~ urbanization, scales = "free_y", ncol = 1) +
-  scale_color_manual(values = cols) +
-  scale_fill_manual(values = cols) +
-  labs(
-    title = "Predicted abundance from species-specific GAMs (CO2 traps)",
-    x = "Disease week",
-    y = "Predicted abundance",
-    color = "Species",
-    fill = "Species"
-  ) +
-  theme_classic() +
-  theme(
-    plot.title = element_text(hjust = 0.5),
-    strip.background = element_blank(),
-    strip.text = element_text(size = 12)
-  )
+fig6
+```
+```{r save-fig6, eval=FALSE}
+ggsave(
+  "../figures/Fig6_abundance_across_habitats_CO2.pdf",
+  fig6,
+  width = 6.5,
+  height = 3
+)
+```
 
+### Other effect size figures
+```{r urbanization-effect}
 # ----------------------
 # 4. Urbanization effect figure
 # ----------------------
@@ -1117,6 +1499,7 @@ ggplot(pred_urban, aes(x = urbanization, y = fit, color = species, group = speci
     title = "Urbanization effects from species-specific GAMs"
   ) +
   theme_minimal()
+
 # ----------------------
 # 5. Trap type effect figure
 # ----------------------
@@ -1151,55 +1534,39 @@ ggplot(pred_trap, aes(x = trap_type, y = fit, color = species, group = species))
     title = "Trap type effects from species-specific GAMs"
   ) +
   theme_minimal()
-
 ```
 
-### Plot relative abundance figure
+# Final verification of final models
+```{r}
+# ============================================================
+# VERIFY FINAL GAMs AGAINST VALUES REPORTED IN MANUSCRIPT
+# ============================================================
 
-```{r rel-abund-2-models}
-newdata_rel <- expand.grid(
-  urbanization = levels(combined$urbanization),
-  disease_week = median(combined$disease_week, na.rm = TRUE),
-  trap_type = "CO2",
-  site_name = levels(combined$site_name)[1]
+summary(pip_gam)
+summary(tar_gam)
+
+# Sample sizes
+nobs(pip_gam)
+nobs(tar_gam)
+
+# Exact parametric coefficients
+coef(summary(pip_gam))$p.table
+coef(summary(tar_gam))$p.table
+
+# Smooth terms / EDF
+summary(pip_gam)$s.table
+summary(tar_gam)$s.table
+
+# Overall model fit
+c(
+  pip_deviance_explained = summary(pip_gam)$dev.expl,
+  pip_adj_r2 = summary(pip_gam)$r.sq,
+  pip_n = nobs(pip_gam)
 )
 
-pred_rel <- bind_rows(
-  predict_species_gam(pip_gam, newdata_rel, "Culex pipiens"),
-  predict_species_gam(tar_gam, newdata_rel, "Culex tarsalis")
-) %>%
-  mutate(
-    species = factor(species, levels = c("Culex pipiens", "Culex tarsalis")),
-    urbanization = factor(urbanization, levels = c("rural", "peri", "urban"))
-  ) %>%
-  group_by(urbanization) %>%
-  mutate(
-    prop = fit / sum(fit),
-    prop_lower = lower / sum(upper),
-    prop_upper = upper / sum(lower),
-    prop_lower = pmax(0, prop_lower),
-    prop_upper = pmin(1, prop_upper)
-  ) %>%
-  ungroup()
-
-ggplot(pred_rel, aes(x = urbanization, y = prop, color = species, group = species)) +
-  geom_point(size = 4) +
-  geom_line(linewidth = 1) +
-  geom_errorbar(
-    aes(ymin = prop_lower, ymax = prop_upper),
-    width = 0.1
-  ) +
-  scale_color_manual(values = cols) +
-  scale_y_continuous(limits = c(0, 1)) +
-  labs(
-    x = "Urbanization",
-    y = "Relative abundance",
-    color = NULL,
-    title = "Predicted relative abundance (CO2 traps)") +
-  theme_classic() +
-  theme(
-    legend.position = "right",
-    plot.title = element_text(hjust = 0.5)
-  )
+c(
+  tar_deviance_explained = summary(tar_gam)$dev.expl,
+  tar_adj_r2 = summary(tar_gam)$r.sq,
+  tar_n = nobs(tar_gam)
+)
 ```
-   

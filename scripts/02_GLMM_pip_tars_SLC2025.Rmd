@@ -5,17 +5,22 @@ date: "`r Sys.Date()`"
 output:
   github_document:
     toc: true
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "../scripts_knitted_md", 
+      envir = globalenv()
+    )
+  })
 ---
 
-# Setup
-```{r 1-setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
   # Saves PNGs to the root /figures folder
-  fig.path = "../figures/" 
+  fig.path = "../figures/knitted_mds_figs/" 
 )
 ```
-
 
 **Research Topic:** testing whether habitat and seasonal partitioning between Culex pipiens s.l. and Culex tarsalis shapes West Nile Virus (WNV) dynamics across urban–rural gradients. 
 
