@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(
   echo = TRUE,
   # Saves PNGs to the root /figures folder
-  fig.path = "../figures/" 
+  fig.path = "../figures/knitted_mds_figs/" 
 )
 ```
 
@@ -234,7 +234,7 @@ pred_site_CO2 <- bind_rows(
   predict_species_gam(tar_gam, newdat_site_CO2, "Culex tarsalis")
 )
 
-ggplot(pred_site_CO2, aes(x = disease_week, y = fit, color = species, group = species)) +
+fig5 <- ggplot(pred_site_CO2, aes(x = disease_week, y = fit, color = species, group = species)) +
   geom_line(linewidth = 1.2) +
   geom_ribbon(aes(ymin = lower, ymax = upper, fill = species), alpha = 0.25, color = NA) +
   geom_vline(xintercept = 33, linetype = "dashed", color = "black", linewidth = 0.5) +
@@ -257,8 +257,22 @@ ggplot(pred_site_CO2, aes(x = disease_week, y = fit, color = species, group = sp
     strip.background = element_blank(),
     strip.text = element_text(size = 12)
   )
+fig5
+```
+### Figure 5 - Seasonal Smooths
+```{r, eval=FALSE}
+# ----------------------
+# 3. PDF of predicted abundance by urbanization: CO2 traps
+# ----------------------
+ggsave(
+  "../figures/seasonal_abund_CO2traps.pdf",
+  fig5,
+  width = 6.5,
+  height = 5.5
+)
 
 ```
+
 ### Relative abundance figure
 
 ```{r rel-abund-2-models}
@@ -440,11 +454,6 @@ pred_urban_trap <- bind_rows(
   )
 )
 
-# Plot: one panel per species, one line per trap type
-#pdf("trap_type_comp_smooths.pdf", width=4.5, height=3)
-
-#put plotting code here in between
-
 ggplot(
   pred_urban_trap,
   aes(
@@ -464,29 +473,14 @@ ggplot(
     aes(group = interaction(species, trap_type)),
     linewidth = 1.2
   ) +
-  geom_vline(
-    xintercept = 33,
-    linetype = "dashed",
-    color = "black",
-    linewidth = 0.5
-  ) +
-  annotate(
-    "text",
-    x = 33,
-    y = Inf,
-    label = "1st WNV cases",
-    vjust = 1,
-    hjust = -0.07,
-    size = 3
-  ) +
   facet_wrap(~ species, scales = "free_y", ncol = 1) +
   scale_color_manual(values = cols) +
   scale_fill_manual(values = cols) +
-  scale_y_log10() +
+  #scale_y_log10() +
   labs(
-    title = "Predicted abundance for urban-only paired traps",
+    title = "Predicted abundance of paired traps (urban)",
     x = "Disease week",
-    y = "Predicted count (log10 scale)",
+    y = "Predicted count ",
     color = "Species",
     fill = "Species",
     linetype = "Trap type"
@@ -497,11 +491,10 @@ ggplot(
     strip.background = element_blank(),
     strip.text = element_text(size = 12)
   )
-  
-#dev.off()
 
 
 ```
+
 
 **Interpretation**:
 
@@ -532,3 +525,206 @@ We also think these results mean we should apply the smooth with trap_type as a 
     -   exp(-0.7178) = 0.49
 
 -   The shape of the seasonal smooth was very very similar among trap types, so I think using the same smooth for both trap types (trap type = fixed effect), works well for Cx. pipiens.
+
+
+
+  
+## Interpretation
+
+**Cx. pipiens:**
+
+-   Estimated GRVD effect was -0.72 in the paired urban-only model
+
+-   GRVD traps caught approximately half of the abundance caught in CO2 traps
+
+    -   exp(-0.72) = 0.49
+
+-   The shape of the seasonal smooth was very very similar among trap types, so I think using the same smooth for both trap types (trap type = fixed effect), works well for Cx. pipiens.
+
+**Cx. tarsalis:**
+
+-   Estimated GRVD effect was -2.6898 in paired urban-only model.
+
+-   GRVD traps caught approximately 7% of the abundance caught in CO2 traps.
+
+    -   exp(-2.6898) = 0.0678 (6.78%)
+
+-   It also looks like for tarsalis, the GRVD trap counts being low enough to potentially not reliable capture the full seasonal smooth, so we should try to visualize with CO2 traps wherever possible.
+
+
+## Figure 3 - Paired Traps
+
+```{r figure-3}
+# Figure 3 using the paired urban models already fit above
+
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex tarsalis" = "#FF2DA0"
+)
+
+# Generate predictions using factor levels from data actually used by each model
+predict_fig3 <- function(model, species_label) {
+
+  dat <- model$model
+
+  newdata <- expand.grid(
+    disease_week = seq(
+      min(dat$disease_week, na.rm = TRUE),
+      max(dat$disease_week, na.rm = TRUE),
+      by = 1
+    ),
+    trap_type = levels(dat$trap_type),
+    site_name = levels(dat$site_name)[1]
+  )
+
+  newdata$trap_type <- factor(
+    newdata$trap_type,
+    levels = levels(dat$trap_type)
+  )
+
+  newdata$site_name <- factor(
+    newdata$site_name,
+    levels = levels(dat$site_name)
+  )
+
+  pred <- predict(
+    model,
+    newdata = newdata,
+    type = "link",
+    se.fit = TRUE,
+    exclude = "s(site_name)"
+  )
+
+  newdata %>%
+    dplyr::mutate(
+      species = species_label,
+      fit   = exp(pred$fit),
+      lower = exp(pred$fit - 1.96 * pred$se.fit),
+      upper = exp(pred$fit + 1.96 * pred$se.fit)
+    )
+}
+
+pred_fig3 <- dplyr::bind_rows(
+  predict_fig3(urban_pip_gam, "Culex pipiens"),
+  predict_fig3(urban_tar_gam, "Culex tarsalis")
+)
+
+
+# Make one panel for each species
+plot_fig3_panel <- function(species_name, show_legend = TRUE) {
+
+  dat <- pred_fig3 %>%
+    dplyr::filter(species == species_name)
+
+  # Rescale GRVD only for plotting so it has its own right-hand axis
+  scale_factor <-
+    max(dat$upper[dat$trap_type == "CO2"], na.rm = TRUE) /
+    max(dat$upper[dat$trap_type == "GRVD"], na.rm = TRUE)
+
+  dat <- dat %>%
+    dplyr::mutate(
+      fit_plot   = ifelse(trap_type == "GRVD", fit * scale_factor, fit),
+      lower_plot = ifelse(trap_type == "GRVD", lower * scale_factor, lower),
+      upper_plot = ifelse(trap_type == "GRVD", upper * scale_factor, upper)
+    )
+
+  ggplot(
+    dat,
+    aes(
+      x = disease_week,
+      y = fit_plot,
+      color = species,
+      fill = species,
+      linetype = trap_type
+    )
+  ) +
+    geom_ribbon(
+      aes(
+        ymin = lower_plot,
+        ymax = upper_plot,
+        group = trap_type
+      ),
+      alpha = 0.18,
+      color = NA
+    ) +
+    geom_line(
+      aes(
+        group = trap_type,
+        linewidth = trap_type
+      )
+    ) +
+    scale_linewidth_manual(
+      values = c("CO2" = 0.8, "GRVD" = 1.5),
+      guide = "none"
+    ) +
+    scale_color_manual(values = cols) +
+    scale_fill_manual(values = cols) +
+    scale_linetype_manual(
+      values = c("CO2" = "solid", "GRVD" = "dashed")
+    ) +
+    scale_y_continuous(
+      name = "Predicted: CO2",
+      sec.axis = sec_axis(
+        ~ . / scale_factor,
+        name = "Predicted: GRVD"
+      )
+    ) +
+    labs(
+      x = "Disease week",
+      color = "Species",
+      fill = "Species",
+      linetype = "Trap type"
+    ) +
+    guides(
+      color = guide_legend(
+        order = 1,
+        override.aes = list(
+          linetype = "solid",
+          linewidth = 1.2,
+          alpha = 0.75
+        )
+      ),
+      fill = "none",
+      linetype = guide_legend(order = 2)
+    ) +
+    theme_classic() +
+    theme(
+      legend.position = if (show_legend) "right" else "none"
+    )
+}
+
+
+plot_pip_fig3 <- plot_fig3_panel(
+  "Culex pipiens",
+  show_legend = TRUE
+)
+
+plot_tar_fig3 <- plot_fig3_panel(
+  "Culex tarsalis",
+  show_legend = FALSE
+)
+
+fig3 <- patchwork::wrap_plots(
+  plot_pip_fig3,
+  plot_tar_fig3,
+  ncol = 1
+) +
+  patchwork::plot_annotation(
+    title = "Urban predicted count by trap type"
+  ) &
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+
+fig3
+```
+
+```{r save-fig3, eval=FALSE}
+ggsave(
+  "../figures/seasonal_abund_paired-traps_urban.pdf",
+  fig3,
+  width = 6.5,
+  height = 3
+)
+```
+
