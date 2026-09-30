@@ -1,7 +1,7 @@
 GAM **Cx. pipiens** and **Cx. tarsalis**: SLC 2025 field season
 ================
 Norah Saarman
-2026-09-29
+2026-09-30
 
 - [Prepare Data](#prepare-data)
   - [Combined data](#combined-data)
@@ -768,6 +768,12 @@ pred_fig3 <- dplyr::bind_rows(
 
 
 # Make one panel for each species
+# Trap-type colors
+trap_cols <- c(
+  "CO2"  = "#2C7FB8",  # blue
+  "GRVD" = "#B8860B"   # dark mustard yellow
+)
+
 plot_fig3_panel <- function(species_name, show_legend = TRUE) {
 
   dat <- pred_fig3 %>%
@@ -790,8 +796,8 @@ plot_fig3_panel <- function(species_name, show_legend = TRUE) {
     aes(
       x = disease_week,
       y = fit_plot,
-      color = species,
-      fill = species,
+      color = trap_type,
+      fill = trap_type,
       linetype = trap_type
     )
   ) +
@@ -801,23 +807,27 @@ plot_fig3_panel <- function(species_name, show_legend = TRUE) {
         ymax = upper_plot,
         group = trap_type
       ),
-      alpha = 0.18,
+      alpha = 0.15,
       color = NA
     ) +
     geom_line(
-      aes(
-        group = trap_type,
-        linewidth = trap_type
-      )
+      aes(group = trap_type),
+      linewidth = 0.7
     ) +
-    scale_linewidth_manual(
-      values = c("CO2" = 0.8, "GRVD" = 1.5),
+    scale_color_manual(
+      values = trap_cols,
+      name = "Trap type"
+    ) +
+    scale_fill_manual(
+      values = trap_cols,
       guide = "none"
     ) +
-    scale_color_manual(values = cols) +
-    scale_fill_manual(values = cols) +
     scale_linetype_manual(
-      values = c("CO2" = "solid", "GRVD" = "dashed")
+      values = c(
+        "CO2"  = "solid",
+        "GRVD" = "dashed"
+      ),
+      name = "Trap type"
     ) +
     scale_y_continuous(
       name = "Predicted: CO2",
@@ -828,25 +838,23 @@ plot_fig3_panel <- function(species_name, show_legend = TRUE) {
     ) +
     labs(
       x = "Disease week",
-      color = "Species",
-      fill = "Species",
-      linetype = "Trap type"
+      title = species_name
     ) +
     guides(
       color = guide_legend(
-        order = 1,
-        override.aes = list(
-          linetype = "solid",
-          linewidth = 1.2,
-          alpha = 0.75
-        )
+        override.aes = list(linewidth = 0.8)
       ),
-      fill = "none",
-      linetype = guide_legend(order = 2)
+      linetype = guide_legend(
+        override.aes = list(linewidth = 0.8)
+      )
     ) +
     theme_classic() +
     theme(
-      legend.position = if (show_legend) "right" else "none"
+      legend.position = if (show_legend) "right" else "none",
+      plot.title = element_text(
+        face = "italic",
+        hjust = 0.5
+      )
     )
 }
 
@@ -861,7 +869,7 @@ plot_tar_fig3 <- plot_fig3_panel(
   show_legend = FALSE
 )
 
-fig3 <- patchwork::wrap_plots(
+fig3_2axes <- patchwork::wrap_plots(
   plot_pip_fig3,
   plot_tar_fig3,
   ncol = 1
@@ -873,17 +881,141 @@ fig3 <- patchwork::wrap_plots(
     plot.title = element_text(hjust = 0.5)
   )
 
-fig3
+fig3_2axes
 ```
 
+    ## Warning: Duplicated `override.aes` is ignored.
+    ## Duplicated `override.aes` is ignored.
+
 ![](../figures/knitted_mds_figs/figure-3-1.png)<!-- -->
+
+``` r
+cols <- c(
+  "Culex pipiens"  = "#FF2DA0",
+  "Culex tarsalis" = "#1bc8ea"
+)
+
+fig3_species_rows <- ggplot(
+  pred_fig3,
+  aes(
+    x = disease_week,
+    y = fit,
+    color = species,
+    fill = species,
+    linetype = trap_type
+  )
+) +
+  geom_ribbon(
+    aes(
+      ymin = lower,
+      ymax = upper,
+      group = interaction(species, trap_type)
+    ),
+    alpha = 0.18,
+    color = NA
+  ) +
+  geom_line(
+    aes(group = interaction(species, trap_type)),
+    linewidth = 0.8
+  ) +
+  facet_wrap(
+    ~ species,
+    ncol = 1,
+    scales = "free_y"
+  ) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  scale_linetype_manual(
+    values = c(
+      "CO2"  = "solid",
+      "GRVD" = "dashed"
+    )
+  ) +
+  labs(
+    x = "Disease week",
+    y = "Predicted count",
+    color = "Species",
+    linetype = "Trap type",
+    title = "Urban predicted (paired traps only)"
+  ) +
+  guides(fill = "none") +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.text = element_blank(),
+    strip.background = element_blank()
+  )
+
+fig3_species_rows
+```
+
+![](../figures/knitted_mds_figs/fig3-sp-rows-1.png)<!-- -->
+
+``` r
+### Simplify with separate panels for the separate tap types:
+
+fig3_trap_rows <- ggplot(
+  pred_fig3,
+  aes(
+    x = disease_week,
+    y = fit,
+    color = species,
+    fill = species,
+    linetype = trap_type
+  )
+) +
+  geom_ribbon(
+    aes(
+      ymin = lower,
+      ymax = upper,
+      group = interaction(species, trap_type)
+    ),
+    alpha = 0.18,
+    color = NA
+  ) +
+  geom_line(
+    aes(group = interaction(species, trap_type)),
+    linewidth = 0.8
+  ) +
+  facet_wrap(
+    ~ trap_type,
+    ncol = 1,
+    scales = "free_y"
+  ) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  scale_linetype_manual(
+    values = c(
+      "CO2"  = "solid",
+      "GRVD" = "dashed"
+    )
+  ) +
+  labs(
+    x = "Disease week",
+    y = "Predicted count",
+    color = "Species",
+    linetype = "Trap type",
+    title = "Urban predicted (paired traps only)"
+  ) +
+  guides(fill = "none") +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.text = element_blank(),
+    strip.background = element_blank()
+  )
+
+fig3_trap_rows
+```
+
+![](../figures/knitted_mds_figs/fig3-2-panels-1.png)<!-- -->
 
 ### Save Figure 3
 
 ``` r
 ggsave(
   "../figures/Fig3_seasonal_abund_paired-traps_urban.pdf",
-  fig3,
+  fig3_trap_rows,
   width = 6.5,
   height = 3
 )
@@ -1006,9 +1138,9 @@ gam.check(pip_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                      k'   edf k-index p-value
-    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.57
-    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.55
-    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.61
+    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.67
+    ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.68
+    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.58
     ## s(site_name)                      59.00 49.76      NA      NA
 
 ### Check smooths: pipiens
@@ -1073,9 +1205,9 @@ gam.check(pip_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                      k'   edf k-index p-value
-    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.62
+    ## s(disease_week):urbanizationrural  9.00  5.58    0.92    0.55
     ## s(disease_week):urbanizationperi   9.00  7.40    0.92    0.62
-    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.60
+    ## s(disease_week):urbanizationurban  9.00  6.07    0.92    0.57
     ## s(site_name)                      59.00 49.76      NA      NA
 
 ``` r
@@ -1296,9 +1428,9 @@ gam.check(tar_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                     k'  edf k-index p-value
-    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.20
-    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.22
-    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.21
+    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.16
+    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.23
+    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.24
     ## s(site_name)                      56.0 43.6      NA      NA
 
 ### Check smooths: tarsalis
@@ -1363,9 +1495,9 @@ gam.check(tar_gam)
     ## indicate that k is too low, especially if edf is close to k'.
     ## 
     ##                                     k'  edf k-index p-value
-    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.21
-    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.17
-    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.20
+    ## s(disease_week):urbanizationrural 19.0 18.1     0.9    0.24
+    ## s(disease_week):urbanizationperi  19.0 13.1     0.9    0.22
+    ## s(disease_week):urbanizationurban 19.0  6.8     0.9    0.23
     ## s(site_name)                      56.0 43.6      NA      NA
 
 ``` r

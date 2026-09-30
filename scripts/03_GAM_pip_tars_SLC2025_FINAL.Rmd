@@ -433,6 +433,12 @@ pred_fig3 <- dplyr::bind_rows(
 
 
 # Make one panel for each species
+# Trap-type colors
+trap_cols <- c(
+  "CO2"  = "#2C7FB8",  # blue
+  "GRVD" = "#B8860B"   # dark mustard yellow
+)
+
 plot_fig3_panel <- function(species_name, show_legend = TRUE) {
 
   dat <- pred_fig3 %>%
@@ -455,8 +461,8 @@ plot_fig3_panel <- function(species_name, show_legend = TRUE) {
     aes(
       x = disease_week,
       y = fit_plot,
-      color = species,
-      fill = species,
+      color = trap_type,
+      fill = trap_type,
       linetype = trap_type
     )
   ) +
@@ -466,23 +472,27 @@ plot_fig3_panel <- function(species_name, show_legend = TRUE) {
         ymax = upper_plot,
         group = trap_type
       ),
-      alpha = 0.18,
+      alpha = 0.15,
       color = NA
     ) +
     geom_line(
-      aes(
-        group = trap_type,
-        linewidth = trap_type
-      )
+      aes(group = trap_type),
+      linewidth = 0.7
     ) +
-    scale_linewidth_manual(
-      values = c("CO2" = 0.8, "GRVD" = 1.5),
+    scale_color_manual(
+      values = trap_cols,
+      name = "Trap type"
+    ) +
+    scale_fill_manual(
+      values = trap_cols,
       guide = "none"
     ) +
-    scale_color_manual(values = cols) +
-    scale_fill_manual(values = cols) +
     scale_linetype_manual(
-      values = c("CO2" = "solid", "GRVD" = "dashed")
+      values = c(
+        "CO2"  = "solid",
+        "GRVD" = "dashed"
+      ),
+      name = "Trap type"
     ) +
     scale_y_continuous(
       name = "Predicted: CO2",
@@ -493,25 +503,23 @@ plot_fig3_panel <- function(species_name, show_legend = TRUE) {
     ) +
     labs(
       x = "Disease week",
-      color = "Species",
-      fill = "Species",
-      linetype = "Trap type"
+      title = species_name
     ) +
     guides(
       color = guide_legend(
-        order = 1,
-        override.aes = list(
-          linetype = "solid",
-          linewidth = 1.2,
-          alpha = 0.75
-        )
+        override.aes = list(linewidth = 0.8)
       ),
-      fill = "none",
-      linetype = guide_legend(order = 2)
+      linetype = guide_legend(
+        override.aes = list(linewidth = 0.8)
+      )
     ) +
     theme_classic() +
     theme(
-      legend.position = if (show_legend) "right" else "none"
+      legend.position = if (show_legend) "right" else "none",
+      plot.title = element_text(
+        face = "italic",
+        hjust = 0.5
+      )
     )
 }
 
@@ -526,7 +534,7 @@ plot_tar_fig3 <- plot_fig3_panel(
   show_legend = FALSE
 )
 
-fig3 <- patchwork::wrap_plots(
+fig3_2axes <- patchwork::wrap_plots(
   plot_pip_fig3,
   plot_tar_fig3,
   ncol = 1
@@ -538,14 +546,167 @@ fig3 <- patchwork::wrap_plots(
     plot.title = element_text(hjust = 0.5)
   )
 
-fig3
+fig3_2axes
+```
+```{r fig3-sp-rows}
+cols <- c(
+  "Culex pipiens"  = "#1bc8ea",
+  "Culex tarsalis" = "#FF2DA0"
+)
+
+fig3_species_rows <- ggplot(
+  pred_fig3,
+  aes(
+    x = disease_week,
+    y = fit,
+    color = species,
+    fill = species,
+    linetype = trap_type
+  )
+) +
+  geom_ribbon(
+    aes(
+      ymin = lower,
+      ymax = upper,
+      group = interaction(species, trap_type)
+    ),
+    alpha = 0.18,
+    color = NA
+  ) +
+  geom_line(
+    aes(group = interaction(species, trap_type)),
+    linewidth = 0.8
+  ) +
+  facet_wrap(
+    ~ species,
+    ncol = 1,
+    scales = "free_y"
+  ) +
+  scale_color_manual(values = cols) +
+  scale_fill_manual(values = cols) +
+  scale_linetype_manual(
+    values = c(
+      "CO2"  = "solid",
+      "GRVD" = "dashed"
+    )
+  ) +
+  labs(
+    x = "Disease week",
+    y = "Predicted count",
+    color = "Species",
+    linetype = "Trap type",
+    title = "Urban predicted (paired traps only)"
+  ) +
+  guides(fill = "none") +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.text = element_blank(),
+    strip.background = element_blank()
+  )
+
+fig3_species_rows
+```
+
+```{r fig3-2-panels}
+# Figure 3: one panel for each trap type
+
+plot_fig3_trap_panel <- function(trap_name, show_legend = TRUE) {
+
+  dat <- pred_fig3 %>%
+    dplyr::filter(trap_type == trap_name)
+
+  ggplot(
+    dat,
+    aes(
+      x = disease_week,
+      y = fit,
+      color = species,
+      fill = species,
+      linetype = trap_type
+    )
+  ) +
+    geom_ribbon(
+      aes(
+        ymin = lower,
+        ymax = upper,
+        group = species
+      ),
+      alpha = 0.15,
+      color = NA
+    ) +
+    geom_line(
+      aes(group = species),
+      linewidth = 0.7
+    ) +
+    scale_color_manual(
+      values = cols,
+      name = "Species"
+    ) +
+    scale_fill_manual(
+      values = cols,
+      guide = "none"
+    ) +
+    scale_linetype_manual(
+      values = c(
+        "CO2"  = "solid",
+        "GRVD" = "dashed"
+      ),
+      name = "Trap type"
+    ) +
+    scale_y_continuous(
+  name = paste0("Predicted: ", trap_name)
+) +
+labs(
+  x = "Disease week"
+) +
+guides(
+  color = guide_legend(
+    override.aes = list(linewidth = 0.8)
+  ),
+  linetype = guide_legend(
+    override.aes = list(linewidth = 0.8)
+  )
+) +
+theme_classic() +
+theme(
+  legend.position = if (show_legend) "right" else "none"
+)
+}
+
+
+plot_co2_fig3 <- plot_fig3_trap_panel(
+  "CO2",
+  show_legend = TRUE
+)
+
+plot_grvd_fig3 <- plot_fig3_trap_panel(
+  "GRVD",
+  show_legend = FALSE
+)
+
+fig3_trap_rows <- patchwork::wrap_plots(
+  plot_co2_fig3,
+  plot_grvd_fig3,
+  ncol = 1
+) +
+  patchwork::plot_annotation(
+    title = "Urban predicted count by trap type"
+  ) &
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    strip.text = element_blank(),
+    strip.background = element_blank()
+  )
+
+fig3_trap_rows
 ```
   
 ### Save Figure 3
 ```{r save-fig3, eval=FALSE}
 ggsave(
   "../figures/Fig3_seasonal_abund_paired-traps_urban.pdf",
-  fig3,
+  fig3_trap_rows,
   width = 6.5,
   height = 3
 )
