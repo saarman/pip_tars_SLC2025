@@ -1320,4 +1320,377 @@ scale_alpha_continuous(
     plot.margin = margin(10, 10, 10, 10)
   )
 
+```  
+### Figure 1 - Sampling sites by trap type and urbanization
+
+```{r fig1}
+tarsalis <- read.csv("../data/tarsalis_2025.csv")
+pipiens  <- read.csv("../data/pipiens_2025.csv")
+combined <- bind_rows(tarsalis, pipiens)
+
+library(ggmap)
+library(ggplot2)
+library(dplyr)
+library(ggspatial)
+library(maps)
+library(patchwork)
+
+# Register your Google Maps API key
+register_google(key = "AIzaSyCdMfZPEp_xxkhdQrN2gfcGdBNpl1ga7ng")
+
+# ------------------------------------------------------------
+# 1. Read the same source files used in the GAM analysis
+# ------------------------------------------------------------
+
+tarsalis_map <- read.csv("../data/tarsalis_2025.csv")
+pipiens_map  <- read.csv("../data/pipiens_2025.csv")
+
+map_data <- bind_rows(tarsalis_map, pipiens_map) %>%
+  mutate(
+    urban_cat = trimws(tolower(urban_cat)),
+    urbanization = factor(
+      urban_cat,
+      levels = c("rural", "peri", "urban")
+    ),
+    trap_type = factor(trap_type)
+  )
+
+
+# ------------------------------------------------------------
+# 2. Make one row per sampling site and determine trap deployment
+# ------------------------------------------------------------
+
+site_map <- map_data %>%
+  dplyr::select(
+    site_name,
+    latitude,
+    longitude,
+    urbanization,
+    trap_type
+  ) %>%
+  dplyr::distinct() %>%
+  dplyr::group_by(site_name, urbanization) %>%
+  dplyr::summarise(
+    latitude  = dplyr::first(latitude),
+    longitude = dplyr::first(longitude),
+    has_CO2   = any(trap_type == "CO2"),
+    has_GRVD  = any(trap_type == "GRVD"),
+    .groups = "drop"
+  ) %>%
+  dplyr::mutate(
+    trap_deployment = dplyr::case_when(
+      has_CO2 & has_GRVD ~ "Paired",
+      has_CO2            ~ "CO2 only",
+      has_GRVD           ~ "Gravid only",
+      TRUE               ~ NA_character_
+    ),
+    trap_deployment = factor(
+      trap_deployment,
+      levels = c("CO2 only", "Gravid only", "Paired")
+    )
+  )
+
+site_map <- site_map %>%
+  dplyr::mutate(
+    urbanization = dplyr::case_when(
+      site_name == "Runway" ~ "rural",
+      TRUE ~ as.character(urbanization)
+    ),
+    urbanization = factor(
+      urbanization,
+      levels = c("rural", "peri", "urban")
+    )
+  )
+
+# Check classifications
+table(site_map$urbanization, site_map$trap_deployment)
+nrow(site_map)
+
+
+# ------------------------------------------------------------
+# 3. Satellite basemap
+# ------------------------------------------------------------
+
+lon_min <- min(site_map$longitude, na.rm = TRUE) - 0.03
+lon_max <- max(site_map$longitude, na.rm = TRUE) + 0.03
+lat_min <- min(site_map$latitude,  na.rm = TRUE) - 0.02
+lat_max <- max(site_map$latitude,  na.rm = TRUE) + 0.02
+
+bg_fig1 <- get_map(
+  location = c(
+    left   = lon_min,
+    bottom = lat_min,
+    right  = lon_max,
+    top    = lat_max
+  ),
+  maptype = "satellite",
+  zoom = 11
+)
+
+
+# ------------------------------------------------------------
+# 4. Color-blind-friendly urbanization palette
+#    same general green -> yellow/orange -> red progression
+# ------------------------------------------------------------
+
+urban_cols <- c(
+  "rural" = "#009E73",  # bluish green
+  "peri"  = "#E69F00",  # orange
+  "urban" = "#D55E00"   # vermillion
+)
+# ------------------------------------------------------------
+# 5. Plot
+# ------------------------------------------------------------
+
+fig1_map <- ggmap(bg_fig1) +
+  geom_point(
+    data = site_map,
+    aes(
+      x = longitude,
+      y = latitude,
+      shape = trap_deployment,
+      fill = urbanization
+    ),
+    size = 3.6,
+    color = "black",
+    stroke = 0.7
+  ) +
+  scale_shape_manual(
+    values = c(
+      "CO2 only"    = 22,  # square
+      "Gravid only" = 21,  # circle
+      "Paired"      = 24   # triangle
+    ),
+    name = "Trap type"
+  ) +
+  scale_fill_manual(
+    values = urban_cols,
+    labels = c(
+      "rural" = "Rural",
+      "peri"  = "Peri-urban",
+      "urban" = "Urban"
+    ),
+    name = "Urbanization"
+  ) +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9)
+  )
+
+# ------------------------------------------------------------
+# Manual scale bar + north arrow for ggmap
+# ------------------------------------------------------------
+
+# Approximate km per degree longitude at the study latitude
+mean_lat <- mean(site_map$latitude, na.rm = TRUE)
+km_per_deg_lon <- 111.32 * cos(mean_lat * pi / 180)
+
+# Choose a 10 km scale bar
+scale_km <- 10
+scale_deg_lon <- scale_km / km_per_deg_lon
+
+# ---- Scale bar: lower left ----
+sb_x1 <- lon_min 
+sb_x2 <- sb_x1 + scale_deg_lon
+sb_y  <- lat_min + 0.012
+
+# ---- North arrow: smaller, upper right ----
+na_x  <- lon_max - 0.04
+na_y1 <- lat_max - 0.02
+na_y2 <- lat_max
+
+fig1_map <- ggmap(bg_fig1) +
+  geom_point(
+    data = site_map,
+    aes(
+      x = longitude,
+      y = latitude,
+      shape = trap_deployment,
+      fill = urbanization
+    ),
+    size = 3.6,
+    color = "black",
+    stroke = 0.7
+  ) +
+  scale_shape_manual(
+    values = c(
+      "CO2 only"    = 22,
+      "Gravid only" = 21,
+      "Paired"      = 24
+    ),
+    name = "Trap type"
+  ) +
+  scale_fill_manual(
+    values = urban_cols,
+    labels = c(
+      "rural" = "Rural",
+      "peri"  = "Peri-urban",
+      "urban" = "Urban"
+    ),
+    name = "Urbanization"
+  ) +
+
+  # -------------------------
+  # Manual 10-km scale bar
+  # -------------------------
+  annotate(
+    "segment",
+    x = sb_x1, xend = sb_x2,
+    y = sb_y,  yend = sb_y,
+    linewidth = 1.2,
+    color = "white"
+  ) +
+  annotate(
+    "segment",
+    x = sb_x1, xend = sb_x1,
+    y = sb_y - 0.004, yend = sb_y + 0.004,
+    linewidth = 1,
+    color = "white"
+  ) +
+  annotate(
+    "segment",
+    x = sb_x2, xend = sb_x2,
+    y = sb_y - 0.004, yend = sb_y + 0.004,
+    linewidth = 1,
+    color = "white"
+  ) +
+  annotate(
+    "text",
+    x = (sb_x1 + sb_x2) / 2,
+    y = sb_y + 0.008,
+    label = "10 km",
+    color = "white",
+    size = 3.5,
+    fontface = "bold"
+  ) +
+
+  # -------------------------
+  # Smaller north arrow, upper right
+  # -------------------------
+  annotate(
+    "segment",
+    x = na_x, xend = na_x,
+    y = na_y1, yend = na_y2,
+    linewidth = 1,
+    color = "white",
+    arrow = arrow(
+      length = grid::unit(0.14, "in"),
+      type = "closed"
+    )
+  ) +
+  annotate(
+    "text",
+    x = na_x,
+    y = na_y2 + 0.010,
+    label = "N",
+    color = "white",
+    size = 3.8,
+    fontface = "bold"
+  ) +
+
+  labs(x = NULL, y = NULL) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9)
+  )
+
+fig1_map
+```
+
+### Save Figure 1
+```{r save-fig1, eval=FALSE}
+ggsave(
+  "../figures/Fig1_map.pdf",
+  fig1_map,
+  width = 6.5,
+  height = 5
+)
+```  
+
+### Figure 1 inset - USA with Utah highlighted
+```{r fig1-inset}
+library(ggplot2)
+library(dplyr)
+library(maps)
+
+# US states polygons
+us_states <- ggplot2::map_data("state")
+
+# Utah polygon
+utah_poly <- us_states %>%
+  dplyr::filter(region == "utah")
+
+# Approximate center of your study area
+study_center <- data.frame(
+  longitude = mean(range(site_map$longitude, na.rm = TRUE)),
+  latitude  = mean(range(site_map$latitude, na.rm = TRUE))
+)
+
+fig1_inset <- ggplot() +
+  geom_polygon(
+    data = us_states,
+    aes(x = long, y = lat, group = group),
+    fill = "grey90",
+    color = "white",
+    linewidth = 0.2
+  ) +
+  geom_polygon(
+    data = utah_poly,
+    aes(x = long, y = lat, group = group),
+    fill = "#D55E00",
+    color = "black",
+    linewidth = 0.3
+  ) +
+  geom_point(
+    data = study_center,
+    aes(x = longitude, y = latitude),
+    shape = 21,
+    size = 2.2,
+    fill = "white",
+    color = "black",
+    stroke = 0.5
+  ) +
+  coord_quickmap(
+    xlim = c(-125, -66),
+    ylim = c(24, 50),
+    expand = FALSE
+  ) +
+  theme_void() +
+  theme(
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.5
+    )
+  )
+
+fig1_inset
+```  
+### Save Figure 1 inset
+```{r save-fig1-inset, eval=FALSE}
+ggsave(
+  "../figures/Fig1_inset_USA.pdf",
+  fig1_inset,
+  width = 2,
+  height = 1.6
+)
+```  
+### Save Figure 1 inset as transparent PNG
+```{r save-fig1-inset-png, eval=FALSE}
+ggsave(
+  "../figures/Fig1_inset_USA.png",
+  fig1_inset,
+  width = 2,
+  height = 1.6,
+  bg = "transparent",
+  dpi = 300
+)
 ```
